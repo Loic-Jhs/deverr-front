@@ -1,5 +1,5 @@
 import { useState } from "react";
-import logoDeverr from '../../assets/img/d.jpg';
+import logoDeverr from '../../assets/img/D.jpg';
 
 function Navbar() {
     const [navbar, setNavbar] = useState(false);
