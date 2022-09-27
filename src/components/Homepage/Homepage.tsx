@@ -1,5 +1,5 @@
 import CardList from "../CardList/CardList"
-import dev from '../../assets/img/99312-developer-skills.gif';
+import developpement from '../../assets/img/94056-development.gif';
 
 function Homepage() {
 
@@ -15,7 +15,7 @@ function Homepage() {
           </button>
         </div>
       </div>
-      <div className="md:flex-col lg:flex lg:flex-row mt-10 items-center"> 
+      <div className="md:flex-col lg:flex lg:flex-row mt-10 items-center">
         <CardList />
         <div className="image lg:w-1/2 sm:w-full pb-2/3 sm:pt-1/3 lg:pt-2/3">
           <img src={dev} className="mx-auto" alt="developer-skills" />
