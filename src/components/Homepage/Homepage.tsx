@@ -1,4 +1,5 @@
 import CardList from "../CardList/CardList"
+import developpement from '../../assets/img/94056-development.gif';
 
 function Homepage() {
 
@@ -16,7 +17,9 @@ function Homepage() {
       </div>
       <div className="md:flex flex-none mt-10 items-center"> 
         <CardList />
-        <h4 className="md:w-1/2 w-full text-2xl">Add the image</h4>
+        <div className="image lg:w-1/2 sm:w-full pb-2/3 sm:pt-1/3 lg:pt-2/3">
+          <img src={developpement} className="mx-auto" alt="developer-skills" />
+        </div>
       </div>
     </div>
   )
