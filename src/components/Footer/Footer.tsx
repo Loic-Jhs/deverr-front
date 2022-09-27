@@ -6,7 +6,7 @@ function Footer() {
       <div className="xl:flex xl:justify-center xl:space-x-10 font-montserrat">
         <div className="sm:mb-2">
           <a href="#" className="flex justify-center mb-4 sm:mb-0 mx-auto">
-          <img src={logoDeverrBlack} className="mr-3 h-8" alt=" Logo Deverr" />
+          <img src={logoDeverrBlack} className="mr-3 h-8" alt="Logo Deverr" />
           <span className="text-sm self-center font-semibold dark:text-gray-400">DEVERR © 2022</span>
         </a>
         </div>
