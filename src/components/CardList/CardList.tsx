@@ -12,7 +12,7 @@ function CardList() {
   }, []);
 
   return (
-    <div className="cardList md:w-1/2 w-full md:flex md:flex-wrap md:justify-between md:mx-4 mx-auto">
+    <div className="md:flex md:flex-wrap md:w-3/4 md:mx-auto">
       {
         userList && userList.map((user) => {
         return  <Card key={user.id} {...user} />
