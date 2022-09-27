@@ -5,7 +5,7 @@ function Footer() {
     <div className="footer p-4 bg-white rounded-lg md:px-6 md:py-8">
       <div className="sm:flex sm:items-center sm:justify-between body-font font-montserrat">
         <a href="#" className="flex items-center mb-4 sm:mb-0">
-          <img src={logoDeverrBlack} className="mr-3 h-8" alt="Flowbite Logo" />
+          <img src={logoDeverrBlack} className="mr-3 h-8" alt="Logo Deverr" />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-gray-400">DEVERR © 2022</span>
         </a>
         <ul className="flex flex-wrap items-center mb-6 text-sm text-gray-500 sm:mb-0 dark:text-gray-400">
