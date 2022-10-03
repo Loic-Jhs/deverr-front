@@ -74,6 +74,8 @@
       }
 
       ul {
+        display: flex;
+        flex-direction: column;
         margin-top: 1.5rem;
         color: #ffffff;
         cursor: pointer;
@@ -87,6 +89,7 @@
         ul {
           display: flex;
           justify-content: space-between;
+          flex-direction: row;
           li {
             margin-left: 1.5rem;
           }
