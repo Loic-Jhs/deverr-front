@@ -1,0 +1,60 @@
+.homepage__container {
+  font-family: Montserrat, sans-serif;
+  h2 {
+    margin-top: 1.5rem;
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 0 auto;
+    width: 90%;
+    margin-bottom: 3em;
+
+    span {
+      color: #1d9bf0;
+    }
+  }
+  @media screen and (min-width: 768px) {
+    h2 {
+      font-size: 2rem;
+      width: 50%;
+      margin-bottom: 2em;
+    }
+  }
+
+  .homepage__button {
+    display: flex;
+    justify-content: flex-end;
+    .button__container {
+      margin: auto;
+      button {
+        padding: 1rem 2rem;
+
+        color: black;
+        background: #1d9bf0;
+        border-radius: 0.375rem;
+        box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1),
+          0 1px 2px -1px rgb(0 0 0 / 0.1);
+        width: 15rem;
+      }
+    }
+  }
+
+  .homepage__content {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .image__container {
+      width: 100%;
+      padding-bottom: 2rem;
+      img {
+        margin: 0 auto;
+      }
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .homepage__content {
+      flex-direction: row;
+    }
+  }
+}

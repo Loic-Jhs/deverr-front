@@ -1,0 +1,55 @@
+.card__container {
+  width: 100%;
+  margin: 1em auto;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  border-color: gray;
+  .card__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 100%;
+
+    .card__image {
+      object-fit: fill;
+      height: 15rem;
+      width: 100%;
+      border-radius: 0.5rem;
+    }
+    .card__stack {
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      justify-content: space-between;
+      border-radius: 0 0 0.5rem 0.5rem;
+      background-color: gray;
+      p {
+        margin-left: 1rem;
+        font-size: 2rem;
+        font-family: "Montserrat";
+        font-weight: 500;
+        color: #ffffff;
+      }
+      .logo__stack {
+        width: 3rem;
+        height: 3rem;
+      }
+    }
+  }
+}
+@media screen and (min-width: 768px) {
+  .card__container {
+    width: 25%;
+    margin: 0.5em 1.5em;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .card__container {
+    width: 25%;
+    margin: 0.5em 1em;
+  }
+}

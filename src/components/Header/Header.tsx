@@ -1,9 +1,10 @@
 import Navbar from "../Navbar/Navbar"
+import './style.scss';
 
 function Header() {
 
   return (
-    <div className="header mb-10">
+    <div className="header">
       <Navbar />
     </div>
   )

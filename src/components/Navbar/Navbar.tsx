@@ -1,26 +1,25 @@
 import { useState } from "react";
 import logoDeverr from '../../assets/img/D.jpg';
+import './style.scss';
 
 function Navbar() {
     const [navbar, setNavbar] = useState(false);
 
     return (
-        <nav className="w-full bg-slate-900 shadow">
-            <div className="justify-between px-4 mx-auto md:items-center md:flex">
+        <nav className="navbar">
+            <div className="navbar__container">
                 <div>
-                    <div className="flex items-center justify-between py-3 md:py-5 md:block">
+                    <div className="logo__container">
                         <a>
-                            <img src={logoDeverr} className="rounded-full h-10 w-10" alt="Logo Deverr" />
+                            <img src={logoDeverr} className="logo__img" alt="Logo Deverr" />
                         </a>
-                        <div className="md:hidden">
+                        <div className="burger__button">
                             <button
-                                className="p-2 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border"
                                 onClick={() => setNavbar(!navbar)}
                             >
                                 {navbar ? (
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
-                                        className="w-6 h-6 text-white"
                                         viewBox="0 0 20 20"
                                         fill="currentColor"
                                     >
@@ -33,7 +32,6 @@ function Navbar() {
                                 ) : (
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
-                                        className="w-6 h-6 text-white"
                                         fill="none"
                                         viewBox="0 0 24 24"
                                         stroke="currentColor"
@@ -50,38 +48,38 @@ function Navbar() {
                         </div>
                     </div>
                 </div>
-                <div>
+                <div className="menu">
                     <div
-                        className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
+                        className={`menu__container w-100 ${
                             navbar ? "block" : "hidden" 
                         }`}
                     >
-                        <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-                            <li className="text-white cursor-pointer hover:text-deverr-yellow">
+                        <ul>
+                            <li>
                                 <a>Accueil</a>
                             </li>
-                            <li className="text-white cursor-pointer hover:text-deverr-yellow">
+                            <li>
                                 <a>Nos développeurs</a>
                             </li>
-                            <li className="text-white cursor-pointer hover:text-deverr-yellow">
+                            <li>
                                 <a>Mon profil</a>
                             </li>
                         </ul>
-                        <div className="mt-3 space-y-2 lg:hidden md:inline-block md:hidden  ">
-                            <a className="inline-block cursor-pointer text-primary-blue w-full px-4 py-2 text-center text-white bg-gray-600 rounded-md shadow hover:bg-gray-800">
+                        <div className="responsive__button">
+                            <a className="login__button">
                                 Connexion
                             </a>
-                            <a className="inline-block cursor-pointer text-primary-blue w-full px-4 py-2 text-center text-gray-800 bg-white rounded-md shadow hover:bg-gray-100">
+                            <a className="logout__button">
                                 Déconnexion
                             </a>
                         </div>
                     </div>
                 </div>
-                <div className="hidden space-x-2 md:inline-block ">
-                    <a className="px-4 py-2 cursor-pointer text-slate-900 bg-primary-blue rounded-md shadow hover:bg-gray-100">
+                <div className="desktop__button">
+                    <a>
                         Connexion
                     </a>
-                    <a className="px-4 py-2 cursor-pointer text-slate-900 bg-primary-blue rounded-md shadow hover:bg-gray-100">
+                    <a>
                         Déconnexion
                     </a>
                 </div>
