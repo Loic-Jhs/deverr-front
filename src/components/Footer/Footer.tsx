@@ -15,16 +15,16 @@ function Footer() {
         <div className="menu__footer">
           <ul>
             <li>
-              <a href="#" className="hover:underline ">À propos</a>
+              <a href="#">À propos</a>
             </li>
             <li>
-              <a href="#" className="hover:underline">Conditions générales d'utilisations</a>
+              <a href="#">Conditions générales d'utilisations</a>
             </li>
             <li>
-              <a href="#" className="hover:underline">Contact</a>
+              <a href="#">Contact</a>
             </li>
             <li>
-              <a href="#" className="hover:underline">Devenir prestataire</a>
+              <a href="#">Devenir prestataire</a>
             </li>
           </ul>
         </div>

@@ -26,6 +26,7 @@
     .button__container {
       margin: auto;
       button {
+        border: none;
         padding: 1rem 2rem;
 
         color: black;
@@ -39,15 +40,14 @@
   }
 
   .homepage__content {
-    margin-top: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     .image__container {
-      width: 100%;
       padding-bottom: 2rem;
+      width: 100%;
       img {
-        margin: 0 auto;
+        width: 100%;
       }
     }
   }
@@ -55,6 +55,12 @@
   @media screen and (min-width: 1024px) {
     .homepage__content {
       flex-direction: row;
+    }
+    .image__container {
+      width: 50%;
+      img {
+        width: 100%;
+      }
     }
   }
 }
