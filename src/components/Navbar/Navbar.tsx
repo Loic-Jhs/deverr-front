@@ -50,9 +50,8 @@ function Navbar() {
                 </div>
                 <div className="menu">
                     <div
-                        className={`menu__container w-100 ${
-                            navbar ? "block" : "hidden" 
-                        }`}
+                        className={`menu__container w-100 ${navbar ? "block" : "hidden"
+                            }`}
                     >
                         <ul>
                             <li>
@@ -87,5 +86,5 @@ function Navbar() {
         </nav>
     )
 }
-  
+
 export default Navbar

@@ -20,8 +20,8 @@
 
       @media screen and (min-width: 768px) {
         .logo__img {
-          height: 8vh;
-          width: 8vh;
+          height: 3rem;
+          width: 3rem;
         }
       }
     }
@@ -57,7 +57,6 @@
     @media screen and (min-width: 768px) {
       .logo__container {
         display: block;
-        padding: 2em 0;
       }
     }
 
@@ -71,7 +70,6 @@
         .menu__container {
           display: flex;
           justify-self: center;
-          padding-bottom: 2em;
         }
       }
 
@@ -89,10 +87,8 @@
         ul {
           display: flex;
           justify-content: space-between;
-
           li {
             margin-left: 1.5rem;
-            margin-top: 1.5rem;
           }
           li:hover {
             color: #fddb14;
@@ -133,7 +129,7 @@
         border-radius: 0.375rem;
         box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1),
           0 1px 2px -1px rgb(0 0 0 / 0.1);
-        padding: 1em 2em;
+        padding: 0.5em 1.5em;
         background-color: #1da8f4;
       }
     }
