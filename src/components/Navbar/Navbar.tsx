@@ -6,7 +6,7 @@ function Navbar() {
 
     return (
         <nav className="w-full bg-slate-900 shadow">
-            <div className="justify-between px-4 mx-auto md:items-center md:flex md:px-8">
+            <div className="justify-between px-4 mx-auto md:items-center md:flex">
                 <div>
                     <div className="flex items-center justify-between py-3 md:py-5 md:block">
                         <a>
@@ -53,35 +53,35 @@ function Navbar() {
                 <div>
                     <div
                         className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
-                            navbar ? "block" : "hidden"
+                            navbar ? "block" : "hidden" 
                         }`}
                     >
                         <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-                            <li className="text-white hover:text-deverr-yellow">
+                            <li className="text-white cursor-pointer hover:text-deverr-yellow">
                                 <a>Accueil</a>
                             </li>
-                            <li className="text-white hover:text-deverr-yellow">
+                            <li className="text-white cursor-pointer hover:text-deverr-yellow">
                                 <a>Nos développeurs</a>
                             </li>
-                            <li className="text-white hover:text-deverr-yellow">
+                            <li className="text-white cursor-pointer hover:text-deverr-yellow">
                                 <a>Mon profil</a>
                             </li>
                         </ul>
-                        <div className="mt-3 space-y-2 lg:hidden md:inline-block">
-                            <a className="inline-block text-primary-blue w-full px-4 py-2 text-center text-white bg-gray-600 rounded-md shadow hover:bg-gray-800">
+                        <div className="mt-3 space-y-2 lg:hidden md:inline-block md:hidden  ">
+                            <a className="inline-block cursor-pointer text-primary-blue w-full px-4 py-2 text-center text-white bg-gray-600 rounded-md shadow hover:bg-gray-800">
                                 Connexion
                             </a>
-                            <a className="inline-block text-primary-blue w-full px-4 py-2 text-center text-gray-800 bg-white rounded-md shadow hover:bg-gray-100">
+                            <a className="inline-block cursor-pointer text-primary-blue w-full px-4 py-2 text-center text-gray-800 bg-white rounded-md shadow hover:bg-gray-100">
                                 Déconnexion
                             </a>
                         </div>
                     </div>
                 </div>
-                <div className="hidden space-x-2 md:inline-block">
-                    <a className="px-4 py-2 text-slate-900 bg-primary-blue rounded-md shadow hover:bg-gray-100">
+                <div className="hidden space-x-2 md:inline-block ">
+                    <a className="px-4 py-2 cursor-pointer text-slate-900 bg-primary-blue rounded-md shadow hover:bg-gray-100">
                         Connexion
                     </a>
-                    <a className="px-4 py-2 text-slate-900 bg-primary-blue rounded-md shadow hover:bg-gray-100">
+                    <a className="px-4 py-2 cursor-pointer text-slate-900 bg-primary-blue rounded-md shadow hover:bg-gray-100">
                         Déconnexion
                     </a>
                 </div>
