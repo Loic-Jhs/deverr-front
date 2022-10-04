@@ -1,0 +1,12 @@
+.dev__container {
+    display: flex;
+    flex-direction: column;
+    width: 98vw;
+    margin: 0 auto;
+}
+
+@media screen and (min-width: 1024px) {
+    .dev__container {
+        flex-direction: row;
+    }
+}

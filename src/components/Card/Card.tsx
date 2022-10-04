@@ -1,23 +1,24 @@
-import { User } from "../../types";
+import { Link } from "react-router-dom";
+import { Dev } from "../../types";
 import './style.scss';
 
-function Card(user: User) {
+function Card(dev: Dev) {
   return (
-    <div className="card__container">
-        <div className="card__content">
-          <img className="card__image" src={`${user.avatar}`} alt={`${user.name} avatar`} />
+    <Link to={`/dev-profile/${dev.id}`} className="card__container">
+        <div className="card__content" >
+          <img className="card__image" src={`${dev.avatar}`} alt={`${dev.firstname} avatar`} />
           <div className="card__stack"> 
-            <p>{user.name}</p>
-            {user.stack.filter(stack => stack.isPreference == true).map((stack) => {
+            <p>{dev.firstname} {dev.lastname}</p>
+            {dev.stack.filter(stack => stack.isPreference == true).map((stack) => {
               return (
-              <div className="logo__stack">
+              <div key={stack.id} className="logo__stack">
                 <img src={`${stack.logo}`} />
               </div>
               )
             })}
           </div>
         </div>
-    </div>
+    </Link>
   )
 }
   
