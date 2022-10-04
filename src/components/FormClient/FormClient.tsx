@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import './style.scss';
+import './formClient.scss';
 
 const FormClient = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -10,11 +10,12 @@ const FormClient = () => {
     //
   }
 
+
   return (
     <>
-      <section className="regisster__container">
-        <h1>Je suis un client</h1>
-        <form onSubmit={handleSubmit}>
+      <section className="register__form__client">
+        <h1>Inscription d'un client</h1>
+        <form className="client__form" onSubmit={handleSubmit}>
           <input type="text" name="lastname" placeholder="Nom" />
           <input type="text" name="firstname" placeholder="Prénom" />
           <input type="date" name="date" placeholder="Date de naissance" />
@@ -32,3 +33,7 @@ const FormClient = () => {
 }
 
 export default FormClient
+
+function constructor(props: any) {
+  throw new Error('Function not implemented.');
+}

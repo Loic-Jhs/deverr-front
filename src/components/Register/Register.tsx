@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import dev from '../../assets/img/99312-developer-skills.gif';
-import "./style.scss";
+import "./register.scss";
 
 function Register() {
   return (
