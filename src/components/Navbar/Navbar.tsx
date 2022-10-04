@@ -50,7 +50,7 @@ function Navbar() {
                 </div>
                 <div className="menu">
                     <div
-                        className={`menu__container w-100 ${navbar ? "block" : "hidden"
+                        className={`menu__container ${navbar ? "menu__show" : "menu__hidden"
                             }`}
                     >
                         <ul>

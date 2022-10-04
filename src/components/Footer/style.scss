@@ -8,6 +8,8 @@
       display: flex;
       justify-content: center;
       margin: 0 auto 1rem auto;
+      color: gray;
+      text-decoration: none;
     }
     img {
       margin-right: 1rem;
@@ -29,9 +31,13 @@
       justify-content: center;
       align-items: center;
       font-size: 0.75rem;
-      color: gray;
+      list-style: none;
       li {
         margin-left: 0.5rem;
+        a {
+          color: gray;
+          text-decoration: none;
+        }
         a:hover {
           text-decoration: underline;
         }
@@ -58,14 +64,14 @@
       .logo__container {
         margin-left: 2.5rem;
       }
-    } 
+    }
     .menu__footer {
-        ul {
-            li {
-                font-size: 1.5rem;
-                margin-left: 3rem;
-            }
+      ul {
+        li {
+          font-size: 1.5rem;
+          margin-left: 3rem;
         }
+      }
     }
   }
 }
