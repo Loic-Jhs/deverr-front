@@ -55,7 +55,9 @@ const FormClient = () => {
           <input type="email" name="email" placeholder="E-mail" value={userInput.email} onChange={handleChange} />
           <input type="password" name="password" placeholder="Mot de passe" value={userInput.password} onChange={handleChange} />
           <input type="password" name="confirmedPassword" placeholder="Confirmez votre mot de passe" value={userInput.confirmedPassword} onChange={handleChange} />
-          <button type="submit" className="btn">Suivant</button>
+          <button type="submit" className="btn">
+            <span className="span">Suivant</span>
+          </button>
         </form>
         <Link to="/registerdev" style={{ textDecoration: "none" }}>
           <p>Je suis un dev</p>
