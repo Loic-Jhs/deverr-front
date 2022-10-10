@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import UserInput from './models/userInput';
 import './formClient.scss';
+import superagent from 'superagent';
 
 const FormClient = () => {
   const [userInput, setUserInput] = useState<UserInput>({
@@ -11,6 +11,7 @@ const FormClient = () => {
     email: "",
     password: "",
     confirmedPassword: "",
+    type: 'client',
   });
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -22,15 +23,14 @@ const FormClient = () => {
           ...cleanUserInput
         } = userInput;
         // const response = axios.post("http://api-dev.deverr.fr/register", cleanUserInput);
-        const response = axios({
-          method: "POST",
-          url: "http://api-dev.deverr.fr/register",
-          data: cleanUserInput,
-          headers: {
-            "Access-Control-Allow-Origin": "*"
-          }
-        })
-        console.log(response);
+        superagent
+            .post('http://api-dev.deverr.fr/register')
+            .send(cleanUserInput)
+            .end((err, res) => {
+                // Calling the end function will send the request
+                console.log(res.body.access_token);
+            });
+
       } catch (error) {
         console.log(error);
       }
