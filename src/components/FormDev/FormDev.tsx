@@ -13,7 +13,6 @@ const FormDev = () => {
         <form className="dev__form" onSubmit={handleSubmit}>
           <input type="text" name="lastname" placeholder="Nom" />
           <input type="text" name="firstname" placeholder="Prénom" />
-          <input type="date" name="date" placeholder="Date de naissance" />
           <input type="email" name="email" placeholder="E-mail" />
           <input type="password" name="password" placeholder="Mot de passe" />
           <input type="password" name="password" placeholder="Confirmez votre mot de passe" />
