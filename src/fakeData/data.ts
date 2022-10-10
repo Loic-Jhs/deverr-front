@@ -4,7 +4,7 @@ export const users = [
         "firstname": "Gyro",
         "lastname": "Zeppeli",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ornare, nunc in condimentum consequat, lectus elit euismod lacus, a sagittis ligula diam vitae felis. Quisque maximus arcu turpis, vitae finibus lacus venenatis vitae. Nullam sagittis lectus at felis gravida finibus. Vivamus volutpat odio et vestibulum facilisis. Nunc malesuada ultrices venenatis. Aliquam eleifend lectus in imperdiet malesuada. Mauris tempor augue eu neque vulputate molestie. Sed quis mi turpis." ,
-        "stack": [
+        "stacks": [
             {
                 "id": 2,
                 "label": "React",
@@ -20,11 +20,36 @@ export const users = [
                 "isPreference": false
             }
         ],
-        "prestation": [
+        "prestations": [
             {
                 "id": 1,
-                "name": "Landing page",
+                "name": "Page d'accueil",
                 "price": "150",
+            },
+            {
+                "id": 2,
+                "name": "Création d'API",
+                "price": "300",
+            },
+            {
+                "id": 3,
+                "name": "Back office",
+                "price": "750",
+            },
+            {
+                "id": 1,
+                "name": "Page d'accueil",
+                "price": "150",
+            },
+            {
+                "id": 2,
+                "name": "Création d'API",
+                "price": "300",
+            },
+            {
+                "id": 3,
+                "name": "Back office",
+                "price": "750",
             }
         ],
         "avatar": "https://external-preview.redd.it/3y-KTCZ7TIZ0Z4Gw50H71AL3Zk3tT0JcFhvA9QRg1dM.png?format=pjpg&auto=webp&s=2c1bfc406c4838ae1e35629ee7edba31f1936e11",
@@ -32,7 +57,7 @@ export const users = [
             {
                 "id": 1,
                 "rate": 3,
-                "comment": "Prestation bien réalisé, mais manque de communication par moment."
+                "comment": "prestations bien réalisé, mais manque de communication par moment."
             },
             {
                 "id": 3,
@@ -46,7 +71,7 @@ export const users = [
         "firstname": "Narancia",
         "lastname": "Ghirga",
         "description": "Duis laoreet odio metus, id sagittis velit accumsan eu. Phasellus et mi at turpis consequat convallis at porta velit. Pellentesque a tempus sapien. Sed porttitor at augue vel rutrum. Praesent nec justo non nibh rhoncus tristique et id libero. Morbi mauris tortor, consequat sit amet tincidunt nec, vestibulum at nulla. Suspendisse bibendum eros massa, sit amet convallis nisl semper at." ,
-        "stack": [
+        "stacks": [
             {
                 "id": 4,
                 "label": "wordpress",
@@ -55,7 +80,7 @@ export const users = [
                 "isPreference": true
             }
         ],
-        "prestation": [
+        "prestations": [
             {
                 "id": 1,
                 "name": "Landing page",
@@ -67,7 +92,7 @@ export const users = [
             {
                 "id": 2,
                 "rate": 5,
-                "comment": "Rien à redire, prestation de qualité et livré dans les temps"
+                "comment": "Rien à redire, prestations de qualité et livré dans les temps"
             },
             {
                 "id": 6,
@@ -77,7 +102,7 @@ export const users = [
             {
                 "id": 8,
                 "rate": 2,
-                "comment": "Partir en vacance en pleine prestation... Déçu de la qualité des développeurs proposés"
+                "comment": "Partir en vacance en pleine prestations... Déçu de la qualité des développeurs proposés"
             }
         ]
     },
@@ -86,7 +111,7 @@ export const users = [
         "firstname": "Mista",
         "lastname": "Guido",
         "description": "Etiam imperdiet diam non magna varius varius. Donec sed scelerisque nulla. Aliquam rhoncus tempus sapien. Integer non cursus leo. Nullam tempus volutpat ex, sit amet ultrices urna eleifend quis. Nunc euismod iaculis blandit. Cras pulvinar risus et eros ornare, at tincidunt mauris gravida. Morbi malesuada augue ac purus suscipit euismod. Nullam eros diam, sollicitudin vel condimentum nec, vestibulum ac mauris.",
-        "stack": [
+        "stacks": [
             {
                 "id": 2,
                 "label": "React",
@@ -95,7 +120,7 @@ export const users = [
                 "isPreference": true
             },
         ],
-        "prestation": [
+        "prestations": [
             {
                 "id": 1,
                 "name": "Landing page",
@@ -110,7 +135,7 @@ export const users = [
         "firstname": "Giorno",
         "lastname": "Giovanna",
         "description": "Ut pretium massa et gravida cursus. Nam vel dapibus mauris. Cras eleifend augue vel vehicula faucibus. Aliquam tempus ipsum lorem. Pellentesque consequat hendrerit leo in eleifend. Nunc sit amet metus quis turpis porttitor tincidunt sit amet rhoncus ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
-        "stack": [
+        "stacks": [
             {
                 "id": 3,
                 "label": "PHP",
@@ -126,7 +151,7 @@ export const users = [
                 "isPreference": true
             }
         ],
-        "prestation": [
+        "prestations": [
             {
                 "id": 1,
                 "name": "Landing page",
@@ -141,7 +166,7 @@ export const users = [
         "firstname": "Josuke",
         "lastname": "Higashikata",
         "description": "Phasellus et mi at turpis consequat convallis at porta velit. Pellentesque a tempus sapien. Sed porttitor at augue vel rutrum. Praesent nec justo non nibh rhoncus tristique et id libero. Morbi mauris tortor, consequat sit amet tincidunt nec, vestibulum at nulla. Suspendisse bibendum eros massa, sit amet convallis nisl semper at.",
-        "stack": [
+        "stacks": [
             {
                 "id": 6,
                 "label": "nodeJS",
@@ -150,7 +175,7 @@ export const users = [
                 "isPreference": true
             }
         ],
-        "prestation": [
+        "prestations": [
             {
                 "id": 1,
                 "name": "Landing page",
@@ -171,7 +196,7 @@ export const users = [
         "firstname": "Jolyne",
         "lastname": "Cujoh",
         "description": "Quisque ac nisl sit amet dolor pharetra vulputate. Donec faucibus, mauris et feugiat faucibus, justo nibh tincidunt velit, et interdum magna orci at risus. Morbi sit amet ipsum facilisis, tincidunt augue ac, volutpat tellus. Praesent faucibus sem in ligula congue, quis euismod tellus malesuada. Integer posuere mauris at est auctor feugiat. Praesent luctus nibh non lorem semper lacinia. Aliquam gravida urna mi, a tristique risus iaculis id.",
-        "stack": [
+        "stacks": [
             {
                 "id": 8,
                 "label": "Python",
@@ -180,7 +205,7 @@ export const users = [
                 "isPreference": true
             },
         ],
-        "prestation": [
+        "prestations": [
             {
                 "id": 1,
                 "name": "Landing page",

@@ -9,7 +9,7 @@ function Card(dev: Dev) {
           <img className="card__image" src={`${dev.avatar}`} alt={`${dev.firstname} avatar`} />
           <div className="card__stack"> 
             <p>{dev.firstname} {dev.lastname}</p>
-            {dev.stack.filter(stack => stack.isPreference == true).map((stack) => {
+            {dev.stacks.filter(stack => stack.isPreference == true).map((stack) => {
               return (
               <div key={stack.id} className="logo__stack">
                 <img src={`${stack.logo}`} />

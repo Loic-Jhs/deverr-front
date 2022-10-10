@@ -1,13 +1,13 @@
-import { Dev } from '../../types';
+import { Dev, DevProps } from '../../types';
 import { users } from '../../fakeData/data';
 import './style.scss';
+import { useState } from 'react';
 
-type DevProps = {
-    devId: number
-}
+
 
 function ProfileInfo({devId}: DevProps) {
     let dev = users.find(user => devId == user.id);
+    const [showMore, setShowMore] = useState(false);
 
     return (
         <div className='profile__container'>
@@ -23,7 +23,10 @@ function ProfileInfo({devId}: DevProps) {
             <div className='description__container'>
                 <h2>{dev?.firstname} {dev?.lastname}</h2>
                 <h3>En quelques mots:</h3>
-                <p>{dev?.description}</p>
+                <p>{showMore ? dev?.description : `${dev?.description.substring(0, 250)}...`} 
+                    <a onClick={() => setShowMore(!showMore)}>{showMore ? "Voir moins" : "Voir plus"}
+                    </a>
+                </p>
             </div>
         </div>
     );

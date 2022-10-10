@@ -1,14 +1,11 @@
 import { users } from '../../fakeData/data';
-import { Rate, Stack } from '../../types';
+import { DevProps, Rate, Stack } from '../../types';
 import './style.scss';
 
-type DevProps = {
-    devId: number
-}
 
 function StackComment({devId}: DevProps) {
     const dev = users.find(user => devId == user.id);
-    const devStack = dev?.stack;
+    const devStack = dev?.stacks;
     const devRate = dev?.rates
 
     return (
@@ -33,9 +30,9 @@ function StackComment({devId}: DevProps) {
                 {devRate && devRate?.map((rate: Rate) => {
                     return (
                         <div key={rate.id} className='rate__item'>
-                            <p>Note: {rate.rate}/5</p>
+                            <p className='rate__star'>Note: {rate.rate}/5</p>
                            
-                            <p>{rate.comment != null ? rate.comment : <span>Aucun commentaire</span>}</p>
+                            <p className='rate__comment'>{rate.comment != null ? rate.comment : <span>Aucun commentaire</span>}</p>
                         </div>
                     )
                 })}

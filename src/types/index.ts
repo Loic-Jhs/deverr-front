@@ -4,8 +4,8 @@ export type Dev = {
     lastname: string,
     description: string,
     avatar: string,
-    stack: Array<Stack>,
-    prestation: Array<Prestation>,
+    stacks: Array<Stack>,
+    prestations: Array<Prestation>,
     rates: Array<Rate>|null
 }
 
@@ -27,4 +27,8 @@ export type Rate = {
     id: number,
     rate: number,
     comment: string|null
+}
+
+export type DevProps = {
+    devId: number
 }
