@@ -18,6 +18,10 @@
     margin-top: 2rem;
   }
 
+  a:hover {
+    transform: perspective(1px) scale3d(1.044, 1.044, 1) translateZ(0);
+  }
+
   .client__form {
     display: flex;
     flex-direction: column;
@@ -61,7 +65,7 @@
     }
 
     button:hover {
-      transform: perspective(1px) scale3d(1.044, 1.044, 1) translateZ(0) 
+      transform: perspective(1px) scale3d(1.044, 1.044, 1) translateZ(0);
     }
   }
 }

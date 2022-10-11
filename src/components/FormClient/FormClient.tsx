@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import UserInput from './models/userInput';
-import './formClient.scss';
+import UserInput from '../../models/userInput';
 import superagent from 'superagent';
+import './formClient.scss';
 
 const FormClient = () => {
   const [userInput, setUserInput] = useState<UserInput>({
@@ -11,7 +11,7 @@ const FormClient = () => {
     email: "",
     password: "",
     confirmedPassword: "",
-    type: 'client',
+    type: "client",
   });
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -24,18 +24,18 @@ const FormClient = () => {
         } = userInput;
         // const response = axios.post("http://api-dev.deverr.fr/register", cleanUserInput);
         superagent
-            .post('http://api-dev.deverr.fr/register')
-            .send(cleanUserInput)
-            .end((err, res) => {
-                // Calling the end function will send the request
-                console.log(res.body.access_token);
-            });
+          .post("http://api-dev.deverr.fr/register")
+          .send(cleanUserInput)
+          .end((err, res) => {
+            // Calling the end function will send the request
+            console.log(res.body.access_token);
+          });
 
       } catch (error) {
         console.log(error);
       }
     } else {
-      
+
     }
   }
 
@@ -59,7 +59,7 @@ const FormClient = () => {
             <span className="span">Suivant</span>
           </button>
         </form>
-        <Link to="/registerdev" style={{ textDecoration: "none" }}>
+        <Link to="/registerdev">
           <p>Je suis un dev</p>
         </Link>
       </section>
