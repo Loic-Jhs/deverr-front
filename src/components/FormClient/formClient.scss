@@ -3,18 +3,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 20rem;
+  margin-bottom: 2rem;
   margin-top: 6rem;
 
   h1 {
     font-size: 1.5rem;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
   }
 
   a {
     font-size: 20px;
     text-decoration: none;
-    color:#1D9BF0;
+    color: #1d9bf0;
     margin-top: 2rem;
   }
 
@@ -29,43 +29,107 @@
     margin-top: 1rem;
     margin-bottom: 1rem;
 
-    input {
-      font-family: "Montserrat", sans-serif;
-      margin-bottom: 1.5rem;
-      width: 20rem;
-      height: 1.5rem;
-      border-radius: 1rem;
-      border-color: #1D9BF0;
-      font-size: inherit;
-      padding-left: 0.4rem;
-    }
-
-    button {
+    .input__container {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      margin-bottom: 1.2rem;
+
+      p {
+        margin-bottom: 0.3rem;
+      }
+
+      label {
+        margin-bottom: 0.5rem;
+      }
+
+      input {
+        font-family: "Montserrat", sans-serif;
+        width: 20rem;
+        height: 1.5rem;
+        border-radius: 1rem;
+        border-color: #1d9bf0;
+        font-size: inherit;
+        padding: 0.5rem;
+      }
+    }
+
+    .button__container {
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      margin-top: 2rem;
-      border-radius: 50px;
-      cursor: pointer;
-      text-transform: uppercase;
-      height: 45px;
-      width: 130px;
-      opacity: 1;
-      background-color: #1D9BF0;
-      border: 1px solid rgba(0, 0, 0, 0.6);
+      width: 100%;
+
+      button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 2rem;
+        border-radius: 50px;
+        cursor: pointer;
+        text-transform: uppercase;
+        height: 45px;
+        width: 130px;
+        opacity: 1;
+        background-color: #1d9bf0;
+        border: 1px solid rgba(0, 0, 0, 0.6);
+      }
+
+      button,
+      span {
+        font-family: "Montserrat", sans-serif;
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.7px;
+      }
+
+      button:hover {
+        transform: perspective(1px) scale3d(1.044, 1.044, 1) translateZ(0);
+      }
     }
 
-    button,
-    span {
-      font-family: "Montserrat", sans-serif;
-      color: #ffffff;
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.7px;
+    .error {
+      color: red;
     }
+  }
+}
 
-    button:hover {
-      transform: perspective(1px) scale3d(1.044, 1.044, 1) translateZ(0);
+@media screen and (min-width: 640px) {
+  .register__form__client {
+    h1 {
+      font-size: 2.5rem;
+    }
+    .client__form {
+      .input__container {
+        font-size: 1.5rem;
+        input {
+          width: 30rem;
+          height: 2rem;
+        }
+      }
+      .error {
+        font-size: 1.1rem;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .register__form__client {
+    h1 {
+      font-size: 2.5rem;
+    }
+    .client__form {
+      .input__container {
+        font-size: 1.7rem;
+        input {
+          width: 40rem;
+          height: 2.5rem;
+        }
+      }
+      .error {
+        font-size: 1.3rem;
+      }
     }
   }
 }
