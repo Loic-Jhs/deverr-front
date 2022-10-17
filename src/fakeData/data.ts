@@ -36,21 +36,6 @@ export const users = [
                 "name": "Back office",
                 "price": "750",
             },
-            {
-                "id": 1,
-                "name": "Page d'accueil",
-                "price": "150",
-            },
-            {
-                "id": 2,
-                "name": "Création d'API",
-                "price": "300",
-            },
-            {
-                "id": 3,
-                "name": "Back office",
-                "price": "750",
-            }
         ],
         "avatar": "https://external-preview.redd.it/3y-KTCZ7TIZ0Z4Gw50H71AL3Zk3tT0JcFhvA9QRg1dM.png?format=pjpg&auto=webp&s=2c1bfc406c4838ae1e35629ee7edba31f1936e11",
         "createdAt": "10-05-2022",

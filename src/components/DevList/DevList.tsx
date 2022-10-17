@@ -30,7 +30,7 @@ function DevList() {
                                 <div className="dev__item-stacks-detail">
                                     {stacks.map((stack) => {
                                         return (
-                                            <div key={stack.id} className="dev__item-stack-logo">
+                                            <div key={stack.label} className="dev__item-stack-logo">
                                                 <img src={`${stack.logo}`} alt={`${stack.label} logo`} />
                                             </div>
                                         )
