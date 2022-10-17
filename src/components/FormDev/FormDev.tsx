@@ -31,8 +31,10 @@ const FormDev = () => {
         // Calling the end function will send the request
         console.log(res.body.access_token);
         console.log(data);
+        console.log(err);
       });
 
+  console.log(onSubmit);
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDevInput({ ...devInput, [event.target.name]: event.target.value });
   }

@@ -16,7 +16,7 @@ const schema = yup.object().shape({
     .min(8, "Le mot de passe doit contenir au moins 8 caractères")
     .max(255, "Le mot de passe doit contenir au maximum 255 caractères")
     .required("Le mot de passe est obligatoire"),
-  passwordConfirm: yup.string()
+  confirmedPassword: yup.string()
     .oneOf([yup.ref('password')], "Les mots de passe ne correspondent pas")
     .required("La confirmation du mot de passe est obligatoire"),
 });

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Link } from 'react-router-dom';
 import UserInput from '../../models/userInput';
@@ -19,8 +19,9 @@ const FormClient = () => {
 
   const { register, handleSubmit, formState: { errors } } = useForm<UserInput>({ resolver: yupResolver(schema) });
   const { confirmedPassword, ...cleanUserInput } = userInput;
-  const onSubmit: SubmitHandler<UserInput> =
-    data => superagent
+  const onSubmit: SubmitHandler<UserInput> = (data) => {
+      console.log('superAgent');
+      superagent
       .post('http://api-dev.deverr.fr/register')
       .send(cleanUserInput)
       .end((err, res) => {
@@ -28,11 +29,21 @@ const FormClient = () => {
         console.log(res.body.access_token);
         console.log(data);
       });
+    }
+
+  // fetch("http://api-dev.deverr.fr/random-users")
+  //   .then(response => response.json())
+  //   .then(response => alert(JSON.stringify(response)))
+  //   .catch(error => alert("Erreur : " + error));
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserInput({ ...userInput, [event.target.name]: event.target.value });
   }
 
+  useEffect(() => {
+    console.log(errors);
+  }, [errors])
+  
   return (
     <section className="register__form__client">
       <h1>Inscription d'un client</h1>
@@ -73,8 +84,9 @@ const FormClient = () => {
             <p>Je suis un dev</p>
           </Link>
           <button type="submit" className="btn">
-            <span className="span">S'inscrire</span>
+            <span className="span">Suivant</span>
           </button>
+
         </div>
       </form>
     </section>
