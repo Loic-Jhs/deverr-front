@@ -20,21 +20,15 @@ const FormClient = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<UserInput>({ resolver: yupResolver(schema) });
   const { confirmedPassword, ...cleanUserInput } = userInput;
   const onSubmit: SubmitHandler<UserInput> = (data) => {
-      console.log('superAgent');
-      superagent
+    superagent
       .post('http://api-dev.deverr.fr/register')
       .send(cleanUserInput)
       .end((err, res) => {
         // Calling the end function will send the request
-        console.log(res.body.access_token);
+        console.log(res.body.message);
         console.log(data);
       });
-    }
-
-  // fetch("http://api-dev.deverr.fr/random-users")
-  //   .then(response => response.json())
-  //   .then(response => alert(JSON.stringify(response)))
-  //   .catch(error => alert("Erreur : " + error));
+  }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserInput({ ...userInput, [event.target.name]: event.target.value });
@@ -43,7 +37,7 @@ const FormClient = () => {
   useEffect(() => {
     console.log(errors);
   }, [errors])
-  
+
   return (
     <section className="register__form__client">
       <h1>Inscription d'un client</h1>

@@ -23,18 +23,18 @@ const FormDev = () => {
 
   // getting all the values from the form but the confirmed password to send to the API
   const { confirmedPassword, ...cleanDevInput } = devInput;
-  const onSubmit: SubmitHandler<DevInput> =
-    data => superagent
+
+  const onSubmit: SubmitHandler<DevInput> = (data) => {
+    superagent
       .post('http://api-dev.deverr.fr/register')
       .send(cleanDevInput)
       .end((err, res) => {
         // Calling the end function will send the request
-        console.log(res.body.access_token);
+        console.log(res.body.message);
         console.log(data);
-        console.log(err);
       });
+  }
 
-  console.log(onSubmit);
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDevInput({ ...devInput, [event.target.name]: event.target.value });
   }
