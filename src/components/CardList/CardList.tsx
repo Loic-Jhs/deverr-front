@@ -1,25 +1,47 @@
 import Card from "../Card/Card";
 import { users } from "../../fakeData/data";
 import { useEffect, useState } from "react";
-import { User } from "../../types";
+import { Dev, HomepageDev } from "../../types";
 import './style.scss'
 
 function CardList() {
   
-  const [userList, setUserList] = useState<User[]>();
+  const [devList, setDevList] = useState<HomepageDev[]>();
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  //const [userList, setUserList] = useState();
 
   useEffect(() => {
-    setUserList(users);
-  }, []);
-
-  return (
-    <div className="cards__container">
-      {
-        userList && userList.map((user) => {
-        return  <Card key={user.id} {...user} />
-        })
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://api-dev.deverr.fr/random-users', {
+          method: "GET",
+          headers: {
+            "access-control-allow-origin" : "*",
+            "Content-type": "application/json"
+          },
+        mode: 'cors'});
+        const data = await response.json();
+        setDevList(data);
+        setIsLoaded(true);
+      } catch (e) {
+        console.log(e)
       }
-    </div>
+    }
+    fetchData()
+  }, [])
+  return (
+    <>
+    {isLoaded && (
+      <div className="cards__container">
+         { devList && devList.map((dev) => {
+            console.log(dev)
+            return <Card key={dev.id} {...dev} />
+          })
+        }
+      </div>
+    )}
+    </>
   )
 }
 

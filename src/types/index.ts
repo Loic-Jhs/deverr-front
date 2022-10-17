@@ -1,8 +1,21 @@
-export type User = { 
+export type Dev = { 
     id: number,
-    name: string,
+    firstname: string,
+    lastname: string,
+    description: string,
     avatar: string,
-    stack: Array<Stack>
+    stacks: Array<Stack>,
+    prestations: Array<Prestation>,
+    rates: Array<Rate>|null
+    createdAt: string
+}
+
+export type HomepageDev = {
+    id: number,
+    avatar: string,
+    user_info: string,
+    name: string,
+    logo: string,
 }
 
 export type Stack = { 
@@ -11,4 +24,20 @@ export type Stack = {
     logo: string,
     experience: number,
     isPreference: boolean
+}
+
+export type Prestation = { 
+    id: number,
+    name: string,
+}
+
+
+export type Rate = { 
+    id: number,
+    rate: number,
+    comment: string|null
+}
+
+export type DevProps = {
+    devId: number
 }

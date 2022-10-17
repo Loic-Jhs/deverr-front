@@ -30,6 +30,7 @@
       display: flex;
       flex-direction: column;
       width: 100vw;
+
       .situation__info {
         font-size: 1.5rem;
         text-align: center;
@@ -43,6 +44,7 @@
       display: flex;
       align-self: center;
       flex-direction: column;
+
       button {
         color: black;
         padding: 0.5rem 1rem;
@@ -55,6 +57,7 @@
         width: 15rem;
         height: 2.5rem;
       }
+
       button:hover {
         background: grey;
       }
@@ -63,6 +66,7 @@
     @media screen and (min-width: 768px) {
       .button {
         align-content: center;
+
         button {
           width: 20rem;
           height: 3rem;
@@ -75,11 +79,14 @@
     .situation__container {
       display: flex;
       flex-direction: row;
+
       .situation__role {
         width: 50vw;
       }
+
       .image__container {
         width: 50vw;
+
         img {
           width: 40vw;
           margin: 0 auto;
@@ -90,6 +97,7 @@
 
   .image__container {
     padding-bottom: 2rem;
+
     img {
       width: 60vw;
       margin: 0 auto;

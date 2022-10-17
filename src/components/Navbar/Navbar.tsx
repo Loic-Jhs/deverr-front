@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import logoDeverr from '../../assets/img/D.jpg';
 import './style.scss';
 
@@ -55,13 +56,13 @@ function Navbar() {
                     >
                         <ul>
                             <li>
-                                <a>Accueil</a>
+                                <Link to={'/'} className='navbar__link'>Accueil</Link>
                             </li>
                             <li>
-                                <a>Nos développeurs</a>
+                                <Link to={'developpeurs'} className='navbar__link'>Nos développeurs</Link>
                             </li>
                             <li>
-                                <a>Mon profil</a>
+                                <a className='navbar__link'>Mon profil</a>
                             </li>
                         </ul>
                         <div className="responsive__button">

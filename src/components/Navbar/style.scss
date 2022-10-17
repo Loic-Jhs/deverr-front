@@ -64,9 +64,11 @@
       .menu__show {
         display: block;
       }
+
       .menu__hidden {
         display: none;
       }
+
       .menu__container {
         padding-bottom: 0;
         margin-top: 0;
@@ -85,8 +87,18 @@
         color: #ffffff;
         cursor: pointer;
         list-style: none;
+
         li {
           margin-bottom: 1rem;
+
+          .navbar__link {
+            text-decoration: none;
+            color: white;
+          }
+
+          .navbar__link:hover {
+            color: #fddb14;
+          }
         }
       }
 
@@ -96,14 +108,21 @@
           flex-direction: row;
           margin-top: auto;
           margin-bottom: auto;
+
           li {
             margin-left: 1.5rem;
             margin-bottom: 0;
+
+            .navbar__link {
+              text-decoration: none;
+              color: white;
+            }
+
+            .navbar__link:hover {
+              color: #fddb14;
+            }
           }
 
-          li:hover {
-            color: #fddb14;
-          }
         }
       }
 
@@ -115,7 +134,7 @@
           margin-top: 1rem;
           display: inline-block;
           cursor: pointer;
-          padding: 0.5rem 2rem;
+          padding: 0.5rem 0;
           text-align: center;
           color: #ffffff;
           background-color: #1da8f4;
@@ -147,6 +166,7 @@
           0 1px 2px -1px rgb(0 0 0 / 0.1);
         padding: 0.5em 1.5em;
         background-color: #1da8f4;
+        color: #FFFFFF;
       }
     }
 

@@ -1,0 +1,102 @@
+.dev-prestation__container {
+    margin-top: 1rem;
+
+    h3 {
+        margin-bottom: 0.5rem;
+    }
+
+    .dev-prestation__list {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin: 0 auto;
+
+        .prestation__container {
+            margin-bottom: 1rem;
+            width: 45%;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+
+            .prestation-img__container {
+                width: 100%;
+
+                img {
+                    width: 100%;
+                    height: 10vh;
+                }
+            }
+
+            .prestation-detail__container {
+                padding: 0.5rem;
+
+                p {
+                    font-size: 0.70rem;
+                    margin-bottom: 0.5rem;
+
+                    span {
+                        font-weight: bold;
+                        font-size: 0.8rem;
+                    }
+                }
+
+                :last-of-type {
+                    margin-bottom: 0;
+                }
+            }
+
+        }
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .dev-prestation__container {
+        margin-top: 2rem;
+
+        h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .dev-prestation__list {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin: 0 auto;
+
+            .prestation__container {
+                margin-bottom: 1.5rem;
+                width: 30%;
+                border-radius: 15px;
+
+                .prestation-img__container {
+                    width: 100%;
+
+                    img {
+                        width: 100%;
+                        height: 20vh;
+                    }
+                }
+
+                .prestation-detail__container {
+                    padding: 1rem;
+
+                    p {
+                        font-size: 1.2rem;
+                        margin-bottom: 0.75rem;
+
+                        span {
+                            font-weight: bold;
+                            font-size: 1.3rem;
+                        }
+                    }
+
+                    :last-of-type {
+                        margin-bottom: 0;
+                    }
+                }
+
+            }
+        }
+    }
+}
