@@ -3,32 +3,39 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 1.5rem;
+
     .stack-comment__title {
         font-size: 1rem;
         margin-bottom: 0.5em;
     }
+
     .stack__container {
         margin-top: 0.5rem;
         width: 45%;
         padding: 0.5rem;
         background-color: #FFFFFF;
         border-radius: 10px;
+
         .stack__item {
             width: 100%;
             margin-bottom: 0.3rem;
+
             .stack__name-logo {
                 display: flex;
                 width: 65%;
                 justify-content: space-between;
+
                 .stack__name {
                     font-size: 1rem;
                     align-self: center;
                     text-transform: capitalize;
                 }
+
                 .stack__image-container {
                     width: 3vh;
                     height: 3vh;
                     display: flex;
+
                     img {
                         align-self: center;
                         width: 100%;
@@ -38,18 +45,22 @@
             }
         }
     }
+
     .comment__container {
         width: 45%;
         margin-top: 0.5rem;
         padding: 0.5rem;
         background-color: #FFFFFF;
         border-radius: 10px;
+
         .rate__item {
             margin-bottom: 0.3rem;
+
             .rate__star,
             .rate__comment {
                 font-size: 0.8rem;
             }
+
             span {
                 font-style: italic;
             }
@@ -66,25 +77,31 @@
         right: 0;
         display: block;
         border-radius: 10px;
+
         .stack-comment__title {
             font-size: 2rem;
             margin-bottom: 0.25em;
         }
+
         .stack__container {
             margin-top: 0;
             width: 100%;
+
             h2 {
                 font-size: 2em;
             }
+
             .stack__item {
                 width: 70%;
                 margin-bottom: 0.5rem;
+
                 .stack__name-logo {
                     .stack__name {
                         font-size: 1.3rem;
                     }
                 }
             }
+
             .stack__item:last-of-type {
                 margin-bottom: 0;
             }
@@ -93,13 +110,16 @@
         .comment__container {
             width: 100%;
             margin-top: 0;
+
             .rate__item {
                 margin-bottom: 0.5rem;
+
                 .rate__star,
                 .rate__comment {
                     font-size: 1.3rem;
                 }
             }
+
             .rate__item:last-of-type {
                 margin-bottom: 0;
             }

@@ -53,6 +53,7 @@ export const users = [
             }
         ],
         "avatar": "https://external-preview.redd.it/3y-KTCZ7TIZ0Z4Gw50H71AL3Zk3tT0JcFhvA9QRg1dM.png?format=pjpg&auto=webp&s=2c1bfc406c4838ae1e35629ee7edba31f1936e11",
+        "createdAt": "10-05-2022",
         "rates": [
             {
                 "id": 1,
@@ -88,6 +89,7 @@ export const users = [
             }
         ],
         "avatar": "https://thumbs.gfycat.com/BlondWellgroomedCheetah-mobile.jpg",
+        "createdAt": "14-06-2021",
         "rates": [
             {
                 "id": 2,
@@ -128,6 +130,7 @@ export const users = [
             }
         ],
         "avatar": "https://www.nautiljon.com/images/perso/00/32/guido_mista_17623.jpg",
+        "createdAt": "09-09-2020",
         "rates": []
     },
     {
@@ -159,6 +162,7 @@ export const users = [
             }
         ],
         "avatar": "https://www.nautiljon.com/images/perso/00/64/giorno_giovanna_17346.jpg",
+        "createdAt": "13-10-2022",
         "rates": []
     },
     {
@@ -183,6 +187,7 @@ export const users = [
             }
         ],
         "avatar": "https://pbs.twimg.com/media/E6aE4TfX0AcmBn9.jpg",
+        "createdAt": "25-06-2020",
         "rates": [
             {
                 "id": 11,
@@ -213,6 +218,7 @@ export const users = [
             }
         ],
         "avatar": "https://media.techtribune.net/uploads/2021/12/Screenshot-2021-12-01-at-10-32-01-JoJos-Bizarre-Adventure-STONE-OCEAN-Official-Trailer-Netflix-YouTube.png",
+        "createdAt": "06-10-2020",
         "rates": []
     },
 ]

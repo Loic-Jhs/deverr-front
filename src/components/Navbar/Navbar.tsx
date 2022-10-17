@@ -56,10 +56,10 @@ function Navbar() {
                     >
                         <ul>
                             <li>
-                                <Link className='navbar__link' to={'/'}>Accueil</Link>
+                                <Link to={'/'} className='navbar__link'>Accueil</Link>
                             </li>
                             <li>
-                                <a className='navbar__link'>Nos développeurs</a>
+                                <Link to={'developpeurs'} className='navbar__link'>Nos développeurs</Link>
                             </li>
                             <li>
                                 <a className='navbar__link'>Mon profil</a>

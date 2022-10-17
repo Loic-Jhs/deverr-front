@@ -7,6 +7,15 @@ export type Dev = {
     stacks: Array<Stack>,
     prestations: Array<Prestation>,
     rates: Array<Rate>|null
+    createdAt: string
+}
+
+export type HomepageDev = {
+    id: number,
+    avatar: string,
+    user_info: string,
+    name: string,
+    logo: string,
 }
 
 export type Stack = { 

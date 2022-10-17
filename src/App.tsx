@@ -6,6 +6,7 @@ import Header from './components/Header/Header'
 import Homepage from './components/Homepage/Homepage';
 import Register from './components/Register/Register';
 import DevDetail from './components/DevDetail/DevDetail';
+import DevList from './components/DevList/DevList';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/register" element={<Register />} />
         <Route path="dev-profile/:userId" element={<DevDetail />} />
+        <Route path="developpeurs" element={<DevList />} />
       </Routes>
       <Footer />
     </div>
