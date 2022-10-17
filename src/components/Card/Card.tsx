@@ -17,5 +17,5 @@ function Card(dev: HomepageDev) {
     </Link>
   )
 }
-  
+
 export default Card

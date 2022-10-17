@@ -7,6 +7,8 @@ import Homepage from './components/Homepage/Homepage';
 import Register from './components/Register/Register';
 import DevDetail from './components/DevDetail/DevDetail';
 import DevList from './components/DevList/DevList';
+import FormDev from './components/FormDev/FormDev';
+import FormClient from './components/FormClient/FormClient';
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="dev-profile/:userId" element={<DevDetail />} />
         <Route path="developpeurs" element={<DevList />} />
+        <Route path="/registerdev" element={<FormDev />} />
+        <Route path="/registerclient" element={<FormClient />} />
       </Routes>
       <Footer />
     </div>

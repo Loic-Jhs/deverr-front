@@ -1,5 +1,6 @@
+import { Link } from 'react-router-dom';
 import dev from '../../assets/img/99312-developer-skills.gif';
-import "./style.scss";
+import "./register.scss";
 
 function Register() {
   return (
@@ -9,8 +10,12 @@ function Register() {
         <div className="situation__role">
           <p className="situation__info">Quelle est votre situation ?</p>
           <div className="button">
+          <Link to="/registerdev" style={{ textDecoration: "none" }}>
             <button>Je suis un developpeur !</button>
+          </Link>
+          <Link to="/registerclient" style={{ textDecoration: "none" }}>
             <button>Je suis un client !</button>
+          </Link>
           </div>
         </div>
         <div className="image__container">

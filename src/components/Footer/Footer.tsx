@@ -1,5 +1,5 @@
 import logoDeverrBlack from '../../assets/img/logo-black.svg'
-import './style.scss'
+import './footer.scss'
 
 function Footer() {
   return (

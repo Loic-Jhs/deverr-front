@@ -1,5 +1,6 @@
 import CardList from "../CardList/CardList"
 import developpement from '../../assets/img/94056-development.gif';
+import { Link } from 'react-router-dom';
 import './style.scss';
 
 function Homepage() {
@@ -12,7 +13,9 @@ function Homepage() {
       <div className="homepage__button">
         <div className="button__container">
           <button>
-            Inscription
+            <Link to="/register">
+              Inscription
+            </Link>
           </button>
         </div>
       </div>
