@@ -66,9 +66,9 @@ function Navbar() {
                             </li>
                         </ul>
                         <div className="responsive__button">
-                            <a className="login__button">
+                            <Link to={'/login'} className="login__button">
                                 Connexion
-                            </a>
+                            </Link>
                             <a className="logout__button">
                                 Déconnexion
                             </a>

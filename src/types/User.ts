@@ -1,5 +1,11 @@
-export type User = {
-  email: string,
-  firstname: string,
-  lastname: string
+type User = {
+  user_info : {
+    id: number | null,
+    email: string | null,
+    firstname: string | null,
+    lastname: string | null,
+  },
+  token_type: string | null,
+  access_token: string | null,
 }
+export default User;

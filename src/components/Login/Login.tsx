@@ -5,6 +5,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import schema from './loginValidation';
 import './login.scss';
 import LoginInput from '../../models/loginInput';
+import { AuthContext} from "../../contexts/AuthContext";
+import User from "../../types/User";
+
 
 const Login = () => {
 
@@ -13,16 +16,28 @@ const Login = () => {
     password: "",
   });
 
+  const [user, setUser] = useState<User>(AuthContext);
+
   const { register, handleSubmit, formState: { errors } } = useForm<LoginInput>({ resolver: yupResolver(schema) });
-  
+
   const onSubmit: SubmitHandler<LoginInput> = (data) => {
     superagent
-      .post('http://api-dev.deverr.fr/login')
+      .post('http://localhost/login')
       .send(loginInput)
       .end((err, res) => {
         // Calling the end function will send the request
-        console.log(res.body.message);
-        console.log(data);
+        console.log(res.body.access_token);
+        setUser({
+          user_info: {
+            id: res.body.user_info.id,
+            email: res.body.user_info.email,
+            firstname: res.body.user_info.firstname,
+            lastname: res.body.user_info.lastname,
+          },
+          access_token: res.body.access_token,
+          token_type: res.body.token_type,
+        });
+        console.log(user);
       });
   }
 
