@@ -1,8 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
-
+import { useState } from 'react';
 import './App.css'
-import Footer from './components/Footer/Footer'
-import Header from './components/Header/Header'
+import Footer from './components/Footer/Footer';
+import Header from './components/Header/Header';
 import Homepage from './components/Homepage/Homepage';
 import Register from './components/Register/Register';
 import DevDetail from './components/DevDetail/DevDetail';
@@ -11,6 +11,7 @@ import FormDev from './components/FormDev/FormDev';
 import FormClient from './components/FormClient/FormClient';
 
 function App() {
+
   return (
     <div className="App">
       <Header />
