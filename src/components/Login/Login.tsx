@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm, SubmitHandler } from "react-hook-form";
 import superagent from 'superagent';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -16,28 +16,18 @@ const Login = () => {
     password: "",
   });
 
-  const [user, setUser] = useState<User>(AuthContext);
-
+  const {user, setUser} = useContext(AuthContext);  
   const { register, handleSubmit, formState: { errors } } = useForm<LoginInput>({ resolver: yupResolver(schema) });
 
   const onSubmit: SubmitHandler<LoginInput> = (data) => {
     superagent
-      .post('http://localhost/login')
+      .post('http://api-dev.deverr.fr/login')
       .send(loginInput)
       .end((err, res) => {
         // Calling the end function will send the request
-        console.log(res.body.access_token);
-        setUser({
-          user_info: {
-            id: res.body.user_info.id,
-            email: res.body.user_info.email,
-            firstname: res.body.user_info.firstname,
-            lastname: res.body.user_info.lastname,
-          },
-          access_token: res.body.access_token,
-          token_type: res.body.token_type,
-        });
-        console.log(user);
+        console.log(res.body);
+        setUser(res.body);
+        localStorage.setItem('access-token', res.body.access_token);
       });
   }
 

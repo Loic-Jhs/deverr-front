@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
-import './App.css'
+import { AuthContext } from './contexts/AuthContext';
+import {defaultUser} from "./types/defaultUser";
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Homepage from './components/Homepage/Homepage';
@@ -9,14 +10,15 @@ import DevDetail from './components/DevDetail/DevDetail';
 import DevList from './components/DevList/DevList';
 import FormDev from './components/FormDev/FormDev';
 import FormClient from './components/FormClient/FormClient';
-import { AuthContext } from './contexts/AuthContext';
-import {defaultUser} from "./types/defaultUser";
 import Login from "./components/Login/Login";
+import User from './types/User';
+import './App.css'
 
 
 function App() {
-
-  const [user, setUser] = useState(defaultUser);
+  console.log(localStorage.getItem('access-token'));
+  
+  const [user, setUser] = useState<User>(defaultUser);
 
   return (
     <div className="App">
