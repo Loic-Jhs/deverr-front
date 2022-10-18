@@ -39,6 +39,10 @@ const FormDev = () => {
     setDevInput({ ...devInput, [event.target.name]: event.target.value });
   }
 
+  const handleTxtAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setDevInput({ ...devInput, [event.target.name]: event.target.value });
+  }
+
   return (
     <section className="register__form__dev">
       <h1>Inscription d'un développeur</h1>
@@ -65,13 +69,18 @@ const FormDev = () => {
         <div className="input__container">
           <p className="error">{errors.experience?.message}</p>
           <label>Années d'expérience</label>
-          <input type="number" {...register("experience")} name="experience" min="1" max="35" value={devInput.experience} onChange={handleChange} />
+          <input type="number" {...register("experience")} name="experience" min="1" max="10" value={devInput.experience} onChange={handleChange} />
         </div>
 
         <div className="input__container">
           <p className="error">{errors.description?.message}</p>
-          <label>Description</label>
-          <input type="text" {...register("description")} name="description" placeholder="Description" value={devInput.description} onChange={handleChange} />
+          <label className="label__description">Description</label>
+          <textarea className="description"
+            name="description"
+            placeholder="Description"
+            value={devInput.description}
+            onChange={handleTxtAreaChange}
+          />
         </div>
 
         <div className="input__container">
