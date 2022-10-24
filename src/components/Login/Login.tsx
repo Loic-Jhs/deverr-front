@@ -43,8 +43,8 @@ const Login = () => {
 
   return (
     <section>
-      <h1>Connexion</h1>
       <form className="login__form" onSubmit={handleSubmit(onSubmit)}>
+        <h1>Connexion</h1>
         <div className="input__container">
           <p className="error">{errors.email?.message}</p>
           <label>Email</label>
@@ -56,10 +56,12 @@ const Login = () => {
           <label>Mot de passe</label>
           <input type="password" {...register("password")} placeholder="Mot de passe" value={loginInput.password} onChange={handleChange} />
         </div>
-
-        <button type="submit" className="btn">
-          <span className="span">Connexion</span>
-        </button>
+        
+        <div className="button__container">
+          <button type="submit" className="btn">
+            <span className="span">Connexion</span>
+          </button>
+        </div>
       </form>
     </section>
   );

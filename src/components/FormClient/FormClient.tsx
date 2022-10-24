@@ -80,7 +80,6 @@ const FormClient = () => {
           <button type="submit" className="btn">
             <span className="span">Suivant</span>
           </button>
-
         </div>
       </form>
     </section>
