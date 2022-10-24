@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
 import { AuthContext } from './contexts/AuthContext';
-import {defaultUser} from "./types/defaultUser";
+import { defaultUser } from "./types/defaultUser";
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Homepage from './components/Homepage/Homepage';
@@ -16,8 +16,6 @@ import './App.css'
 
 
 function App() {
-  console.log(localStorage.getItem('access-token'));
-  
   const [user, setUser] = useState<User>(defaultUser);
 
   return (
@@ -25,13 +23,13 @@ function App() {
       <Header />
       <AuthContext.Provider value={{ user, setUser }}>
         <Routes>
-            <Route path="/" element={<Homepage />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="dev-profile/:userId" element={<DevDetail />} />
-            <Route path="developpeurs" element={<DevList />} />
-            <Route path="/registerdev" element={<FormDev />} />
-            <Route path="/registerclient" element={<FormClient />} />
-            <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Homepage />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/devprofile/:userId" element={<DevDetail />} />
+          <Route path="/developers" element={<DevList />} />
+          <Route path="/registerdev" element={<FormDev />} />
+          <Route path="/registerclient" element={<FormClient />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </AuthContext.Provider>
       <Footer />

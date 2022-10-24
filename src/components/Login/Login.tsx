@@ -3,11 +3,10 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import superagent from 'superagent';
 import { yupResolver } from '@hookform/resolvers/yup';
 import schema from './loginValidation';
-import './login.scss';
 import LoginInput from '../../models/loginInput';
-import { AuthContext} from "../../contexts/AuthContext";
-import User from "../../types/User";
-
+import { AuthContext } from "../../contexts/AuthContext";
+import { useNavigate } from 'react-router-dom';
+import './login.scss';
 
 const Login = () => {
 
@@ -16,8 +15,9 @@ const Login = () => {
     password: "",
   });
 
-  const {user, setUser} = useContext(AuthContext);  
+  const { user, setUser } = useContext(AuthContext);
   const { register, handleSubmit, formState: { errors } } = useForm<LoginInput>({ resolver: yupResolver(schema) });
+  const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<LoginInput> = (data) => {
     superagent
@@ -25,9 +25,14 @@ const Login = () => {
       .send(loginInput)
       .end((err, res) => {
         // Calling the end function will send the request
-        console.log(res.body);
         setUser(res.body);
         localStorage.setItem('access-token', res.body.access_token);
+        // Entourer d'un if pour gérer la redirection en fonction du rôle
+        if (res.body.role_id.toLowerCase() === 'developer') {
+          navigate(`/devprofile/${user.user_info.id}`);
+        } else {
+          navigate("/developers");
+        }
       });
   }
 
@@ -38,7 +43,7 @@ const Login = () => {
 
   return (
     <section>
-      <h1>Connection</h1>
+      <h1>Connexion</h1>
       <form className="login__form" onSubmit={handleSubmit(onSubmit)}>
         <div className="input__container">
           <p className="error">{errors.email?.message}</p>

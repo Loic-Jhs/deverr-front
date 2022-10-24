@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+import User from '../../types/User';
 import DevPrestation from '../DevPrestation/DevPrestation';
 import ProfileInfo from '../ProfileInfo/ProfileInfo';
 import StackComment from '../StackComment/StackComment';
@@ -10,8 +11,8 @@ function DevDetail() {
     return (
         <div className='dev__container'>
             <div className="profile-prestation__container">
-            <ProfileInfo devId={Number(userId)}/>
-            <DevPrestation devId={Number(userId)} />
+                <ProfileInfo devId={Number(userId)} />
+                <DevPrestation devId={Number(userId)} />
             </div>
             <StackComment devId={Number(userId)} />
         </div>

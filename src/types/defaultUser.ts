@@ -4,6 +4,7 @@ import User from "./User";
 export const defaultUser: User = {
   user_info : {
     id: null,
+    role_id: null,
     email: null,
     firstname: null,
     lastname: null,
