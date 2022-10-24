@@ -11,11 +11,12 @@
   "dependencies": {
     "@hookform/resolvers": "^2.9.8",
     "@types/superagent": "^4.1.15",
+    "esbuild": "^0.15.12",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.37.0",
     "react-router-dom": "^6.4.1",
     "sass": "^1.55.0",
-    "react-hook-form": "^7.37.0",
     "superagent": "^8.0.0",
     "yup": "^0.32.11"
   },
