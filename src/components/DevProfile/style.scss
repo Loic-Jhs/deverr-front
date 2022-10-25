@@ -1,0 +1,45 @@
+.profile__container {
+    padding: 1rem;
+    width: 80%;
+    margin: 0 auto;
+    h1 {
+        font-size: 4rem;
+        font-weight: bold;
+        text-align: center;
+    }
+    .description__prestations__container {
+        display: flex;
+        .description__container {
+            width: 25vh;
+            .editable__description__container {
+                textarea {
+                    width: 95%;
+                    min-height: 10vh;
+                    max-height: 30vh;
+                    resize: vertical;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    .profile__container {
+        width: 95%;
+        margin: 0 auto;
+        padding: 0.3rem;
+        h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            text-align: center;
+        }
+        .description__prestations__container {
+            display: flex;
+            flex-direction: column;
+            .description__container {
+                width: 95%;
+                margin: 0 auto;
+            }
+        }
+    }
+}

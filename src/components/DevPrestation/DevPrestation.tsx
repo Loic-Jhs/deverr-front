@@ -2,8 +2,8 @@ import { DevProps } from '../../types';
 import { users } from '../../fakeData/data';
 import './style.scss';
 
-function DevPrestation({devId}: DevProps) {
-    let dev = users.find(user => devId == user.id);
+function DevPrestation({devID}: DevProps) {
+    let dev = users.find(user => devID == user.id);
     let prestations = dev?.prestations;
     return (
         <div className='dev-prestation__container'>
