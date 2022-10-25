@@ -14,7 +14,7 @@ const FormClient = () => {
     email: "",
     password: "",
     confirmedPassword: "",
-    type: "client",
+    type: "user",
   });
 
   const { register, handleSubmit, formState: { errors } } = useForm<UserInput>({ resolver: yupResolver(schema) });
