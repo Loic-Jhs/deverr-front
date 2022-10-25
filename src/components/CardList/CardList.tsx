@@ -7,7 +7,7 @@ import './style.scss'
 function CardList() {
   
   const [devList, setDevList] = useState<HomepageDev[]>();
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState<Boolean>(false);
 
   //const [userList, setUserList] = useState();
 
