@@ -3,8 +3,8 @@ import { DevProps, Rate, Stack } from '../../types';
 import './style.scss';
 
 
-function StackComment({devId}: DevProps) {
-    const dev = users.find(user => devId == user.id);
+function StackComment({devID}: DevProps) {
+    const dev = users.find(user => devID == user.id);
     const devStack = dev?.stacks;
     const devRate = dev?.rates
 
