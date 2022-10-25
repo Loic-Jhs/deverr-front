@@ -1,4 +1,4 @@
-.profile__container {
+.dev__profile__container {
     width: 100%;
     border-radius: 0.5rem;
     display: flex;
@@ -62,7 +62,7 @@
 }
 
 @media screen and (min-width: 1280px) {
-    .profile__container {
+    .dev__profile__container {
         width: 100%;
         padding: 0 1rem 0rem 0;
         background-color: #FFFFFF;

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import dev from '../../assets/img/99312-developer-skills.gif';
+import dev from '../../assets/img/register-img.png';
 import "./register.scss";
 
 function Register() {

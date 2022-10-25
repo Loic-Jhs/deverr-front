@@ -3,14 +3,12 @@ import { users } from '../../fakeData/data';
 import './style.scss';
 import { useState } from 'react';
 
-
-
-function ProfileInfo({devId}: DevProps) {
-    let dev = users.find(user => devId == user.id);
+function ProfileInfo({devID}: DevProps) {
+    let dev = users.find(user => devID == user.id);
     const [showMore, setShowMore] = useState(false);
 
     return (
-        <div className='profile__container'>
+        <div className='dev__profile__container'>
             <div className='avatar__container'>
                 <img src={`${dev?.avatar}`} alt={`${dev?.firstname} avatar`} />
                 <div className='avatar__rate-activity'>
