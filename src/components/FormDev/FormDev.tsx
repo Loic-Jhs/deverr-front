@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Link } from 'react-router-dom';
-import DevInput from '../../models/devInput';
-import superagent from 'superagent';
 import { yupResolver } from '@hookform/resolvers/yup';
+import DevInput from '../../models/devInput';
 import schema from './formDevValidation';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import superagent from 'superagent';
 import './formDev.scss';
 
 const FormDev = () => {
@@ -19,19 +19,34 @@ const FormDev = () => {
     type: "developer",
   });
 
-  const { register, handleSubmit, formState: { errors } } = useForm<DevInput>({ resolver: yupResolver(schema) });
+  const [inputClear, setInputClear] = useState("");
 
+  const { register, handleSubmit, formState: { errors} } = useForm<DevInput>({ resolver: yupResolver(schema) });
   // getting all the values from the form but the confirmed password to send to the API
   const { confirmedPassword, ...cleanDevInput } = devInput;
+  const [successMessage, setSuccessMessage] = useState("")
+  const [loading, setLoading] = useState(false);
 
   const onSubmit: SubmitHandler<DevInput> = (data) => {
+    setLoading(true);
     superagent
       .post('http://api-dev.deverr.fr/register')
       .send(cleanDevInput)
       .end((err, res) => {
         // Calling the end function will send the request
-        console.log(res.body.message);
-        console.log(data);
+        setSuccessMessage(res.body.message);
+        setDevInput({...devInput, 
+          lastname: "",
+          firstname: "",
+          email: "",
+          experience: 0,
+          description: "",
+          password: "",
+          confirmedPassword: ""
+        })
+        if(successMessage != null) {
+          setLoading(false);
+        }
       });
   }
 
@@ -46,6 +61,14 @@ const FormDev = () => {
   return (
     <section className="register__form__dev">
       <h1>Inscription d'un développeur</h1>
+      <div className="succes">
+        <p>{successMessage}</p>
+      </div>
+
+      <div className="load">
+        <p>{loading ? "Chargement..." : ""}</p>
+      </div>
+
       <form className="dev__form" onSubmit={handleSubmit(onSubmit)}>
 
         <div className="input__container">
