@@ -1,20 +1,36 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { users } from '../../fakeData/data';
+import { Dev } from '../../types';
 import './style.scss';
 
 function DevList() {
+    const [ devList, setDevList ] = useState<Dev[]>();
+    const [isLoaded, setIsLoaded] = useState<Boolean>(false);
 
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const response = await fetch('http://api-dev.deverr.fr/all-developers', {
+              method: "GET",
+              headers: {
+                "access-control-allow-origin" : "*",
+                "Content-type": "application/json"
+              },
+            mode: 'cors'});
+            const data = await response.json();
+            setDevList(data);
+            setIsLoaded(true);
+          } catch (e) {
+            console.log(e)
+          }
+        }
+        fetchData()
+    }, [])
     return (
         <div className='dev-list__container'>
-            {users.map((user) => {
-                const {id, firstname, lastname, avatar, rates, description, prestations, stacks, createdAt } = user;
-                let average:Number|String = 0;
-                if (rates.length > 0) {
-                    average = rates.reduce((a, b) =>  a + b.rate, 0) / rates.length
-                } else {
-                    average = "Pas de note";
-                }
-
+            {devList && devList.map((dev) => {
+                const {id, firstname, lastname, avatar, average_rating, description, prestations, stacks, register_date } = dev;
                 return (
                     <Link key={id} to={`/dev-profile/${id}`} className='dev-list__link'>
                         <div  className="dev__item">
@@ -22,16 +38,21 @@ function DevList() {
                                 <img src={`${avatar}`} alt={`${firstname} avatar`} />
                             </div>
                             <div className="dev__item-infos">
-                                <div className="dev__item-account-detail">
-                                    <h3>{firstname} {lastname}</h3>
-                                    <p>Inscrit depuis le {createdAt}</p>
-                                    <p>{`${description.substring(0, 90)}...`} </p>
+                                <div>
+                                    <div className="dev__item-account-detail">
+                                        <div className="dev__item-name-subscription">
+                                            <h3>{firstname} {lastname}</h3>
+                                            <p>Inscrit depuis le {register_date}</p>
+                                        </div>
+                                        <p className="rating">{average_rating != null ? average_rating+'/5' : 'Pas de note'}</p>
+                                    </div>
+                                    <p>{description}fsdfds fdsfds,fldskflksdlm fksdlmkflmsdkflkdsmlfkdslk lfmsdklmfkdslmfkdslm </p>
                                 </div>
                                 <div className="dev__item-stacks-detail">
                                     {stacks.map((stack) => {
                                         return (
-                                            <div key={stack.label} className="dev__item-stack-logo">
-                                                <img src={`${stack.logo}`} alt={`${stack.label} logo`} />
+                                            <div key={stack.id} className="dev__item-stack-logo">
+                                                <img src={`${stack.logo}`} alt={`${stack.name} logo`} />
                                             </div>
                                         )
                                     })}
