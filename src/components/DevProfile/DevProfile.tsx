@@ -82,7 +82,6 @@ function DevProfile() {
             <h3>Prestations proposées :</h3>
             <div className='dev__prestations-list'>
               {dev.prestations && dev.prestations.map((prestation) => {
-                console.log(dev.prestations)
                 return (
                   <div key={prestation.id} className='dev__prestation-item'>
                     <h4>{prestation.name}</h4>

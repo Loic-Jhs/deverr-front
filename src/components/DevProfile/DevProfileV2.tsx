@@ -76,7 +76,6 @@ function DevProfileV2() {
                     <h3>{dev.reviews.length > 1 ? 'Notes et commentaires reçues ' : 'Note reçue '}:</h3>
                     <div className='dev__reviews-container'>
                         {dev.reviews && dev.reviews.map((review) => {
-                            console.log(dev)
                             return (
                             <div key={review.id} className='dev__review-item'>                 
                             </div>

@@ -76,9 +76,9 @@ function Navbar() {
                     </div>
                 </div>
                 <div className="desktop__button">
-                    <a>
+                    <Link to={'/login'}>
                         Connexion
-                    </a>
+                    </Link>
                     <a>
                         Déconnexion
                     </a>

@@ -23,7 +23,6 @@ function CardList() {
           mode: 'cors'
         });
         const data = await response.json();
-        console.log(data)
         setDevList(data);
         setIsLoaded(true);
       } catch (e) {
