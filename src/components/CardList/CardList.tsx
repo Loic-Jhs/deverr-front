@@ -22,6 +22,7 @@ function CardList() {
           },
         mode: 'cors'});
         const data = await response.json();
+        console.log(data)
         setDevList(data);
         setIsLoaded(true);
       } catch (e) {
@@ -30,6 +31,7 @@ function CardList() {
     }
     fetchData()
   }, [])
+  
   return (
     <>
     {isLoaded && (

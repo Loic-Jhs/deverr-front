@@ -3,7 +3,7 @@ export type Dev = {
     firstname: string,
     lastname: string,
     avatar: string,
-    average_rating: string|null,
+    rating: number|null,
     description: string,
     stacks: Array<RealStack>
     prestations: Array<RealPrestation>,
@@ -12,15 +12,11 @@ export type Dev = {
 
 export type DevInfos = {
     id: number,
-    user_id: number,
     avatar: string,
     description: string,
-    experience: number,
-    registred_at: string,
     firstname: string,
     lastname: string,
-    email: string,
-    prestations: Array<DevPrestation>
+    prestations: Array<RealPrestation>
     stacks: Array<RealStack>
     reviews: Array<Review>
 }
@@ -55,10 +51,9 @@ export type RealPrestation = {
 export type HomepageDev = {
     id: number,
     avatar: string,
-    developer_lastname: string,
-    developer_firstname: string,
-    name: string,
-    logo: string,
+    lastname: string,
+    firstname: string,
+    stack: string
 }
 
 export type Stack = { 

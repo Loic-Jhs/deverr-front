@@ -6,10 +6,10 @@ function Card(dev: HomepageDev) {
   return (
     <Link to={`/dev-profile/${dev.id}`} className="card__container">
         <div className="card__content" >
-          <img className="card__image" src={`${dev.avatar}`} alt={`${dev.developer_firstname} ${dev.developer_lastname} avatar`} />
+          <img className="card__image" src={`${dev.avatar}`} alt={`${dev.firstname} ${dev.lastname} avatar`} />
           <div className="card__stack"> 
-            <p>{dev.developer_firstname} {dev.developer_lastname.substring(0,1)}.</p>
-              <div key={dev.name} className="logo__stack">
+            <p>{dev.firstname} {dev.lastname.substring(0,1)}.</p>
+              <div key={dev.stack} className="logo__stack">
                 <img src={`${dev.logo}`} />
               </div>
           </div>

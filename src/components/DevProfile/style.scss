@@ -1,45 +1,152 @@
+body{
+    height: 100vh;
+    width: 100vw;
+    background-color: #FFF0EA;
+}
 .profile__container {
-    padding: 1rem;
-    width: 80%;
-    margin: 0 auto;
-    h1 {
-        font-size: 4rem;
-        font-weight: bold;
-        text-align: center;
+    display: flex;
+    flex-direction: column;
+    .dev__informations {
+        background-color: #FFF0EA;
+        width: 100%;
+        padding-top: 1rem;
+        .img__container {
+            display: flex;
+            img {
+                border-radius: 50%;
+                object-fit: cover;
+                margin: 0 auto;
+                width: 10vh;
+                height: 10vh;
+                border: 0.3rem solid #FFFFFF;
+            }
+        }
+        .dev__name {
+            margin-top: 0.3rem;
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .dev__missions-reviews-count {
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+            padding-bottom: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #000000;
+        }
     }
-    .description__prestations__container {
-        display: flex;
-        .description__container {
-            width: 25vh;
-            .editable__description__container {
-                textarea {
-                    width: 95%;
-                    min-height: 10vh;
-                    max-height: 30vh;
-                    resize: vertical;
+    .dev__situation {
+        padding: 1rem;
+        padding-bottom: 0;
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            span {
+                font-size: 1.2rem;
+                font-weight: bold;
+            }
+        }
+    }
+    .dev__stacks {
+        padding: 1rem;
+        background-color: #FFD8C9;
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+    } 
+}
+
+@media screen and (min-width: 1024px) {
+    .profile__container {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 2rem 2rem 1rem 2rem;
+        width: 70%;
+        margin: 0 auto;
+        .dev__informations {
+            width: 20%;
+            padding: 1.5rem;
+            .img__container {
+                display: flex;
+                img {
+                    border-radius: 50%;
+                    object-fit: cover;
+                    margin: 0 auto;
+                    width: 12vh;
+                    height: 12vh;
+                    border: 0.6rem solid #FFFFFF;
+                }
+            }
+            .dev__name {
+                margin-top: 0.3rem;
+                text-align: center;
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+        }
+
+        .dev__situation {
+            padding: 0;
+            p {
+                font-size: 1.1rem;
+                margin-bottom: 0.5rem;
+                span {
+                    font-size: 1.2rem;
+                    font-weight: bold;
                 }
             }
         }
+        .dev__stacks {
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 0.75rem;
+            .dev__stacks-list {
+                display: flex;
+                justify-content: space-evenly;
+                .stack__item {
+                    display: inline-block;
+                    padding: 0.4rem 0.8rem;
+                    border-radius: 0.75rem;
+                    background-color: #BD0F14;
+                }
+            }
+            h3 {
+                font-size: 1.5rem;
+                margin-bottom: 0.75rem;
+            }
+        } 
     }
-}
-
-@media screen and (max-width: 1280px) {
-    .profile__container {
-        width: 95%;
-        margin: 0 auto;
-        padding: 0.3rem;
-        h1 {
-            font-size: 3rem;
-            font-weight: bold;
-            text-align: center;
-        }
-        .description__prestations__container {
+    
+    .dev__description-prestation-portfolio {
+        width: 50%;
+        .dev__prestations-list {
+            margin: 1rem 0 2rem 0;
             display: flex;
-            flex-direction: column;
-            .description__container {
-                width: 95%;
-                margin: 0 auto;
+            justify-content: space-between;
+            .dev__prestation-item {
+                h4 {
+                    margin-bottom: 0.5rem;
+                }
+                .p__detail {
+                    margin-bottom: 0.3rem;
+                }
+                p { 
+                    font-size: 1.2rem;
+                }
+                width: 30%;
+                padding: 0.75rem;
+                border-radius: 0.75rem;
+                box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+                .dev__prestation-price {
+                    margin-top: 0.5rem;
+                }
             }
         }
+ 
+    }
+    .dev__contact-review {
+        width: 20%;
     }
 }
