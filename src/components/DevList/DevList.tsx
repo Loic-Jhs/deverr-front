@@ -1,14 +1,26 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
-import { users } from "../../fakeData/data";
+import { users, prestations } from "../../fakeData/data";
 import { useState } from "react";
 import "./style.scss";
 
 function DevList() {
     const { user } = useContext(AuthContext);
     const [query, setQuery] = useState("");
-    
+
+    // find the good type of event
+    // const handleChange = (event: any) => {
+    //     const newUsers = users.map(user => {
+    //         user.prestations.filter(prestation => {
+    //             console.log(prestation, "prestation")
+    //             console.log(event.target.value, "event")
+    //             return prestation.id == event.target.value;
+    //         })
+    //     })
+    //     console.log(newUsers);
+    // };
+
     return (
         <>
             <div className="search">
@@ -17,19 +29,11 @@ function DevList() {
                     onChange={(event) => setQuery(event.target.value)}
                 />
                 {/* <label>Rechercher une prestation</label>
-                <select>
+                <select onChange={handleChange}>
                     {
-                        users.filter( element => {
-                            const isDuplicate = uniquePrestations.includes()
-                        })
-                        users.map(({ prestations }) => {
+                        prestations.map((prestation) => {
                             return (
-                                <>
-                                    {prestations.map((prestation) => {
-                                        console.log(prestation);
-                                        return (<option key={prestation.id} value={prestation.id}>{prestation.name} {prestation.price}€</option>)
-                                    })}
-                                </>
+                                <option key={prestation.id} value={prestation.id}>{prestation.name}</option>
                             )
                         })
                     }
