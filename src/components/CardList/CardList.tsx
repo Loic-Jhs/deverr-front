@@ -5,7 +5,7 @@ import { Dev, HomepageDev } from "../../types";
 import './style.scss'
 
 function CardList() {
-  
+
   const [devList, setDevList] = useState<HomepageDev[]>();
   const [isLoaded, setIsLoaded] = useState<Boolean>(false);
 
@@ -17,10 +17,11 @@ function CardList() {
         const response = await fetch('http://api-dev.deverr.fr/random-users', {
           method: "GET",
           headers: {
-            "access-control-allow-origin" : "*",
+            "access-control-allow-origin": "*",
             "Content-type": "application/json"
           },
-        mode: 'cors'});
+          mode: 'cors'
+        });
         const data = await response.json();
         console.log(data)
         setDevList(data);
@@ -34,15 +35,14 @@ function CardList() {
   
   return (
     <>
-    {isLoaded && (
-      <div className="cards__container">
-         { devList && devList.map((dev) => {
-            console.log(dev)
+      {isLoaded && (
+        <div className="cards__container">
+          {devList && devList.map((dev) => {
             return <Card key={dev.id} {...dev} />
           })
-        }
-      </div>
-    )}
+          }
+        </div>
+      )}
     </>
   )
 }

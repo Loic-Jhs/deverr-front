@@ -22,6 +22,18 @@
     transform: perspective(1px) scale3d(1.044, 1.044, 1) translateZ(0);
   }
 
+  .succes {
+    text-align: center;
+    color: rgb(38, 184, 38);
+  }
+
+  .load {
+    text-align: center;
+    p {
+      color: #1d9bf0;
+    }
+  }
+
   .dev__form {
     display: flex;
     flex-direction: column;
@@ -49,6 +61,15 @@
         border-radius: 1rem;
         border-color: #1d9bf0;
         font-size: inherit;
+        padding: 0.5rem;
+      }
+      .description {
+        font-family: "Montserrat", sans-serif;
+        resize: none;
+        border-radius: 1rem;
+        border: #1d9bf0 solid 2px;
+        height: 7em;
+        width: 25em;
         padding: 0.5rem;
       }
     }
@@ -106,9 +127,23 @@
           width: 30rem;
           height: 2rem;
         }
+        .description {
+          height: 10em;
+          width: 36em;
+        }
       }
       .error {
         font-size: 1.1rem;
+      }
+    }
+    .success {
+      p {
+        font-size: 1.1rem;
+      }
+    }
+    .load {
+      p {
+        font-size: 1.3rem;
       }
     }
   }
@@ -126,9 +161,23 @@
           width: 40rem;
           height: 2.5rem;
         }
+        .description {
+          height: 12em;
+          width: 48em;
+        }
       }
       .error {
         font-size: 1.3rem;
+      }
+    }
+    .success {
+      p {
+        font-size: 1.3rem;
+      }
+    }
+    .load {
+      p {
+        font-size: 1.6rem;
       }
     }
   }

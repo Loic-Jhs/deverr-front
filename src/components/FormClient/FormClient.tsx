@@ -9,24 +9,38 @@ import './formClient.scss';
 
 const FormClient = () => {
   const [userInput, setUserInput] = useState<UserInput>({
-    firstname: "",
     lastname: "",
+    firstname: "",
     email: "",
     password: "",
     confirmedPassword: "",
-    type: "client",
+    type: "user",
   });
 
   const { register, handleSubmit, formState: { errors } } = useForm<UserInput>({ resolver: yupResolver(schema) });
   const { confirmedPassword, ...cleanUserInput } = userInput;
+  const [successMessage, setSuccessMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const onSubmit: SubmitHandler<UserInput> = (data) => {
+    setLoading(true);
     superagent
       .post('http://api-dev.deverr.fr/register')
       .send(cleanUserInput)
       .end((err, res) => {
         // Calling the end function will send the request
-        console.log(res.body.message);
-        console.log(data);
+        setSuccessMessage(res.body.message);
+        setUserInput({
+          ...userInput,
+          lastname: "",
+          firstname: "",
+          email: "",
+          password: "",
+          confirmedPassword: ""
+        })
+        if (successMessage != null) {
+          setLoading(false);
+        }
       });
   }
 
@@ -34,13 +48,18 @@ const FormClient = () => {
     setUserInput({ ...userInput, [event.target.name]: event.target.value });
   }
 
-  useEffect(() => {
-    console.log(errors);
-  }, [errors])
-
   return (
     <section className="register__form__client">
       <h1>Inscription d'un client</h1>
+
+      <div className="success">
+        <p>{successMessage}</p>
+      </div>
+
+      <div className="load">
+        <p>{loading ? "Chargement..." : ""}</p>
+      </div>
+
       <form className="client__form" onSubmit={handleSubmit(onSubmit)}>
 
         <div className="input__container">
@@ -80,7 +99,6 @@ const FormClient = () => {
           <button type="submit" className="btn">
             <span className="span">Suivant</span>
           </button>
-
         </div>
       </form>
     </section>

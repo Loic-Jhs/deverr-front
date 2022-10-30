@@ -14,6 +14,7 @@
     "@hookform/resolvers": "^2.9.8",
     "@mui/material": "^5.10.11",
     "@types/superagent": "^4.1.15",
+    "esbuild": "^0.15.12",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.37.0",

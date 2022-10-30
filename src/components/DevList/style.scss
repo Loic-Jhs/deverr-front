@@ -1,3 +1,8 @@
+.search {
+  display: flex;
+  justify-content: center;
+}
+
 .dev-list__container {
     display: grid;
     grid-template-columns: repeat(auto-fill, 95%);
@@ -89,9 +94,29 @@
                     margin-bottom: 0.75rem;
                 }
             }
+          }
         }
+      }
+    
+    .dev__item-prestation {
+      display: flex;
+      flex-wrap: wrap;
+      padding-bottom: 1rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      justify-content: center;
+      .prestation__container {
+        padding: 0.5rem;
+        border: 1px solid black;
+        border-radius: 0.5rem;
+        margin-top: 0.5rem;
+        margin-right: 0.3rem;
+        margin-left: 0.3rem;
+        p {
+          font-size: 0.75rem;
+        }
+      }
     }
-}
 
 
 @media screen and (min-width: 1024px) {
@@ -113,5 +138,5 @@
             }
         }
     }
+  }
 
-}

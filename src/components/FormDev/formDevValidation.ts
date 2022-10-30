@@ -2,11 +2,11 @@ import * as yup from "yup";
 
 const schema = yup.object().shape({
     firstname: yup.string()
-        .min(3, "Le prénom doit contenir au moins 3 caractères")
+        .min(2, "Le prénom doit contenir au moins 3 caractères")
         .max(255, "Le prénom doit contenir au maximum 255 caractères")
         .required("Le prénom est obligatoire"),
     lastname: yup.string()
-        .min(3, "Le nom doit contenir au moins 3 caractères")
+        .min(2, "Le nom doit contenir au moins 3 caractères")
         .max(255, "Le nom doit contenir au maximum 255 caractères")
         .required("Le nom est obligatoire"),
     email: yup.string()
@@ -21,7 +21,7 @@ const schema = yup.object().shape({
         .required("La confirmation du mot de passe est obligatoire"),
     experience: yup.number()
         .min(1, "L'expérience doit être supérieure ou égale à 1")
-        .max(80, "L'expérience doit être inférieure ou égale à 80")
+        .max(10, "L'expérience doit être inférieure ou égale à 10")
         .required("L'expérience est obligatoire"),
 });
 
