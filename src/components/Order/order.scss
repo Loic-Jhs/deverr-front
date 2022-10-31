@@ -1,0 +1,78 @@
+p {
+  font-size: 1.27rem;
+  margin-bottom: 1rem;
+}
+.order__form {
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  select {
+    margin-bottom: 1rem;
+  }
+  .input__container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    p {
+      margin-bottom: 0.3rem;
+    }
+
+    label {
+      margin-bottom: 0.5rem;
+    }
+
+    input {
+      font-family: "Montserrat", sans-serif;
+      width: 20rem;
+      height: 1.5rem;
+      border-radius: 1rem;
+      border-color: #1d9bf0;
+      font-size: inherit;
+      padding: 0.5rem;
+    }
+    .description {
+      font-family: "Montserrat", sans-serif;
+      resize: none;
+      border-radius: 1rem;
+      border: #1d9bf0 solid 2px;
+      height: 12em;
+      width: 17em;
+      padding: 0.5rem;
+    }
+  }
+  .button__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 2rem;
+      border-radius: 50px;
+      cursor: pointer;
+      text-transform: uppercase;
+      height: 45px;
+      width: 130px;
+      opacity: 1;
+      background-color: #1d9bf0;
+      border: 1px solid rgba(0, 0, 0, 0.6);
+    }
+
+    button,
+    span {
+      font-family: "Montserrat", sans-serif;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.7px;
+    }
+
+    button:hover {
+      transform: perspective(1px) scale3d(1.044, 1.044, 1) translateZ(0);
+    }
+  }
+}

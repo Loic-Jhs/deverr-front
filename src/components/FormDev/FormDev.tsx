@@ -21,7 +21,7 @@ const FormDev = () => {
 
   const [inputClear, setInputClear] = useState("");
 
-  const { register, handleSubmit, formState: { errors} } = useForm<DevInput>({ resolver: yupResolver(schema) });
+  const { register, handleSubmit, formState: { errors } } = useForm<DevInput>({ resolver: yupResolver(schema) });
   // getting all the values from the form but the confirmed password to send to the API
   const { confirmedPassword, ...cleanDevInput } = devInput;
   const [successMessage, setSuccessMessage] = useState("")
@@ -30,12 +30,13 @@ const FormDev = () => {
   const onSubmit: SubmitHandler<DevInput> = (data) => {
     setLoading(true);
     superagent
-      .post('http://api-dev.deverr.fr/register')
+      .post('https://api-dev.deverr.fr/register')
       .send(cleanDevInput)
       .end((err, res) => {
         // Calling the end function will send the request
         setSuccessMessage(res.body.message);
-        setDevInput({...devInput, 
+        setDevInput({
+          ...devInput,
           lastname: "",
           firstname: "",
           email: "",
@@ -44,7 +45,7 @@ const FormDev = () => {
           password: "",
           confirmedPassword: ""
         })
-        if(successMessage != null) {
+        if (successMessage != null) {
           setLoading(false);
         }
       });

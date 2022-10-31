@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom';
 import './login.scss';
 
 const Login = () => {
-
   const [loginInput, setLoginInput] = useState<LoginInput>({
     email: "",
     password: "",
@@ -21,7 +20,7 @@ const Login = () => {
 
   const onSubmit: SubmitHandler<LoginInput> = (data) => {
     superagent
-      .post('http://api-dev.deverr.fr/login')
+      .post('https://api-dev.deverr.fr/login')
       .send(loginInput)
       .end((err, res) => {
         // Calling the end function will send the request

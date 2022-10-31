@@ -1,0 +1,28 @@
+.modal-overlay {
+  font-family: "Montserrat", sans-serif;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: center;
+  .modal-box {
+    background: white;
+    width: 18rem;
+    height: 30rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    p {
+      font-size: 1.27rem;
+      margin-bottom: 1rem;
+    }
+    .modal__form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}

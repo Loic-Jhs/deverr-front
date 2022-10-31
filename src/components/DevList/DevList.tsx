@@ -14,7 +14,7 @@ function DevList() {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await fetch('http://api-dev.deverr.fr/all-developers', {
+            const response = await fetch('https://api-dev.deverr.fr/all-developers', {
               method: "GET",
               headers: {
                 "access-control-allow-origin" : "*",
@@ -24,9 +24,8 @@ function DevList() {
             const data = await response.json();
             setDevList(data);
             setIsLoaded(true);
-            console.log(devList)
           } catch (e) {
-            console.log(e)
+            console.error(e)
           }
         }
         fetchData()
