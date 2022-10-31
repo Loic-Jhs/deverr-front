@@ -4,9 +4,7 @@
   .register__info {
     font-size: 1.5rem;
     text-align: center;
-    margin: 0 auto;
-    width: 90vw;
-
+    margin: 1.5rem auto 0 auto;
     span {
       color: #1d9bf0;
     }
@@ -21,7 +19,7 @@
 
   .situation__container {
     display: flex;
-    width: 100vw;
+    width: 100%;
     align-items: center;
     justify-content: center;
     flex-direction: column;
@@ -29,7 +27,7 @@
     .situation__role {
       display: flex;
       flex-direction: column;
-      width: 100vw;
+      width: 100%;
 
       .situation__info {
         font-size: 1.5rem;
@@ -47,6 +45,8 @@
 
       button {
         color: black;
+        font-size: 1rem;
+        font-weight: bold;
         padding: 0.5rem 1rem;
         margin-bottom: 1rem;
         background-color: #1da8f4;
@@ -86,9 +86,10 @@
 
       .image__container {
         width: 50vw;
+        display: flex;
 
         img {
-          width: 40vw;
+          width: 85%;
           margin: 0 auto;
         }
       }

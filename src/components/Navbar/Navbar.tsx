@@ -11,9 +11,9 @@ function Navbar() {
             <div className="navbar__container">
                 <div>
                     <div className="logo__container">
-                        <a>
+                        <Link to={'/'}>
                             <img src={logoDeverr} className="logo__img" alt="Logo Deverr" />
-                        </a>
+                        </Link>                            
                         <div className="burger__button">
                             <button
                                 onClick={() => setNavbar(!navbar)}
@@ -59,10 +59,10 @@ function Navbar() {
                                 <Link to={'/'} className='navbar__link'>Accueil</Link>
                             </li>
                             <li>
-                                <Link to={'developpeurs'} className='navbar__link'>Nos développeurs</Link>
+                                <Link to={'developers'} className='navbar__link'>Nos développeurs</Link>
                             </li>
                             <li>
-                                <a className='navbar__link'>Mon profil</a>
+                                <Link to={'my-profile'} className='navbar__link'>Mon profil</Link>
                             </li>
                         </ul>
                         <div className="responsive__button">
@@ -76,9 +76,9 @@ function Navbar() {
                     </div>
                 </div>
                 <div className="desktop__button">
-                    <a>
+                    <Link to={'/login'}>
                         Connexion
-                    </a>
+                    </Link>
                     <a>
                         Déconnexion
                     </a>

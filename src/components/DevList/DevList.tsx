@@ -1,25 +1,35 @@
-import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { AuthContext } from "../../contexts/AuthContext";
-import { users, prestations } from "../../fakeData/data";
-import { useState } from "react";
-import "./style.scss";
+import { Dev } from '../../types';
+import './style.scss';
+import { Rating } from '@mui/material'
 
 function DevList() {
     const { user } = useContext(AuthContext);
+    const [ devList, setDevList ] = useState<Dev[]>();
+    const [isLoaded, setIsLoaded] = useState<Boolean>(false);
     const [query, setQuery] = useState("");
 
-    // find the good type of event
-    // const handleChange = (event: any) => {
-    //     const newUsers = users.map(user => {
-    //         user.prestations.filter(prestation => {
-    //             console.log(prestation, "prestation")
-    //             console.log(event.target.value, "event")
-    //             return prestation.id == event.target.value;
-    //         })
-    //     })
-    //     console.log(newUsers);
-    // };
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const response = await fetch('http://api-dev.deverr.fr/all-developers', {
+              method: "GET",
+              headers: {
+                "access-control-allow-origin" : "*",
+                "Content-type": "application/json"
+              },
+            mode: 'cors'});
+            const data = await response.json();
+            setDevList(data);
+            setIsLoaded(true);
+          } catch (e) {
+            console.log(e)
+          }
+        }
+        fetchData()
+    }, [isLoaded])
 
     return (
         <>
@@ -28,83 +38,83 @@ function DevList() {
                     placeholder="Rechercher un(e) Dev/Techno"
                     onChange={(event) => setQuery(event.target.value)}
                 />
-                {/* <label>Rechercher une prestation</label>
-                <select onChange={handleChange}>
-                    {
-                        prestations.map((prestation) => {
-                            return (
-                                <option key={prestation.id} value={prestation.id}>{prestation.name}</option>
-                            )
-                        })
-                    }
-                </select> */}
             </div>
-            <div className="dev-list__container">
-                {users.filter(user => {
+            <div className='dev-list__container'>
+            {devList && devList.filter(dev => {
                     if (query === "") {
                         //if query is empty
-                        return user;
-                    } else if (user.firstname.toLowerCase().includes(query.toLowerCase()) || user.lastname.toLowerCase().includes(query.toLowerCase())) {
+                        return dev;
+                    } else if (dev.firstname.toLowerCase().includes(query.toLowerCase()) || dev.lastname.toLowerCase().includes(query.toLowerCase())) {
                         //returns filtered array
-                        return user;
-                    } else if (user.stacks[0].label.toLowerCase().includes(query.toLowerCase())) {
-                        //returns filtered array for techno
-                        return user;
+                        return dev;
+                    } else if (dev.stacks !== null && dev.stacks.length > 0) {
+                        dev.stacks.map((stack) => {
+                            if (stack.name.toLowerCase().includes(query.toLowerCase())) {
+                                //returns filtered array for techno
+                                return dev;
+                            }
+                        })
                     }
-                }).map((user) => {
+                }).map((dev) => {
                     const {
                         id,
                         firstname,
                         lastname,
                         avatar,
-                        rates,
+                        rating,
                         description,
                         prestations,
                         stacks,
-                        createdAt,
-                    } = user;
-                    let average: Number | String = 0;
-                    rates.length > 0 ? average = rates.reduce((a, b) => a + b.rate, 0) / rates.length : average = "Pas de note";
+                        register_date,
+                    } = dev;
 
                     return (
-                        <Link key={id} to={`/dev-profile/${id}`} className="dev-list__link">
-                            <div className="dev__item">
-                                <div className="dev__item-img">
+                        <Link key={id} to={`/dev-profile/${id}`} className='dev-list__link'>
+                            <div className='dev__info'>
+                                <div className='dev__info-picture-fav'>
                                     <img src={`${avatar}`} alt={`${firstname} avatar`} />
                                 </div>
-                                <div className="dev__item-infos">
-                                    <div className="dev__item-account-detail">
-                                        <h3>
-                                            {firstname} {lastname}
-                                        </h3>
-                                        <p>Inscrit depuis le {createdAt}</p>
-                                        <p>{`${description.substring(0, 90)}...`} </p>
-                                    </div>
-                                    <div className="dev__item-stacks-detail">
-                                        {stacks.map((stack) => {
-                                            return (
-                                                <div key={stack.label} className="dev__item-stack-logo">
-                                                    <img
-                                                        src={`${stack.logo}`}
-                                                        alt={`${stack.label} logo`}
-                                                    />
-                                                </div>
-                                            );
-                                        })}
-                                    </div>
+                                <div className='dev__name-rate'>
+                                    <p className='dev__name'>{firstname} {lastname}</p>
+                                    {
+                                        rating ?
+                                            <div  className='dev__rate'>
+                                                <Rating name="half-rating-read" size="large" value={rating} precision={0.5} readOnly/>
+                                                <p>{rating}</p>
+                                            </div>
+                                        : 
+                                            <div  className='dev__rate'>
+                                                <Rating name="half-rating-read" size="large" value={rating} precision={0.5} readOnly/>
+                                                <p>Aucune note</p>
+                                            </div>
+                                    }
                                 </div>
-                                <div className="dev__item-prestation">
-                                    {prestations.map((prestation) => {
+                                <p className='dev__description'>{description.slice(0, 100)}...</p>
+                            </div>
+                            <div className='dev__stacks-prestations'>
+                                <h2>Mes compétences :</h2>
+                                <div className='dev__stacks'>
+                                    {stacks && stacks.map((stack) => {
                                         return (
-                                            <div key={prestation.id} className="prestation__container">
+                                            <div key={stack.id} className="dev__item-stack-logo">
+                                                <img src={`${stack.logo}`} alt={`${stack.name} logo`} />
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                                <h2>Mes prestations :</h2>
+                                <div className='dev__prestations'>
+                                    {prestations && prestations.map((prestation) => {
+                                        return (
+                                            <div key={prestation.id} className='prestation__container'>
                                                 <p>{prestation.name}</p>
                                             </div>
-                                        );
+                                        )
                                     })}
                                 </div>
                             </div>
                         </Link>
-                    );
+                    )
                 })}
             </div>
         </>

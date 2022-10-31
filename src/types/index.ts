@@ -1,21 +1,59 @@
-export type Dev = { 
+export type Dev = {
     id: number,
     firstname: string,
     lastname: string,
-    description: string,
     avatar: string,
-    stacks: Array<Stack>,
-    prestations: Array<Prestation>,
-    rates: Array<Rate>|null
-    createdAt: string
+    rating: number|null,
+    description: string,
+    stacks: Array<RealStack>
+    prestations: Array<RealPrestation>,
+    register_date: string
+}
+
+export type DevInfos = {
+    id: number,
+    avatar: string,
+    description: string,
+    firstname: string,
+    lastname: string,
+    prestations: Array<RealPrestation>
+    stacks: Array<RealStack>
+    reviews: Array<Review>
+}
+
+export type Review = {
+    id: number,
+    client_id: number,
+    client_firstname: string,
+    client_lastname: string,
+    comment: string,
+    rate: number,
+    prestation_name: string
+}
+
+export type DevPrestation = {
+    id: number,
+    price: number,
+    description: string
+}
+
+export type RealStack = {
+    id: number,
+    logo: string,
+    name: string
+}
+
+export type RealPrestation = {
+    id: number,
+    name: string,
 }
 
 export type HomepageDev = {
     id: number,
     avatar: string,
-    user_info: string,
-    name: string,
-    logo: string,
+    lastname: string,
+    firstname: string,
+    stack: string
 }
 
 export type Stack = { 
@@ -39,5 +77,28 @@ export type Rate = {
 }
 
 export type DevProps = {
-    devId: number
+    devID: number
+}
+
+
+export type DevList = {
+   id: number,
+   avatar: string,
+   firstname: string,
+   lastname: string,
+   average_rating: number|null,
+   register_date: string,
+   stacks: string,
+   prestations: string 
+}
+
+export type ProfilStack = {
+    id: number,
+    label: string,
+}
+
+export type ProfileMessage = {
+    id: number,
+    user_id: number,
+    prestation_id: number
 }
