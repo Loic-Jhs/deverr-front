@@ -3,7 +3,7 @@ export const users = [
         "id": 1,
         "firstname": "Gyro",
         "lastname": "Zeppeli",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ornare, nunc in condimentum consequat, lectus elit euismod lacus, a sagittis ligula diam vitae felis. Quisque maximus arcu turpis, vitae finibus lacus venenatis vitae. Nullam sagittis lectus at felis gravida finibus. Vivamus volutpat odio et vestibulum facilisis. Nunc malesuada ultrices venenatis. Aliquam eleifend lectus in imperdiet malesuada. Mauris tempor augue eu neque vulputate molestie. Sed quis mi turpis." ,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ornare, nunc in condimentum consequat, lectus elit euismod lacus, a sagittis ligula diam vitae felis. Quisque maximus arcu turpis, vitae finibus lacus venenatis vitae. Nullam sagittis lectus at felis gravida finibus. Vivamus volutpat odio et vestibulum facilisis. Nunc malesuada ultrices venenatis. Aliquam eleifend lectus in imperdiet malesuada. Mauris tempor augue eu neque vulputate molestie. Sed quis mi turpis.",
         "stacks": [
             {
                 "id": 2,
@@ -56,7 +56,7 @@ export const users = [
         "id": 2,
         "firstname": "Narancia",
         "lastname": "Ghirga",
-        "description": "Duis laoreet odio metus, id sagittis velit accumsan eu. Phasellus et mi at turpis consequat convallis at porta velit. Pellentesque a tempus sapien. Sed porttitor at augue vel rutrum. Praesent nec justo non nibh rhoncus tristique et id libero. Morbi mauris tortor, consequat sit amet tincidunt nec, vestibulum at nulla. Suspendisse bibendum eros massa, sit amet convallis nisl semper at." ,
+        "description": "Duis laoreet odio metus, id sagittis velit accumsan eu. Phasellus et mi at turpis consequat convallis at porta velit. Pellentesque a tempus sapien. Sed porttitor at augue vel rutrum. Praesent nec justo non nibh rhoncus tristique et id libero. Morbi mauris tortor, consequat sit amet tincidunt nec, vestibulum at nulla. Suspendisse bibendum eros massa, sit amet convallis nisl semper at.",
         "stacks": [
             {
                 "id": 4,
@@ -205,5 +205,20 @@ export const users = [
         "avatar": "https://media.techtribune.net/uploads/2021/12/Screenshot-2021-12-01-at-10-32-01-JoJos-Bizarre-Adventure-STONE-OCEAN-Official-Trailer-Netflix-YouTube.png",
         "createdAt": "06-10-2020",
         "rates": []
+    },
+]
+
+export const prestations = [
+    {
+        "id": 1,
+        "name": "Landing page",
+    },
+    {
+        "id": 2,
+        "name": "Création d'API",
+    },
+    {
+        "id": 3,
+        "name": "Back office",
     },
 ]
