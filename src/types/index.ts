@@ -3,7 +3,8 @@ export type Dev = {
     firstname: string,
     lastname: string,
     avatar: string,
-    rating: number|null,
+    average_rating: number|null,
+    reviews_number: number|null,
     description: string,
     stacks: Array<RealStack>
     prestations: Array<RealPrestation>,
@@ -14,11 +15,16 @@ export type DevInfos = {
     id: number,
     avatar: string,
     description: string,
+    registered_at: string,
+    average_rating: number|null,
+    last_order_date: string|null,
+    orders_count: number|null,
     firstname: string,
     lastname: string,
-    prestations: Array<RealPrestation>
-    stacks: Array<RealStack>
-    reviews: Array<Review>
+    prestations: Array<RealPrestation>,
+    stacks: Array<RealStack>,
+    reviews: Array<Review>,
+    years_of_experience: number
 }
 
 export type Review = {
@@ -27,7 +33,7 @@ export type Review = {
     client_firstname: string,
     client_lastname: string,
     comment: string,
-    rate: number,
+    rating: number,
     prestation_name: string
 }
 

@@ -9,7 +9,7 @@ import DevList from './components/DevList/DevList';
 import FormDev from './components/FormDev/FormDev';
 import FormClient from './components/FormClient/FormClient';
 import Register from './components/Register/Register';
-import DevProfileV2 from './components/DevProfile/DevProfileV2';
+import DevProfile from './components/DevProfile/DevProfile';
 import Login from "./components/Login/Login";
 import User from './types/User';
 import './App.css'
@@ -25,8 +25,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/dev-profile/:devID" element={<DevProfileV2 />} />
-          {/* <Route path="dev-pro/:devID" element={<DevDetail />} />*/}        
+          <Route path="/dev-profile/:devID" element={<DevProfile />} />
           <Route path="developers" element={<DevList />} />
           <Route path="/registerdev" element={<FormDev />} />
           <Route path="/registerclient" element={<FormClient />} />
