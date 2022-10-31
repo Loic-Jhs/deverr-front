@@ -24,6 +24,7 @@ function DevList() {
             const data = await response.json();
             setDevList(data);
             setIsLoaded(true);
+            console.log(devList)
           } catch (e) {
             console.log(e)
           }
@@ -61,11 +62,11 @@ function DevList() {
                         firstname,
                         lastname,
                         avatar,
-                        rating,
+                        average_rating,
                         description,
                         prestations,
                         stacks,
-                        register_date,
+                        reviews_number,
                     } = dev;
 
                     return (
@@ -77,14 +78,15 @@ function DevList() {
                                 <div className='dev__name-rate'>
                                     <p className='dev__name'>{firstname} {lastname}</p>
                                     {
-                                        rating ?
+                                        average_rating ?
                                             <div  className='dev__rate'>
-                                                <Rating name="half-rating-read" size="large" value={rating} precision={0.5} readOnly/>
-                                                <p>{rating}</p>
+                                                <Rating name="half-rating-read" size="large" value={average_rating} precision={0.5} readOnly/>
+                                                <p>{average_rating}</p>
+                                                <p>({reviews_number})</p>
                                             </div>
                                         : 
                                             <div  className='dev__rate'>
-                                                <Rating name="half-rating-read" size="large" value={rating} precision={0.5} readOnly/>
+                                                <Rating name="half-rating-read" size="large" value={0} precision={0.5} readOnly/>
                                                 <p>Aucune note</p>
                                             </div>
                                     }
