@@ -4,17 +4,19 @@ import superagent from 'superagent';
 import { yupResolver } from '@hookform/resolvers/yup';
 import schema from './loginValidation';
 import LoginInput from '../../models/loginInput';
-import { AuthContext } from "../../contexts/AuthContext";
 import { useNavigate } from 'react-router-dom';
 import './login.scss';
+import { authContext } from '../../contexts/authContext';
 
 const Login = () => {
+
+  const { setAuth } = useContext(authContext)
+
   const [loginInput, setLoginInput] = useState<LoginInput>({
     email: "",
     password: "",
   });
 
-  const { user, setUser } = useContext(AuthContext);
   const { register, handleSubmit, formState: { errors } } = useForm<LoginInput>({ resolver: yupResolver(schema) });
   const navigate = useNavigate();
 
@@ -24,17 +26,23 @@ const Login = () => {
       .send(loginInput)
       .end((err, res) => {
         // Calling the end function will send the request
-        setUser(res.body);
-        localStorage.setItem('access-token', res.body.access_token);
+        localStorage.setItem('access_token', JSON.stringify(res.body.access_token)),
+        localStorage.setItem('token_type', JSON.stringify(res.body.token_type)),
+        localStorage.setItem('user_info', JSON.stringify(res.body.user_info))
+        
+        setAuth({
+          access_token: JSON.parse(localStorage.getItem('access_token') ?? ''),
+          token_type: JSON.parse(localStorage.getItem('token_type') ?? ''),
+          user_info: JSON.parse(localStorage.getItem('user_info') ?? '')
+        })
         // Entourer d'un if pour gérer la redirection en fonction du rôle
-        if (res.body.role_id.toLowerCase() === 'developer') {
-          navigate(`/devprofile/${user.user_info.id}`);
-        } else {
+        if (res.body.user_info.user_role == 1 && res.body.access_token != undefined) {
+          navigate(`/dev-profile/${res.body.user_info.developer_id}`);
+        } else if (res.body.access_token != undefined) {
           navigate("/developers");
         }
       });
   }
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setLoginInput({ ...loginInput, [event.target.name]: event.target.value });
   }
@@ -55,7 +63,7 @@ const Login = () => {
           <label>Mot de passe</label>
           <input type="password" {...register("password")} placeholder="Mot de passe" value={loginInput.password} onChange={handleChange} />
         </div>
-        
+
         <div className="button__container">
           <button type="submit" className="btn">
             <span className="span">Connexion</span>

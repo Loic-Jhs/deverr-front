@@ -2,13 +2,9 @@
 import User from "./User";
 
 export const defaultUser: User = {
-  user_info : {
-    id: null,
-    role_id: null,
-    email: null,
-    firstname: null,
-    lastname: null,
-  },
-  token_type: null,
-  access_token: null,
+  user_id: null,
+  developer_id: null,
+  user_role: null,
+  token_type: undefined,
+  access_token: undefined,
 };

@@ -1,20 +1,22 @@
-import { CircularProgress, Rating } from '@mui/material'
+import { useContext, useEffect, useState } from 'react';
+import { DevInfos, UserAsContext } from '../../types';
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { CircularProgress, Rating } from '@mui/material'
+import { authContext } from '../../contexts/authContext';
 import useModal from '../Modal/useModal';
-import { DevInfos } from '../../types';
 import Modal from '../Modal/Modal';
 import './style.scss';
 
+
 function DevProfile() {
+    const { auth } = useContext(authContext)
     const { devID } = useParams();
-    const [isEditable, setIsEditable] = useState<Boolean>(false);
-    const [dev, setDev] = useState<DevInfos>();
+    const [isEditable, setIsEditable] = useState<Boolean>(false)
+    const [dev, setDev] = useState<DevInfos>()
     const [isLoaded, setIsLoaded] = useState<Boolean>(false);
     const { isOpen, toggle } = useModal();
-    function submitDescription() {
-        setIsEditable(false)
-    };
+
+    const [isCurrentDev, setIsCurrentDev] = useState(false)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -23,19 +25,56 @@ function DevProfile() {
                     method: "GET",
                     headers: {
                         "access-control-allow-origin": "*",
-                        "Content-type": "application/json"
+                        "Content-type": "application/json",
                     },
                     mode: 'cors'
                 });
                 const data = await response.json();
                 setDev(data[0]);
                 setIsLoaded(true);
+
             } catch (e) {
                 console.log(e)
             }
         }
         fetchData()
+
     }, [isLoaded])
+
+    function handleEditElement() {
+        setIsEditable(!isEditable)
+    }
+    const handleChangeDescription = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        if (dev) {
+            setDev({
+                ...dev,
+                description: e.target.value
+            })
+        }
+    }
+
+    const submitDescription = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        setIsEditable(!isEditable)
+        try {
+            const response = await fetch(`https://api-dev.deverr.fr/profile/update`, {
+                method: "PUT",
+                headers: {
+                    "access-control-allow-origin": "*",
+                    "Content-type": "application/json",
+                    Authorization: `Bearer ` + localStorage.getItem('access_token')?.replaceAll('"', '')
+                },
+                body: JSON.stringify({ ...dev }),
+                mode: 'cors'
+            });
+            const data = await response.json();
+
+
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
 
     if (dev) {
         let average: number | null = 0;
@@ -50,7 +89,25 @@ function DevProfile() {
                         </div>
                         <div className='detail__situation'>
                             <h3>En quelques mots : </h3>
-                            <p className='dev__description'>{dev.description}</p>
+                            {
+                                auth.access_token && auth.user_info.developer_id == dev.id ?
+                                    <div className='description__editable'>
+                                        {
+                                            isEditable == false ?
+                                                <div>
+                                                    <p className='dev__description'>{dev.description}</p>
+                                                    <button onClick={handleEditElement}> Modifier</button>
+                                                </div>
+                                                :
+                                                <div>
+                                                    <textarea onChange={handleChangeDescription} value={dev.description} />
+                                                    <button onClick={submitDescription}> Enregistrer</button>
+                                                </div>
+                                        }
+                                    </div>
+                                    :
+                                    <p className='dev__description'>{dev.description}</p>
+                            }
                             <ul>
                                 <li><span>Inscrit depuis le :</span> {dev.registered_at}</li>
                                 <li><span>Situation :</span> Disponible actuellement</li>

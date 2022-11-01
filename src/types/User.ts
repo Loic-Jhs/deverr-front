@@ -1,12 +1,8 @@
 type User = {
-  user_info : {
-    id: number | null,
-    role_id: string | null,
-    email: string | null,
-    firstname: string | null,
-    lastname: string | null,
-  },
-  token_type: string | null,
-  access_token: string | null,
+  user_id: number|null,
+  developer_id: number|null,
+  user_role: number|null
+  token_type: string|undefined,
+  access_token: string|undefined,
 }
 export default User;

@@ -1,12 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from "../../contexts/AuthContext";
+import { AuthContext } from "../../contexts/Noooon";
 import { Dev } from '../../types';
 import './style.scss';
 import { Rating } from '@mui/material'
 
 function DevList() {
-    const { user } = useContext(AuthContext);
     const [ devList, setDevList ] = useState<Dev[]>();
     const [isLoaded, setIsLoaded] = useState<Boolean>(false);
     const [query, setQuery] = useState("");
