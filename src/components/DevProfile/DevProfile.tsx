@@ -6,6 +6,7 @@ import { authContext } from '../../contexts/authContext';
 import useModal from '../Modal/useModal';
 import Modal from '../Modal/Modal';
 import './style.scss';
+import Order from '../Order/Order';
 
 
 function DevProfile() {
@@ -81,7 +82,7 @@ function DevProfile() {
         dev.reviews.length > 0 ? average = dev.reviews.reduce((a, b) => a + b.rating, 0) / dev.reviews.length : average = null;
         return (
             <>
-                <Modal isOpen={isOpen} toggle={toggle} />
+                <Modal isOpen={isOpen} toggle={toggle} children={<Order toggle={toggle} />} />
                 <div className='profile__container'>
                     <div className='profile__left-part'>
                         <div className='img__container'>
