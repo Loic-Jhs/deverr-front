@@ -1,12 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from "../../contexts/AuthContext";
+import { AuthContext } from "../../contexts/Noooon";
 import { Dev } from '../../types';
 import './style.scss';
 import { Rating } from '@mui/material'
 
 function DevList() {
-    const { user } = useContext(AuthContext);
     const [ devList, setDevList ] = useState<Dev[]>();
     const [isLoaded, setIsLoaded] = useState<Boolean>(false);
     const [query, setQuery] = useState("");
@@ -14,7 +13,7 @@ function DevList() {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await fetch('http://api-dev.deverr.fr/all-developers', {
+            const response = await fetch('https://api-dev.deverr.fr/all-developers', {
               method: "GET",
               headers: {
                 "access-control-allow-origin" : "*",
@@ -24,7 +23,6 @@ function DevList() {
             const data = await response.json();
             setDevList(data);
             setIsLoaded(true);
-            console.log(devList)
           } catch (e) {
             console.log(e)
           }

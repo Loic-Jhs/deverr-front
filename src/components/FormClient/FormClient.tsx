@@ -25,7 +25,7 @@ const FormClient = () => {
   const onSubmit: SubmitHandler<UserInput> = (data) => {
     setLoading(true);
     superagent
-      .post('http://api-dev.deverr.fr/register')
+      .post('https://api-dev.deverr.fr/register')
       .send(cleanUserInput)
       .end((err, res) => {
         // Calling the end function will send the request

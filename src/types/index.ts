@@ -27,6 +27,18 @@ export type DevInfos = {
     years_of_experience: number
 }
 
+export type UserAsContext = {
+    access_token?: string,
+    token_type?: string,
+    user_info?: UserInfo
+}
+
+export type UserInfo = {
+    developer_id: number,
+    user_id: number,
+    user_role: string
+}
+
 export type Review = {
     id: number,
     client_id: number,

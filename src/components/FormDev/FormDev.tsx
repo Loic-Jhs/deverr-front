@@ -30,7 +30,7 @@ const FormDev = () => {
   const onSubmit: SubmitHandler<DevInput> = (data) => {
     setLoading(true);
     superagent
-      .post('http://api-dev.deverr.fr/register')
+      .post('https://api-dev.deverr.fr/register')
       .send(cleanDevInput)
       .end((err, res) => {
         // Calling the end function will send the request
