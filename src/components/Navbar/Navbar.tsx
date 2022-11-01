@@ -24,7 +24,7 @@ function Navbar() {
                     <div className="logo__container">
                         <Link to={'/'}>
                             <img src={logoDeverr} className="logo__img" alt="Logo Deverr" />
-                        </Link>                            
+                        </Link>
                         <div className="burger__button">
                             <button
                                 onClick={() => setNavbar(!navbar)}
@@ -77,26 +77,42 @@ function Navbar() {
                             </li>
                         </ul>
                         <div className="responsive__button">
-                            {auth.access_token && 
-                            <Link to={'/login'} className="login__button">
-                                Connexion
-                            </Link>
+                            {!auth.access_token &&
+                                <>
+                                    <Link to={'/register'} className="login__button">
+                                        Inscription
+                                    </Link>
+                                    <Link to={'/login'} className="login__button">
+                                        Connexion
+                                    </Link>
+                                </>
                             }
-                            <a className="logout__button">
-                                Déconnexion
-                            </a>
+                            {
+                                auth.access_token &&
+                                <a onClick={logout} className="logout__button">
+                                    Déconnexion
+                                </a>
+                            }
                         </div>
                     </div>
                 </div>
                 <div className="desktop__button">
-                    {!auth.access_token  && 
-                        <Link to={'/login'}>
-                            Connexion
-                        </Link>
+                    {!auth.access_token &&
+                        <>
+                            <Link to={'/register'}>
+                                Inscription
+                            </Link>
+                            <Link to={'/login'}>
+                                Connexion
+                            </Link>
+                        </>
                     }
-                    <a onClick={logout}>
-                        Déconnexion
-                    </a>
+                    {
+                        auth.access_token &&
+                        <a onClick={logout}>
+                            Déconnexion
+                        </a>
+                    }
                 </div>
             </div>
         </nav>

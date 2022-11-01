@@ -5,7 +5,6 @@ import { authContext } from "../../contexts/authContext";
 import { CircularProgress } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { DevInfos } from "../../types";
-import useModal from '../Modal/useModal';
 import './order.scss';
 
 interface modaleProps {

@@ -83,6 +83,7 @@ function DevProfile() {
         return (
             <>
                 <Modal isOpen={isOpen} toggle={toggle} children={<Order toggle={toggle} />} />
+                {/* <Modal isOpen={isOpen} toggle={toggle} children={<AddStack toggle={toggle} />} /> */}
                 <div className='profile__container'>
                     <div className='profile__left-part'>
                         <div className='img__container'>
@@ -116,14 +117,25 @@ function DevProfile() {
                                 <li><span>Dernière mission :</span> {dev.last_order_date != null ? dev.last_order_date : 'Aucune'}</li>
                             </ul>
                         </div>
-                        <div className='dev__stacks'>
-                            {dev.stacks.map((stack) => {
-                                return (
-                                    <div key={stack.id} className='stack__item'>
-                                        <img src={stack.logo} alt={`Logo ${stack.name}`} />
-                                    </div>
-                                )
-                            })}
+                        <div>
+                            <div className="header__stack">
+                                <p>Compétences maîtrisées :</p>
+                                {
+                                    auth.access_token && auth.user_info.developer_id == dev.id ?
+                                    <button onClick={toggle}>Ajouter une compétence</button>
+                                    :
+                                    ""
+                                }
+                            </div>
+                            <div className='dev__stacks'>
+                                {dev.stacks.map((stack) => {
+                                    return (
+                                        <div key={stack.id} className='stack__item'>
+                                            <img src={stack.logo} alt={`Logo ${stack.name}`} />
+                                        </div>
+                                    )
+                                })}
+                            </div>
                         </div>
                     </div>
                     <div className='profile__right-part'>
@@ -142,10 +154,14 @@ function DevProfile() {
                                     <p>Aucune note</p><Rating name="half-rating-read" size="large" value={0} precision={0.5} readOnly />
                                 </div>
                             }
-                            <div className='dev__contact'>
-                                <button onClick={toggle}>Demandez une prestation</button>
-                                <button>Signaler</button>
-                            </div>
+                            {
+                                !auth.access_token || auth.user_info.role_id != 1 ?
+                                    <div className='dev__contact'>
+                                        <button onClick={toggle}>Demandez une prestation</button>
+                                    </div>
+                                    :
+                                    ""
+                            }
                             <div className='dev__prestations-reviews'>
                                 <h3>{dev.prestations.length > 1 ? 'Services proposés ' : 'Service proposé '}:</h3>
                                 <div className='dev__prestations-container'>
