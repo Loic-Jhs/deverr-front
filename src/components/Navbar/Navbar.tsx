@@ -1,10 +1,20 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import logoDeverr from '../../assets/img/D.jpg';
+import { authContext } from "../../contexts/authContext";
+import { UserAsContext } from "../../types";
 import './style.scss';
 
 function Navbar() {
     const [navbar, setNavbar] = useState(false);
+    const navigate = useNavigate();
+    const { auth, resetState } = useContext(authContext)
+
+    const logout = () => {
+        localStorage.clear();
+        navigate('/')
+        resetState()
+    }
 
     return (
         <nav className="navbar">
@@ -66,9 +76,11 @@ function Navbar() {
                             </li>
                         </ul>
                         <div className="responsive__button">
+                            {auth.access_token && 
                             <Link to={'/login'} className="login__button">
                                 Connexion
                             </Link>
+                            }
                             <a className="logout__button">
                                 Déconnexion
                             </a>
@@ -76,10 +88,12 @@ function Navbar() {
                     </div>
                 </div>
                 <div className="desktop__button">
-                    <Link to={'/login'}>
-                        Connexion
-                    </Link>
-                    <a>
+                    {!auth.access_token  && 
+                        <Link to={'/login'}>
+                            Connexion
+                        </Link>
+                    }
+                    <a onClick={logout}>
                         Déconnexion
                     </a>
                 </div>

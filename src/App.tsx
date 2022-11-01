@@ -1,7 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { useState } from 'react';
-import { AuthContext } from './contexts/AuthContext';
-import { defaultUser } from "./types/defaultUser";
+import { useContext, useEffect, useState } from 'react';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Homepage from './components/Homepage/Homepage';
@@ -13,26 +11,27 @@ import DevProfile from './components/DevProfile/DevProfile';
 import Login from "./components/Login/Login";
 import User from './types/User';
 import './App.css'
+import { UserAsContext } from './types';
+import AuthProvider from './contexts/authContext';
 
 
 function App() {
-  const [user, setUser] = useState<User>(defaultUser);
 
   return (
     <div className="App">
-      <Header />
-      <AuthContext.Provider value={{ user, setUser }}>
-        <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/dev-profile/:devID" element={<DevProfile />} />
-          <Route path="developers" element={<DevList />} />
-          <Route path="/registerdev" element={<FormDev />} />
-          <Route path="/registerclient" element={<FormClient />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </AuthContext.Provider>
-      <Footer />
+      <AuthProvider> 
+        <Header />
+          <Routes>
+            <Route path="/" element={<Homepage />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/dev-profile/:devID" element={<DevProfile />} />
+            <Route path="developers" element={<DevList />} />
+            <Route path="/registerdev" element={<FormDev />} />
+            <Route path="/registerclient" element={<FormClient />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        <Footer />
+      </AuthProvider>
     </div>
   )
 }
