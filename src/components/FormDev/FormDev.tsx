@@ -24,7 +24,7 @@ const FormDev = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<DevInput>({ resolver: yupResolver(schema) });
   // getting all the values from the form but the confirmed password to send to the API
   const { confirmedPassword, ...cleanDevInput } = devInput;
-  const [successMessage, setSuccessMessage] = useState("")
+  const [successMessage, setSuccessMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
   const onSubmit: SubmitHandler<DevInput> = (data) => {
