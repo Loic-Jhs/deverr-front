@@ -8,12 +8,13 @@ import './style.scss';
 function Navbar() {
     const [navbar, setNavbar] = useState(false);
     const navigate = useNavigate();
-    const { auth, resetState } = useContext(authContext)
+    const { auth, resetState, setIsLogged } = useContext(authContext)
 
     const logout = () => {
         localStorage.clear();
         navigate('/')
         resetState()
+        setIsLogged(false)
     }
 
     return (

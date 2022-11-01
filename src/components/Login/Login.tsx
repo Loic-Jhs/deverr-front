@@ -10,7 +10,7 @@ import { authContext } from '../../contexts/authContext';
 
 const Login = () => {
 
-  const { setAuth } = useContext(authContext)
+  const { setIsLogged } = useContext(authContext)
 
   const [loginInput, setLoginInput] = useState<LoginInput>({
     email: "",
@@ -30,11 +30,7 @@ const Login = () => {
         localStorage.setItem('token_type', JSON.stringify(res.body.token_type)),
         localStorage.setItem('user_info', JSON.stringify(res.body.user_info))
         
-        setAuth({
-          access_token: JSON.parse(localStorage.getItem('access_token') ?? ''),
-          token_type: JSON.parse(localStorage.getItem('token_type') ?? ''),
-          user_info: JSON.parse(localStorage.getItem('user_info') ?? '')
-        })
+        setIsLogged(true)
         // Entourer d'un if pour gérer la redirection en fonction du rôle
         if (res.body.user_info.user_role == 1 && res.body.access_token != undefined) {
           navigate(`/dev-profile/${res.body.user_info.developer_id}`);

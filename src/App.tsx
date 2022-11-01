@@ -12,14 +12,15 @@ import Login from "./components/Login/Login";
 import User from './types/User';
 import './App.css'
 import { UserAsContext } from './types';
-import AuthProvider from './contexts/authContext';
-
+import { authContext } from './contexts/authContext';
 
 function App() {
+  const { auth} = useContext(authContext)
+  const [isLogged, setIsLogged] = useState(false)
+
 
   return (
     <div className="App">
-      <AuthProvider> 
         <Header />
           <Routes>
             <Route path="/" element={<Homepage />} />
@@ -31,7 +32,6 @@ function App() {
             <Route path="/login" element={<Login />} />
           </Routes>
         <Footer />
-      </AuthProvider>
     </div>
   )
 }
