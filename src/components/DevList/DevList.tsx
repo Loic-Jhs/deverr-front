@@ -43,17 +43,16 @@ function DevList() {
                     if (query === "") {
                         //if query is empty
                         return dev;
-                    } else if (dev.firstname.toLowerCase().includes(query.toLowerCase()) || dev.lastname.toLowerCase().includes(query.toLowerCase())) {
-                        //returns filtered array
-                        return dev;
                     } else if (dev.stacks !== null && dev.stacks.length > 0) {
+                        let devStacks: string[] = [];
                         dev.stacks.map((stack) => {
-                            if (stack.name.toLowerCase().includes(query.toLowerCase())) {
-                                //returns filtered array for techno
-                                return dev;
-                            }
+                            devStacks.push(stack.name.toLowerCase());
                         })
+                        if (devStacks.includes(query.toLowerCase())) {
+                            return dev;
+                        }
                     }
+
                 }).map((dev) => {
                     const {
                         id,
