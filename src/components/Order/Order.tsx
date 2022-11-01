@@ -11,7 +11,7 @@ interface modaleProps {
   toggle: () => void;
 }
 
-function Order(props: modaleProps) {
+function Order({toggle}: modaleProps) {
   const { devID } = useParams();
   const { auth } = useContext(authContext);
   const [dev, setDev] = useState<DevInfos>();
@@ -25,7 +25,7 @@ function Order(props: modaleProps) {
   useEffect(() => {
     if (orderMessage.status != "") {
       const displayOrderMessage = setTimeout(() => {
-        props.toggle()
+        toggle()
         setOrderMessage({ status: "", message: "" });
       }, 3000);
       return () => clearTimeout(displayOrderMessage);
