@@ -19,6 +19,12 @@ function DevProfile() {
     const [isCurrentDev, setIsCurrentDev] = useState(false)
 
     useEffect(() => {
+        if (auth.access_token != undefined) {
+            setIsCurrentDev(true)
+        }
+    }, [isCurrentDev])
+
+    useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await fetch(`https://api-dev.deverr.fr/developer/${devID}`, {
@@ -68,13 +74,10 @@ function DevProfile() {
                 mode: 'cors'
             });
             const data = await response.json();
-
-
         } catch (e) {
             console.log(e)
         }
     }
-
 
     if (dev) {
         let average: number | null = 0;
@@ -147,6 +150,9 @@ function DevProfile() {
                             </div>
                             <div className='dev__prestations-reviews'>
                                 <h3>{dev.prestations.length > 1 ? 'Services proposés ' : 'Service proposé '}:</h3>
+                                {
+                                   isCurrentDev && <button>Ajouter une prestation</button>
+                                }
                                 <div className='dev__prestations-container'>
                                     {dev.prestations && dev.prestations.map((prestation) => {
                                         return (

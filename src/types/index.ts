@@ -11,6 +11,15 @@ export type Dev = {
     register_date: string
 }
 
+export type Order = {
+    id: number,
+    prestation_name: string,
+    instructions: string |null,
+    is_payed: boolean,
+    is_accepted_by_developer: boolean|null,
+    price: number
+}
+
 export type DevInfos = {
     id: number,
     avatar: string,

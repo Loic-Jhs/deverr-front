@@ -1,0 +1,58 @@
+.developer__order {
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 3rem;
+    h1 {
+        margin-bottom: 2rem;
+        font-size: 2.5rem;
+    }
+    .order__comming {
+        padding: 0.75rem;
+        border-radius: 1rem;
+        .oder__container {
+            margin: 2.5rem 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, 25%);
+            grid-gap: 2rem;
+            .order__item {
+                padding: 1rem;
+                box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+                .order__detail {
+                    margin: 0.5rem 0;
+                    p {
+                        margin-top: 0.3rem;
+                    }
+                }
+                p {
+                    margin-bottom: 0.5rem;
+                }
+                .button__container {
+                    width: 70%;
+                    display: flex;
+                    justify-content: space-between;
+                    margin: 0 auto;
+                    margin-top: 1rem;
+                    button {
+                        padding: 0.5rem 2rem;
+                        border: none;
+                        background-color: #bbd9ee;
+                        border-radius: 0.75rem;
+                        cursor: pointer;
+                        font-weight: bold;
+                        color: #000000;
+                        font-size: 1rem;
+                    }
+                    button:hover {
+                        color: #FFFFFF;
+                    }
+                    .confirm__order:hover {
+                        background-color: #1D9BF0;
+                    }
+                    .cancel__order:hover {
+                        background-color: #D01919;
+                    }
+                }
+            }
+        }
+    }
+}

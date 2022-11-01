@@ -13,11 +13,11 @@ import User from './types/User';
 import './App.css'
 import { UserAsContext } from './types';
 import { authContext } from './contexts/authContext';
+import DevOrder from './components/DevOrder/DevOrder';
 
 function App() {
   const { auth} = useContext(authContext)
   const [isLogged, setIsLogged] = useState(false)
-
 
   return (
     <div className="App">
@@ -26,6 +26,7 @@ function App() {
             <Route path="/" element={<Homepage />} />
             <Route path="/register" element={<Register />} />
             <Route path="/dev-profile/:devID" element={<DevProfile />} />
+            <Route path="/dev-order/:devID" element={<DevOrder />} />
             <Route path="developers" element={<DevList />} />
             <Route path="/registerdev" element={<FormDev />} />
             <Route path="/registerclient" element={<FormClient />} />

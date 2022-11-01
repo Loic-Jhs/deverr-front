@@ -1,31 +1,31 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from "../../contexts/Noooon";
 import { Dev } from '../../types';
 import './style.scss';
 import { Rating } from '@mui/material'
 
 function DevList() {
-    const [ devList, setDevList ] = useState<Dev[]>();
+    const [devList, setDevList] = useState<Dev[]>();
     const [isLoaded, setIsLoaded] = useState<Boolean>(false);
     const [query, setQuery] = useState("");
 
     useEffect(() => {
         const fetchData = async () => {
-          try {
-            const response = await fetch('https://api-dev.deverr.fr/all-developers', {
-              method: "GET",
-              headers: {
-                "access-control-allow-origin" : "*",
-                "Content-type": "application/json"
-              },
-            mode: 'cors'});
-            const data = await response.json();
-            setDevList(data);
-            setIsLoaded(true);
-          } catch (e) {
-            console.error(e)
-          }
+            try {
+                const response = await fetch('https://api-dev.deverr.fr/all-developers', {
+                    method: "GET",
+                    headers: {
+                        "access-control-allow-origin": "*",
+                        "Content-type": "application/json"
+                    },
+                    mode: 'cors'
+                });
+                const data = await response.json();
+                setDevList(data);
+                setIsLoaded(true);
+            } catch (e) {
+                console.error(e)
+            }
         }
         fetchData()
     }, [isLoaded])
@@ -39,7 +39,7 @@ function DevList() {
                 />
             </div>
             <div className='dev-list__container'>
-            {devList && devList.filter(dev => {
+                {devList && devList.filter(dev => {
                     if (query === "") {
                         //if query is empty
                         return dev;
@@ -76,15 +76,15 @@ function DevList() {
                                 <div className='dev__name-rate'>
                                     <p className='dev__name'>{firstname} {lastname}</p>
                                     {
-                                        average_rating ?
-                                            <div  className='dev__rate'>
-                                                <Rating name="half-rating-read" size="large" value={average_rating} precision={0.5} readOnly/>
+                                        average_rating != null ?
+                                            <div className='dev__rate'>
+                                                <Rating name="half-rating-read" size="large" value={average_rating} precision={0.5} readOnly />
                                                 <p>{average_rating}</p>
                                                 <p>({reviews_number})</p>
                                             </div>
-                                        : 
-                                            <div  className='dev__rate'>
-                                                <Rating name="half-rating-read" size="large" value={0} precision={0.5} readOnly/>
+                                            :
+                                            <div className='dev__rate'>
+                                                <Rating name="half-rating-read" size="large" value={0} precision={0.5} readOnly />
                                                 <p>Aucune note</p>
                                             </div>
                                     }
