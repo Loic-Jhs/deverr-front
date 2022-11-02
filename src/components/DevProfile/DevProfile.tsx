@@ -101,12 +101,12 @@ function DevProfile() {
                                             isEditable == false ?
                                                 <div>
                                                     <p className='dev__description'>{dev.description}</p>
-                                                    <button onClick={handleEditElement}> Modifier</button>
+                                                    <button className='button_dev__profile' onClick={handleEditElement}> Modifier</button>
                                                 </div>
                                                 :
-                                                <div>
+                                                <div className='edit__container'>
                                                     <textarea onChange={handleChangeDescription} value={dev.description} />
-                                                    <button onClick={submitDescription}> Enregistrer</button>
+                                                    <button className='button_dev__profile' onClick={submitDescription}> Enregistrer</button>
                                                 </div>
                                         }
                                     </div>
@@ -120,12 +120,12 @@ function DevProfile() {
                                 <li><span>Dernière mission :</span> {dev.last_order_date != null ? dev.last_order_date : 'Aucune'}</li>
                             </ul>
                         </div>
-                        <div>
+                        <div className='stacks__section__container'>
                             <div className="header__stack">
                                 <p>Compétences maîtrisées :</p>
                                 {
                                     auth.access_token && auth.user_info.developer_id == dev.id ?
-                                        <button onClick={toggleStack}>Ajouter une compétence</button>
+                                        <button className='button_dev__profile' onClick={toggleStack}>Ajouter une compétence</button>
                                         :
                                         ""
                                 }
@@ -160,7 +160,7 @@ function DevProfile() {
                             {
                                 auth.access_token == undefined || auth.user_info.user_role != 1 ?
                                     <div className='dev__contact'>
-                                        <button onClick={toggle}>Demandez une prestation</button>
+                                        <button className='button_dev__profile' onClick={toggle}>Demandez une prestation</button>
                                     </div>
                                     :
                                     ""
@@ -168,7 +168,7 @@ function DevProfile() {
                             <div className='dev__prestations-reviews'>
                                 <h3>{dev.prestations.length > 1 ? 'Services proposés ' : 'Service proposé '}:</h3>
                                 {
-                                    isCurrentDev && <button>Ajouter une prestation</button>
+                                    isCurrentDev && <button className='button_dev__profile'>Ajouter une prestation</button>
                                 }
                                 <div className='dev__prestations-container'>
                                     {dev.prestations && dev.prestations.map((prestation) => {

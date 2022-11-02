@@ -1,0 +1,36 @@
+.client__container {
+    width: 80%;
+    margin: 0 auto;
+    h1 {
+        margin: 1rem 0;
+    }
+    .client__orders__container {
+        h2 {
+            border-bottom: 1rem;
+            margin: 1rem 0;
+        }
+        .client__orders__list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, 30%);
+            grid-gap: 1.5rem;
+            padding: 0.5rem;;
+            .order__item {
+                padding: 1rem;
+                border: 1px solid black;
+                border-radius: 0.75rem;
+                h3 {
+                    font-size: 2rem;
+                    margin-bottom: 0.3rem;
+                }
+                p {
+                    font-size: 1.5rem;
+                    margin-bottom: 0.4rem;
+                }
+            }
+            .finished__order {
+                opacity: 0.5;
+                color: #000000;
+            }
+        }
+    }
+}
