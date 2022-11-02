@@ -7,6 +7,15 @@
     display: flex;
     justify-content: space-between;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    .button_dev__profile {
+        padding: 0.5rem 1rem;
+        background-color: #1D9BF0;
+        color: #FFFFFF;
+        cursor: pointer;
+        border-radius: 0.75rem;
+        font-weight: bold;
+        border: none;
+    }
     .profile__left-part {
         width: 30%;
         .img__container {
@@ -33,6 +42,18 @@
                 font-size: 1.2rem;
                 padding: 0 1rem;
             }
+            .edit__container {
+                display: flex;
+                flex-direction: column;
+                textarea {
+                    height: 6vh;
+                    width: 100%;
+                }
+                button {
+                    margin: 0 auto;
+                    margin-top: 0.5rem;
+                }
+            }
             ul {
                 padding: 1rem 0.75rem;
                 list-style: none;
@@ -48,23 +69,27 @@
                 }
             }
         }
-        .dev__stacks {
-            margin: 0 auto;
-            display: flex;
+        .stacks__section__container {
             width: 15vw;
-            .stack__item {
-                padding: 1rem;
-                width: 33%;
+            margin: 0 auto;
+            .dev__stacks {
+                margin: 0 auto;
                 display: flex;
-                flex-direction: column;
-                text-align: center;
-                p {
-                    margin-bottom: 0.5rem;
-                }
-                img {
-                    width: 2vw;
-                    height: 2vw;
-                    margin: 0 auto;
+                width: 15vw;
+                .stack__item {
+                    padding: 1rem;
+                    width: 33%;
+                    display: flex;
+                    flex-direction: column;
+                    text-align: center;
+                    p {
+                        margin-bottom: 0.5rem;
+                    }
+                    img {
+                        width: 2vw;
+                        height: 2vw;
+                        margin: 0 auto;
+                    }
                 }
             }
         }

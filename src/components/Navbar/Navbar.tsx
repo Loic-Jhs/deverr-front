@@ -71,9 +71,16 @@ function Navbar() {
                             <li>
                                 <Link to={'developers'} className='navbar__link'>Nos développeurs</Link>
                             </li>
-                            <li>
-                                <Link to={'my-profile'} className='navbar__link'>Mon profil</Link>
-                            </li>
+                            {auth.access_token &&
+                                <li>
+                                    {auth.user_info.developer_id != null ? 
+                                        <Link to={'dev-order/'+auth.user_info.developer_id} className='navbar__link'>Mes commandes</Link>
+                                    :
+                                    <Link to={'my-profile/'+auth.user_info.user_id} className='navbar__link'>Mon profil</Link>
+                                        
+                                    }
+                                </li>
+                            }
                         </ul>
                         <div className="responsive__button">
                             {!auth.access_token &&

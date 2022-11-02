@@ -15,11 +15,13 @@
             margin-bottom: 2rem;
             font-size: 2.5rem;
         }
-        .order__comming {
+        .order__comming,
+        .order__in-progress,
+        .order__done{
             padding: 0.75rem;
             border-radius: 1rem;
             .order__container {
-                margin: 2.5rem 0;
+                margin: 1.5rem 0;
                 display: grid;
                 grid-template-columns: repeat(1fr);
                 grid-gap: 2rem;
@@ -35,6 +37,7 @@
                     }
                     p {
                         margin-bottom: 0.5rem;
+                        font-weight: normal;
                     }
                     .button__container {
                         width: 70%;
@@ -61,6 +64,12 @@
                         .cancel__order:hover {
                             background-color: #D01919;
                         }
+                    }
+                }
+                .no__order-element {
+                    h2 {
+                        font-weight: normal;
+                        font-size: 1.3rem;
                     }
                 }
             }

@@ -18,6 +18,7 @@ export type Order = {
     instructions: string |null,
     is_payed: number,
     is_accepted_by_developer: number|null,
+    is_finished: number,
     price: number,
     user_fullname: string
     
@@ -37,6 +38,27 @@ export type DevInfos = {
     stacks: Array<RealStack>,
     reviews: Array<Review>,
     years_of_experience: number
+}
+
+export type UserInfos = {
+    id: number,
+    firstname: string,
+    lastname: string,
+    email: string,
+    registered_at: string,
+    orders: [{
+        id: number,
+        developer: string,
+        instructions: string,
+        is_finished: boolean,
+        is_payed: boolean,
+        is_accepted_by_developer: boolean,
+        price: number,
+        prestation_name: string,
+        created_at: string,
+        updated_at: string
+    }]
+    
 }
 
 export type UserAsContext = {

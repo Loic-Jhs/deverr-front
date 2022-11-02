@@ -10,6 +10,7 @@ import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Login from "./components/Login/Login";
 import './App.css'
+import ClientProfile from './components/ClientProfile/ClientProfile';
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dev-profile/:devID" element={<DevProfile />} />
+        <Route path="/my-profile/:userID" element={<ClientProfile />} />
         <Route path="/dev-order/:devID" element={<DevOrder />} />
         <Route path="developers" element={<DevList />} />
         <Route path="/registerdev" element={<FormDev />} />
