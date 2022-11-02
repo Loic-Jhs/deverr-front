@@ -11,7 +11,7 @@ interface modaleProps {
   toggle: () => void;
 }
 
-function Order({toggle}: modaleProps) {
+function Order({ toggle }: modaleProps) {
   const { devID } = useParams();
   const { auth } = useContext(authContext);
   const [dev, setDev] = useState<DevInfos>();
@@ -60,7 +60,6 @@ function Order({toggle}: modaleProps) {
       developer_prestation_id: Number(data.prestation_id),
       instructions: data.instruction
     }
-    console.log(orderDataRequired);
     try {
       const response = await fetch(`https://api-dev.deverr.fr/order/store`, {
         method: "POST",
@@ -86,7 +85,7 @@ function Order({toggle}: modaleProps) {
         })
       }
     } catch (e) {
-      console.log(e)
+      console.error(e);
     }
   }
 
@@ -99,18 +98,18 @@ function Order({toggle}: modaleProps) {
               <p>Demandez une prestation à {dev.firstname}</p>
               <form id="orderForm" className="order__form" onSubmit={handleSubmit(onSubmit)}>
                 <div className='dev__prestations-container'>
-                  {dev.prestations && dev.prestations.map((prestation) => {
-                    return (
-                      <div key={prestation.id} className='dev__prestation-item'>
-                        <p>Choisir une prestation</p>
-                        <select {...register("prestation_id", { required: true })} name="prestation_id">
-                          <option value="">Selectionner une prestation</option>
-                          <option value={prestation.id}>{prestation.name}</option>
-                        </select>
-                        {errors.prestation_id && <p>Selectionnez une prestation !</p>}
-                      </div>
-                    )
-                  })}
+                  <div className='dev__prestation-item'>
+                    <p>Choisir une prestation</p>
+                    <select {...register("prestation_id", { required: true })} name="prestation_id">
+                      <option value="">Selectionner une prestation</option>
+                      {dev.prestations && dev.prestations.map((prestation) => {
+                        return (
+                          <option key={prestation.id} value={prestation.id}>{prestation.name}</option>
+                        )
+                      })}
+                      {errors.prestation_id && <p>Selectionnez une prestation !</p>}
+                    </select>
+                  </div>
                 </div>
                 <div className="input__container">
                   <textarea className="description"

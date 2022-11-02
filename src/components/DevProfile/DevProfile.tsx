@@ -1,12 +1,13 @@
-import { useContext, useEffect, useState } from 'react';
-import { DevInfos } from '../../types';
-import { useParams } from 'react-router-dom';
-import { CircularProgress, Rating } from '@mui/material'
 import { authContext } from '../../contexts/authContext';
+import { CircularProgress, Rating } from '@mui/material';
+import { useContext, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import AddStack from '../AddStack/AddStack';
 import useModal from '../Modal/useModal';
+import { DevInfos } from '../../types';
 import Modal from '../Modal/Modal';
-import './style.scss';
 import Order from '../Order/Order';
+import './style.scss';
 
 
 function DevProfile() {
@@ -16,14 +17,15 @@ function DevProfile() {
     const [dev, setDev] = useState<DevInfos>()
     const [isLoaded, setIsLoaded] = useState<Boolean>(false);
     const { isOpen, toggle } = useModal();
+    const { isOpenStack, toggleStack } = useModal();
 
     const [isCurrentDev, setIsCurrentDev] = useState(false)
 
     useEffect(() => {
-        if (auth.access_token != undefined) {
+        if (auth.access_token != undefined && devID == auth.user_info.developer_id) {
             setIsCurrentDev(true)
         }
-    }, [isCurrentDev])
+    })
 
     useEffect(() => {
         const fetchData = async () => {
@@ -39,13 +41,11 @@ function DevProfile() {
                 const data = await response.json();
                 setDev(data[0]);
                 setIsLoaded(true);
-
             } catch (e) {
                 console.log(e)
             }
         }
         fetchData()
-
     }, [isLoaded])
 
     function handleEditElement() {
@@ -86,7 +86,7 @@ function DevProfile() {
         return (
             <>
                 <Modal isOpen={isOpen} toggle={toggle} children={<Order toggle={toggle} />} />
-                {/* <Modal isOpen={isOpen} toggle={toggle} children={<AddStack toggle={toggle} />} /> */}
+                <Modal isOpen={isOpenStack} toggle={toggleStack} children={<AddStack toggleStack={toggle} devStacks={dev.stacks} />} />
                 <div className='profile__container'>
                     <div className='profile__left-part'>
                         <div className='img__container'>
@@ -125,9 +125,9 @@ function DevProfile() {
                                 <p>Compétences maîtrisées :</p>
                                 {
                                     auth.access_token && auth.user_info.developer_id == dev.id ?
-                                    <button onClick={toggle}>Ajouter une compétence</button>
-                                    :
-                                    ""
+                                        <button onClick={toggleStack}>Ajouter une compétence</button>
+                                        :
+                                        ""
                                 }
                             </div>
                             <div className='dev__stacks'>
@@ -158,7 +158,7 @@ function DevProfile() {
                                 </div>
                             }
                             {
-                                !auth.access_token || auth.user_info.role_id != 1 ?
+                                auth.access_token == undefined || auth.user_info.user_role != 1 ?
                                     <div className='dev__contact'>
                                         <button onClick={toggle}>Demandez une prestation</button>
                                     </div>
@@ -168,7 +168,7 @@ function DevProfile() {
                             <div className='dev__prestations-reviews'>
                                 <h3>{dev.prestations.length > 1 ? 'Services proposés ' : 'Service proposé '}:</h3>
                                 {
-                                   isCurrentDev && <button>Ajouter une prestation</button>
+                                    isCurrentDev && <button>Ajouter une prestation</button>
                                 }
                                 <div className='dev__prestations-container'>
                                     {dev.prestations && dev.prestations.map((prestation) => {

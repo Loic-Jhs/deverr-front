@@ -1,0 +1,56 @@
+:root {
+  --select-border: #777;
+  --select-focus: blue;
+  --select-arrow: var(--select-border);
+}
+
+.stacks__form {
+  .error {
+    color: red;
+  }
+
+  select {
+    width: 100%;
+    min-width: 15ch;
+    max-width: 30ch;
+    border-radius: 0.25em;
+    padding: 0.25em 0.5em;
+    font-size: 1.25rem;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .button__container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 2rem;
+      border-radius: 50px;
+      cursor: pointer;
+      text-transform: uppercase;
+      height: 45px;
+      width: 130px;
+      opacity: 1;
+      background-color: #1d9bf0;
+      border: 1px solid rgba(0, 0, 0, 0.6);
+    }
+
+    button,
+    span {
+      font-family: "Montserrat", sans-serif;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.7px;
+    }
+
+    button:hover {
+      transform: perspective(1px) scale3d(1.044, 1.044, 1) translateZ(0);
+    }
+  }
+}
