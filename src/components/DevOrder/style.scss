@@ -1,58 +1,88 @@
-.developer__order {
-    width: 70%;
+.dev__order-container {
     margin: 0 auto;
-    margin-top: 3rem;
-    h1 {
-        margin-bottom: 2rem;
-        font-size: 2.5rem;
+    .modal-box {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 85%;
+        height: 45%;
     }
-    .order__comming {
-        padding: 0.75rem;
-        border-radius: 1rem;
-        .oder__container {
-            margin: 2.5rem 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, 25%);
-            grid-gap: 2rem;
-            .order__item {
-                padding: 1rem;
-                box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-                .order__detail {
-                    margin: 0.5rem 0;
+    .developer__order {
+        width: 98%;
+        margin: 0 auto;
+        h1 {
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+        .order__comming {
+            padding: 0.75rem;
+            border-radius: 1rem;
+            .order__container {
+                margin: 2.5rem 0;
+                display: grid;
+                grid-template-columns: repeat(1fr);
+                grid-gap: 2rem;
+                .order__item {
+                    padding: 1.2rem;
+                    box-shadow: rgba(77, 84, 91, 0.2) 0px 8px 24px;
+                    border-radius: 0.75rem;
+                    .order__detail {
+                        margin: 0.5rem 0;
+                        p {
+                            margin-top: 0.3rem;
+                        }
+                    }
                     p {
-                        margin-top: 0.3rem;
+                        margin-bottom: 0.5rem;
                     }
-                }
-                p {
-                    margin-bottom: 0.5rem;
-                }
-                .button__container {
-                    width: 70%;
-                    display: flex;
-                    justify-content: space-between;
-                    margin: 0 auto;
-                    margin-top: 1rem;
-                    button {
-                        padding: 0.5rem 2rem;
-                        border: none;
-                        background-color: #bbd9ee;
-                        border-radius: 0.75rem;
-                        cursor: pointer;
-                        font-weight: bold;
-                        color: #000000;
-                        font-size: 1rem;
-                    }
-                    button:hover {
-                        color: #FFFFFF;
-                    }
-                    .confirm__order:hover {
-                        background-color: #1D9BF0;
-                    }
-                    .cancel__order:hover {
-                        background-color: #D01919;
+                    .button__container {
+                        width: 70%;
+                        display: flex;
+                        justify-content: space-between;
+                        margin: 0 auto;
+                        margin-top: 1rem;
+                        button {
+                            padding: 0.5rem 2rem;
+                            border: none;
+                            background-color: #bbd9ee;
+                            border-radius: 0.75rem;
+                            cursor: pointer;
+                            font-weight: bold;
+                            color: #000000;
+                            font-size: 1rem;
+                        }
+                        button:hover {
+                            color: #FFFFFF;
+                        }
+                        .confirm__order:hover {
+                            background-color: #1D9BF0;
+                        }
+                        .cancel__order:hover {
+                            background-color: #D01919;
+                        }
                     }
                 }
             }
+        }
+}
+
+}
+
+@media screen and (min-width: 1024px) {
+    .dev__order-container {
+        width: 100%;
+        .developer__order {
+            width: 70%;
+            .order__comming {
+                .order__container {
+                    grid-template-columns: repeat(auto-fill, 25%);
+                    grid-gap: 2rem;
+                }
+            }
+        }
+        .modal-box {
+            width: 30%;
         }
     }
 }

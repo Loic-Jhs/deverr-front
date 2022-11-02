@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logoDeverr from '../../assets/img/D.jpg';
 import { authContext } from "../../contexts/authContext";
-import { UserAsContext } from "../../types";
 import './style.scss';
 
 function Navbar() {

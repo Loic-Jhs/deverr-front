@@ -9,8 +9,8 @@ function Card(dev: HomepageDev) {
           <img className="card__image" src={`${dev.avatar}`} alt={`${dev.firstname} ${dev.lastname} avatar`} />
           <div className="card__stack"> 
             <p>{dev.firstname} {dev.lastname.substring(0,1)}.</p>
-              <div key={dev.stack} className="logo__stack">
-                <img src={`${dev.logo}`} />
+              <div key={dev.stack.name} className="logo__stack">
+                <img src={`${dev.stack.logo}`} />
               </div>
           </div>
         </div>

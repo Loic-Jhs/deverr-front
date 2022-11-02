@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { DevInfos, UserAsContext } from '../../types';
+import { DevInfos } from '../../types';
 import { useParams } from 'react-router-dom';
 import { CircularProgress, Rating } from '@mui/material'
 import { authContext } from '../../contexts/authContext';

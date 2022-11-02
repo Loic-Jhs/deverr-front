@@ -13,11 +13,14 @@ export type Dev = {
 
 export type Order = {
     id: number,
+    created_at: string,
     prestation_name: string,
     instructions: string |null,
-    is_payed: boolean,
-    is_accepted_by_developer: boolean|null,
-    price: number
+    is_payed: number,
+    is_accepted_by_developer: number|null,
+    price: number,
+    user_fullname: string
+    
 }
 
 export type DevInfos = {
@@ -80,7 +83,10 @@ export type HomepageDev = {
     avatar: string,
     lastname: string,
     firstname: string,
-    stack: string
+    stack: {
+        name: string,
+        logo: string
+    }
 }
 
 export type Stack = { 

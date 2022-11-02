@@ -1,5 +1,4 @@
 import Card from "../Card/Card";
-import { users } from "../../fakeData/data";
 import { useEffect, useState } from "react";
 import { Dev, HomepageDev } from "../../types";
 import './style.scss'
@@ -24,6 +23,7 @@ function CardList() {
         });
         const data = await response.json();
         setDevList(data);
+        console.log(data)
         setIsLoaded(true);
       } catch (e) {
         console.log(e)
