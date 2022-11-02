@@ -35,7 +35,7 @@ export type DevInfos = {
     firstname: string,
     lastname: string,
     prestations: Array<RealPrestation>,
-    stacks: Array<RealStack>,
+    stacks: Array<DevStack>,
     reviews: Array<Review>,
     years_of_experience: number
 }
@@ -111,6 +111,14 @@ export type HomepageDev = {
     }
 }
 
+
+export type DevStack = {
+    id: number,
+    name: string,
+    experience: number,
+    is_primary: boolean,
+    logo: string
+}
 export type Stack = { 
     id: number,
     label: string,

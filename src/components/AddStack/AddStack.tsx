@@ -1,14 +1,14 @@
 import { useContext, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { authContext } from '../../contexts/authContext';
-import { RealStack } from '../../types';
+import { DevStack, RealStack } from '../../types';
 import Stacks from '../../models/stacks';
 import { DevInfos } from '../../types';
 import './addStack.scss';
 
 interface modaleProps {
   toggleStack: () => void;
-  devStacks: Stacks[];
+  devStacks: DevStack[];
 }
 
 function AddStack({ toggleStack, devStacks }: modaleProps) {
