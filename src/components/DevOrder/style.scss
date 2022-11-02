@@ -23,7 +23,7 @@
             .order__container {
                 margin: 1.5rem 0;
                 display: grid;
-                grid-template-columns: repeat(1fr);
+                grid-template-columns: repeat(1fr, 40%);
                 grid-gap: 2rem;
                 .order__item {
                     padding: 1.2rem;
@@ -40,11 +40,11 @@
                         font-weight: normal;
                     }
                     .button__container {
-                        width: 70%;
                         display: flex;
                         justify-content: space-between;
                         margin: 0 auto;
                         margin-top: 1rem;
+                        
                         button {
                             padding: 0.5rem 2rem;
                             border: none;
@@ -54,6 +54,9 @@
                             font-weight: bold;
                             color: #000000;
                             font-size: 1rem;
+                        }
+                        .order__done {
+                            margin: 0 auto;
                         }
                         button:hover {
                             color: #FFFFFF;
@@ -82,8 +85,10 @@
     .dev__order-container {
         width: 100%;
         .developer__order {
-            width: 70%;
-            .order__comming {
+            width: 80%;
+            .order__comming,
+            .order__in-progress,
+            .order__done {
                 .order__container {
                     grid-template-columns: repeat(auto-fill, 25%);
                     grid-gap: 2rem;
