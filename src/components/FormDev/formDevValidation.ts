@@ -12,6 +12,12 @@ const schema = yup.object().shape({
     email: yup.string()
         .email("L'adresse email n'est pas valide")
         .required("L'adresse email est obligatoire"),
+    stacks: yup.array().of(yup.object().shape({
+        id: yup.number(),
+        name: yup.string(),
+        experience: yup.number().min(0),
+        is_primary: yup.boolean(),
+    })),
     password: yup.string()
         .min(8, "Le mot de passe doit contenir au moins 8 caractères")
         .max(255, "Le mot de passe doit contenir au maximum 255 caractères")

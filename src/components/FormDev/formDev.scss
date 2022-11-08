@@ -56,26 +56,37 @@
 
       input {
         font-family: "Montserrat", sans-serif;
-        width: 20rem;
-        height: 1.5rem;
+        width: 90%;
+        height: 90%;
         border-radius: 1rem;
         border-color: #1d9bf0;
         font-size: inherit;
         padding: 0.5rem;
       }
+
       .description {
         font-family: "Montserrat", sans-serif;
         resize: none;
         border-radius: 1rem;
         border: #1d9bf0 solid 2px;
+        width: 90%;
         height: 7em;
-        width: 25em;
         padding: 0.5rem;
       }
 
       .stacks__container {
         display: grid;
         justify-items: center;
+        .stack__container {
+          .stack__input {
+            display: flex;
+            flex-direction: row;
+          }
+          .primary__input {
+            display: flex;
+            align-items: center;
+          }
+        }
       }
     }
 
@@ -83,7 +94,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      width: 100%;
+      width: 90%;
 
       button {
         display: flex;
@@ -128,12 +139,12 @@
     .dev__form {
       .input__container {
         font-size: 1.5rem;
-        input {
-          width: 30rem;
-          height: 2rem;
-        }
+        // input {
+        //   width: 30rem;
+        //   height: 2rem;
+        // }
         .description {
-          height: 10em;
+          // height: 10em;
           width: 36em;
         }
       }
@@ -162,12 +173,12 @@
     .dev__form {
       .input__container {
         font-size: 1.7rem;
-        input {
-          width: 40rem;
-          height: 2.5rem;
-        }
+        // input {
+        //   width: 40rem;
+        //   height: 2.5rem;
+        // }
         .description {
-          height: 12em;
+          // height: 12em;
           width: 48em;
         }
       }

@@ -6,7 +6,7 @@ export default interface DevInput {
     name: string,
     experience: number,
     is_primary: boolean,
-  },
+  }[],
   years_of_experience: number,
   description: string,
   email: string,
