@@ -1,5 +1,6 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import React, { useEffect, useState } from 'react';
+import CloseIcon from '@mui/icons-material/Close';
 import DevInput from '../../models/devInput';
 import Stacks from "../../models/stacks";
 import { Link } from 'react-router-dom';
@@ -26,9 +27,9 @@ const FormDev = () => {
   const [loading, setLoading] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [stacks, setStacks] = useState<Stacks[]>([]);
+  const [successMessage, setSuccessMessage] = useState("");
   const [filteredStacks, setFilteredStacks] = useState<Stacks[]>([]);
   const [selectedStacks, setSelectedStacks] = useState<Stacks[]>([]);
-  const [successMessage, setSuccessMessage] = useState("");
   const { register, handleSubmit, reset, formState: { errors } } = useForm<DevInput>({ defaultValues });
 
   useEffect(() => {
@@ -56,6 +57,7 @@ const FormDev = () => {
   // TODO: enlever/ne pas afficher les technos qui ont déjà été selectionné
   // TODO: faire en sorte de supprimer de la selection les technos que l'on souhaite
 
+  // On met à jour le state à chaque changement concernant les technos
   useEffect(() => {
     setSelectedStacks(selectedStacks);
   }, [selectedStacks]);
@@ -85,6 +87,22 @@ const FormDev = () => {
     } catch (e) {
       console.log(e);
     }
+  };
+
+  const onSelectedStacks = (stack: Stacks) => {
+    // On va chercher la techno selectionné dans le tableau initial (qui est stacks)
+    const selectedStack = stacks.find(stackFind => stackFind.name === stack.name);
+    if (selectedStack) {
+      // Dans le setSelectedStacks, on prend les anciennes valeures (current) puis
+      // on les envoie dans un nouveau tableau qui est [...current, selectedStack]
+      setSelectedStacks(current => {
+        return [...current, selectedStack]
+      });
+    }
+  };
+
+  const onDeletedStacks = (stack: Stacks) => {
+    setSelectedStacks(selectedStacks.filter(selectedStack => selectedStack !== stack));
   };
 
   return (
@@ -122,22 +140,25 @@ const FormDev = () => {
               </div>
               {
                 filteredStacks.length > 0 &&
-                <select onChange={(e) => {
-                  const selectedStack = stacks.find(stack => stack.name === e.target.value);
-                  if (selectedStack) {
-                    // Dans le setSelectedStacks, on prend les anciennes valeures (current) puis
-                    // on les envoie dans un nouveau tableau qui est [...current, selectedStack]
-                    setSelectedStacks(current => {
-                      return [...current, selectedStack]
-                    })
-                  }
-                }}>
-                  {
-                    filteredStacks.map(stack => (
-                      <option key={stack.id} value={stack.name}>{stack.name}</option>
-                    ))
-                  }
-                </select>
+                <div>
+                  <ul>
+                    {
+                      filteredStacks.map(stack => {
+                        if (selectedStacks.find(selectedStack => selectedStack.name === stack.name)) {
+                          return null;
+                        } else {
+                          return <li key={stack.id} value={stack.name} onClick={() => onSelectedStacks(stack)}>{stack.name}</li>
+                        }
+                      })
+                    }
+                  </ul>
+                </div>
+              }
+              {
+                selectedStacks.map(stack => {
+                  return <span key={stack.id}>{stack.name} <CloseIcon onClick={() => onDeletedStacks(stack)}/> </span>
+                })
+
               }
             </div>
           </div>
