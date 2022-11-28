@@ -38,6 +38,7 @@ const FormDev = () => {
         const response = await fetch('https://api-dev.deverr.fr/stacks/all', {
           method: "GET",
           headers: {
+            //TODO trouver une meilleure manière d'autoriser l'accès aux cors
             "access-control-allow-origin": "*",
             "Content-type": "application/json",
           },
@@ -52,10 +53,6 @@ const FormDev = () => {
     }
     fetchData()
   }, [isLoaded]);
-
-  // TODO: mapper sur le tableau selectedStacks[] pour afficher ce qui a été selectionné
-  // TODO: enlever/ne pas afficher les technos qui ont déjà été selectionné
-  // TODO: faire en sorte de supprimer de la selection les technos que l'on souhaite
 
   // On met à jour le state à chaque changement concernant les technos
   useEffect(() => {
@@ -78,6 +75,7 @@ const FormDev = () => {
       await fetch('https://api-dev.deverr.fr/register', {
         method: "POST",
         headers: {
+          //TODO trouver une meilleure manière d'autoriser l'accès aux cors
           "access-control-allow-origin": "*",
           "Content-type": "application/json",
         },
@@ -133,14 +131,13 @@ const FormDev = () => {
           <div className="stacks__container">
             <p className="error">{errors.stacks?.message}</p>
             <label>Vos compétences</label>
-            <p>Ajoutez vos compétences et frameworks que vous maîtrisez.</p>
             <div className="stack__container">
               <div className="stack__input">
-                <input type="text" placeholder=" Saisissez une compétence" onChange={handleChange} />
+                <input type="text" placeholder="Ajoutez les compétences que vous maîtrisez." onChange={handleChange} />
               </div>
               {
                 filteredStacks.length > 0 &&
-                <div>
+                <div className="stack__list">
                   <ul>
                     {
                       filteredStacks.map(stack => {
@@ -154,12 +151,15 @@ const FormDev = () => {
                   </ul>
                 </div>
               }
-              {
-                selectedStacks.map(stack => {
-                  return <span key={stack.id}>{stack.name} <CloseIcon onClick={() => onDeletedStacks(stack)}/> </span>
-                })
-
-              }
+              <div className="stack__list">
+                <ul>
+                  {
+                    selectedStacks.map(stack => {
+                      return <li className="selectedStack" key={stack.id}>{stack.name} <CloseIcon onClick={() => onDeletedStacks(stack)} /> </li>
+                    })
+                  }
+                </ul>
+              </div>
             </div>
           </div>
 
@@ -185,7 +185,7 @@ const FormDev = () => {
             <p>Je suis un client</p>
           </Link>
           <button type="submit" className="btn">
-            <span className="span">Suivant</span>
+            <span className="span">Envoyer</span>
           </button>
         </div>
       </form>
