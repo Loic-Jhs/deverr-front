@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Link } from 'react-router-dom';
-import UserInput from '../../models/userInput';
-import superagent from 'superagent';
 import { yupResolver } from '@hookform/resolvers/yup';
+import React, { useEffect, useState } from 'react';
+import UserInput from '../../models/userInput';
 import schema from './formClientValidation';
+import { Link } from 'react-router-dom';
 import './formClient.scss';
 
 const FormClient = () => {
@@ -17,31 +16,40 @@ const FormClient = () => {
     type: "user",
   });
 
-  const { register, handleSubmit, formState: { errors } } = useForm<UserInput>({ resolver: yupResolver(schema) });
-  const { confirmedPassword, ...cleanUserInput } = userInput;
-  const [successMessage, setSuccessMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const { confirmedPassword, ...cleanUserInput } = userInput;
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<UserInput>({ resolver: yupResolver(schema) });
 
-  const onSubmit: SubmitHandler<UserInput> = (data) => {
+  const onSubmit: SubmitHandler<UserInput> = async (data) => {
     setLoading(true);
-    superagent
-      .post('https://api-dev.deverr.fr/register')
-      .send(cleanUserInput)
-      .end((err, res) => {
-        // Calling the end function will send the request
-        setSuccessMessage(res.body.message);
+    try {
+      await fetch('https://api-dev.deverr.fr/register', {
+        method: "POST",
+        headers: {
+          "access-control-allow-origin": "*",
+          "Content-type": "application/json",
+        },
+        mode: 'cors',
+        body: JSON.stringify(cleanUserInput),
+      })
+      .then(response => response.json())
+      .then(responseData => {
+        setLoading(false);
+        setSuccessMessage(responseData.message);
+        setTimeout(() => {setSuccessMessage("")}, 4000);
         setUserInput({
-          ...userInput,
           lastname: "",
           firstname: "",
           email: "",
           password: "",
-          confirmedPassword: ""
-        })
-        if (successMessage != null) {
-          setLoading(false);
-        }
+          confirmedPassword: "",
+          type: "user",
+        });
       });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

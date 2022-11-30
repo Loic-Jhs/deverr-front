@@ -38,7 +38,7 @@ const FormDev = () => {
         const response = await fetch('https://api-dev.deverr.fr/stacks/all', {
           method: "GET",
           headers: {
-            //TODO trouver une meilleure manière d'autoriser l'accès aux cors
+            //TODO find a better way to allow access to cors
             "access-control-allow-origin": "*",
             "Content-type": "application/json",
           },
@@ -47,6 +47,8 @@ const FormDev = () => {
         const data = await response.json();
         setStacks(data);
         setIsLoaded(true);
+        setSuccessMessage(data.message);
+        setTimeout(() => {setSuccessMessage("")}, 4000);
       } catch (e) {
         console.log(e);
       }
@@ -54,7 +56,7 @@ const FormDev = () => {
     fetchData()
   }, [isLoaded]);
 
-  // On met à jour le state à chaque changement concernant les technos
+  // We update the state every time there is a change in techno
   useEffect(() => {
     setSelectedStacks(selectedStacks);
   }, [selectedStacks]);
@@ -70,29 +72,31 @@ const FormDev = () => {
 
   const onSubmit: SubmitHandler<DevInput> = async (data) => {
     setLoading(true);
-    const selectedStack = data.stacks.find(stack => stack.experience > 0);
     try {
       await fetch('https://api-dev.deverr.fr/register', {
         method: "POST",
         headers: {
-          //TODO trouver une meilleure manière d'autoriser l'accès aux cors
+          //TODO find a better way to allow access to cors
           "access-control-allow-origin": "*",
           "Content-type": "application/json",
         },
-        mode: 'cors'
+        mode: 'cors',
+        body: JSON.stringify(data),
       });
       reset();
+      setLoading(false);
+      setSelectedStacks([]);
     } catch (e) {
       console.log(e);
     }
   };
 
   const onSelectedStacks = (stack: Stacks) => {
-    // On va chercher la techno selectionné dans le tableau initial (qui est stacks)
+    // We will look for the techno selected in the initial table (which is stacks)
     const selectedStack = stacks.find(stackFind => stackFind.name === stack.name);
     if (selectedStack) {
-      // Dans le setSelectedStacks, on prend les anciennes valeures (current) puis
-      // on les envoie dans un nouveau tableau qui est [...current, selectedStack]
+      // In the setSelectedStacks, we take the old values (current) then
+      // we send them to a new array which is [...current, selectedStack]
       setSelectedStacks(current => {
         return [...current, selectedStack]
       });
@@ -165,7 +169,7 @@ const FormDev = () => {
 
           <p className="error">{errors.years_of_experience?.message}</p>
           <label>Années d'expérience</label>
-          <input type="number" {...register("years_of_experience")} min="1" max="10" />
+          <input className="experience" type="number" {...register("years_of_experience")} min="1" max="10" />
 
           <p className="error">{errors.description?.message}</p>
           <label className="label__description">Description</label>
