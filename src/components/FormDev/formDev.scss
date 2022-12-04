@@ -1,0 +1,200 @@
+$blueDeverr: #1da8f4;
+$blueDeverr2: #1d9bf0;
+
+.register__form__dev {
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+  padding: 0 20px 20px 20px;
+  h1 {
+    font-size: 1.3rem;
+    font-weight: 300;
+  }
+  a {
+    font-size: 20px;
+    text-decoration: none;
+    color: $blueDeverr2;
+  }
+  a:hover {
+    transform: perspective(1px) scale3d(1.044, 1.044, 1) translateZ(0);
+  }
+  .succes {
+    text-align: center;
+    color: rgb(38, 184, 38);
+  }
+  .load {
+    text-align: center;
+    p {
+      color: $blueDeverr2;
+    }
+  }
+  .dev__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    .input__container {
+      display: flex;
+      flex-direction: column;
+      p {
+        margin-bottom: 0.3rem;
+      }
+      label {
+        margin-bottom: 0.5rem;
+      }
+      input {
+        font-family: "Montserrat", sans-serif;
+        height: 40px;
+        border-radius: 1rem;
+        border-color: $blueDeverr2;
+        font-size: inherit;
+        padding: 0.5rem;
+      }
+      .description {
+        font-family: "Montserrat", sans-serif;
+        resize: none;
+        border-radius: 1rem;
+        border: $blueDeverr2 solid 2px;
+        height: 7em;
+        padding: 0.5rem;
+      }
+      .stack__container {
+        margin-top: 0.5rem;
+        .stack__input {
+          display: flex;
+          flex-direction: column;
+        }
+        .stack__list {
+          ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            li {
+              list-style-type: none;
+              text-align: center;
+              border-radius: 5px;
+              padding: 3px;
+              border: solid 1px $blueDeverr;
+              background-color: $blueDeverr;
+              color: white;
+              transition: all 0.5s;
+            }
+            .selectedStack {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              padding: 4px 1px 4px 7px;
+              background-color: white;
+              color: $blueDeverr;
+            }
+          }
+        }
+        .primary__input {
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+    .button__container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1rem;
+      width: 100%;
+      p {
+        margin-bottom: 0rem;
+      }
+      button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50px;
+        cursor: pointer;
+        text-transform: uppercase;
+        height: 45px;
+        width: 130px;
+        opacity: 1;
+        background-color: $blueDeverr2;
+        border: 1px solid rgba(0, 0, 0, 0.6);
+      }
+      button,
+      span {
+        font-family: "Montserrat", sans-serif;
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.7px;
+      }
+      
+      button:hover {
+        transform: perspective(1px) scale3d(1.044, 1.044, 1) translateZ(0);
+      }
+    }
+    .error {
+      color: red;
+    }
+  }
+}
+@media screen and (min-width: 640px) {
+  .register__form__dev {
+    padding: 0 40px 20px 40px;
+    h1 {
+      font-size: 2rem;
+      font-weight: 300;
+    }
+    .dev__form {
+      .input__container {
+        font-size: 1.5rem;
+        .stack__container {
+          .stack__input {
+            input {
+              font-size: 1.5rem;
+            }
+          }
+        }
+      }
+      .error {
+        font-size: 1.1rem;
+      }
+    }
+    .success {
+      p {
+        font-size: 1.1rem;
+      }
+    }
+    .load {
+      p {
+        font-size: 1.3rem;
+      }
+    }
+  }
+}
+@media screen and (min-width: 768px) {
+  .register__form__dev {
+    padding: 0 65px 20px 65px;
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 300;
+    }
+    .dev__form {
+      .error {
+        font-size: 1.3rem;
+      }
+    }
+    .success {
+      p {
+        font-size: 1.3rem;
+      }
+    }
+    .load {
+      p {
+        font-size: 1.6rem;
+      }
+    }
+  }
+}

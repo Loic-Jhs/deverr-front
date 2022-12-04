@@ -1,32 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import FormClient from './components/FormClient/FormClient';
+import DevProfile from './components/DevProfile/DevProfile';
+import DevOrder from './components/DevOrder/DevOrder';
+import Homepage from './components/Homepage/Homepage';
+import Register from './components/Register/Register';
+import DevList from './components/DevList/DevList';
+import FormDev from './components/FormDev/FormDev';
+import { Routes, Route } from 'react-router-dom';
+import Footer from './components/Footer/Footer';
+import Header from './components/Header/Header';
+import Login from "./components/Login/Login";
 import './App.css'
+import ClientProfile from './components/ClientProfile/ClientProfile';
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/dev-profile/:devID" element={<DevProfile />} />
+        <Route path="/my-profile/:userID" element={<ClientProfile />} />
+        <Route path="/dev-order/:devID" element={<DevOrder />} />
+        <Route path="developers" element={<DevList />} />
+        <Route path="/registerdev" element={<FormDev />} />
+        <Route path="/registerclient" element={<FormClient />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+      <Footer />
     </div>
   )
 }
