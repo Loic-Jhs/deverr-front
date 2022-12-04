@@ -12,7 +12,7 @@ function DevList() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('https://api-dev.deverr.fr/all-developers', {
+                const response = await fetch('http://localhost/all-developers', {
                     method: "GET",
                     headers: {
                         "access-control-allow-origin": "*",
@@ -27,7 +27,7 @@ function DevList() {
                 console.error(e)
             }
         }
-        fetchData()
+        fetchData();
     }, [isLoaded])
 
     return (

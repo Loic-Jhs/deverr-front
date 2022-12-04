@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { authContext } from '../../contexts/authContext';
 import { DevStack, RealStack } from '../../types';
@@ -16,6 +16,7 @@ function AddStack({ toggleStack, devStacks }: modaleProps) {
   const [dev, setDev] = useState<DevInfos>();
   const [isLoaded, setIsLoaded] = useState(false);
   const [stacks, setStacks] = useState<Stacks[]>([]);
+  const [successMessage, setSuccessMessage] = useState('');
   const { register, handleSubmit, formState: { errors } } = useForm<Stacks>();
   const filteredStacks = stacks.filter((stack) => {
     return !devStacks.find((devStack) => 
@@ -57,7 +58,7 @@ function AddStack({ toggleStack, devStacks }: modaleProps) {
     };
 
     try {
-      const response = await fetch(`https://api-dev.deverr.fr/profile/add-stack/${stacksDataRequired.stack_id}`, {
+      const response = await fetch(`http://localhost/profile/add-stack/${stacksDataRequired.stack_id}`, {
         method: "POST",
         headers: {
           "access-control-allow-origin": "*",
@@ -68,7 +69,7 @@ function AddStack({ toggleStack, devStacks }: modaleProps) {
         mode: 'cors'
       });
       const data = await response.json();
-      console.log(data);
+      setSuccessMessage(data.message + " !");
     } catch (e) {
       console.error(e);
     }
@@ -78,9 +79,9 @@ function AddStack({ toggleStack, devStacks }: modaleProps) {
     <>
       <div className='dev__stacks'>
         <form id="stacksForm" className="stacks__form" onSubmit={handleSubmit(onSubmit)}>
-          <h1>Choisisser une nouvelle Techno</h1>
+          <h1>Choisissez une nouvelle Techno</h1>
           <select {...register("id", { required: true })}>
-            <option value="">Selectionner une techno</option>
+            <option value="">Sélectionnez une techno</option>
             {filteredStacks.map((stack) => {
               return (
                 <option key={stack.id} value={stack.id}>{stack.name}</option>
@@ -94,6 +95,9 @@ function AddStack({ toggleStack, devStacks }: modaleProps) {
             </button>
           </div>
         </form>
+      </div>
+      <div className="success">
+        <p>{successMessage}</p>
       </div>
     </>
   );

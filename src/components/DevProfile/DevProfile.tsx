@@ -30,7 +30,7 @@ function DevProfile() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`https://api-dev.deverr.fr/developer/${devID}`, {
+                const response = await fetch(`http://localhost/developer/${devID}`, {
                     method: "GET",
                     headers: {
                         "access-control-allow-origin": "*",
@@ -64,7 +64,7 @@ function DevProfile() {
         e.preventDefault();
         setIsEditable(!isEditable)
         try {
-            const response = await fetch(`https://api-dev.deverr.fr/profile/update`, {
+            const response = await fetch(`http://localhost/profile/update`, {
                 method: "PUT",
                 headers: {
                     "access-control-allow-origin": "*",
@@ -177,7 +177,7 @@ function DevProfile() {
                                                 <h4>{prestation.name}</h4>
                                                 <p className='p__detail'>Details :</p>
                                                 <p className='prestation__description'>
-                                                    blablalba je vous propose ceci et cela, je passe X temps sur machin truc truc
+                                                    {prestation.description}
                                                 </p>
                                                 <p className='dev__prestation-price'><span>Tarif :</span> 120€</p>
                                             </div>

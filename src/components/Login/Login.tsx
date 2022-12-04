@@ -16,33 +16,40 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const [successMessage, setSuccessMessage] = useState("");
 
   const { register, handleSubmit, formState: { errors } } = useForm<LoginInput>({ resolver: yupResolver(schema) });
   const navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<LoginInput> = (data) => {
-    superagent
-      .post('https://api-dev.deverr.fr/login')
-      .send(loginInput)
-      .end((err, res) => {
-        // Calling the end function will send the request
-        localStorage.setItem('access_token', JSON.stringify(res.body.access_token)),
-        localStorage.setItem('token_type', JSON.stringify(res.body.token_type)),
-        localStorage.setItem('user_info', JSON.stringify(res.body.user_info))
-        
-        setIsLogged(true)
-        // Entourer d'un if pour gérer la redirection en fonction du rôle
-        if (res.body.user_info.user_role == 1 && res.body.access_token != undefined) {
-          navigate(`/dev-profile/${res.body.user_info.developer_id}`);
-        } else if (res.body.access_token != undefined) {
+  const onSubmit: SubmitHandler<LoginInput> = async (data) => {
+    try {
+      await fetch('http://localhost/login', {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }).then (response => response.json())
+      .then (data => {
+        console.log(data);
+        localStorage.setItem('access_token', JSON.stringify(data.access_token));
+        localStorage.setItem('token_type', JSON.stringify(data.token_type));
+        localStorage.setItem('user_info', JSON.stringify(data.user_info));
+        setIsLogged(true);
+        if (data.user_info.user_role == 1) {
+          navigate(`/dev-profile/${data.user_info.developer_id}`);
+        } else if (data.user_info.user_role == 0) {
           navigate("/developers");
         }
       });
+    } catch (e) {
+      console.log(e);
+    }
   }
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setLoginInput({ ...loginInput, [event.target.name]: event.target.value });
   }
-
 
   return (
     <section>
@@ -70,4 +77,4 @@ const Login = () => {
   );
 }
 
-export default Login
+export default Login;

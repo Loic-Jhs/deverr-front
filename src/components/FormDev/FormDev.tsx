@@ -35,14 +35,14 @@ const FormDev = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://api-dev.deverr.fr/stacks/all', {
+        const response = await fetch('http://localhost/stacks/all', {
           method: "GET",
           headers: {
             //TODO find a better way to allow access to cors
             "access-control-allow-origin": "*",
             "Content-type": "application/json",
           },
-          mode: 'cors'
+          mode: 'cors',
         });
         const data = await response.json();
         setStacks(data);
@@ -73,7 +73,7 @@ const FormDev = () => {
   const onSubmit: SubmitHandler<DevInput> = async (data) => {
     setLoading(true);
     try {
-      await fetch('https://api-dev.deverr.fr/register', {
+      await fetch('http://localhost/register', {
         method: "POST",
         headers: {
           //TODO find a better way to allow access to cors
@@ -82,6 +82,10 @@ const FormDev = () => {
         },
         mode: 'cors',
         body: JSON.stringify(data),
+      })
+      .then(response => response.json())
+      .then(responseData => {
+        setSuccessMessage(responseData.message);
       });
       reset();
       setLoading(false);
@@ -108,6 +112,7 @@ const FormDev = () => {
   };
 
   return (
+
     <section className="register__form__dev">
       <h1>Inscription d'un développeur</h1>
       <div className="succes">

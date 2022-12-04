@@ -22,7 +22,7 @@ function Modal(props: ModalType) {
               auth.access_token != undefined ?
                 props.children :
                 <div className="not__authenticated">
-                  <h1>Pour pouvoir demander une prestation, veuilez vous inscrire ou vous connecter</h1>
+                  <h1>Pour pouvoir demander une prestation, veuillez vous inscrire ou vous connecter</h1>
                   <div className="button__container">
                     <Link className="register__link" to="/register">S'inscrire</Link>
                     <Link className="login__link" to="/login">Se connecter</Link>
