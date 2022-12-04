@@ -89,9 +89,6 @@ function DevProfile() {
                 <Modal isOpen={isOpenStack} toggle={toggleStack} children={<AddStack toggleStack={toggle} devStacks={dev.stacks} />} />
                 <div className='profile__container'>
                     <div className='profile__left-part'>
-                        <div className='img__container'>
-                            <img src={dev.avatar} alt={`${dev.firstname} ${dev.lastname} avatar`} />
-                        </div>
                         <div className='detail__situation'>
                             <h3>En quelques mots : </h3>
                             {
@@ -143,6 +140,9 @@ function DevProfile() {
                     </div>
                     <div className='profile__right-part'>
                         <div className='dev__info'>
+                            <div className='img__container'>
+                                <img src={dev.avatar} alt={`${dev.firstname} ${dev.lastname} avatar`} />
+                            </div>
                             <div className='dev__name-job'>
                                 <h3>{dev.firstname} {dev.lastname}</h3>
                                 <p>Développeur depuis {dev.years_of_experience} ans</p>

@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Dev } from '../../types';
-import './style.scss';
 import { Rating } from '@mui/material'
+import Stacks from '../../models/stacks';
+import './style.scss';
 
 function DevList() {
+    const [query, setQuery] = useState("");
     const [devList, setDevList] = useState<Dev[]>();
     const [isLoaded, setIsLoaded] = useState<Boolean>(false);
-    const [query, setQuery] = useState("");
-
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -33,8 +33,10 @@ function DevList() {
     return (
         <>
             <div className="search">
+                <label htmlFor="searchTechno">Rechercher une technologie</label>
                 <input
-                    placeholder="Rechercher un(e) Dev/Techno"
+                    name="searchTechno"
+                    placeholder="PHP, JavaScript..."
                     onChange={(event) => setQuery(event.target.value)}
                 />
             </div>
