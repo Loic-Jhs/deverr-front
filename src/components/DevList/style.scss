@@ -3,6 +3,13 @@
   flex-direction: column;
   align-items: center;
   font-family: Montserrat, sans-serif;
+  input {
+    border: solid 2px #1da8f4;
+    border-radius: 0.5rem;
+    margin-top: 0.5rem;
+    padding: 5px;
+    text-align: center;
+  }
 }
 
 .dev-list__container {
@@ -15,11 +22,10 @@
   .dev-list__link {
     text-decoration: none;
     color: #000000;
-    background-color: #ffffff;
     border-radius: 1rem;
     overflow: hidden;
     background-color: #e9eced;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
     .dev__info {
       margin-left: auto;
       padding: 1.5rem;
@@ -93,7 +99,6 @@
         .prestation__container {
           background-color: #ffffff;
           border-radius: 0.75rem;
-          font-size: 1.2rem;
           font-size: 0.75rem;
           margin-right: 0.3rem;
           margin-bottom: 0.75rem;
