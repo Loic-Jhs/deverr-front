@@ -98,6 +98,7 @@ export type RealStack = {
 export type RealPrestation = {
     id: number,
     name: string,
+    description: string,
 }
 
 export type HomepageDev = {

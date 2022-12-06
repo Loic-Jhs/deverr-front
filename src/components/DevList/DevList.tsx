@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Dev } from '../../types';
 import { Rating } from '@mui/material'
-import Stacks from '../../models/stacks';
 import './style.scss';
 
 function DevList() {
@@ -11,21 +10,20 @@ function DevList() {
     const [isLoaded, setIsLoaded] = useState<Boolean>(false);
     useEffect(() => {
         const fetchData = async () => {
-            try {
-                const response = await fetch('http://localhost/all-developers', {
-                    method: "GET",
-                    headers: {
-                        "access-control-allow-origin": "*",
-                        "Content-type": "application/json"
-                    },
-                    mode: 'cors'
-                });
-                const data = await response.json();
+            await fetch('http://localhost/all-developers', {
+                method: "GET",
+                headers: {
+                    "access-control-allow-origin": "*",
+                    "Content-type": "application/json"
+                },
+                mode: 'cors'
+            })
+            .then((response) => response.json())
+            .then((data) => {
                 setDevList(data);
                 setIsLoaded(true);
-            } catch (e) {
-                console.error(e)
-            }
+            })
+            .catch((e) => console.log(e));
         }
         fetchData();
     }, [isLoaded])

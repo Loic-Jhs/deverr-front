@@ -94,10 +94,6 @@ $blueDeverr2: #1d9bf0;
             }
           }
         }
-        .primary__input {
-          display: flex;
-          align-items: center;
-        }
       }
     }
     .button__container {
@@ -107,7 +103,7 @@ $blueDeverr2: #1d9bf0;
       margin-top: 1rem;
       width: 100%;
       p {
-        margin-bottom: 0rem;
+        margin-bottom: 0;
       }
       button {
         display: flex;

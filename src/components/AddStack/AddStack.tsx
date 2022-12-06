@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { authContext } from '../../contexts/authContext';
-import { DevStack, RealStack } from '../../types';
+import { DevStack } from '../../types';
 import Stacks from '../../models/stacks';
 import { DevInfos } from '../../types';
 import './addStack.scss';
@@ -45,7 +45,7 @@ function AddStack({ toggleStack, devStacks }: modaleProps) {
           console.log(e);
         }
       }
-      fetchData()
+      fetchData();
     }
   }, [isLoaded])
 

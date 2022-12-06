@@ -25,53 +25,7 @@ function DevOrder() {
     useEffect(() => {
         if (auth.access_token != undefined && auth.user_info.developer_id == devID) {
             const fetchData = async () => {
-                try {
-                    const response = await fetch(`https://api-dev.deverr.fr/order?developer_id=${devID}`, {
-                        method: "GET",
-                        headers: {
-                            "access-control-allow-origin": "*",
-                            "Content-type": "application/json",
-                            Authorization: `Bearer ${auth.access_token}`
-                        },
-                        mode: 'cors'
-                    });
-                    const data = await response.json();
-                    setOrders(data);
-                    let newOrderArray: Array<Order> = [];
-                    let inProgressOrdeArray: Array<Order>= []
-                    let orderDoneArray: Array<Order> = []
-                    orders && orders.map((order) => {
-                        if (order.is_accepted_by_developer == null) {
-                            newOrderArray.push(order)
-                        } else if (order.is_accepted_by_developer == 1 && order.is_finished == 0) {
-                            inProgressOrdeArray.push(order)
-                        } else if (order.is_accepted_by_developer == 1 && order.is_finished == 1) {
-                            orderDoneArray.push(order)
-                        }
-                    })
-                    setNewOrders(newOrderArray);
-                    setInProgressOrders(inProgressOrdeArray);
-                    setOrdersDone(orderDoneArray);
-                    setIsLoaded(true);
-
-                } catch (e) {
-                    console.log(e)
-                }
-            }
-            fetchData()
-        } else if (auth.access_token != undefined && auth.user_info.developer_id == null) {
-            navigate("/developers");
-        } else if (auth.access_token != undefined && auth.user_info.developer_id != devID ){
-            navigate(`/dev-profile/${auth.user_info.developer_id}`)
-        } else if (!auth){
-            navigate('/')
-        } 
-    }, [auth, isLoaded])
-
-    const confirmOrder = async (orderID: number) => {
-        if (auth.access_token != undefined && orderID) {
-            try {
-                const response = await fetch(`https://api-dev.deverr.fr/order/prestation-accepted/${orderID}`, {
+                await fetch(`https://api-dev.deverr.fr/order?developer_id=${devID}`, {
                     method: "GET",
                     headers: {
                         "access-control-allow-origin": "*",
@@ -79,12 +33,59 @@ function DevOrder() {
                         Authorization: `Bearer ${auth.access_token}`
                     },
                     mode: 'cors'
-                });
-                const data = await response.json();
-                setIsLoaded(false)
-            } catch (e) {
-                console.log(e)
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    setOrders(data);
+                    let newOrderArray: Array<Order> = [];
+                    let inProgressOrderArray: Array<Order>= []
+                    let orderDoneArray: Array<Order> = []
+
+                    orders && orders.map((order) => {
+                        if (order.is_accepted_by_developer == null) {
+                            newOrderArray.push(order)
+                        } else if (order.is_accepted_by_developer == 1 && order.is_finished == 0) {
+                            inProgressOrderArray.push(order)
+                        } else if (order.is_accepted_by_developer == 1 && order.is_finished == 1) {
+                            orderDoneArray.push(order)
+                        }
+                    })
+
+                    setNewOrders(newOrderArray);
+                    setInProgressOrders(inProgressOrderArray);
+                    setOrdersDone(orderDoneArray);
+                    setIsLoaded(true);
+                })
+              .catch((error) => console.log(error));
             }
+            fetchData();
+        } else if (auth.access_token != undefined && auth.user_info.developer_id == null) {
+            navigate("/developers");
+        } else if (auth.access_token != undefined && auth.user_info.developer_id != devID ) {
+            navigate(`/dev-profile/${auth.user_info.developer_id}`);
+        } else if (!auth) {
+            navigate('/');
+        } 
+    }, [auth, isLoaded])
+
+    const confirmOrder = async (orderID: number) => {
+        if (auth.access_token != undefined && orderID) {
+            await fetch(`https://api-dev.deverr.fr/order/prestation-accepted/${orderID}`, {
+                method: "GET",
+                headers: {
+                    "access-control-allow-origin": "*",
+                    "Content-type": "application/json",
+                    Authorization: `Bearer ${auth.access_token}`
+                },
+                mode: 'cors'
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                setIsLoaded(false)
+            })
+            .catch((error) => {
+                console.log(error);
+            });
         }
     }
 

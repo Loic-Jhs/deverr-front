@@ -34,23 +34,22 @@ function Order({ toggle }: modaleProps) {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await fetch(`https://api-dev.deverr.fr/developer/${devID}`, {
-          method: "GET",
-          headers: {
-            "access-control-allow-origin": "*",
-            "Content-type": "application/json"
-          },
-          mode: 'cors'
-        });
-        const data = await response.json();
+      await fetch(`https://api-dev.deverr.fr/developer/${devID}`, {
+        method: "GET",
+        headers: {
+          "access-control-allow-origin": "*",
+          "Content-type": "application/json"
+        },
+        mode: 'cors'
+      })
+      .then((response) => response.json())
+      .then((data) => {
         setDev(data[0]);
         setIsLoaded(true);
-      } catch (e) {
-        console.log(e)
-      }
+      })
+      .catch((e) => console.log(e));
     }
-    fetchData()
+    fetchData();
   }, [isLoaded]);
 
   const onSubmit: SubmitHandler<OrderInput & OrderSelect> = async (data) => {
@@ -60,8 +59,7 @@ function Order({ toggle }: modaleProps) {
       developer_prestation_id: Number(data.prestation_id),
       instructions: data.instruction
     }
-    try {
-      const response = await fetch(`https://api-dev.deverr.fr/order/store`, {
+    await fetch(`https://api-dev.deverr.fr/order/store`, {
         method: "POST",
         headers: {
           "access-control-allow-origin": "*",
@@ -70,23 +68,12 @@ function Order({ toggle }: modaleProps) {
         },
         body: JSON.stringify(orderDataRequired),
         mode: 'cors'
-      });
-      const data = await response.json();
-      console.log(data);
-      if (response.status == 200) {
-        setOrderMessage({
-          status: "success",
-          message: "Votre demande a bien été envoyée"
-        })
-      } else {
-        setOrderMessage({
-          status: "error",
-          message: "Une erreur est survenue, veuilez réessayer plus tard"
-        })
-      }
-    } catch (e) {
-      console.error(e);
-    }
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((e) => console.log(e));
   }
 
   if (dev) {

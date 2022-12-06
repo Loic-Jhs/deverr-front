@@ -1,6 +1,6 @@
 import { authContext } from '../../contexts/authContext';
 import { CircularProgress, Rating } from '@mui/material';
-import { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import AddStack from '../AddStack/AddStack';
 import useModal from '../Modal/useModal';
@@ -29,23 +29,22 @@ function DevProfile() {
 
     useEffect(() => {
         const fetchData = async () => {
-            try {
-                const response = await fetch(`http://localhost/developer/${devID}`, {
-                    method: "GET",
-                    headers: {
-                        "access-control-allow-origin": "*",
-                        "Content-type": "application/json",
-                    },
-                    mode: 'cors'
-                });
-                const data = await response.json();
-                setDev(data[0]);
-                setIsLoaded(true);
-            } catch (e) {
-                console.log(e)
-            }
+            await fetch(`http://localhost/developer/${devID}`, {
+                method: "GET",
+                headers: {
+                    "access-control-allow-origin": "*",
+                    "Content-type": "application/json",
+                },
+                mode: 'cors'
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    setDev(data[0]);
+                    setIsLoaded(true);
+                })
+                .catch((error) => console.log(error));
         }
-        fetchData()
+        fetchData();
     }, [isLoaded])
 
     function handleEditElement() {
@@ -95,7 +94,7 @@ function DevProfile() {
                                 auth.access_token && auth.user_info.developer_id == dev.id ?
                                     <div className='description__editable'>
                                         {
-                                            isEditable == false ?
+                                            !isEditable ?
                                                 <div>
                                                     <p className='dev__description'>{dev.description}</p>
                                                     <button className='button_dev__profile' onClick={handleEditElement}> Modifier</button>

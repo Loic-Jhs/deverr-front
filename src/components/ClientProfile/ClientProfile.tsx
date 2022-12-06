@@ -3,32 +3,32 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { authContext } from '../../contexts/authContext';
 import { UserInfos } from '../../types';
-import './style.scss'
+import './style.scss';
 
 
 function ClientProfile() {
-    const { auth } = useContext(authContext)
+    const { auth } = useContext(authContext);
     const { userID } = useParams();
-    const [client, setClient] = useState<UserInfos>()
+    const [client, setClient] = useState<UserInfos>();
     const [isLoaded, setIsLoaded] = useState<Boolean>(false);
-    const [isCurrentClient, setIsCurrentClient] = useState<boolean>(false)
-    const navigate = useNavigate()
+    const [isCurrentClient, setIsCurrentClient] = useState<boolean>(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (auth.access_token != undefined && userID == auth.user_info.user_id) {
-            setIsCurrentClient(true)
+            setIsCurrentClient(true);
         }
     }, [auth])
 
      useEffect(() => {
-         if (isCurrentClient == true) {
+         if (isCurrentClient) {
             const fetchData = async () => {
                 try {
                     const response = await fetch(`https://api-dev.deverr.fr/profile/${userID}`, {
                         method: "GET",
                         headers: {
                             "access-control-allow-origin": "*",
-                            "Content-type": "application/json",
+                            "Content-type": "application/json"
                         },
                         mode: 'cors'
                     });
@@ -39,13 +39,13 @@ function ClientProfile() {
                     console.log(e)
                 }
             }
-            fetchData()
+            fetchData();
         } else {
             if (auth.access_token != undefined && auth.user_info.developer_id != null) {
                 console.log('ok')
-                navigate('/dev-profile/'+auth.user_info.developer_id)
-            } else if (auth.acces_token != undefined && auth.user_info.developer_id == null) {
-                navigate('/developers')
+                navigate('/dev-profile/'+auth.user_info.developer_id);
+            } else if (auth.access_token != undefined && auth.user_info.developer_id == null) {
+                navigate('/developers');
                 console.log('test')
             }
         }
@@ -72,15 +72,15 @@ function ClientProfile() {
                                 <h3>Prestation demandée :</h3>
                                 <p>Vous avez demandé la prestation {order.prestation_name} à {order.developer} le {order.created_at}</p>
                                 <h3>Statut de la demande :</h3>
-                                <p>{order.is_accepted_by_developer  == null ? 'En attente du dévelopeur' : 'Demande traitée'}</p>
+                                <p>{order.is_accepted_by_developer ? 'En attente du développeur' : 'Demande traitée'}</p>
                                 <h3>Mis à jour le :</h3>
                                 <p>{order.updated_at != null ? order.updated_at : 'Aucune action effectuée'}</p>
                                 <h3>Détail de votre demande :</h3>
                                 <p>{order.instructions}</p>
-                                { order.is_accepted_by_developer == true ? 
+                                { order.is_accepted_by_developer ?
                                     <div>
                                         <h3>Statut du projet :</h3>
-                                        <p>{order.is_finished == true ? 'Terminé' : 'En cours'}</p>
+                                        <p>{order.is_finished ? 'Terminé' : 'En cours'}</p>
                                     </div>
                                 :
                                     ''

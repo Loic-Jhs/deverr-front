@@ -34,29 +34,28 @@ const FormDev = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost/stacks/all', {
-          method: "GET",
-          headers: {
-            //TODO find a better way to allow access to cors
-            "access-control-allow-origin": "*",
-            "Content-type": "application/json",
-          },
-          mode: 'cors',
-        });
-        const data = await response.json();
+      await fetch('http://localhost/stacks/all', {
+        method: "GET",
+        headers: {
+          //TODO find a better way to allow access to cors
+          "access-control-allow-origin": "*",
+          "Content-type": "application/json",
+        },
+        mode: 'cors',
+      })
+      .then((response) => response.json())
+      .then((data) => {
         setStacks(data);
         setIsLoaded(true);
         setSuccessMessage(data.message);
         setTimeout(() => {setSuccessMessage("")}, 4000);
-      } catch (e) {
-        console.log(e);
-      }
+      })
+      .catch((e) => console.log(e));
     }
-    fetchData()
+    fetchData();
   }, [isLoaded]);
 
-  // We update the state every time there is a change in techno
+  // We update the state every time there is a change in stack
   useEffect(() => {
     setSelectedStacks(selectedStacks);
   }, [selectedStacks]);
@@ -96,7 +95,7 @@ const FormDev = () => {
   };
 
   const onSelectedStacks = (stack: Stacks) => {
-    // We will look for the techno selected in the initial table (which is stacks)
+    // We will look for the stack selected in the initial table (which is stacks)
     const selectedStack = stacks.find(stackFind => stackFind.name === stack.name);
     if (selectedStack) {
       // In the setSelectedStacks, we take the old values (current) then

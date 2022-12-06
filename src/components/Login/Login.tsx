@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import { useForm, SubmitHandler } from "react-hook-form";
-import superagent from 'superagent';
 import { yupResolver } from '@hookform/resolvers/yup';
 import schema from './loginValidation';
 import LoginInput from '../../models/loginInput';

@@ -38,7 +38,7 @@
       }
     }
 
-    .button {
+    .buttons {
       display: flex;
       align-self: center;
       flex-direction: column;
@@ -49,6 +49,7 @@
         font-weight: bold;
         padding: 0.5rem 1rem;
         margin-bottom: 1rem;
+        cursor: default;
         background-color: #1da8f4;
         border: none;
         border-radius: 0.375rem;
@@ -64,7 +65,7 @@
     }
 
     @media screen and (min-width: 768px) {
-      .button {
+      .buttons {
         align-content: center;
 
         button {
