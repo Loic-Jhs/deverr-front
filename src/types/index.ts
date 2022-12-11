@@ -166,3 +166,13 @@ export type ProfileMessage = {
     user_id: number,
     prestation_id: number
 }
+
+export type ForgotPasswordType = {
+    email: string
+}
+
+export type ResetPasswordType = {
+    email: string,
+    password: string,
+    password_confirmation: string
+}

@@ -9,8 +9,11 @@ import { Routes, Route } from 'react-router-dom';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Login from "./components/Login/Login";
+import ForgotPassword from './components/Password/ForgotPassword/ForgotPassword';
+import ResetPassword from './components/Password/ResetPassword/ResetPassword';
 import './App.css'
 import ClientProfile from './components/ClientProfile/ClientProfile';
+
 
 function App() {
 
@@ -27,6 +30,8 @@ function App() {
         <Route path="/registerdev" element={<FormDev />} />
         <Route path="/registerclient" element={<FormClient />} />
         <Route path="/login" element={<Login />} />
+        <Route path='/forgot-password' element={<ForgotPassword />} />
+        <Route path='/reset-password/:token' element={<ResetPassword />} />
       </Routes>
       <Footer />
     </div>
