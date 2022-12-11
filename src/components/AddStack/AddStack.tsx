@@ -24,7 +24,6 @@ function AddStack({ toggleStack, devStacks }: modaleProps) {
     )
   });
 
-
   useEffect(() => {
     if (auth && auth.access_token != undefined) {
       const fetchData = async () => {
@@ -47,7 +46,7 @@ function AddStack({ toggleStack, devStacks }: modaleProps) {
       }
       fetchData();
     }
-  }, [isLoaded])
+  }, [isLoaded]);
 
   const onSubmit: SubmitHandler<Stacks> = async (data) => {
     const stacksDataRequired = {
@@ -73,7 +72,7 @@ function AddStack({ toggleStack, devStacks }: modaleProps) {
     } catch (e) {
       console.error(e);
     }
-  }
+  };
 
   return (
     <>

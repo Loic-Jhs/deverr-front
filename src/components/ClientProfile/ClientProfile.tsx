@@ -18,13 +18,13 @@ function ClientProfile() {
         if (auth.access_token != undefined && userID == auth.user_info.user_id) {
             setIsCurrentClient(true);
         }
-    }, [auth])
+    }, [auth]);
 
      useEffect(() => {
          if (isCurrentClient) {
             const fetchData = async () => {
                 try {
-                    const response = await fetch(`https://api-dev.deverr.fr/profile/${userID}`, {
+                    const response = await fetch(`http://localhost/profile/${userID}`, {
                         method: "GET",
                         headers: {
                             "access-control-allow-origin": "*",
@@ -49,7 +49,7 @@ function ClientProfile() {
                 console.log('test')
             }
         }
-    }, [isCurrentClient, isLoaded, auth]) 
+    }, [isCurrentClient, isLoaded, auth]);
 
     if (client) {
         return (

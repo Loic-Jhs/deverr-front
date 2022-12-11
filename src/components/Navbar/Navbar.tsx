@@ -61,8 +61,7 @@ function Navbar() {
                 </div>
                 <div className="menu">
                     <div
-                        className={`menu__container ${navbar ? "menu__show" : "menu__hidden"
-                            }`}
+                        className={`menu__container ${navbar ? "menu__show" : "menu__hidden"}`}
                     >
                         <ul>
                             <li>
@@ -73,11 +72,10 @@ function Navbar() {
                             </li>
                             {auth.access_token &&
                                 <li>
-                                    {auth.user_info.developer_id != null ? 
-                                        <Link to={'dev-order/'+auth.user_info.developer_id} className='navbar__link'>Mes commandes</Link>
-                                    :
-                                    <Link to={'my-profile/'+auth.user_info.user_id} className='navbar__link'>Mon profil</Link>
-                                        
+                                    {auth.user_info.developer_id != null ?
+                                        <Link to={'dev-order/' + auth.user_info.developer_id} className='navbar__link'>Mes commandes</Link>
+                                        :
+                                        <Link to={'my-profile/' + auth.user_info.user_id} className='navbar__link'>Mon profil</Link>
                                     }
                                 </li>
                             }

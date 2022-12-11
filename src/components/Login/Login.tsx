@@ -30,7 +30,6 @@ const Login = () => {
         body: JSON.stringify(data),
       }).then (response => response.json())
       .then (data => {
-        console.log(data);
         localStorage.setItem('access_token', JSON.stringify(data.access_token));
         localStorage.setItem('token_type', JSON.stringify(data.token_type));
         localStorage.setItem('user_info', JSON.stringify(data.user_info));

@@ -1,6 +1,6 @@
+import { authContext } from "../../contexts/authContext";
 import { ReactNode, useContext } from "react";
 import { Link } from "react-router-dom";
-import { authContext } from "../../contexts/authContext";
 import './modal.scss';
 
 interface ModalType {
@@ -8,8 +8,6 @@ interface ModalType {
   isOpen: boolean;
   toggle: () => void;
 }
-
-
 
 function Modal(props: ModalType) {
   const { auth } = useContext(authContext);

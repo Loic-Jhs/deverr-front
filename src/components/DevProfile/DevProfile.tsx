@@ -11,21 +11,20 @@ import './style.scss';
 
 
 function DevProfile() {
-    const { auth } = useContext(authContext)
     const { devID } = useParams();
-    const [isEditable, setIsEditable] = useState<Boolean>(false)
-    const [dev, setDev] = useState<DevInfos>()
-    const [isLoaded, setIsLoaded] = useState<Boolean>(false);
     const { isOpen, toggle } = useModal();
+    const { auth } = useContext(authContext);
+    const [dev, setDev] = useState<DevInfos>();
     const { isOpenStack, toggleStack } = useModal();
-
-    const [isCurrentDev, setIsCurrentDev] = useState(false)
+    const [isCurrentDev, setIsCurrentDev] = useState(false);
+    const [isLoaded, setIsLoaded] = useState<Boolean>(false);
+    const [isEditable, setIsEditable] = useState<Boolean>(false);
 
     useEffect(() => {
         if (auth.access_token != undefined && devID == auth.user_info.developer_id) {
             setIsCurrentDev(true)
         }
-    })
+    });
 
     useEffect(() => {
         const fetchData = async () => {
@@ -45,11 +44,12 @@ function DevProfile() {
                 .catch((error) => console.log(error));
         }
         fetchData();
-    }, [isLoaded])
+    }, [isLoaded]);
 
-    function handleEditElement() {
+    const handleEditElement = () => {
         setIsEditable(!isEditable)
-    }
+    };
+
     const handleChangeDescription = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         if (dev) {
             setDev({
@@ -57,7 +57,7 @@ function DevProfile() {
                 description: e.target.value
             })
         }
-    }
+    };
 
     const submitDescription = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -77,7 +77,7 @@ function DevProfile() {
         } catch (e) {
             console.log(e)
         }
-    }
+    };
 
     if (dev) {
         let average: number | null = 0;
