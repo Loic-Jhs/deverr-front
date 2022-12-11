@@ -29,7 +29,7 @@ function AddStack({ toggleStack, devStacks }: modaleProps) {
     if (auth && auth.access_token != undefined) {
       const fetchData = async () => {
         try {
-          const response = await fetch('https://api-dev.deverr.fr/stacks/all', {
+          const response = await fetch('http://localhost/stacks/all', {
             method: "GET",
             headers: {
               "access-control-allow-origin": "*",

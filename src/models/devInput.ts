@@ -1,6 +1,7 @@
 export default interface DevInput {
   firstname: string,
   lastname: string,
+  role: number,
   stacks: {
     id: number,
     name: string,

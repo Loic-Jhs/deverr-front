@@ -10,15 +10,17 @@ function CardList() {
 
   useEffect(() => {
     const fetchData = async () => {
-      await fetch('http://localhost/random-users', {
+      await fetch('http://localhost/random-developers', {
         method: "GET",
+        mode: 'cors'
       })
         .then((response) => response.json())
         .then((data) => {
+          console.log(data);
           setDevList(data);
           setIsLoaded(true);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.log("une erreur est survenue", error));
     };
     fetchData();
   }, [])

@@ -10,6 +10,7 @@ const defaultValues = {
   firstname: "",
   lastname: "",
   email: "",
+  role: 1,
   stacks: [{
     id: 0,
     name: "",
