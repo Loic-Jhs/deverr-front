@@ -1,24 +1,25 @@
+import type { Prestation } from '../../types';
+import type { DevInfos } from '../../types';
+
+import React, { useContext, useEffect, useState } from 'react';
 import { authContext } from '../../contexts/authContext';
 import { CircularProgress, Rating } from '@mui/material';
-import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import AddStack from '../AddStack/AddStack';
-import useModal from '../Modal/useModal';
-import { DevInfos } from '../../types';
-import Modal from '../Modal/Modal';
-import Order from '../Order/Order';
-import './style.scss';
+import ServicesModal from './ServicesModal';
 
+import './style.scss';
 
 function DevProfile() {
     const { devID } = useParams();
-    const { isOpen, toggle } = useModal();
     const { auth } = useContext(authContext);
     const [dev, setDev] = useState<DevInfos>();
-    const { isOpenStack, toggleStack } = useModal();
     const [isCurrentDev, setIsCurrentDev] = useState(false);
     const [isLoaded, setIsLoaded] = useState<Boolean>(false);
     const [isEditable, setIsEditable] = useState<Boolean>(false);
+
+    const [open, setOpen] =  useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     useEffect(() => {
         if (auth.access_token != undefined && devID == auth.user_info.developer_id) {
@@ -62,21 +63,19 @@ function DevProfile() {
     const submitDescription = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         setIsEditable(!isEditable)
-        try {
-            const response = await fetch(`http://localhost/profile/update`, {
-                method: "PUT",
-                headers: {
-                    "access-control-allow-origin": "*",
-                    "Content-type": "application/json",
-                    Authorization: `Bearer ` + localStorage.getItem('access_token')?.replaceAll('"', '')
-                },
-                body: JSON.stringify({ ...dev }),
-                mode: 'cors'
-            });
-            const data = await response.json();
-        } catch (e) {
-            console.log(e)
-        }
+
+        const response = await fetch(`http://localhost/profile/update`, {
+            method: "PUT",
+            headers: {
+                "access-control-allow-origin": "*",
+                "Content-type": "application/json",
+                Authorization: `Bearer ` + localStorage.getItem('access_token')?.replaceAll('"', '')
+            },
+            body: JSON.stringify({ ...dev }),
+            mode: 'cors'
+        })
+        .then(response => response.json())
+        .catch(err => console.log(err));
     };
 
     if (dev) {
@@ -84,8 +83,7 @@ function DevProfile() {
         dev.reviews.length > 0 ? average = dev.reviews.reduce((a, b) => a + b.rating, 0) / dev.reviews.length : average = null;
         return (
             <>
-                <Modal isOpen={isOpen} toggle={toggle} children={<Order toggle={toggle} />} />
-                <Modal isOpen={isOpenStack} toggle={toggleStack} children={<AddStack toggleStack={toggle} devStacks={dev.stacks} />} />
+                <ServicesModal open={open} onClose={handleClose} />
                 <div className='profile__container'>
                     <div className='profile__left-part'>
                         <div className='detail__situation'>
@@ -121,7 +119,7 @@ function DevProfile() {
                                 <p>Compétences maîtrisées :</p>
                                 {
                                     auth.access_token && auth.user_info.developer_id == dev.id ?
-                                        <button className='button_dev__profile' onClick={toggleStack}>Ajouter une compétence</button>
+                                        <button className='button_dev__profile'>Ajouter une compétence</button>
                                         :
                                         ""
                                 }
@@ -159,7 +157,7 @@ function DevProfile() {
                             {
                                 auth.access_token == undefined || auth.user_info.user_role != 1 ?
                                     <div className='dev__contact'>
-                                        <button className='button_dev__profile' onClick={toggle}>Demandez une prestation</button>
+                                        <button className='button_dev__profile' >Demandez une prestation</button>
                                     </div>
                                     :
                                     ""
@@ -167,7 +165,7 @@ function DevProfile() {
                             <div className='dev__prestations-reviews'>
                                 <h3>{dev.prestations.length > 1 ? 'Services proposés ' : 'Service proposé '}:</h3>
                                 {
-                                    isCurrentDev && <button className='button_dev__profile'>Ajouter une prestation</button>
+                                    isCurrentDev && <button className='button_dev__profile' onClick={handleOpen}>Ajouter une prestation</button>
                                 }
                                 <div className='dev__prestations-container'>
                                     {dev.prestations && dev.prestations.map((prestation) => {

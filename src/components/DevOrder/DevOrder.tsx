@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { authContext } from '../../contexts/authContext';
-import useModal from '../Modal/useModal';
+// import useModal from '../Modal/useModal';
 import Modal from '../Modal/Modal';
 import { Order } from '../../types';
 import './style.scss'
@@ -13,8 +13,8 @@ function DevOrder() {
     const { devID } = useParams() 
     const [ isLoaded, setIsLoaded ] = useState<Boolean>(false);
     const [ orders, setOrders ] = useState<Order[]>()
-    const { isOpen, toggle } = useModal();
-    const { isOpenOderDone, toggleOrderDone } = useModal();
+    // const { isOpen, toggle } = useModal();
+    // const { isOpenOderDone, toggleOrderDone } = useModal();
     const [ orderToCancel, setOrderToCancel ] = useState<Order>()
     const [ orderDone, setOrderDone ] = useState<Order>()
     const [ newOrders, setNewOrders] = useState<Order[]>()
@@ -91,8 +91,8 @@ function DevOrder() {
 
     return (
         <div className='dev__order-container'>
-            <Modal isOpen={isOpen} toggle={toggle} children={<CancelOrder setIsLoaded={setIsLoaded} order={orderToCancel} toggle={toggle} auth={auth}/>} />
-            <Modal isOpen={isOpenOderDone} toggle={toggleOrderDone} children={<OrderDone setIsLoaded={setIsLoaded} order={orderDone} toggle={toggleOrderDone} auth={auth}/>} />
+            {/* <Modal isOpen={isOpen} toggle={toggle} children={<CancelOrder setIsLoaded={setIsLoaded} order={orderToCancel} toggle={toggle} auth={auth}/>} />
+            <Modal isOpen={isOpenOderDone} toggle={toggleOrderDone} children={<OrderDone setIsLoaded={setIsLoaded} order={orderDone} toggle={toggleOrderDone} auth={auth}/>} /> */}
 
             <div className='developer__order'>
                 <h1>Suivi de mes demandes.</h1>
@@ -117,7 +117,7 @@ function DevOrder() {
                                             </button>
                                             <button onClick={() => {
                                                 setOrderToCancel(order)
-                                                toggle()
+                                                // toggle()
                                             }} className='cancel__order'>
                                                 Non
                                             </button>
@@ -151,7 +151,7 @@ function DevOrder() {
                                         <div className='button__container'>
                                             <button  onClick={() => {
                                                 setOrderDone(order)
-                                                toggleOrderDone()
+                                                // toggleOrderDone()
                                             }} className='order__done'>
                                                 Prestation terminée !
                                             </button>
