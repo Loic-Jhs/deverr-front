@@ -3,9 +3,10 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import schema from './loginValidation';
 import LoginInput from '../../models/loginInput';
-import { useNavigate } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import './login.scss';
 import { authContext } from '../../contexts/authContext';
+import logoDeverr from "../../assets/img/D.jpg";
 
 const Login = () => {
 
@@ -63,6 +64,9 @@ const Login = () => {
           <p className="error">{errors.password?.message}</p>
           <label>Mot de passe</label>
           <input type="password" {...register("password")} placeholder="Mot de passe" value={loginInput.password} onChange={handleChange} />
+          <Link to={'/forgot-password'} className="forgotPasswordLink">
+            Mot de passe oublié ?
+          </Link>
         </div>
 
         <div className="button__container">
