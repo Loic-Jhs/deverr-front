@@ -1,7 +1,4 @@
-import { Box, Modal, Typography } from '@mui/material';
-import { useContext, useEffect, useState } from "react";
-import { authContext } from "../../contexts/authContext";
-import { Prestation, Stack } from '../../types';
+import { Modal} from '@mui/material';
 import './modal.scss';
 
 interface ModalType {
@@ -9,7 +6,6 @@ interface ModalType {
   onClose: () => void;
   children: JSX.Element;
 }
-
 
 function ModalWindow(props: ModalType) {
   const { children } = props;

@@ -2,6 +2,7 @@ import CardList from "../CardList/CardList"
 import developpement from '../../assets/img/deverr-team.png';
 import { Link } from 'react-router-dom';
 import './style.scss';
+import Button from "../Button/Button";
 
 function Homepage() {
 
@@ -17,11 +18,11 @@ function Homepage() {
             <span>DEVERR</span> est la plateforme qui met à votre disposition des <span>développeurs</span> qui donneront vie à <span>vos projets</span>.
           </p>
           <div className="homepage__button">
-            <div className="button__container">
               <Link to="/register">
-                Inscription
+                <Button variant="contained">
+                    Inscription
+                </Button>
               </Link>
-            </div>
           </div>
         </div>
         <div className="image__container">

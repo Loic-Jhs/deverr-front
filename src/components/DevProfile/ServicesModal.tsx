@@ -1,8 +1,7 @@
-import { Box, Typography } from '@mui/material';
-import { useContext, useEffect, useState } from "react";
 import { authContext } from "../../contexts/authContext";
-import { Prestation, Stack } from '../../types';
+import { MouseEventHandler, useContext, useEffect, useState } from "react";
 import ModalWindow from '../Modal/Modal';
+import Button from "../Button/Button";
 
 interface ModalType {
   open: boolean;
@@ -17,6 +16,7 @@ type T = {
 function ServicesModal(props: ModalType) {
   const { auth } = useContext(authContext);
   const [data, setData] = useState<T>();
+  const [selected, setSelected] = useState<number | undefined>(undefined)
 
   useEffect(() => {
     fetch(`http://localhost/all-prestations/`, {
@@ -30,6 +30,11 @@ function ServicesModal(props: ModalType) {
       .then(response => response.json())
       .then(data => { setData(data) })
   }, [])
+
+  const handleClick = (item: T) => {
+    console.log(item);
+    setSelected(item.id)
+  }
   
   return (
     <ModalWindow
@@ -37,16 +42,26 @@ function ServicesModal(props: ModalType) {
       onClose={props.onClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
-      // className="modal-container"
     >
       <div>
         <h2>Choisissez une prestation</h2>
         <ul>
           {
-            data && data.map((item: T) => <li key={item.id} value={item.name}>{item.name}</li>)
+            data && data.map((item: T) => {
+              return (
+                <li 
+                  onClick={() => handleClick(item)}
+                  key={item.id}
+                  value={item.id}
+                  className={selected === item.id ? 'selected' : ''}
+                >
+                  {item.name}
+                </li>
+              )
+            })
           }
         </ul>
-        <button>Valider</button>
+        <Button>Valider</Button>
       </div>
     </ModalWindow>
   );

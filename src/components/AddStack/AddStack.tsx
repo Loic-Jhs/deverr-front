@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { authContext } from '../../contexts/authContext';
-import { DevStack } from '../../types';
 import Stacks from '../../models/stacks';
+import { DevStack } from '../../types';
 import { DevInfos } from '../../types';
+import Button from '../Button/Button';
+
 import './addStack.scss';
 
 interface modaleProps {
@@ -88,11 +90,9 @@ function AddStack({ toggleStack, devStacks }: modaleProps) {
             })}
           </select>
           {errors.id && <p className="error">Selectionnez une techno !</p>}
-          <div className="button__container">
-            <button type="submit">
-              <span className="span">Ajouter</span>
-            </button>
-          </div>
+          <Button type="submit">
+            Ajouter
+          </Button>
         </form>
       </div>
       <div className="success">
