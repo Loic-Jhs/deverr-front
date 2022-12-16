@@ -1,8 +1,11 @@
-import CardList from "../CardList/CardList"
 import developpement from '../../assets/img/deverr-team.png';
+import CardList from "../CardList/CardList"
 import { Link } from 'react-router-dom';
-import './style.scss';
 import Button from "../Button/Button";
+import developerSkills from "../../assets/lotties/developerSkills.json"
+
+import './style.scss';
+import LottieIllustration from '../LottieIllustration/LottieIllustration';
 
 function Homepage() {
 
@@ -26,7 +29,7 @@ function Homepage() {
           </div>
         </div>
         <div className="image__container">
-          <img src={developpement}  alt="developer-skills" />
+          <LottieIllustration animationData={developerSkills} />
         </div>
       </div>
       <div className="developpers__container">
