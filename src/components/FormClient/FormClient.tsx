@@ -5,6 +5,7 @@ import UserInput from '../../models/userInput';
 import schema from './formClientValidation';
 import { Link } from 'react-router-dom';
 import './formClient.scss';
+import Button from "../Button/Button";
 
 const FormClient = () => {
   const [userInput, setUserInput] = useState<UserInput>({
@@ -33,20 +34,20 @@ const FormClient = () => {
         mode: 'cors',
         body: JSON.stringify(cleanUserInput),
       })
-      .then(response => response.json())
-      .then(responseData => {
-        setLoading(false);
-        setSuccessMessage(responseData.message);
-        setTimeout(() => {setSuccessMessage("")}, 4000);
-        setUserInput({
-          lastname: "",
-          firstname: "",
-          email: "",
-          password: "",
-          confirmedPassword: "",
-          type: "user",
+        .then(response => response.json())
+        .then(responseData => {
+          setLoading(false);
+          setSuccessMessage(responseData.message);
+          setTimeout(() => { setSuccessMessage("") }, 4000);
+          setUserInput({
+            lastname: "",
+            firstname: "",
+            email: "",
+            password: "",
+            confirmedPassword: "",
+            type: "user",
+          });
         });
-      });
     } catch (error) {
       console.log(error);
     }
@@ -104,9 +105,9 @@ const FormClient = () => {
           <Link to="/registerdev">
             <p>Je suis un dev</p>
           </Link>
-          <button type="submit" className="btn">
-            <span className="span">Suivant</span>
-          </button>
+          <Button type="submit">
+            Envoyer
+          </Button>
         </div>
       </form>
     </section>

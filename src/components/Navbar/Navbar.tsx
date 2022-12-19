@@ -61,9 +61,8 @@ function Navbar() {
         </div>
         <div className="menu">
           <div
-            className={`menu__container ${
-              navbar ? "menu__show" : "menu__hidden"
-            }`}
+            className={`menu__container ${navbar ? "menu__show" : "menu__hidden"
+              }`}
           >
             <ul>
               <li>
@@ -99,11 +98,15 @@ function Navbar() {
             <div className="responsive__button">
               {!auth.access_token && (
                 <>
-                  <Link to={"/register"} className="login__button">
-                    Inscription
+                  <Link to={"/register"}>
+                    <Button>
+                      Inscription
+                    </Button>
                   </Link>
-                  <Link to={"/login"} className="login__button">
-                    Connexion
+                  <Link to={"/login"}>
+                    <Button>
+                      Connexion
+                    </Button>
                   </Link>
                 </>
               )}
@@ -127,12 +130,12 @@ function Navbar() {
             <>
               <Link to={"/register"}>
                 <Button>
-                    Inscription
+                  Inscription
                 </Button>
               </Link>
               <Link to={"/login"}>
                 <Button>
-                    Connexion
+                  Connexion
                 </Button>
               </Link>
             </>

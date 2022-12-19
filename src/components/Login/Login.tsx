@@ -1,12 +1,14 @@
-import React, { useContext, useState } from 'react';
-import { useForm, SubmitHandler } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
+import Button from '../Button/Button';
 import schema from './loginValidation';
+// import logoDeverr from "../../assets/img/D.jpg";
 import LoginInput from '../../models/loginInput';
-import {Link, useNavigate} from 'react-router-dom';
-import './login.scss';
+import React, { useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm, SubmitHandler } from "react-hook-form";
 import { authContext } from '../../contexts/authContext';
-import logoDeverr from "../../assets/img/D.jpg";
+
+import './login.scss';
 
 const Login = () => {
 
@@ -29,18 +31,18 @@ const Login = () => {
           "Content-type": "application/json",
         },
         body: JSON.stringify(data),
-      }).then (response => response.json())
-      .then (data => {
-        localStorage.setItem('access_token', JSON.stringify(data.access_token));
-        localStorage.setItem('token_type', JSON.stringify(data.token_type));
-        localStorage.setItem('user_info', JSON.stringify(data.user_info));
-        setIsLogged(true);
-        if (data.user_info.user_role == 1) {
-          navigate(`/dev-profile/${data.user_info.developer_id}`);
-        } else if (data.user_info.user_role == 0) {
-          navigate("/developers");
-        }
-      });
+      }).then(response => response.json())
+        .then(data => {
+          localStorage.setItem('access_token', JSON.stringify(data.access_token));
+          localStorage.setItem('token_type', JSON.stringify(data.token_type));
+          localStorage.setItem('user_info', JSON.stringify(data.user_info));
+          setIsLogged(true);
+          if (data.user_info.user_role == 1) {
+            navigate(`/dev-profile/${data.user_info.developer_id}`);
+          } else if (data.user_info.user_role == 0) {
+            navigate("/developers");
+          }
+        });
     } catch (e) {
       console.log(e);
     }
@@ -59,21 +61,17 @@ const Login = () => {
           <label>Email</label>
           <input type="email" placeholder="Email" {...register("email")} value={loginInput.email} onChange={handleChange} />
         </div>
-
         <div className="input__container">
           <p className="error">{errors.password?.message}</p>
           <label>Mot de passe</label>
           <input type="password" {...register("password")} placeholder="Mot de passe" value={loginInput.password} onChange={handleChange} />
-          <Link to={'/forgot-password'} className="forgotPasswordLink">
-            Mot de passe oublié ?
-          </Link>
         </div>
-
-        <div className="button__container">
-          <button type="submit" className="btn">
-            <span className="span">Connexion</span>
-          </button>
-        </div>
+        <Button type="submit">
+          Connexion
+        </Button>
+        <Link to={'/forgot-password'} className="forgotPasswordLink">
+          Mot de passe oublié ?
+        </Link>
       </form>
     </section>
   );

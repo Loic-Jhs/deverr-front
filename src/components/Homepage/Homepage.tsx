@@ -1,11 +1,10 @@
-import developpement from '../../assets/img/deverr-team.png';
-import CardList from "../CardList/CardList"
-import { Link } from 'react-router-dom';
 import Button from "../Button/Button";
+import { Link } from 'react-router-dom';
+import CardList from "../CardList/CardList"
 import developerSkills from "../../assets/lotties/developerSkills.json"
+import LottieIllustration from '../LottieIllustration/LottieIllustration';
 
 import './style.scss';
-import LottieIllustration from '../LottieIllustration/LottieIllustration';
 
 function Homepage() {
 

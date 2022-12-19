@@ -5,6 +5,7 @@ import DevInput from '../../models/devInput';
 import Stacks from "../../models/stacks";
 import { Link } from 'react-router-dom';
 import './formDev.scss';
+import Button from "../Button/Button";
 
 const defaultValues = {
   firstname: "",
@@ -127,22 +128,22 @@ const FormDev = () => {
         <div className="input__container">
           <p className="error">{errors.lastname?.message}</p>
           <label>Nom</label>
-          <input type="text" {...register("lastname")} placeholder="Nom" />
+          <input type="text" {...register("lastname")} placeholder="Jhon" />
 
           <p className="error">{errors.firstname?.message}</p>
           <label>Prénom</label>
-          <input type="text" {...register("firstname")} placeholder="Prénom" />
+          <input type="text" {...register("firstname")} placeholder="Doe" />
 
           <p className="error">{errors.email?.message}</p>
           <label>Email</label>
-          <input type="email" {...register("email")} placeholder="E-mail" />
+          <input type="email" {...register("email")} placeholder="jhon-doe@email.com" />
 
           <div className="stacks__container">
             <p className="error">{errors.stacks?.message}</p>
             <label>Vos compétences</label>
             <div className="stack__container">
               <div className="stack__input">
-                <input type="text" placeholder="Ajoutez les compétences que vous maîtrisez." onChange={handleChange} />
+                <input type="text" placeholder="JavaScript, PHP, React..." onChange={handleChange} />
               </div>
               {
                 filteredStacks.length > 0 &&
@@ -178,24 +179,24 @@ const FormDev = () => {
 
           <p className="error">{errors.description?.message}</p>
           <label className="label__description">Description</label>
-          <textarea className="description" {...register("description")} placeholder="Description" />
+          <textarea className="description" {...register("description")} placeholder="Décrivez qui vous êtes et ce que vous faites !" />
 
           <p className="error">{errors.password?.message}</p>
           <label>Mot de passe</label>
-          <input type="password" {...register("password")} placeholder="Mot de passe" />
+          <input type="password" {...register("password")} />
 
           <p className="error">{errors.confirmedPassword?.message}</p>
           <label>Confirmer le mot de passe</label>
-          <input type="password" {...register("confirmedPassword")} placeholder="Confirmez votre mot de passe" />
+          <input type="password" {...register("confirmedPassword")} />
         </div>
 
         <div className="button__container">
           <Link to="/registerclient">
             <p>Je suis un client</p>
           </Link>
-          <button type="submit" className="btn">
-            <span className="span">Envoyer</span>
-          </button>
+          <Button type="submit">
+            Envoyer
+          </Button>
         </div>
       </form>
     </section>
