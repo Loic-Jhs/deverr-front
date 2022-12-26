@@ -1,22 +1,27 @@
 import type { DevInfos } from "../../types";
 
+import { CircularProgress, Rating } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { authContext } from "../../contexts/authContext";
-import { CircularProgress, Rating } from "@mui/material";
 import { useParams } from "react-router-dom";
 import ServicesModal from "./ServicesModal";
-
-import "./style.scss";
 import Button from "../Button/Button";
+import PrestationCard from "./PrestationCard";
+import "./style.scss";
 
 function DevProfile() {
+  //HOOKS
   const { devID } = useParams();
   const { auth } = useContext(authContext);
+
+  //STATES
   const [dev, setDev] = useState<DevInfos>();
   const [isCurrentDev, setIsCurrentDev] = useState(false);
   const [isLoaded, setIsLoaded] = useState<Boolean>(false);
+  const [services, setServices] = useState<Boolean>(false);
   const [isEditable, setIsEditable] = useState<Boolean>(false);
 
+  //MODAL STATES
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -48,7 +53,7 @@ function DevProfile() {
         .catch((error) => console.log(error));
     };
     fetchData();
-  }, [isLoaded]);
+  }, [isLoaded, services]);
 
   const handleEditElement = () => {
     setIsEditable(!isEditable);
@@ -92,7 +97,11 @@ function DevProfile() {
       : (average = null);
     return (
       <>
-        <ServicesModal open={open} onClose={handleClose} />
+        <ServicesModal
+          open={open}
+          onClose={handleClose}
+          services={setServices}
+        />
         <div className="profile__container">
           <div className="profile__left-part">
             <div className="detail__situation">
@@ -102,12 +111,7 @@ function DevProfile() {
                   {!isEditable ? (
                     <div>
                       <p className="dev__description">{dev.description}</p>
-                      <Button
-                        onClick={handleEditElement}
-                      >
-                        {" "}
-                        Modifier
-                      </Button>
+                      <Button onClick={handleEditElement}> Modifier</Button>
                     </div>
                   ) : (
                     <div className="edit__container">
@@ -115,13 +119,7 @@ function DevProfile() {
                         onChange={handleChangeDescription}
                         value={dev.description}
                       />
-                      <button
-                        className="button_dev__profile"
-                        onClick={submitDescription}
-                      >
-                        {" "}
-                        Enregistrer
-                      </button>
+                      <Button onClick={submitDescription}> Enregistrer</Button>
                     </div>
                   )}
                 </div>
@@ -149,9 +147,7 @@ function DevProfile() {
               <div className="header__stack">
                 <p>Compétences maîtrisées :</p>
                 {auth.access_token && auth.user_info.developer_id == dev.id ? (
-                  <Button>
-                    Ajouter
-                  </Button>
+                  <Button>Ajouter</Button>
                 ) : (
                   ""
                 )}
@@ -208,9 +204,7 @@ function DevProfile() {
               {auth.access_token == undefined ||
               auth.user_info.user_role != 1 ? (
                 <div className="dev__contact">
-                  <Button>
-                    Demandez une prestation
-                  </Button>
+                  <Button>Demandez une prestation</Button>
                 </div>
               ) : (
                 ""
@@ -223,29 +217,18 @@ function DevProfile() {
                   :
                 </h3>
                 {isCurrentDev && (
-                  <Button onClick={handleOpen}>
-                    Ajouter une prestation
-                  </Button>
+                  <Button onClick={handleOpen}>Ajouter une prestation</Button>
                 )}
                 <div className="dev__prestations-container">
                   {dev.prestations &&
-                    dev.prestations.map((prestation) => {
-                      return (
-                        <div
-                          key={prestation.id}
-                          className="dev__prestation-item"
-                        >
-                          <h4>{prestation.name}</h4>
-                          <p className="p__detail">Details :</p>
-                          <p className="prestation__description">
-                            {prestation.description}
-                          </p>
-                          <p className="dev__prestation-price">
-                            <span>Tarif :</span> 120€
-                          </p>
-                        </div>
-                      );
-                    })}
+                    dev.prestations.map((prestation) => (
+                      <PrestationCard
+                        key={prestation.id}
+                        prestation={prestation}
+                        services={services}
+                        setServices={setServices}
+                      />
+                    ))}
                 </div>
                 <h3>
                   {dev.reviews.length > 1
@@ -280,6 +263,11 @@ function DevProfile() {
                 </div>
               </div>
             </div>
+            {isCurrentDev && (
+              <Button variant="text" size="small">
+                Désactiver votre compte
+              </Button>
+            )}
           </div>
         </div>
       </>

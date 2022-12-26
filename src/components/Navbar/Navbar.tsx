@@ -1,11 +1,11 @@
 import { authContext } from "../../contexts/authContext";
 import { Link, useNavigate } from "react-router-dom";
+import LogoutIcon from "@mui/icons-material/Logout";
+import IconButton from "@mui/material/IconButton";
 import logoDeverr from "../../assets/img/D.jpg";
 import { useContext, useState } from "react";
-import LogoutIcon from "@mui/icons-material/Logout";
-import "./style.scss";
-import IconButton from "@mui/material/IconButton";
 import Button from "../Button/Button";
+import "./style.scss";
 
 function Navbar() {
   const [navbar, setNavbar] = useState(false);
