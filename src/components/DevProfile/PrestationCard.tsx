@@ -37,7 +37,7 @@ function PrestationCard(props: PROPS) {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
-        prestation_type_id: 3,
+        prestation_type_id: id,
         description: description,
         price: price,
       }),

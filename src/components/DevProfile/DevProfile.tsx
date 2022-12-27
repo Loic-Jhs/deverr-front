@@ -1,5 +1,4 @@
 import type { DevInfos } from "../../types";
-
 import { CircularProgress, Rating } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { authContext } from "../../contexts/authContext";
@@ -7,6 +6,7 @@ import { useParams } from "react-router-dom";
 import ServicesModal from "./ServicesModal";
 import Button from "../Button/Button";
 import PrestationCard from "./PrestationCard";
+import StacksModal from "./StacksModal";
 import "./style.scss";
 
 function DevProfile() {
@@ -23,8 +23,11 @@ function DevProfile() {
 
   //MODAL STATES
   const [open, setOpen] = useState(false);
+  const [stacksOpen, setStacksOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const handleStacksOpen = () => setStacksOpen(true);
+  const handleStacksClose = () => setStacksOpen(false);
 
   useEffect(() => {
     if (
@@ -37,11 +40,13 @@ function DevProfile() {
 
   useEffect(() => {
     const fetchData = async () => {
-      await fetch(`http://localhost/developer/${devID}`, {
+      await fetch(`http://localhost/profile/`, {
         method: "GET",
         headers: {
           "access-control-allow-origin": "*",
           "Content-type": "application/json",
+          Authorization:
+          `Bearer ` + localStorage.getItem("access_token")?.replaceAll('"', ""),
         },
         mode: "cors",
       })
@@ -102,6 +107,10 @@ function DevProfile() {
           onClose={handleClose}
           services={setServices}
         />
+        <StacksModal 
+          open={stacksOpen}
+          onClose={handleStacksClose}
+        />
         <div className="profile__container">
           <div className="profile__left-part">
             <div className="detail__situation">
@@ -147,7 +156,7 @@ function DevProfile() {
               <div className="header__stack">
                 <p>Compétences maîtrisées :</p>
                 {auth.access_token && auth.user_info.developer_id == dev.id ? (
-                  <Button>Ajouter</Button>
+                  <Button onClick={handleStacksOpen} >Ajouter</Button>
                 ) : (
                   ""
                 )}
