@@ -58,7 +58,7 @@ function DevDetails() {
         .catch((error) => console.log(error));
     };
     fetchData();
-  }, [isLoaded, services]);
+  }, [isLoaded, services, devID]);
 
   const handleEditElement = () => {
     setIsEditable(!isEditable);
