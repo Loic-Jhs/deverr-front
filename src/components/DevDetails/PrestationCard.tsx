@@ -66,8 +66,6 @@ function PrestationCard(props: PROPS) {
       .catch((error) => console.log(error));
   };
 
-  console.log(auth.user_info.developer_id, devID)
-
   return (
     <div className="dev__prestation-item">
       <div className="edit">

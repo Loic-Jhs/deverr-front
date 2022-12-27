@@ -9,9 +9,8 @@ import { authContext } from "../../contexts/authContext";
 import TextField from "@mui/material/TextField";
 import ModalWindow from "../Modal/Modal";
 import Button from "../Button/Button";
-import { RealPrestation } from "../../types";
 
-interface ModalType {
+type  ModalType = {
   open: boolean;
   onClose: () => void;
   services: Dispatch<SetStateAction<Boolean>>;
@@ -52,7 +51,6 @@ function ServicesModal(props: ModalType) {
   const handleClick = (item: T) => {
     setSelected(item.id);
     setServiceSelected(item.id);
-    // TODO make condition which allows to deselect an item
   };
 
   const validateAddingService = () => {
@@ -90,10 +88,9 @@ function ServicesModal(props: ModalType) {
           {data &&
             data.map((item: T) => {
               return (
-                <div key={item.name}>
+                <div key={item.id}>
                   <li
                     onClick={() => handleClick(item)}
-                    key={item.id}
                     value={item.id}
                     className={selected === item.id ? "selected" : ""}
                   >

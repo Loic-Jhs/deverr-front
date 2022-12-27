@@ -46,7 +46,7 @@ function DevDetails() {
           "access-control-allow-origin": "*",
           "Content-type": "application/json",
           Authorization:
-            `Bearer ` + localStorage.getItem("access_token")?.replaceAll('"', ""),
+            `Bearer ` + auth.access_token
         },
         mode: "cors",
       })
@@ -85,7 +85,7 @@ function DevDetails() {
         "access-control-allow-origin": "*",
         "Content-type": "application/json",
         Authorization:
-          `Bearer ` + localStorage.getItem("access_token")?.replaceAll('"', ""),
+          `Bearer ` + auth.access_token
       },
       body: JSON.stringify({ ...dev }),
       mode: "cors",
@@ -112,6 +112,9 @@ function DevDetails() {
         <StacksModal
           open={stacksOpen}
           onClose={handleStacksClose}
+          services={services}
+          setServices={setServices}
+          devStacks={dev.stacks}
         />
         <div className="profile__container">
           <div className="profile__left-part">
