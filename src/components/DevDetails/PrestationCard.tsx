@@ -12,6 +12,7 @@ import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import CancelIcon from "@mui/icons-material/Cancel";
 import EditIcon from "@mui/icons-material/Edit";
 import type { RealPrestation } from "../../types";
+import { useParams } from "react-router-dom";
 
 type PROPS = {
   prestation: RealPrestation;
@@ -21,6 +22,7 @@ type PROPS = {
 
 function PrestationCard(props: PROPS) {
   //HOOKS
+  const { devID } = useParams();
   const { auth } = useContext(authContext);
 
   //STATES
@@ -64,37 +66,42 @@ function PrestationCard(props: PROPS) {
       .catch((error) => console.log(error));
   };
 
+  console.log(auth.user_info.developer_id, devID)
+
   return (
     <div className="dev__prestation-item">
       <div className="edit">
         <h4>{props.prestation.name}</h4>
-        <div className="svg">
-          {!editService && (
-            <>
-              <EditIcon
-                color="primary"
-                onClick={() => {
-                  setEditService(true);
-                }}
-              />
-              <DeleteForeverIcon
-                color="error"
-                onClick={() => deleteService(props.prestation.id)}
-              />
-            </>
-          )}
-          {editService && (
-            <>
-              <TaskAltIcon
-                color="primary"
-                onClick={() =>
-                  updateService(props.prestation.id, description, price)
-                }
-              />
-              <CancelIcon color="error" onClick={() => setEditService(false)} />
-            </>
-          )}
-        </div>
+        {
+          auth.user_info.developer_id === Number(devID) &&
+          <div className="svg">
+            {!editService && (
+              <>
+                <EditIcon
+                  color="primary"
+                  onClick={() => {
+                    setEditService(true);
+                  }}
+                />
+                <DeleteForeverIcon
+                  color="error"
+                  onClick={() => deleteService(props.prestation.id)}
+                />
+              </>
+            )}
+            {editService && (
+              <>
+                <TaskAltIcon
+                  color="primary"
+                  onClick={() =>
+                    updateService(props.prestation.id, description, price)
+                  }
+                />
+                <CancelIcon color="error" onClick={() => setEditService(false)} />
+              </>
+            )}
+          </div>
+        }
       </div>
       {!editService && (
         <>

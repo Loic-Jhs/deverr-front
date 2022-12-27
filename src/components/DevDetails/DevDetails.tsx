@@ -9,7 +9,7 @@ import PrestationCard from "./PrestationCard";
 import StacksModal from "./StacksModal";
 import "./style.scss";
 
-function DevProfile() {
+function DevDetails() {
   //HOOKS
   const { devID } = useParams();
   const { auth } = useContext(authContext);
@@ -40,13 +40,13 @@ function DevProfile() {
 
   useEffect(() => {
     const fetchData = async () => {
-      await fetch(`http://localhost/profile/`, {
+      await fetch(`http://localhost/developer/${devID}`, {
         method: "GET",
         headers: {
           "access-control-allow-origin": "*",
           "Content-type": "application/json",
           Authorization:
-          `Bearer ` + localStorage.getItem("access_token")?.replaceAll('"', ""),
+            `Bearer ` + localStorage.getItem("access_token")?.replaceAll('"', ""),
         },
         mode: "cors",
       })
@@ -96,10 +96,12 @@ function DevProfile() {
 
   if (dev) {
     let average: number | null = 0;
-    dev.reviews.length > 0
-      ? (average =
+    if (dev.reviews) {
+      dev.reviews.length > 0
+        ? (average =
           dev.reviews.reduce((a, b) => a + b.rating, 0) / dev.reviews.length)
-      : (average = null);
+        : (average = null);
+    }
     return (
       <>
         <ServicesModal
@@ -107,7 +109,7 @@ function DevProfile() {
           onClose={handleClose}
           services={setServices}
         />
-        <StacksModal 
+        <StacksModal
           open={stacksOpen}
           onClose={handleStacksClose}
         />
@@ -211,7 +213,7 @@ function DevProfile() {
                 </div>
               )}
               {auth.access_token == undefined ||
-              auth.user_info.user_role != 1 ? (
+                auth.user_info.user_role != 1 ? (
                 <div className="dev__contact">
                   <Button>Demandez une prestation</Button>
                 </div>
@@ -246,7 +248,7 @@ function DevProfile() {
                   :
                 </h3>
                 <div className="dev__reviews-container">
-                  {dev.reviews.length > 0 ? (
+                  {dev.reviews && (
                     dev.reviews.map((review) => {
                       return (
                         <div key={review.id} className="dev__review-item">
@@ -266,8 +268,6 @@ function DevProfile() {
                         </div>
                       );
                     })
-                  ) : (
-                    <p>Aucune note reçu actuellement</p>
                   )}
                 </div>
               </div>
@@ -286,4 +286,4 @@ function DevProfile() {
   }
 }
 
-export default DevProfile;
+export default DevDetails;

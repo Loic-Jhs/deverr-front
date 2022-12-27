@@ -8,8 +8,9 @@ import Button from "../Button/Button";
 import "./style.scss";
 
 function Navbar() {
-  const [navbar, setNavbar] = useState(false);
   const navigate = useNavigate();
+  const [navbar, setNavbar] = useState(false);
+
   const { auth, resetState, setIsLogged } = useContext(authContext);
   const logout = () => {
     localStorage.clear();
@@ -61,8 +62,9 @@ function Navbar() {
         </div>
         <div className="menu">
           <div
-            className={`menu__container ${navbar ? "menu__show" : "menu__hidden"
-              }`}
+            className={`menu__container ${
+              navbar ? "menu__show" : "menu__hidden"
+            }`}
           >
             <ul>
               <li>
@@ -76,37 +78,33 @@ function Navbar() {
                 </Link>
               </li>
               {auth.access_token && (
-                <li>
-                  {auth.user_info.developer_id != null ? (
-                    <Link
-                      to={"dev-order/" + auth.user_info.developer_id}
-                      className="navbar__link"
-                    >
-                      Mes commandes
-                    </Link>
-                  ) : (
-                    <Link
-                      to={"my-profile/" + auth.user_info.user_id}
-                      className="navbar__link"
-                    >
+                <>
+                  <li>
+                    <Link to={auth.user_info.developer_id ? `/dev-profile/${auth.user_info.developer_id}` : "my-profile/"} className="navbar__link">
                       Mon profil
                     </Link>
-                  )}
-                </li>
+                  </li>
+                  <li>
+                    {auth.user_info.developer_id != null && (
+                      <Link
+                        to={"dev-order/" + auth.user_info.developer_id}
+                        className="navbar__link"
+                      >
+                        Mes commandes
+                      </Link>
+                    )}
+                  </li>
+                </>
               )}
             </ul>
             <div className="responsive__button">
               {!auth.access_token && (
                 <>
                   <Link to={"/register"}>
-                    <Button>
-                      Inscription
-                    </Button>
+                    <Button>Inscription</Button>
                   </Link>
                   <Link to={"/login"}>
-                    <Button>
-                      Connexion
-                    </Button>
+                    <Button>Connexion</Button>
                   </Link>
                 </>
               )}
@@ -129,14 +127,10 @@ function Navbar() {
           {!auth.access_token && (
             <>
               <Link to={"/register"}>
-                <Button>
-                  Inscription
-                </Button>
+                <Button>Inscription</Button>
               </Link>
               <Link to={"/login"}>
-                <Button>
-                  Connexion
-                </Button>
+                <Button>Connexion</Button>
               </Link>
             </>
           )}
