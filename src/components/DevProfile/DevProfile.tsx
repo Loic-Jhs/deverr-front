@@ -1,57 +1,129 @@
 import type { DevInfos } from "../../types";
 import { CircularProgress, Rating } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { authContext } from "../../contexts/authContext";
-import { useParams } from "react-router-dom";
-import Button from "../Button/Button";
-import PrestationCard from "./PrestationCard";
+import ServicesModal from "../DevDetails/ServicesModal";
+import PrestationCard from "../DevDetails/PrestationCard";
+import StacksModal from "../DevDetails/StacksModal";
 import "./style.scss";
+import Button from "../Button/Button";
 
-function DevDetails() {
+function DevProfile() {
   //HOOKS
-  const { devID } = useParams();
   const { auth } = useContext(authContext);
 
   //STATES
   const [dev, setDev] = useState<DevInfos>();
   const [isLoaded, setIsLoaded] = useState<Boolean>(false);
   const [services, setServices] = useState<Boolean>(false);
+  const [isEditable, setIsEditable] = useState<Boolean>(false);
+
+  //MODAL STATES
+  const [open, setOpen] = useState(false);
+  const [stacksOpen, setStacksOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const handleStacksOpen = () => setStacksOpen(true);
+  const handleStacksClose = () => setStacksOpen(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      await fetch(`http://localhost/developer/${devID}`, {
+      await fetch(`http://localhost/profile/`, {
         method: "GET",
         headers: {
           "access-control-allow-origin": "*",
           "Content-type": "application/json",
-          Authorization: `Bearer ` + auth.access_token,
+          Authorization:
+            `Bearer ` + auth.access_token
         },
         mode: "cors",
       })
         .then((response) => response.json())
         .then((data) => {
-          setDev(data[0]);
+          console.log(data);
+          setDev(data);
           setIsLoaded(true);
         })
         .catch((error) => console.log(error));
     };
     fetchData();
-  }, [isLoaded, services, devID]);
+  }, [isLoaded, services]);
+
+  const handleEditElement = () => {
+    setIsEditable(!isEditable);
+  };
+
+  const handleChangeDescription = (
+    e: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    if (dev) {
+      setDev({
+        ...dev,
+        description: e.target.value,
+      });
+    }
+  };
+
+  const submitDescription = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setIsEditable(!isEditable);
+
+    const response = await fetch(`http://localhost/profile/update`, {
+      method: "PUT",
+      headers: {
+        "access-control-allow-origin": "*",
+        "Content-type": "application/json",
+        Authorization:
+          `Bearer ` + auth.access_token
+      },
+      body: JSON.stringify({ ...dev }),
+      mode: "cors",
+    })
+      .then((response) => response.json())
+      .catch((err) => console.log(err));
+  };
+
+  console.log(auth.user_info);
 
   if (dev) {
-    let average: number | null = 0;
-    if (dev.reviews) {
-      dev.reviews.length > 0
-        ? (average =
-            dev.reviews.reduce((a, b) => a + b.rating, 0) / dev.reviews.length)
-        : (average = null);
-    }
     return (
       <>
+        <ServicesModal
+          open={open}
+          onClose={handleClose}
+          services={setServices}
+        />
+        <StacksModal
+          open={stacksOpen}
+          onClose={handleStacksClose}
+          services={services}
+          setServices={setServices}
+          devStacks={dev.stacks}
+        />
         <div className="profile__container">
           <div className="profile__left-part">
             <div className="detail__situation">
               <h3>En quelques mots : </h3>
+              {auth.access_token && auth.user_info.user_id === dev.id ? (
+                <div className="description__editable">
+                  {!isEditable ? (
+                    <div>
+                      <p className="dev__description">{dev.description}</p>
+                      <Button onClick={handleEditElement}> Modifier</Button>
+                    </div>
+                  ) : (
+                    <div className="edit__container">
+                      <textarea
+                        onChange={handleChangeDescription}
+                        value={dev.description}
+                      />
+                      <Button onClick={submitDescription}> Enregistrer</Button>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <p className="dev__description">{dev.description}</p>
+              )}
               <ul>
                 <li>
                   <span>Inscrit depuis le :</span> {dev.registered_at}
@@ -72,6 +144,11 @@ function DevDetails() {
             <div className="stacks__section__container">
               <div className="header__stack">
                 <p>Compétences maîtrisées :</p>
+                {auth.access_token && auth.user_info.user_id === dev.id ? (
+                  <Button onClick={handleStacksOpen} >Ajouter</Button>
+                ) : (
+                  ""
+                )}
               </div>
               <div className="dev__stacks">
                 {dev.stacks.map((stack) => {
@@ -98,38 +175,6 @@ function DevDetails() {
                 </h3>
                 <p>Développeur depuis {dev.years_of_experience} ans</p>
               </div>
-              {average != null ? (
-                <div className="dev__rating">
-                  <p>{average}</p>
-                  <Rating
-                    name="half-rating-read"
-                    size="large"
-                    value={average}
-                    precision={0.5}
-                    readOnly
-                  />
-                  <p className="count__rating">({dev.reviews.length})</p>
-                </div>
-              ) : (
-                <div className="dev__rating">
-                  <p>Aucune note</p>
-                  <Rating
-                    name="half-rating-read"
-                    size="large"
-                    value={0}
-                    precision={0.5}
-                    readOnly
-                  />
-                </div>
-              )}
-              {auth.access_token == undefined ||
-              auth.user_info.user_role != 1 ? (
-                <div className="dev__contact">
-                  <Button>Demandez une prestation</Button>
-                </div>
-              ) : (
-                ""
-              )}
               <div className="dev__prestations-reviews">
                 <h3>
                   {dev.prestations.length > 1
@@ -137,6 +182,7 @@ function DevDetails() {
                     : "Service proposé "}
                   :
                 </h3>
+                <Button onClick={handleOpen}>Ajouter une prestation</Button>
                 <div className="dev__prestations-container">
                   {dev.prestations &&
                     dev.prestations.map((prestation) => (
@@ -145,40 +191,15 @@ function DevDetails() {
                         prestation={prestation}
                         services={services}
                         setServices={setServices}
-                        devProfileId={dev.id}
+                        devProfileId={auth.user_info.user_id}
                       />
                     ))}
                 </div>
-                <h3>
-                  {dev.reviews.length > 1
-                    ? "Notes et commentaires reçues "
-                    : "Note reçue "}
-                  :
-                </h3>
-                <div className="dev__reviews-container">
-                  {dev.reviews &&
-                    dev.reviews.map((review) => {
-                      return (
-                        <div key={review.id} className="dev__review-item">
-                          <p className="author__review">Alain Durand</p>
-                          <div className="rating__and__service">
-                            <Rating
-                              className="rating__star"
-                              name="half-rating-read"
-                              value={review.rating}
-                              precision={0.5}
-                              readOnly
-                            />
-                            <p className="service__review">ERP</p>
-                          </div>
-                          <p className="comment__review">{review.comment}</p>
-                          <p className="date__review">Posté le 10/04/22</p>
-                        </div>
-                      );
-                    })}
-                </div>
               </div>
             </div>
+              <Button variant="text" size="small">
+                Désactiver votre compte
+              </Button>
           </div>
         </div>
       </>
@@ -188,4 +209,4 @@ function DevDetails() {
   }
 }
 
-export default DevDetails;
+export default DevProfile;

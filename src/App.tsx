@@ -1,5 +1,6 @@
 import FormClient from './components/FormClient/FormClient';
 import DevDetails from './components/DevDetails/DevDetails';
+import DevProfile from './components/DevProfile/DevProfile';
 import DevOrder from './components/DevOrder/DevOrder';
 import Homepage from './components/Homepage/Homepage';
 import Register from './components/Register/Register';
@@ -12,7 +13,6 @@ import Login from "./components/Login/Login";
 import ForgotPassword from './components/Password/ForgotPassword/ForgotPassword';
 import ResetPassword from './components/Password/ResetPassword/ResetPassword';
 import ClientProfile from './components/ClientProfile/ClientProfile';
-import Profile from './components/Profile/Profile';
 import './App.css'
 
 
@@ -25,6 +25,7 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dev-profile/:devID" element={<DevDetails />} />
+        <Route path="/dev-profile/" element={<DevProfile />} />
         <Route path="/my-profile" element={<ClientProfile />} />
         <Route path="/dev-order/:devID" element={<DevOrder />} />
         <Route path="developers" element={<DevList />} />

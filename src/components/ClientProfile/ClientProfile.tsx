@@ -42,22 +42,7 @@ function ClientProfile() {
         }
       };
       fetchData();
-    } 
-    // else {
-    //   if (
-    //     auth.access_token != undefined &&
-    //     auth.user_info.developer_id != null
-    //   ) {
-    //     console.log("ok");
-    //     navigate("/dev-profile/" + auth.user_info.developer_id);
-    //   } else if (
-    //     auth.access_token != undefined &&
-    //     auth.user_info.developer_id == null
-    //   ) {
-    //     navigate("/my-profile");
-    //     console.log("test");
-    //   }
-    // }
+    }
   }, [isCurrentClient, isLoaded, auth]);
 
   if (client) {

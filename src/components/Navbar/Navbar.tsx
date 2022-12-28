@@ -80,7 +80,7 @@ function Navbar() {
               {auth.access_token && (
                 <>
                   <li>
-                    <Link to={auth.user_info.developer_id ? `/dev-profile/${auth.user_info.developer_id}` : "my-profile/"} className="navbar__link">
+                    <Link to={auth.user_info.developer_id ? `/dev-profile/` : "my-profile/"} className="navbar__link">
                       Mon profil
                     </Link>
                   </li>

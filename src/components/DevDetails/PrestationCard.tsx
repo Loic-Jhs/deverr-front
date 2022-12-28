@@ -18,6 +18,7 @@ type PROPS = {
   prestation: RealPrestation;
   services: Boolean;
   setServices: Dispatch<SetStateAction<Boolean>>;
+  devProfileId?: Number;
 };
 
 function PrestationCard(props: PROPS) {
@@ -66,12 +67,19 @@ function PrestationCard(props: PROPS) {
       .catch((error) => console.log(error));
   };
 
+  console.log(auth.user_info);
+  
+
   return (
     <div className="dev__prestation-item">
       <div className="edit">
         <h4>{props.prestation.name}</h4>
         {
-          auth.user_info.developer_id === Number(devID) &&
+          /*
+          Si le user connecté correspond à un développeur 
+          on affiche les boutons
+          */
+          auth.user_info.user_id === props.devProfileId &&
           <div className="svg">
             {!editService && (
               <>
