@@ -28,7 +28,7 @@ function Homepage() {
           </div>
         </div>
         <div className="image__container">
-          <LottieIllustration animationData={developerSkills} />
+          <LottieIllustration animationData={developerSkills} illustration={developerSkills} />
         </div>
       </div>
       <div className="developpers__container">

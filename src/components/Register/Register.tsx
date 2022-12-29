@@ -26,7 +26,7 @@ function Register() {
           </div>
         </div>
         <div className="image__container">
-          <LottieIllustration animationData={peopleComputer} />
+          <LottieIllustration animationData={peopleComputer} illustration={peopleComputer} />
         </div>
       </div>
     </div>
