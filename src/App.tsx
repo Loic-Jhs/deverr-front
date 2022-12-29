@@ -25,10 +25,10 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dev-profile/:devID" element={<DevDetails />} />
-        <Route path="/dev-profile/" element={<DevProfile />} />
+        <Route path="/dev-profile" element={<DevProfile />} />
         <Route path="/my-profile" element={<ClientProfile />} />
         <Route path="/dev-order/:devID" element={<DevOrder />} />
-        <Route path="developers" element={<DevList />} />
+        <Route path="/developers" element={<DevList />} />
         <Route path="/registerdev" element={<FormDev />} />
         <Route path="/registerclient" element={<FormClient />} />
         <Route path="/login" element={<Login />} />
