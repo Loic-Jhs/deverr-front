@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { authContext } from "../../contexts/authContext";
 import { useParams } from "react-router-dom";
 import Button from "../Button/Button";
-import PrestationCard from "./PrestationCard";
+import PrestationCard from "../DevProfile/PrestationCard";
 import "./style.scss";
 
 function DevDetails() {

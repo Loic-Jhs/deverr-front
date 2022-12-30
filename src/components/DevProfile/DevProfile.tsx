@@ -2,9 +2,9 @@ import type { DevInfos } from "../../types";
 import { CircularProgress, Rating } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { authContext } from "../../contexts/authContext";
-import ServicesModal from "../DevDetails/ServicesModal";
-import PrestationCard from "../DevDetails/PrestationCard";
-import StacksModal from "../DevDetails/StacksModal";
+import ServicesModal from "./ServicesModal";
+import PrestationCard from "./PrestationCard";
+import StacksModal from "./StacksModal";
 import Button from "../Button/Button";
 import "./style.scss";
 
@@ -82,8 +82,6 @@ function DevProfile() {
       .then((response) => response.json())
       .catch((err) => console.log(err));
   };
-
-  console.log(auth.user_info);
 
   if (dev) {
     return (
@@ -197,10 +195,12 @@ function DevProfile() {
                 </div>
               </div>
             </div>
-            <Button variant="text" size="small">
-              Désactiver votre compte
-            </Button>
           </div>
+        </div>
+        <div className="delete__profile">
+          <Button variant="text" size="small">
+            Désactiver votre compte
+          </Button>
         </div>
       </>
     );
