@@ -5,8 +5,8 @@ import { authContext } from "../../contexts/authContext";
 import ServicesModal from "../DevDetails/ServicesModal";
 import PrestationCard from "../DevDetails/PrestationCard";
 import StacksModal from "../DevDetails/StacksModal";
-import "./style.scss";
 import Button from "../Button/Button";
+import "./style.scss";
 
 function DevProfile() {
   //HOOKS
@@ -33,14 +33,15 @@ function DevProfile() {
         headers: {
           "access-control-allow-origin": "*",
           "Content-type": "application/json",
+          // To improve, find out why the context is lost
+          // when the component is refreshed
           Authorization:
-            `Bearer ` + auth.access_token
+            `Bearer ` + JSON.parse(localStorage.getItem("access_token") ?? ""),
         },
         mode: "cors",
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
           setDev(data);
           setIsLoaded(true);
         })
@@ -73,8 +74,7 @@ function DevProfile() {
       headers: {
         "access-control-allow-origin": "*",
         "Content-type": "application/json",
-        Authorization:
-          `Bearer ` + auth.access_token
+        Authorization: `Bearer ` + auth.access_token,
       },
       body: JSON.stringify({ ...dev }),
       mode: "cors",
@@ -145,7 +145,7 @@ function DevProfile() {
               <div className="header__stack">
                 <p>Compétences maîtrisées :</p>
                 {auth.access_token && auth.user_info.user_id === dev.id ? (
-                  <Button onClick={handleStacksOpen} >Ajouter</Button>
+                  <Button onClick={handleStacksOpen}>Ajouter</Button>
                 ) : (
                   ""
                 )}
@@ -197,9 +197,9 @@ function DevProfile() {
                 </div>
               </div>
             </div>
-              <Button variant="text" size="small">
-                Désactiver votre compte
-              </Button>
+            <Button variant="text" size="small">
+              Désactiver votre compte
+            </Button>
           </div>
         </div>
       </>

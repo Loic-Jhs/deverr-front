@@ -18,10 +18,9 @@ const Login = () => {
     email: "",
     password: "",
   });
-  const [successMessage, setSuccessMessage] = useState("");
-
-  const { register, handleSubmit, formState: { errors } } = useForm<LoginInput>({ resolver: yupResolver(schema) });
   const navigate = useNavigate();
+  const [successMessage, setSuccessMessage] = useState("");
+  const { register, handleSubmit, formState: { errors } } = useForm<LoginInput>({ resolver: yupResolver(schema) });
 
   const onSubmit: SubmitHandler<LoginInput> = async (data) => {
     try {
@@ -38,7 +37,7 @@ const Login = () => {
           localStorage.setItem('user_info', JSON.stringify(data.user_info));
           setIsLogged(true);
           if (data.user_info.user_role == 1) {
-            navigate(`/dev-profile/${data.user_info.developer_id}`);
+            navigate(`/dev-profile/`);
           } else if (data.user_info.user_role == 0) {
             navigate("/developers");
           }
