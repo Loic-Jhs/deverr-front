@@ -1,9 +1,11 @@
 import React, { createContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { UserAsContext } from "../types";
 
 export const authContext = createContext<any>({});
 
 function AuthProvider({ children }: React.PropsWithChildren) {
+  const navigate = useNavigate();
   const [auth, setAuth] = useState<UserAsContext>({
     access_token: undefined,
     token_type: undefined,
@@ -19,6 +21,13 @@ function AuthProvider({ children }: React.PropsWithChildren) {
     });
   };
 
+  const logout = () => {
+    localStorage.clear();
+    navigate("/");
+    resetState();
+    setIsLogged(false);
+  };
+
   useEffect(() => {
     if (localStorage.length > 0) {
       setAuth({
@@ -30,7 +39,7 @@ function AuthProvider({ children }: React.PropsWithChildren) {
   }, [isLogged]);
 
   return (
-    <authContext.Provider value={{ auth, setAuth, setIsLogged, resetState }}>
+    <authContext.Provider value={{ auth, setAuth, setIsLogged, resetState, logout }}>
       {children}
     </authContext.Provider>
   );

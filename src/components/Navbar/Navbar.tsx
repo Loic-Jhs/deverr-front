@@ -8,16 +8,8 @@ import Button from "../Button/Button";
 import "./style.scss";
 
 function Navbar() {
-  const navigate = useNavigate();
   const [navbar, setNavbar] = useState(false);
-
-  const { auth, resetState, setIsLogged } = useContext(authContext);
-  const logout = () => {
-    localStorage.clear();
-    navigate("/");
-    resetState();
-    setIsLogged(false);
-  };
+  const { auth, logout } = useContext(authContext);
 
   return (
     <nav className="navbar">

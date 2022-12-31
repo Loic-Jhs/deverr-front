@@ -6,11 +6,14 @@ import ServicesModal from "./ServicesModal";
 import PrestationCard from "./PrestationCard";
 import StacksModal from "./StacksModal";
 import Button from "../Button/Button";
+import ConfirmModal from "./ConfirmModal";
+import { useNavigate } from "react-router-dom";
 import "./style.scss";
 
 function DevProfile() {
+  const navigate = useNavigate();
   //HOOKS
-  const { auth } = useContext(authContext);
+  const { auth, logout } = useContext(authContext);
 
   //STATES
   const [dev, setDev] = useState<DevInfos>();
@@ -21,14 +24,17 @@ function DevProfile() {
   //MODAL STATES
   const [open, setOpen] = useState(false);
   const [stacksOpen, setStacksOpen] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleStacksOpen = () => setStacksOpen(true);
   const handleStacksClose = () => setStacksOpen(false);
+  const handleConfirmOpen = () => setConfirmOpen(true);
+  const handleConfirmClose = () => setConfirmOpen(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      await fetch(`http://localhost/profile/`, {
+      await fetch("http://localhost/profile/", {
         method: "GET",
         headers: {
           "access-control-allow-origin": "*",
@@ -69,7 +75,7 @@ function DevProfile() {
     e.preventDefault();
     setIsEditable(!isEditable);
 
-    const response = await fetch(`http://localhost/profile/update`, {
+    const response = await fetch("http://localhost/profile/update", {
       method: "PUT",
       headers: {
         "access-control-allow-origin": "*",
@@ -80,6 +86,23 @@ function DevProfile() {
       mode: "cors",
     })
       .then((response) => response.json())
+      .catch((err) => console.log(err));
+  };
+
+  const deleteUser = () => {
+    fetch("http://localhost/profile/delete", {
+      method: "DELETE",
+      headers: {
+        "access-control-allow-origin": "*",
+        "Content-type": "application/json",
+        Authorization: `Bearer ` + auth.access_token,
+      },
+      mode: "cors",
+    })
+      .then((_response) => {
+        handleConfirmClose();
+        logout();
+      })
       .catch((err) => console.log(err));
   };
 
@@ -97,6 +120,13 @@ function DevProfile() {
           services={services}
           setServices={setServices}
           devStacks={dev.stacks}
+        />
+        <ConfirmModal
+          open={confirmOpen}
+          onClose={handleConfirmClose}
+          title="Désactivation du compte"
+          content="Êtes vous sûr de vouloir supprimer votre compte ?"
+          confirmFunction={deleteUser}
         />
         <div className="profile__container">
           <div className="profile__left-part">
@@ -198,7 +228,13 @@ function DevProfile() {
           </div>
         </div>
         <div className="delete__profile">
-          <Button variant="text" size="small">
+          <Button
+            variant="text"
+            size="small"
+            onClick={() => {
+              handleConfirmOpen();
+            }}
+          >
             Désactiver votre compte
           </Button>
         </div>
