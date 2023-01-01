@@ -157,7 +157,7 @@ const FormDev = () => {
             placeholder="jhon-doe@email.com"
           />
 
-          <div className="stacks__container">
+          {/* <div className="stacks__container">
             <p className="error">{errors.stacks?.message}</p>
             <label>Vos compétences</label>
             <div className="stack__container">
@@ -206,7 +206,7 @@ const FormDev = () => {
                 </ul>
               </div>
             </div>
-          </div>
+          </div> */}
 
           <p className="error">{errors.years_of_experience?.message}</p>
           <label>Années d'expérience</label>

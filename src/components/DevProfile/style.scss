@@ -293,6 +293,9 @@
     ul {
       list-style: none;
       li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         background: transparent;
         cursor: pointer;
         margin: 3px 0;

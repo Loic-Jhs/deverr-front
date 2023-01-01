@@ -65,10 +65,7 @@ function PrestationCard(props: PROPS) {
     })
       .then((_response) => props.setServices(!props.services))
       .catch((error) => console.log(error));
-  };
-
-  console.log(auth.user_info);
-  
+  };  
 
   return (
     <div className="dev__prestation-item">

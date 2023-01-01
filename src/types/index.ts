@@ -118,7 +118,7 @@ export type DevStack = {
   id: number;
   name: string;
   experience: number;
-  is_primary: boolean;
+  is_primary: number;
   logo: string;
 };
 export type Stack = {

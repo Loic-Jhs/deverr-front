@@ -7,11 +7,10 @@ import PrestationCard from "./PrestationCard";
 import StacksModal from "./StacksModal";
 import Button from "../Button/Button";
 import ConfirmModal from "./ConfirmModal";
-import { useNavigate } from "react-router-dom";
 import "./style.scss";
+import StacksCard from "./StacksCard";
 
 function DevProfile() {
-  const navigate = useNavigate();
   //HOOKS
   const { auth, logout } = useContext(authContext);
 
@@ -48,6 +47,7 @@ function DevProfile() {
       })
         .then((response) => response.json())
         .then((data) => {
+          console.log(data);
           setDev(data);
           setIsLoaded(true);
         })

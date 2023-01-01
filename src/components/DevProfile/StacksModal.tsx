@@ -6,15 +6,15 @@ import React, {
   useState,
 } from "react";
 import ModalWindow from "../Modal/Modal";
-import type { RealStack } from "../../types/index";
+import type { DevStack } from "../../types/index";
 import Button from "../Button/Button";
-import TextField from "@mui/material/TextField";
 import { authContext } from "../../contexts/authContext";
+import StacksCard from "./StacksCard";
 
 type ModalType = {
   open: boolean;
   onClose: () => void;
-  devStacks: RealStack[];
+  devStacks: DevStack[];
   services: Boolean;
   setServices: Dispatch<SetStateAction<Boolean>>;
 }
@@ -24,14 +24,15 @@ function StacksModal(props: ModalType) {
   const { auth } = useContext(authContext);
 
   //STATES
-  const [stacks, setStacks] = useState<RealStack[]>([]);
+  const [stacks, setStacks] = useState<DevStack[]>([]);
   const [selected, setSelected] = useState<number | undefined>(undefined);
-  const [stackSelected, setStackSelected] = useState<RealStack | undefined>(
+  const [stackSelected, setStackSelected] = useState<DevStack | undefined>(
     undefined
   );
   const [yearsExp, setYearsExp] = useState<string>("1");
 
   useEffect(() => {
+    console.log(props.devStacks);
     fetch(`http://localhost/all-stacks`, {
       method: "GET",
       headers: {
@@ -41,7 +42,7 @@ function StacksModal(props: ModalType) {
       mode: "cors",
     })
       .then((response) => response.json())
-      .then((data: RealStack[]) => {
+      .then((data: DevStack[]) => {
         // On filtre les stacks par rapport à leur id
         const filteredStacks = data.filter(
           (stack) =>
@@ -53,11 +54,16 @@ function StacksModal(props: ModalType) {
       });
   }, []);
 
-  const handleClick = (item: RealStack) => {
+  useEffect(() => {
+    console.log(stackSelected);
+  }, [stackSelected])
+
+  const handleClick = (item: DevStack) => {
     setStackSelected(item);
   };
 
   const validateAddingStack = () => {
+    console.log(stackSelected);
     fetch("http://localhost/profile/stacks/store", {
       method: "POST",
       headers: {
@@ -90,42 +96,15 @@ function StacksModal(props: ModalType) {
         <h2>Ajoutez une nouvelle compétence</h2>
         <ul>
           {stacks &&
-            stacks.map((stack: RealStack) => {
+            stacks.map((stack: DevStack) => {
               return (
-                <div key={stack.id} className="new_stack_container">
-                  <li
-                    onClick={() => handleClick(stack)}
-                    value={stack.id}
-                    className={stackSelected?.id === stack.id ? "selected" : ""}
-                  >
-                    {stack.name}
-                  </li>
-                  {stackSelected?.id === stack.id && (
-                    <div>
-                      <TextField
-                        id="standard-basic"
-                        margin="dense"
-                        label="Années d'expérience"
-                        variant="standard"
-                        type="number"
-                        inputProps={{ step: 1, min: 1, max: 10 }}
-                        //we make this condition to be sure
-                        //that the user enters only integers between 1 and 10
-                        onKeyDown={(event) => {
-                          if (
-                            event.key != "ArrowUp" &&
-                            event.key != "ArrowDown"
-                          ) {
-                            event.preventDefault();
-                          }
-                        }}
-                        onChange={(
-                          event: React.ChangeEvent<HTMLInputElement>
-                        ) => setYearsExp(event.target.value)}
-                      />
-                    </div>
-                  )}
-                </div>
+                <StacksCard
+                  key={stack.id}
+                  stack={stack}
+                  stackSelected={stackSelected}
+                  setStackSelected={setStackSelected}
+                  setYearsExp={setYearsExp}
+                />
               );
             })}
         </ul>
