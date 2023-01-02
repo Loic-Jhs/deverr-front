@@ -9,6 +9,7 @@ type PROPS = {
   stackSelected: DevStack | undefined;
   setStackSelected: Dispatch<SetStateAction<DevStack | undefined>>;
   setYearsExp: Dispatch<SetStateAction<string>>;
+  primaryStackExist: boolean;
 };
 
 function StacksCard({
@@ -16,26 +17,40 @@ function StacksCard({
   stackSelected,
   setStackSelected,
   setYearsExp,
+  primaryStackExist
 }: PROPS) {
   const [isFavorite, setIsFavorite] = useState<number>(0);
 
-  // useEffect(() => {
-  //   console.log(stackSelected);
-  // }, [stackSelected])
-
   const handleClick = (item: DevStack) => {
-    setStackSelected({ ...item, is_primary: isFavorite });
-    // console.log(stackSelected);
+    setStackSelected({ ...item });
   };
 
-  const handleFavoriteClick = () => {
-    console.log(1);
+  /*
+    Dans les 2 handleClick ci dessous,
+    On fait face à un problème d'évènement du parent, (la <li>).
+    Lorsqu'on clic sur les icônes favories, l'évènement du clic 
+    trigger au mauvais endroit, c'est à dire la <li>. Alors qu'on souhaiterais trigger les icônes.
+    Pour remédier à ce pb, on utilise stopPropagation().
+
+    Aussi quand on clic sur l'icône, on change la valeur de is_primary à 1 ou 0 en dur 
+    pour envoyer les bonnes valeurs au back (seule façon trouvée qui fonctionne).
+  */
+  const handleFavoriteClick = (event: any, item: DevStack) => {
+    event.stopPropagation();
+    setStackSelected({ ...item, is_primary: 1 });
     setIsFavorite(1);
   };
-  const deleteFavoriteClick = () => {
-    console.log(0);
+
+  const deleteFavoriteClick = (event: any, item: DevStack) => {
+    event.stopPropagation();
+    setStackSelected({ ...item, is_primary: 0 });
     setIsFavorite(0);
   };
+
+  useEffect(() => {
+    setStackSelected(stackSelected);
+  }, [isFavorite]);
+
   return (
     <div className="new_stack_container">
       <li
@@ -44,12 +59,12 @@ function StacksCard({
         className={stackSelected?.id === stack.id ? "selected" : ""}
       >
         {stack.name}
-        {stackSelected?.id === stack.id &&
+        {!primaryStackExist &&
           <>
             {isFavorite === 1 ? (
-              <FavoriteIcon onClick={() => deleteFavoriteClick()} />
+              <FavoriteIcon onClick={(event) => deleteFavoriteClick(event, stack)} />
             ) : (
-              <FavoriteBorderIcon onClick={() => handleFavoriteClick()} />
+              <FavoriteBorderIcon onClick={(event) => handleFavoriteClick(event, stack)} />
             )}
           </>
         }
