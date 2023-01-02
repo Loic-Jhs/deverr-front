@@ -1,4 +1,4 @@
-import React, {
+import {
   Dispatch,
   SetStateAction,
   useContext,
@@ -17,7 +17,7 @@ type ModalType = {
   devStacks: DevStack[];
   services: Boolean;
   setServices: Dispatch<SetStateAction<Boolean>>;
-}
+};
 
 function StacksModal(props: ModalType) {
   //HOOKS
@@ -30,9 +30,9 @@ function StacksModal(props: ModalType) {
     undefined
   );
   const [yearsExp, setYearsExp] = useState<string>("1");
+  const [primaryStackExist, setPrimaryStackExist] = useState<boolean>(false);
 
   useEffect(() => {
-    console.log(props.devStacks);
     fetch(`http://localhost/all-stacks`, {
       method: "GET",
       headers: {
@@ -51,19 +51,19 @@ function StacksModal(props: ModalType) {
             !props.devStacks.some((devStack) => devStack.id === stack.id)
         );
         setStacks(filteredStacks);
+        // On verifie si une techno à is_primary à 1
+        // On le passe dans le seter pour le fournir en props à StacksCard
+        setPrimaryStackExist(
+          props.devStacks.some((devStack) => devStack.is_primary === 1)
+        );
       });
-  }, []);
-
-  useEffect(() => {
-    console.log(stackSelected);
-  }, [stackSelected])
+  }, [props.open]);
 
   const handleClick = (item: DevStack) => {
     setStackSelected(item);
   };
 
   const validateAddingStack = () => {
-    console.log(stackSelected);
     fetch("http://localhost/profile/stacks/store", {
       method: "POST",
       headers: {
@@ -75,15 +75,19 @@ function StacksModal(props: ModalType) {
       body: JSON.stringify({
         stack_id: stackSelected?.id,
         stack_experience: yearsExp,
-        is_primary: 0,
+        is_primary: stackSelected?.is_primary,
       }),
     })
       .then((_response) => {
-        props.onClose();
         props.setServices(!props.services);
+        props.onClose();
       })
       .catch((err) => console.log(err));
   };
+
+  useEffect(() => {
+    console.log(stackSelected);
+  }, [stackSelected]);
 
   return (
     <ModalWindow
@@ -104,6 +108,7 @@ function StacksModal(props: ModalType) {
                   stackSelected={stackSelected}
                   setStackSelected={setStackSelected}
                   setYearsExp={setYearsExp}
+                  primaryStackExist={primaryStackExist}
                 />
               );
             })}
