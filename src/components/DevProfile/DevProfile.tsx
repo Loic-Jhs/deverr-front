@@ -6,9 +6,9 @@ import ServicesModal from "./ServicesModal";
 import PrestationCard from "./PrestationCard";
 import StacksModal from "./StacksModal";
 import Button from "../Button/Button";
-import ConfirmModal from "./ConfirmModal";
+import ConfirmModal from "../Modal/ConfirmModal";
+import ClearIcon from '@mui/icons-material/Clear';
 import "./style.scss";
-import StacksCard from "./StacksCard";
 
 function DevProfile() {
   //HOOKS
@@ -47,7 +47,6 @@ function DevProfile() {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
           setDev(data);
           setIsLoaded(true);
         })
@@ -103,7 +102,20 @@ function DevProfile() {
         handleConfirmClose();
         logout();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
+  };
+
+  const deleteStacks = (stackId: number) => {
+    fetch(`http://localhost/profile/stacks/delete/${stackId}`, {
+      method: "DELETE",
+      headers: {
+        "access-control-allow-origin": "*",
+        "Content-type": "application/json",
+        Authorization: `Bearer ` + auth.access_token,
+      },
+      mode: "cors",
+    }).then(_response => {setServices(!services)})
+      .catch((err) => console.error(err));
   };
 
   if (dev) {
@@ -183,6 +195,10 @@ function DevProfile() {
                   return (
                     <div key={stack.id} className="stack__item">
                       <img src={stack.logo} alt={`Logo ${stack.name}`} />
+                      <ClearIcon 
+                        color="error"
+                        onClick={() => deleteStacks(stack.id)}
+                      />
                     </div>
                   );
                 })}
