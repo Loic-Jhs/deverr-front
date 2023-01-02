@@ -1,5 +1,5 @@
 import Button from "../Button/Button";
-import ModalWindow from "../Modal/Modal";
+import ModalWindow from "./Modal";
 
 type ModalType = {
   open: boolean;
