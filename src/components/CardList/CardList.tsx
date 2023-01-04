@@ -16,11 +16,10 @@ function CardList() {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
           setDevList(data);
           setIsLoaded(true);
         })
-        .catch((error) => console.log("une erreur est survenue", error));
+        .catch((error) => console.error("une erreur est survenue", error));
     };
     fetchData();
   }, [])

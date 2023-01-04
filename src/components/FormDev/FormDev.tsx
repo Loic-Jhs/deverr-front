@@ -62,7 +62,7 @@ const FormDev = () => {
             setSuccessMessage("");
           }, 4000);
         })
-        .catch((e) => console.log(e));
+        .catch((e) => console.error(e));
     };
     fetchData();
   }, [isLoaded]);
@@ -104,7 +104,7 @@ const FormDev = () => {
       setLoading(false);
       setSelectedStacks([]);
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   };
 

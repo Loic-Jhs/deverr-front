@@ -50,7 +50,7 @@ function PrestationCard(props: PROPS) {
         props.setServices(!props.services);
         setEditService(false);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.error(error));
   };
 
   const deleteService = (id: number) => {
@@ -64,7 +64,7 @@ function PrestationCard(props: PROPS) {
       mode: "cors",
     })
       .then((_response) => props.setServices(!props.services))
-      .catch((error) => console.log(error));
+      .catch((error) => console.error(error));
   };  
 
   return (

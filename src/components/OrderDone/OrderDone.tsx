@@ -29,7 +29,7 @@ function OrderDone({order, toggle, auth, setIsLoaded}: OrderDoneProps) {
                 setIsLoaded(false)
                 toggle()
             } catch (e) {
-                console.log(e)
+                console.error(e)
             }
         }
     }

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Dev } from "../../types";
 import { Rating } from "@mui/material";
+import { Dev } from "../../types";
 import "./style.scss";
 
 function DevList() {
-  const [query, setQuery] = useState("");
+  // STATES
   const [devList, setDevList] = useState<Dev[]>();
   const [isLoaded, setIsLoaded] = useState<Boolean>(false);
   const [filteredDev, setFilteredDev] = useState<Dev[]>();
@@ -26,22 +26,22 @@ function DevList() {
           setFilteredDev(data);
           setIsLoaded(true);
         })
-        .catch((e) => console.log(e));
+        .catch((e) => console.error(e));
     };
     fetchData();
   }, [isLoaded]);
 
   const filterDevFunc = (devArray: Dev[] | undefined, inputLetters: string) => {
-    // Si input vide
+    // If empty input
     if (inputLetters === "") {
-      // on renvoie le tableau initial (càd tous les dev)
+      // We return the initial array (i.e. all devs)
       return devArray;
     } else {
-      // On filtre le tableau de dev
+      // Filtering the dev table
       return devArray?.filter((user) =>
-        // Vérifie la condition, si true renvoie le dev, sinon rien
+        // Checks the condition, if true returns the dev, otherwise nothing
         user.stacks.some((stack) =>
-          // Si une lettre match avec une stack.name, renvoi true ⬆
+          // If a letter matches with a stack.name, return true ⬆
           stack.name.toLowerCase().includes(inputLetters.toLowerCase())
         )
       );
@@ -58,7 +58,6 @@ function DevList() {
           name="searchTechno"
           placeholder="PHP, JavaScript..."
           onChange={(event) => {
-            setQuery(event.target.value);
             const filterDevSearch = filterDevFunc(devList, event.target.value);
             setFilteredDev(filterDevSearch);
           }}
@@ -78,7 +77,6 @@ function DevList() {
               stacks,
               reviews_number,
             } = dev;
-
             return (
               <Link
                 key={id}

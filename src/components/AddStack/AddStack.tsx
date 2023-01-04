@@ -43,7 +43,7 @@ function AddStack({ toggleStack, devStacks }: modaleProps) {
           setStacks(data);
           setIsLoaded(true);
         } catch (e) {
-          console.log(e);
+          console.error(e);
         }
       }
       fetchData();

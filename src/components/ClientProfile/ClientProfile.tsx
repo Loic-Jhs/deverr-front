@@ -34,11 +34,11 @@ function ClientProfile() {
             mode: "cors",
           });
           const data = await response.json();
-          console.log(data);
+          console.error(data);
           setClient(data);
           setIsLoaded(true);
         } catch (e) {
-          console.log(e);
+          console.error(e);
         }
       };
       fetchData();

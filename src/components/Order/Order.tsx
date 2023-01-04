@@ -47,7 +47,7 @@ function Order({ toggle }: modaleProps) {
         setDev(data[0]);
         setIsLoaded(true);
       })
-      .catch((e) => console.log(e));
+      .catch((e) => console.error(e));
     }
     fetchData();
   }, [isLoaded]);
@@ -71,9 +71,9 @@ function Order({ toggle }: modaleProps) {
       })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        console.error(data);
       })
-      .catch((e) => console.log(e));
+      .catch((e) => console.error(e));
   }
 
   if (dev) {

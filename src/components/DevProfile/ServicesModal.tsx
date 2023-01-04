@@ -72,7 +72,7 @@ function ServicesModal(props: ModalType) {
         props.services(true);
         props.onClose();
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.error(error));
   };
 
   return (

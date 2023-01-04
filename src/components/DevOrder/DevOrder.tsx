@@ -21,7 +21,6 @@ function DevOrder() {
     const [ inProgressOrders, setInProgressOrders] = useState<Order[]>()
     const [ ordersDone, setOrdersDone] = useState<Order[]>()
     const navigate = useNavigate()
-    console.log(orders)
     useEffect(() => {
         if (auth.access_token != undefined && auth.user_info.developer_id == devID) {
             const fetchData = async () => {
@@ -56,7 +55,7 @@ function DevOrder() {
                     setOrdersDone(orderDoneArray);
                     setIsLoaded(true);
                 })
-              .catch((error) => console.log(error));
+              .catch((error) => console.error(error));
             }
             fetchData();
         } else if (auth.access_token != undefined && auth.user_info.developer_id == null) {
@@ -84,7 +83,7 @@ function DevOrder() {
                 setIsLoaded(false)
             })
             .catch((error) => {
-                console.log(error);
+                console.error(error);
             });
         }
     }

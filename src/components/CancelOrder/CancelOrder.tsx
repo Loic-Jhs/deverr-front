@@ -30,7 +30,7 @@ function CancelOrder({order, toggle, auth, setIsLoaded}: CancelOrderProps) {
                 setIsLoaded(false)
                 toggle()
             } catch (e) {
-                console.log(e)
+                console.error(e)
             }
         }
     }

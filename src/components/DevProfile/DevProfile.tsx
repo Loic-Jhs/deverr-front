@@ -50,7 +50,7 @@ function DevProfile() {
           setDev(data);
           setIsLoaded(true);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.error(error));
     };
     fetchData();
   }, [isLoaded, services]);
@@ -85,7 +85,7 @@ function DevProfile() {
       mode: "cors",
     })
       .then((response) => response.json())
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   };
 
   const deleteUser = () => {

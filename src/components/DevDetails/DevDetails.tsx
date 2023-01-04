@@ -33,7 +33,7 @@ function DevDetails() {
           setDev(data[0]);
           setIsLoaded(true);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.error(error));
     };
     fetchData();
   }, [isLoaded, services, devID]);

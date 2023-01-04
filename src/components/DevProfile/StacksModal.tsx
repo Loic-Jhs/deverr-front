@@ -82,12 +82,8 @@ function StacksModal(props: ModalType) {
         props.setServices(!props.services);
         props.onClose();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   };
-
-  useEffect(() => {
-    console.log(stackSelected);
-  }, [stackSelected]);
 
   return (
     <ModalWindow
