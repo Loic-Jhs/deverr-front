@@ -19,6 +19,7 @@ type PROPS = {
   services: Boolean;
   setServices: Dispatch<SetStateAction<Boolean>>;
   devProfileId?: Number;
+  displayButton: Boolean;
 };
 
 function PrestationCard(props: PROPS) {
@@ -29,7 +30,9 @@ function PrestationCard(props: PROPS) {
   //STATES
   const [price, setPrice] = useState<number>(props.prestation.price);
   const [editService, setEditService] = useState<Boolean>(false);
-  const [description, setDescription] = useState<string | undefined>(props.prestation.description);
+  const [description, setDescription] = useState<string | undefined>(
+    props.prestation.description
+  );
 
   const updateService = (id: number, description?: string, price?: number) => {
     fetch(`http://localhost/profile/prestations/edit/${id}`, {
@@ -65,7 +68,7 @@ function PrestationCard(props: PROPS) {
     })
       .then((_response) => props.setServices(!props.services))
       .catch((error) => console.error(error));
-  };  
+  };
 
   return (
     <div className="dev__prestation-item">
@@ -76,34 +79,38 @@ function PrestationCard(props: PROPS) {
           Si le user connecté correspond à un développeur 
           on affiche les boutons
           */
-          auth.user_info.user_id === props.devProfileId &&
-          <div className="svg">
-            {!editService && (
-              <>
-                <EditIcon
-                  color="primary"
-                  onClick={() => {
-                    setEditService(true);
-                  }}
-                />
-                <DeleteForeverIcon
-                  color="error"
-                  onClick={() => deleteService(props.prestation.id)}
-                />
-              </>
-            )}
-            {editService && (
-              <>
-                <TaskAltIcon
-                  color="primary"
-                  onClick={() =>
-                    updateService(props.prestation.id, description, price)
-                  }
-                />
-                <CancelIcon color="error" onClick={() => setEditService(false)} />
-              </>
-            )}
-          </div>
+          auth.user_info.user_id === props.devProfileId && (
+            <div className="svg">
+              {!editService && props.displayButton && (
+                <>
+                  <EditIcon
+                    color="primary"
+                    onClick={() => {
+                      setEditService(true);
+                    }}
+                  />
+                  <DeleteForeverIcon
+                    color="error"
+                    onClick={() => deleteService(props.prestation.id)}
+                  />
+                </>
+              )}
+              {editService && (
+                <>
+                  <TaskAltIcon
+                    color="primary"
+                    onClick={() =>
+                      updateService(props.prestation.id, description, price)
+                    }
+                  />
+                  <CancelIcon
+                    color="error"
+                    onClick={() => setEditService(false)}
+                  />
+                </>
+              )}
+            </div>
+          )
         }
       </div>
       {!editService && (

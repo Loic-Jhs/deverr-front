@@ -7,7 +7,7 @@ import PrestationCard from "./PrestationCard";
 import StacksModal from "./StacksModal";
 import Button from "../Button/Button";
 import ConfirmModal from "../Modal/ConfirmModal";
-import ClearIcon from '@mui/icons-material/Clear';
+import ClearIcon from "@mui/icons-material/Clear";
 import "./style.scss";
 
 function DevProfile() {
@@ -19,6 +19,7 @@ function DevProfile() {
   const [isLoaded, setIsLoaded] = useState<Boolean>(false);
   const [services, setServices] = useState<Boolean>(false);
   const [isEditable, setIsEditable] = useState<Boolean>(false);
+  const [displayButton, setDisplayButton] = useState<Boolean>(false);
 
   //MODAL STATES
   const [open, setOpen] = useState(false);
@@ -114,7 +115,10 @@ function DevProfile() {
         Authorization: `Bearer ` + auth.access_token,
       },
       mode: "cors",
-    }).then(_response => {setServices(!services)})
+    })
+      .then((_response) => {
+        setServices(!services);
+      })
       .catch((err) => console.error(err));
   };
 
@@ -149,7 +153,9 @@ function DevProfile() {
                   {!isEditable ? (
                     <div>
                       <p className="dev__description">{dev.description}</p>
-                      <Button onClick={handleEditElement}> Modifier</Button>
+                      {displayButton && (
+                        <Button onClick={handleEditElement}> Modifier</Button>
+                      )}
                     </div>
                   ) : (
                     <div className="edit__container">
@@ -184,7 +190,9 @@ function DevProfile() {
             <div className="stacks__section__container">
               <div className="header__stack">
                 <p>Compétences maîtrisées :</p>
-                {auth.access_token && auth.user_info.user_id === dev.id ? (
+                {auth.access_token &&
+                auth.user_info.user_id === dev.id &&
+                displayButton ? (
                   <Button onClick={handleStacksOpen}>Ajouter</Button>
                 ) : (
                   ""
@@ -195,10 +203,12 @@ function DevProfile() {
                   return (
                     <div key={stack.id} className="stack__item">
                       <img src={stack.logo} alt={`Logo ${stack.name}`} />
-                      <ClearIcon 
-                        color="error"
-                        onClick={() => deleteStacks(stack.id)}
-                      />
+                      {displayButton && (
+                        <ClearIcon
+                          color="error"
+                          onClick={() => deleteStacks(stack.id)}
+                        />
+                      )}
                     </div>
                   );
                 })}
@@ -207,6 +217,11 @@ function DevProfile() {
           </div>
           <div className="profile__right-part">
             <div className="dev__info">
+              <div className="edit__button">
+                <Button onClick={() => setDisplayButton(!displayButton)}>
+                  {displayButton ? "Ok" : "Modifier mon profil"}
+                </Button>
+              </div>
               <div className="img__container">
                 <img
                   src={dev.avatar}
@@ -226,7 +241,9 @@ function DevProfile() {
                     : "Service proposé "}
                   :
                 </h3>
-                <Button onClick={handleOpen}>Ajouter une prestation</Button>
+                {displayButton && (
+                  <Button onClick={handleOpen}>Ajouter une prestation</Button>
+                )}
                 <div className="dev__prestations-container">
                   {dev.prestations &&
                     dev.prestations.map((prestation) => (
@@ -235,6 +252,7 @@ function DevProfile() {
                         prestation={prestation}
                         services={services}
                         setServices={setServices}
+                        displayButton={displayButton}
                         devProfileId={auth.user_info.user_id}
                       />
                     ))}
@@ -243,17 +261,19 @@ function DevProfile() {
             </div>
           </div>
         </div>
-        <div className="delete__profile">
-          <Button
-            variant="text"
-            size="small"
-            onClick={() => {
-              handleConfirmOpen();
-            }}
-          >
-            Désactiver votre compte
-          </Button>
-        </div>
+        {displayButton && (
+          <div className="delete__profile">
+            <Button
+              variant="text"
+              size="small"
+              onClick={() => {
+                handleConfirmOpen();
+              }}
+            >
+              Désactiver votre compte
+            </Button>
+          </div>
+        )}
       </>
     );
   } else {
