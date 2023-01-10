@@ -38,6 +38,10 @@ function DevDetails() {
     fetchData();
   }, [isLoaded, services, devID]);
 
+  const handleAskServicesClick = () => {
+    //Que doit on faire lorsqu'on clic sur une demande de presta ?
+  }
+
   if (dev) {
     let average: number | null = 0;
     if (dev.reviews) {
@@ -125,7 +129,7 @@ function DevDetails() {
               {auth.access_token == undefined ||
               auth.user_info.user_role != 1 ? (
                 <div className="dev__contact">
-                  <Button>Demandez une prestation</Button>
+                  <Button onClick={handleAskServicesClick}>Demandez une prestation</Button>
                 </div>
               ) : (
                 ""
@@ -146,6 +150,7 @@ function DevDetails() {
                         services={services}
                         setServices={setServices}
                         devProfileId={dev.id}
+                        displayButton={false}
                       />
                     ))}
                 </div>
