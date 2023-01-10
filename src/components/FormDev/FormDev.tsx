@@ -1,8 +1,6 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import React, { useEffect, useState } from "react";
-import CloseIcon from "@mui/icons-material/Close";
+import { useState } from "react";
 import DevInput from "../../models/devInput";
-import Stacks from "../../models/stacks";
 import { Link } from "react-router-dom";
 import Button from "../Button/Button";
 import "./formDev.scss";
@@ -30,58 +28,13 @@ const defaultValues = {
 
 const FormDev = () => {
   const [loading, setLoading] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [stacks, setStacks] = useState<Stacks[]>([]);
   const [successMessage, setSuccessMessage] = useState("");
-  const [filteredStacks, setFilteredStacks] = useState<Stacks[]>([]);
-  const [selectedStacks, setSelectedStacks] = useState<Stacks[]>([]);
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm<DevInput>({ defaultValues });
-
-  useEffect(() => {
-    const fetchData = async () => {
-      await fetch("http://localhost/stacks/all", {
-        method: "GET",
-        headers: {
-          //TODO find a better way to allow access to cors
-          "access-control-allow-origin": "*",
-          "Content-type": "application/json",
-        },
-        mode: "cors",
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          setStacks(data);
-          setIsLoaded(true);
-          setSuccessMessage(data.message);
-          setTimeout(() => {
-            setSuccessMessage("");
-          }, 4000);
-        })
-        .catch((e) => console.error(e));
-    };
-    fetchData();
-  }, [isLoaded]);
-
-  // We update the state every time there is a change in stack
-  useEffect(() => {
-    setSelectedStacks(selectedStacks);
-  }, [selectedStacks]);
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.value.length) {
-      let filterStack = stacks.filter((stack) =>
-        stack.name.toLowerCase().includes(event.target.value)
-      );
-      setFilteredStacks(filterStack);
-    } else {
-      setFilteredStacks([]);
-    }
-  };
 
   const onSubmit: SubmitHandler<DevInput> = async (data) => {
     setLoading(true);
@@ -102,30 +55,9 @@ const FormDev = () => {
         });
       reset();
       setLoading(false);
-      setSelectedStacks([]);
     } catch (e) {
       console.error(e);
     }
-  };
-
-  const onSelectedStacks = (stack: Stacks) => {
-    // We will look for the stack selected in the initial table (which is stacks)
-    const selectedStack = stacks.find(
-      (stackFind) => stackFind.name === stack.name
-    );
-    if (selectedStack) {
-      // In the setSelectedStacks, we take the old values (current) then
-      // we send them to a new array which is [...current, selectedStack]
-      setSelectedStacks((current) => {
-        return [...current, selectedStack];
-      });
-    }
-  };
-
-  const onDeletedStacks = (stack: Stacks) => {
-    setSelectedStacks(
-      selectedStacks.filter((selectedStack) => selectedStack !== stack)
-    );
   };
 
   return (
@@ -156,57 +88,6 @@ const FormDev = () => {
             {...register("email")}
             placeholder="jhon-doe@email.com"
           />
-
-          {/* <div className="stacks__container">
-            <p className="error">{errors.stacks?.message}</p>
-            <label>Vos compétences</label>
-            <div className="stack__container">
-              <div className="stack__input">
-                <input
-                  type="text"
-                  placeholder="JavaScript, PHP, React..."
-                  onChange={handleChange}
-                />
-              </div>
-              {filteredStacks.length > 0 && (
-                <div className="stack__list">
-                  <ul>
-                    {filteredStacks.map((stack) => {
-                      if (
-                        selectedStacks.find(
-                          (selectedStack) => selectedStack.name === stack.name
-                        )
-                      ) {
-                        return null;
-                      } else {
-                        return (
-                          <li
-                            key={stack.id}
-                            value={stack.name}
-                            onClick={() => onSelectedStacks(stack)}
-                          >
-                            {stack.name}
-                          </li>
-                        );
-                      }
-                    })}
-                  </ul>
-                </div>
-              )}
-              <div className="stack__list">
-                <ul>
-                  {selectedStacks.map((stack) => {
-                    return (
-                      <li className="selectedStack" key={stack.id}>
-                        {stack.name}{" "}
-                        <CloseIcon onClick={() => onDeletedStacks(stack)} />{" "}
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            </div>
-          </div> */}
 
           <p className="error">{errors.years_of_experience?.message}</p>
           <label>Années d'expérience</label>

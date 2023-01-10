@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 import UserInput from '../../models/userInput';
 import schema from './formClientValidation';
 import { Link } from 'react-router-dom';
-import './formClient.scss';
 import Button from "../Button/Button";
+import './formClient.scss';
 
 const FormClient = () => {
   const [userInput, setUserInput] = useState<UserInput>({
@@ -25,7 +25,7 @@ const FormClient = () => {
   const onSubmit: SubmitHandler<UserInput> = async (data) => {
     setLoading(true);
     try {
-      await fetch('https://api-dev.deverr.fr/register', {
+      await fetch('http://localhost/register', {
         method: "POST",
         headers: {
           "access-control-allow-origin": "*",

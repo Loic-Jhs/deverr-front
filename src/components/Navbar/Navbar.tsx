@@ -72,7 +72,7 @@ function Navbar() {
               {auth.access_token && (
                 <>
                   <li>
-                    <Link to={auth.user_info.developer_id ? `/dev-profile/` : "my-profile/"} className="navbar__link">
+                    <Link to={auth.user_info.developer_id ? "/dev-profile/" : "/my-profile/"} className="navbar__link">
                       Mon profil
                     </Link>
                   </li>
@@ -126,7 +126,6 @@ function Navbar() {
               </Link>
             </>
           )}
-          {/* {auth.access_token && <a onClick={logout}>Déconnexion</a>} */}
           {auth.access_token && (
             <Button
               onClick={logout}
