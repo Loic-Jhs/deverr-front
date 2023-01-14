@@ -8,6 +8,7 @@ import StacksModal from "./StacksModal";
 import Button from "../Button/Button";
 import ConfirmModal from "../Modal/ConfirmModal";
 import ClearIcon from "@mui/icons-material/Clear";
+import defaultAvatar from "../../assets/img/avatar.svg"
 import "./style.scss";
 
 function DevProfile() {
@@ -199,7 +200,7 @@ function DevProfile() {
                 )}
               </div>
               <div className="dev__stacks">
-                {dev.stacks.map((stack) => {
+                {dev.stacks && dev.stacks.map((stack) => {
                   return (
                     <div key={stack.id} className="stack__item">
                       <img src={stack.logo} alt={`Logo ${stack.name}`} />
@@ -224,7 +225,7 @@ function DevProfile() {
               </div>
               <div className="img__container">
                 <img
-                  src={dev.avatar}
+                  src={dev.avatar ? dev.avatar : defaultAvatar}
                   alt={`${dev.firstname} ${dev.lastname} avatar`}
                 />
               </div>
@@ -232,11 +233,11 @@ function DevProfile() {
                 <h3>
                   {dev.firstname} {dev.lastname}
                 </h3>
-                <p>Développeur depuis {dev.years_of_experience} ans</p>
+                <p>Développeur depuis {dev.years_of_experience ? dev.years_of_experience : "1"} ans</p>
               </div>
               <div className="dev__prestations-reviews">
                 <h3>
-                  {dev.prestations.length > 1
+                  {dev.prestations && dev.prestations.length > 1
                     ? "Services proposés "
                     : "Service proposé "}
                   :
