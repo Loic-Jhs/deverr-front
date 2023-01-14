@@ -11,14 +11,6 @@ const defaultValues = {
   lastname: "",
   email: "",
   role: 1,
-  stacks: [
-    {
-      id: 0,
-      name: "",
-      experience: 0,
-      is_primary: false,
-    },
-  ],
   years_of_experience: 1,
   description: "",
   password: "",
