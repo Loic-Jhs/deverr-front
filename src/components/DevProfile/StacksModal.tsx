@@ -43,19 +43,23 @@ function StacksModal(props: ModalType) {
     })
       .then((response) => response.json())
       .then((data: DevStack[]) => {
-        // On filtre les stacks par rapport à leur id
-        const filteredStacks = data.filter(
-          (stack) =>
-            // Compare les stack.id des deux tableaux,
-            // pour ne renvoyer que ceux qui ne sont pas déjà présent.
-            !props.devStacks.some((devStack) => devStack.id === stack.id)
-        );
-        setStacks(filteredStacks);
-        // On verifie si une techno à is_primary à 1
-        // On le passe dans le seter pour le fournir en props à StacksCard
-        setPrimaryStackExist(
-          props.devStacks.some((devStack) => devStack.is_primary === 1)
-        );
+        if (props.devStacks) {
+          // On filtre les stacks par rapport à leur id
+          const filteredStacks = data.filter(
+            (stack) =>
+              // Compare les stack.id des deux tableaux,
+              // pour ne renvoyer que ceux qui ne sont pas déjà présent.
+              !props.devStacks.some((devStack) => devStack.id === stack.id)
+          );
+          setStacks(filteredStacks);
+          // On verifie si une techno à is_primary à 1
+          // On le passe dans le seter pour le fournir en props à StacksCard
+          setPrimaryStackExist(
+            props.devStacks.some((devStack) => devStack.is_primary === 1)
+          );
+        } else {
+          setStacks(data);
+        }
       });
   }, [props.open]);
 
@@ -74,7 +78,7 @@ function StacksModal(props: ModalType) {
       mode: "cors",
       body: JSON.stringify({
         stack_id: stackSelected?.id,
-        stack_experience: yearsExp,
+        stack_experience: Number(yearsExp),
         is_primary: stackSelected?.is_primary,
       }),
     })
