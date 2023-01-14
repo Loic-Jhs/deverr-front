@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import Button from "../Button/Button";
 import PrestationCard from "../DevProfile/PrestationCard";
 import "./style.scss";
+import OrderModal from "./OrderModal";
 
 function DevDetails() {
   //HOOKS
@@ -16,6 +17,11 @@ function DevDetails() {
   const [dev, setDev] = useState<DevInfos>();
   const [isLoaded, setIsLoaded] = useState<Boolean>(false);
   const [services, setServices] = useState<Boolean>(false);
+
+  //MODAL STATES
+  const [open, setOpen] = useState(true);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,20 +44,23 @@ function DevDetails() {
     fetchData();
   }, [isLoaded, services, devID]);
 
-  const handleAskServicesClick = () => {
-    //Que doit on faire lorsqu'on clic sur une demande de presta ?
-  }
-
   if (dev) {
     let average: number | null = 0;
     if (dev.reviews) {
       dev.reviews.length > 0
         ? (average =
-            dev.reviews.reduce((a, b) => a + b.rating, 0) / dev.reviews.length)
+          dev.reviews.reduce((a, b) => a + b.rating, 0) / dev.reviews.length)
         : (average = null);
     }
     return (
       <>
+        <OrderModal
+          open={open}
+          onClose={handleClose}
+          orders={setServices}
+          developerId={devID}
+          devData={dev}
+        />
         <div className="profile__container">
           <div className="profile__left-part">
             <div className="detail__situation">
@@ -127,9 +136,9 @@ function DevDetails() {
                 </div>
               )}
               {auth.access_token == undefined ||
-              auth.user_info.user_role != 1 ? (
+                auth.user_info.user_role != 1 ? (
                 <div className="dev__contact">
-                  <Button onClick={handleAskServicesClick}>Demandez une prestation</Button>
+                  <Button onClick={handleOpen}>Demandez une prestation</Button>
                 </div>
               ) : (
                 ""
