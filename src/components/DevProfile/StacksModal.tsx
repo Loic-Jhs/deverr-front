@@ -64,15 +64,6 @@ function StacksModal(props: ModalType) {
   };
 
   const validateAddingStack = () => {
-    console.log(
-      {
-        stack_id: stackSelected?.id,
-        stack_experience: Number(yearsExp),
-        is_primary: stackSelected?.is_primary,
-      },
-      auth.access_token
-    );
-    
     fetch("http://localhost/profile/stacks/store", {
       method: "POST",
       headers: {
