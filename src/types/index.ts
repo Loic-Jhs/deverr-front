@@ -45,20 +45,18 @@ export type UserInfos = {
   lastname: string;
   email: string;
   registered_at: string;
-  orders: [
-    {
-      id: number;
-      developer: string;
-      instructions: string;
-      is_finished: boolean;
-      is_payed: boolean;
-      is_accepted_by_developer: boolean;
-      price: number;
-      prestation_name: string;
-      created_at: string;
-      updated_at: string;
-    }
-  ];
+  orders: Array<{
+    id: number;
+    developer: string;
+    instructions: string;
+    is_finished: boolean;
+    is_payed: boolean;
+    is_accepted_by_developer: boolean;
+    price: number;
+    prestation_name: string;
+    created_at: string;
+    updated_at: string;
+  }>;
 };
 
 export type UserAsContext = {

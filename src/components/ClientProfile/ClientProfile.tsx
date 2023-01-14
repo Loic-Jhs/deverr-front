@@ -34,7 +34,6 @@ function ClientProfile() {
             mode: "cors",
           });
           const data = await response.json();
-          console.error(data);
           setClient(data);
           setIsLoaded(true);
         } catch (e) {
@@ -60,7 +59,7 @@ function ClientProfile() {
         <div className="client__orders__container">
           <h2>Suivi de vos demandes : </h2>
           <div className="client__orders__list">
-            {client.orders.map((order, index) => {
+            {client.orders.map((order: UserInfos['orders'][0], index) => {
               let classToAdd = order.is_finished ? "finished__order" : "";
 
               return (
