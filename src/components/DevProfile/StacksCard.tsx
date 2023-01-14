@@ -9,7 +9,6 @@ type PROPS = {
   stackSelected: DevStack | undefined;
   setStackSelected: Dispatch<SetStateAction<DevStack | undefined>>;
   setYearsExp: Dispatch<SetStateAction<string>>;
-  primaryStackExist: boolean;
 };
 
 function StacksCard({
@@ -17,7 +16,7 @@ function StacksCard({
   stackSelected,
   setStackSelected,
   setYearsExp,
-  primaryStackExist
+  // primaryStackExist
 }: PROPS) {
   const [isFavorite, setIsFavorite] = useState<number>(0);
 
@@ -33,7 +32,7 @@ function StacksCard({
     Pour remédier à ce pb, on utilise stopPropagation().
 
     Aussi quand on clic sur l'icône, on change la valeur de is_primary à 1 ou 0 en dur 
-    pour envoyer les bonnes valeurs au back (seule façon trouvée qui fonctionne).
+    pour envoyer les bonnes valeurs au back.
   */
   const handleFavoriteClick = (event: any, item: DevStack) => {
     event.stopPropagation();
@@ -59,7 +58,6 @@ function StacksCard({
         className={stackSelected?.id === stack.id ? "selected" : ""}
       >
         {stack.name}
-        {!primaryStackExist &&
           <>
             {isFavorite === 1 ? (
               <FavoriteIcon onClick={(event) => deleteFavoriteClick(event, stack)} />
@@ -67,7 +65,6 @@ function StacksCard({
               <FavoriteBorderIcon onClick={(event) => handleFavoriteClick(event, stack)} />
             )}
           </>
-        }
       </li>
       {stackSelected?.id === stack.id && (
         <div>

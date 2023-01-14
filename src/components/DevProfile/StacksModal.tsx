@@ -30,7 +30,6 @@ function StacksModal(props: ModalType) {
     undefined
   );
   const [yearsExp, setYearsExp] = useState<string>("1");
-  const [primaryStackExist, setPrimaryStackExist] = useState<boolean>(false);
 
   useEffect(() => {
     fetch(`http://localhost/all-stacks`, {
@@ -54,9 +53,6 @@ function StacksModal(props: ModalType) {
           setStacks(filteredStacks);
           // On verifie si une techno à is_primary à 1
           // On le passe dans le seter pour le fournir en props à StacksCard
-          setPrimaryStackExist(
-            props.devStacks.some((devStack) => devStack.is_primary === 1)
-          );
         } else {
           setStacks(data);
         }
@@ -68,6 +64,15 @@ function StacksModal(props: ModalType) {
   };
 
   const validateAddingStack = () => {
+    console.log(
+      {
+        stack_id: stackSelected?.id,
+        stack_experience: Number(yearsExp),
+        is_primary: stackSelected?.is_primary,
+      },
+      auth.access_token
+    );
+    
     fetch("http://localhost/profile/stacks/store", {
       method: "POST",
       headers: {
@@ -78,8 +83,8 @@ function StacksModal(props: ModalType) {
       mode: "cors",
       body: JSON.stringify({
         stack_id: stackSelected?.id,
-        stack_experience: Number(yearsExp),
-        is_primary: stackSelected?.is_primary,
+        stack_experience: yearsExp,
+        is_primary: stackSelected?.is_primary ?? 0,
       }),
     })
       .then((_response) => {
@@ -108,7 +113,6 @@ function StacksModal(props: ModalType) {
                   stackSelected={stackSelected}
                   setStackSelected={setStackSelected}
                   setYearsExp={setYearsExp}
-                  primaryStackExist={primaryStackExist}
                 />
               );
             })}
