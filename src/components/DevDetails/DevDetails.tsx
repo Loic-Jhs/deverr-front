@@ -28,9 +28,8 @@ function DevDetails() {
       await fetch(`${import.meta.env.VITE_API_URL}/developer/${devID}`, {
         method: "GET",
         headers: {
-          "access-control-allow-origin": "*",
-          "Content-type": "application/json",
           Authorization: `Bearer ` + auth.access_token,
+          "Content-type": "application/json",
         },
         mode: "cors",
       })
@@ -157,7 +156,7 @@ function DevDetails() {
                         prestation={prestation}
                         services={services}
                         setServices={setServices}
-                        devProfileId={dev.id}
+                        devProfileId={dev?.id}
                         displayButton={false}
                       />
                     ))}

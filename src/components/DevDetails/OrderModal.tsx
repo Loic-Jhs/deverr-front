@@ -29,8 +29,7 @@ function OrderModal(props: ModalType) {
 
   //STATES
   const [selected, setSelected] = useState<number | undefined>(undefined);
-  // TODO change for the good type
-  const [orderSelected, setOrderSelected] = useState<any>();
+  const [orderSelected, setOrderSelected] = useState<number | undefined>();
   const [instruction, setInstruction] = useState<string | undefined>();
 
   const handleClick = (item: T) => {
@@ -39,12 +38,12 @@ function OrderModal(props: ModalType) {
   };
 
   const validateAskService = () => {
-    fetch(`http://localhost/order/store`, {
+    fetch(`${import.meta.env.VITE_API_URL}/order/store`, {
       method: "POST",
       headers: {
         Authorization: "Bearer " + auth.access_token,
-        "access-control-allow-origin": "*",
         "Content-type": "application/json",
+
       },
       body: JSON.stringify({
         developer_id: props.developerId,

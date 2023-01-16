@@ -22,16 +22,15 @@ const FormClient = () => {
   const { confirmedPassword, ...cleanUserInput } = userInput;
   const { register, handleSubmit, reset, formState: { errors } } = useForm<UserInput>({ resolver: yupResolver(schema) });
 
-  const onSubmit: SubmitHandler<UserInput> = async (data) => {
+  const onSubmit: SubmitHandler<UserInput> = async () => {
     setLoading(true);
     try {
       await fetch(`${import.meta.env.VITE_API_URL}/register`, {
         method: "POST",
-        headers: {
-          "access-control-allow-origin": "*",
-          "Content-type": "application/json",
-        },
         mode: 'cors',
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(cleanUserInput),
       })
         .then(response => response.json())
@@ -39,22 +38,11 @@ const FormClient = () => {
           setLoading(false);
           setSuccessMessage(responseData.message);
           setTimeout(() => { setSuccessMessage("") }, 4000);
-          setUserInput({
-            lastname: "",
-            firstname: "",
-            email: "",
-            password: "",
-            confirmedPassword: "",
-            type: "user",
-          });
+          reset();
         });
     } catch (error) {
       console.error(error);
     }
-  }
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUserInput({ ...userInput, [event.target.name]: event.target.value });
   }
 
   return (
@@ -74,31 +62,31 @@ const FormClient = () => {
         <div className="input__container">
           <p className="error">{errors.lastname?.message}</p>
           <label>Nom</label>
-          <input type="text" {...register("lastname")} name="lastname" placeholder="Nom" value={userInput.lastname} onChange={handleChange} />
+          <input type="text" {...register("lastname")} name="lastname" placeholder="Nom" />
         </div>
 
         <div className="input__container">
           <p className="error">{errors.firstname?.message}</p>
           <label>Prénom</label>
-          <input type="text" {...register("firstname")} name="firstname" placeholder="Prénom" value={userInput.firstname} onChange={handleChange} />
+          <input type="text" {...register("firstname")} name="firstname" placeholder="Prénom" />
         </div>
 
         <div className="input__container">
           <p className="error">{errors.email?.message}</p>
           <label>Email</label>
-          <input type="email" {...register("email")} name="email" placeholder="E-mail" value={userInput.email} onChange={handleChange} />
+          <input type="email" {...register("email")} name="email" placeholder="E-mail" />
         </div>
 
         <div className="input__container">
           <p className="error">{errors.password?.message}</p>
           <label>Mot de passe</label>
-          <input type="password" {...register("password")} name="password" placeholder="Mot de passe" value={userInput.password} onChange={handleChange} />
+          <input type="password" {...register("password")} name="password" placeholder="Mot de passe" />
         </div>
 
         <div className="input__container">
           <p className="error">{errors.confirmedPassword?.message}</p>
           <label>Confirmer le mot de passe</label>
-          <input type="password" {...register("confirmedPassword")} placeholder="Confirmez votre mot de passe" value={userInput.confirmedPassword} onChange={handleChange} />
+          <input type="password" {...register("confirmedPassword")} placeholder="Confirmez votre mot de passe" />
         </div>
 
         <div className="button__container">

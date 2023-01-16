@@ -33,11 +33,10 @@ function Order({ toggle }: modaleProps) {
   }, [orderMessage]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    (async () => {
       await fetch(`${import.meta.env.VITE_API_URL}/developer/${devID}`, {
         method: "GET",
         headers: {
-          "access-control-allow-origin": "*",
           "Content-type": "application/json"
         },
         mode: 'cors'
@@ -48,8 +47,7 @@ function Order({ toggle }: modaleProps) {
         setIsLoaded(true);
       })
       .catch((e) => console.error(e));
-    }
-    fetchData();
+    })();
   }, [isLoaded]);
 
   const onSubmit: SubmitHandler<OrderInput & OrderSelect> = async (data) => {
@@ -64,7 +62,7 @@ function Order({ toggle }: modaleProps) {
         headers: {
           "access-control-allow-origin": "*",
           "Content-type": "application/json",
-          Authorization: `Bearer ` + localStorage.getItem('access_token')?.replaceAll('"', '')
+          Authorization: `Bearer ` + auth.token,
         },
         body: JSON.stringify(orderDataRequired),
         mode: 'cors'

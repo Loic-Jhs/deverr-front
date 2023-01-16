@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -25,13 +25,13 @@ function StacksCard({
   };
 
   /*
-    Dans les 2 handleClick ci dessous,
+    Dans les 2 handleClick ci-dessous,
     On fait face à un problème d'évènement du parent, (la <li>).
-    Lorsqu'on clic sur les icônes favories, l'évènement du clic 
-    trigger au mauvais endroit, c'est à dire la <li>. Alors qu'on souhaiterais trigger les icônes.
+    Lorsqu'on clique sur les icônes favoris, l'évènement du clic
+    trigger au mauvais endroit, c'est-à-dire la <li>. Alors qu'on souhaiterait trigger les icônes.
     Pour remédier à ce pb, on utilise stopPropagation().
 
-    Aussi quand on clic sur l'icône, on change la valeur de is_primary à 1 ou 0 en dur 
+    Aussi quand on clique sur l'icône, on change la valeur d'is_primary à 1 ou 0 en dur
     pour envoyer les bonnes valeurs au back.
   */
   const handleFavoriteClick = (event: any, item: DevStack) => {

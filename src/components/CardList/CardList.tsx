@@ -12,6 +12,9 @@ function CardList() {
     (async () => {
       await fetch(`${import.meta.env.VITE_API_URL}/random-developers`, {
         method: "GET",
+        headers: {
+          "Content-type": "application/json",
+        },
         mode: 'cors'
       })
         .then((response) => response.json())

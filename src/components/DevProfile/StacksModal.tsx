@@ -6,7 +6,7 @@ import {
   useState,
 } from "react";
 import ModalWindow from "../Modal/Modal";
-import type { DevStack } from "../../types/index";
+import type { DevStack } from "../../types";
 import Button from "../Button/Button";
 import { authContext } from "../../contexts/authContext";
 import StacksCard from "./StacksCard";
@@ -25,14 +25,13 @@ function StacksModal(props: ModalType) {
 
   //STATES
   const [stacks, setStacks] = useState<DevStack[]>([]);
-  const [selected, setSelected] = useState<number | undefined>(undefined);
   const [stackSelected, setStackSelected] = useState<DevStack | undefined>(
     undefined
   );
   const [yearsExp, setYearsExp] = useState<string>("1");
 
   useEffect(() => {
-    fetch(`http://localhost/all-stacks`, {
+    fetch(`${import.meta.env.VITE_API_URL}/all-stacks`, {
       method: "GET",
       headers: {
         "access-control-allow-origin": "*",
@@ -46,29 +45,23 @@ function StacksModal(props: ModalType) {
           // On filtre les stacks par rapport à leur id
           const filteredStacks = data.filter(
             (stack) =>
-              // Compare les stack.id des deux tableaux,
-              // pour ne renvoyer que ceux qui ne sont pas déjà présent.
+              // Compare-les stack.id des deux tableaux,
+              // pour ne renvoyer que ceux qui ne sont pas déjà présents.
               !props.devStacks.some((devStack) => devStack.id === stack.id)
           );
           setStacks(filteredStacks);
-          // On verifie si une techno à is_primary à 1
-          // On le passe dans le seter pour le fournir en props à StacksCard
+          // On vérifie si une techno à is_primary à 1
+          // On le passe dans le setter pour le fournir en props à StacksCard
         } else {
           setStacks(data);
         }
       });
   }, [props.open]);
 
-  const handleClick = (item: DevStack) => {
-    setStackSelected(item);
-  };
-
   const validateAddingStack = () => {
-    fetch("http://localhost/profile/stacks/store", {
+    fetch(`${import.meta.env.VITE_API_URL}/profile/stacks/store`, {
       method: "POST",
       headers: {
-        "access-control-allow-origin": "*",
-        "Content-type": "application/json",
         Authorization: `Bearer ` + auth.access_token,
       },
       mode: "cors",

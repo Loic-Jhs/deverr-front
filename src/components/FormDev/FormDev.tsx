@@ -33,12 +33,10 @@ const FormDev = () => {
     try {
       await fetch(`${import.meta.env.VITE_API_URL}/register`, {
         method: "POST",
-        headers: {
-          //TODO find a better way to allow access to cors
-          "access-control-allow-origin": "*",
-          "Content-type": "application/json",
-        },
         mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(data),
       })
         .then((response) => response.json())
@@ -55,7 +53,7 @@ const FormDev = () => {
   return (
     <section className="register__form__dev">
       <h1>Inscription d'un développeur</h1>
-      <div className="succes">
+      <div className="success">
         <p>{successMessage}</p>
       </div>
 

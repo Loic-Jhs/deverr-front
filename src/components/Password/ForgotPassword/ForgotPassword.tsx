@@ -14,7 +14,6 @@ function ForgotPassword() {
     await fetch(`${import.meta.env.VITE_API_URL}/forgot-password`, {
       method: "POST",
       headers: {
-        "access-control-allow-origin": "*",
         "Content-type": "application/json",
       },
       mode: 'cors',

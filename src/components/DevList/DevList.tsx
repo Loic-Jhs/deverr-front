@@ -11,14 +11,13 @@ function DevList() {
   const [filteredDev, setFilteredDev] = useState<Dev[]>();
 
   useEffect(() => {
-    const fetchData = async () => {
+    (async () => {
       await fetch(`${import.meta.env.VITE_API_URL}/all-developers`, {
         method: "GET",
+        mode: "cors",
         headers: {
-          "access-control-allow-origin": "*",
           "Content-type": "application/json",
         },
-        mode: "cors",
       })
         .then((response) => response.json())
         .then((data) => {
@@ -27,8 +26,7 @@ function DevList() {
           setIsLoaded(true);
         })
         .catch((e) => console.error(e));
-    };
-    fetchData();
+    })();
   }, [isLoaded]);
 
   const filterDevFunc = (devArray: Dev[] | undefined, inputLetters: string) => {

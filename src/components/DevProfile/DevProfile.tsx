@@ -1,5 +1,5 @@
 import type { DevInfos } from "../../types";
-import { CircularProgress, Rating } from "@mui/material";
+import { CircularProgress} from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { authContext } from "../../contexts/authContext";
 import ServicesModal from "./ServicesModal";
@@ -34,16 +34,12 @@ function DevProfile() {
   const handleConfirmClose = () => setConfirmOpen(false);
 
   useEffect(() => {
-    const fetchData = async () => {
+    (async () => {
       await fetch(`${import.meta.env.VITE_API_URL}/profile/`, {
         method: "GET",
         headers: {
-          "access-control-allow-origin": "*",
           "Content-type": "application/json",
-          // To improve, find out why the context is lost
-          // when the component is refreshed
-          Authorization:
-            `Bearer ` + JSON.parse(localStorage.getItem("access_token") ?? ""),
+          Authorization: `Bearer ` + auth.access_token,
         },
         mode: "cors",
       })
@@ -53,8 +49,7 @@ function DevProfile() {
           setIsLoaded(true);
         })
         .catch((error) => console.error(error));
-    };
-    fetchData();
+    })();
   }, [isLoaded, services]);
 
   const handleEditElement = () => {
@@ -76,10 +71,9 @@ function DevProfile() {
     e.preventDefault();
     setIsEditable(!isEditable);
 
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/profile/update`, {
+    await fetch(`${import.meta.env.VITE_API_URL}/profile/update`, {
       method: "PUT",
       headers: {
-        "access-control-allow-origin": "*",
         "Content-type": "application/json",
         Authorization: `Bearer ` + auth.access_token,
       },
@@ -91,10 +85,9 @@ function DevProfile() {
   };
 
   const deleteUser = () => {
-    fetch("http://localhost/profile/delete", {
+    fetch(`${import.meta.env.VITE_API_URL}/profile/delete`, {
       method: "DELETE",
       headers: {
-        "access-control-allow-origin": "*",
         "Content-type": "application/json",
         Authorization: `Bearer ` + auth.access_token,
       },
@@ -108,10 +101,9 @@ function DevProfile() {
   };
 
   const deleteStacks = (stackId: number) => {
-    fetch(`http://localhost/profile/stacks/delete/${stackId}`, {
+    fetch(`${import.meta.env.VITE_API_URL}/profile/stacks/delete/${stackId}`, {
       method: "DELETE",
       headers: {
-        "access-control-allow-origin": "*",
         "Content-type": "application/json",
         Authorization: `Bearer ` + auth.access_token,
       },
