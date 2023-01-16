@@ -24,7 +24,7 @@ function Homepage() {
           <div className="homepage__button">
             { !auth.access_token &&
               <Link to="/register">
-                <Button variant="contained">
+                <Button variant="contained" sx={{mt: 1}}>
                     Inscription
                 </Button>
               </Link>
@@ -35,7 +35,7 @@ function Homepage() {
           <LottieIllustration animationData={developerSkills} illustration={developerSkills} />
         </div>
       </div>
-      <div className="developpers__container">
+      <div>
         <CardList />
       </div>
     </div>
