@@ -24,8 +24,8 @@ function DevDetails() {
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      await fetch(`http://localhost/developer/${devID}`, {
+    (async () => {
+      await fetch(`${import.meta.env.VITE_API_URL}/developer/${devID}`, {
         method: "GET",
         headers: {
           "access-control-allow-origin": "*",
@@ -40,8 +40,7 @@ function DevDetails() {
           setIsLoaded(true);
         })
         .catch((error) => console.error(error));
-    };
-    fetchData();
+    })();
   }, [isLoaded, services, devID]);
 
   if (dev) {

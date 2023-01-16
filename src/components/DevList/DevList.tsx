@@ -12,7 +12,7 @@ function DevList() {
 
   useEffect(() => {
     const fetchData = async () => {
-      await fetch("http://localhost/all-developers", {
+      await fetch(`${import.meta.env.VITE_API_URL}/all-developers`, {
         method: "GET",
         headers: {
           "access-control-allow-origin": "*",

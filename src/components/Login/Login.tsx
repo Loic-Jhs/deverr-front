@@ -23,7 +23,7 @@ const Login = () => {
 
   const onSubmit: SubmitHandler<LoginInput> = async (data) => {
     try {
-      await fetch('http://localhost/login', {
+      await fetch(`${import.meta.env.VITE_API_URL}/login`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",

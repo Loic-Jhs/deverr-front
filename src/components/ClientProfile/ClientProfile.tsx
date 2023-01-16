@@ -23,7 +23,7 @@ function ClientProfile() {
     if (isCurrentClient) {
       const fetchData = async () => {
         try {
-          const response = await fetch(`http://localhost/profile/`, {
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/profile/`, {
             method: "GET",
             headers: {
               "access-control-allow-origin": "*",

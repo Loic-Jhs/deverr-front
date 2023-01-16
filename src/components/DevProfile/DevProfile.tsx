@@ -35,7 +35,7 @@ function DevProfile() {
 
   useEffect(() => {
     const fetchData = async () => {
-      await fetch("http://localhost/profile/", {
+      await fetch(`${import.meta.env.VITE_API_URL}/profile/`, {
         method: "GET",
         headers: {
           "access-control-allow-origin": "*",
@@ -76,7 +76,7 @@ function DevProfile() {
     e.preventDefault();
     setIsEditable(!isEditable);
 
-    const response = await fetch("http://localhost/profile/update", {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/profile/update`, {
       method: "PUT",
       headers: {
         "access-control-allow-origin": "*",

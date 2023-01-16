@@ -15,7 +15,7 @@ function OrderDone({order, toggle, auth, setIsLoaded}: OrderDoneProps) {
     const confirmOrderDone = async () => {
         if (auth.access_token != undefined && order) {
             try {
-                const response = await fetch(`https://api-dev.deverr.fr/order/prestation-finished/${order.id}`, {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/order/prestation-finished/${order.id}`, {
                     method: "GET",
                     headers: {
                         "access-control-allow-origin": "*",

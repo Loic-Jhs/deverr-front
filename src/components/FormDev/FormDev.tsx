@@ -31,7 +31,7 @@ const FormDev = () => {
   const onSubmit: SubmitHandler<DevInput> = async (data) => {
     setLoading(true);
     try {
-      await fetch("http://localhost/register", {
+      await fetch(`${import.meta.env.VITE_API_URL}/register`, {
         method: "POST",
         headers: {
           //TODO find a better way to allow access to cors

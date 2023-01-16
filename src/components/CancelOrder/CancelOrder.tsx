@@ -16,7 +16,7 @@ function CancelOrder({order, toggle, auth, setIsLoaded}: CancelOrderProps) {
     const confirmCancelation = async () => {
         if (auth.access_token != undefined && order) {
             try {
-                const response = await fetch(`https://api-dev.deverr.fr/order/prestation-rejected/${order.id}`, {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/order/prestation-rejected/${order.id}`, {
                     method: "GET",
                     headers: {
                         "access-control-allow-origin": "*",

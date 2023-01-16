@@ -13,7 +13,7 @@ function LottieIllustration(props: AnimationConfig) {
 
   useEffect(() => {
     const animation = lottie.loadAnimation({
-      container: container.current,
+      container: container.current as Element,
       renderer: "svg",
       loop: props.loop,
       autoplay: true,

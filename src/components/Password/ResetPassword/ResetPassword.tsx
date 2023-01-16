@@ -13,7 +13,7 @@ function ResetPassword() {
 
   const onSubmit: SubmitHandler<ResetPasswordType> = async (data) => {
     setLoading(true);
-    await fetch(`http://localhost/reset-password/`, {
+    await fetch(`${import.meta.env.VITE_API_URL}/reset-password/`, {
       method: "POST",
       headers: {
         "access-control-allow-origin": "*",

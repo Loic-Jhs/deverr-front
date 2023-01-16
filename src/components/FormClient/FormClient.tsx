@@ -25,7 +25,7 @@ const FormClient = () => {
   const onSubmit: SubmitHandler<UserInput> = async (data) => {
     setLoading(true);
     try {
-      await fetch('http://localhost/register', {
+      await fetch(`${import.meta.env.VITE_API_URL}/register`, {
         method: "POST",
         headers: {
           "access-control-allow-origin": "*",

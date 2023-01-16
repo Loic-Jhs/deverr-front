@@ -34,7 +34,7 @@ function Order({ toggle }: modaleProps) {
 
   useEffect(() => {
     const fetchData = async () => {
-      await fetch(`https://api-dev.deverr.fr/developer/${devID}`, {
+      await fetch(`${import.meta.env.VITE_API_URL}/developer/${devID}`, {
         method: "GET",
         headers: {
           "access-control-allow-origin": "*",
@@ -59,7 +59,7 @@ function Order({ toggle }: modaleProps) {
       developer_prestation_id: Number(data.prestation_id),
       instructions: data.instruction
     }
-    await fetch(`https://api-dev.deverr.fr/order/store`, {
+    await fetch(`${import.meta.env.VITE_API_URL}/order/store`, {
         method: "POST",
         headers: {
           "access-control-allow-origin": "*",

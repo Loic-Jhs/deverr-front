@@ -24,7 +24,7 @@ function DevOrder() {
     useEffect(() => {
         if (auth.access_token != undefined && auth.user_info.developer_id == devID) {
             const fetchData = async () => {
-                await fetch(`https://api-dev.deverr.fr/order?developer_id=${devID}`, {
+                await fetch(`${import.meta.env.VITE_API_URL}/order?developer_id=${devID}`, {
                     method: "GET",
                     headers: {
                         "access-control-allow-origin": "*",
@@ -69,7 +69,7 @@ function DevOrder() {
 
     const confirmOrder = async (orderID: number) => {
         if (auth.access_token != undefined && orderID) {
-            await fetch(`https://api-dev.deverr.fr/order/prestation-accepted/${orderID}`, {
+            await fetch(`${import.meta.env.VITE_API_URL}/order/prestation-accepted/${orderID}`, {
                 method: "GET",
                 headers: {
                     "access-control-allow-origin": "*",
