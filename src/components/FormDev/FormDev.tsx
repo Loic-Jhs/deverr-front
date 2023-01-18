@@ -35,7 +35,7 @@ const FormDev = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://api-dev.deverr.fr/stacks/all', {
+        const response = await fetch('https://api-dev.deverr.fr/all-stacks', {
           method: "GET",
           headers: {
             //TODO find a better way to allow access to cors
