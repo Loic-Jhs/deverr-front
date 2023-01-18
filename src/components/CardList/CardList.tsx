@@ -13,7 +13,7 @@ function CardList() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://api-dev.deverr.fr/random-users', {
+        const response = await fetch('https://api-dev.deverr.fr/random-developers', {
           method: "GET",
           headers: {
             "access-control-allow-origin": "*",
