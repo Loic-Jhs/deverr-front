@@ -24,7 +24,7 @@ function ClientProfile() {
          if (isCurrentClient == true) {
             const fetchData = async () => {
                 try {
-                    const response = await fetch(`https://api-dev.deverr.fr/profile/${userID}`, {
+                    const response = await fetch(`https://api-dev.deverr.fr/profile`, {
                         method: "GET",
                         headers: {
                             "access-control-allow-origin": "*",
