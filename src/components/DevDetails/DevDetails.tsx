@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import Button from "../Button/Button";
 import PrestationCard from "../DevProfile/PrestationCard";
 import "./style.scss";
+import OrderModal from "./OrderModal";
 
 function DevDetails() {
   //HOOKS
@@ -17,14 +18,18 @@ function DevDetails() {
   const [isLoaded, setIsLoaded] = useState<Boolean>(false);
   const [services, setServices] = useState<Boolean>(false);
 
+  //MODAL STATES
+  const [open, setOpen] = useState(true);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   useEffect(() => {
-    const fetchData = async () => {
-      await fetch(`http://localhost/developer/${devID}`, {
+    (async () => {
+      await fetch(`${import.meta.env.VITE_API_URL}/developer/${devID}`, {
         method: "GET",
         headers: {
-          "access-control-allow-origin": "*",
-          "Content-type": "application/json",
           Authorization: `Bearer ` + auth.access_token,
+          "Content-type": "application/json",
         },
         mode: "cors",
       })
@@ -34,24 +39,26 @@ function DevDetails() {
           setIsLoaded(true);
         })
         .catch((error) => console.error(error));
-    };
-    fetchData();
+    })();
   }, [isLoaded, services, devID]);
-
-  const handleAskServicesClick = () => {
-    //Que doit on faire lorsqu'on clic sur une demande de presta ?
-  }
 
   if (dev) {
     let average: number | null = 0;
     if (dev.reviews) {
       dev.reviews.length > 0
         ? (average =
-            dev.reviews.reduce((a, b) => a + b.rating, 0) / dev.reviews.length)
+          dev.reviews.reduce((a, b) => a + b.rating, 0) / dev.reviews.length)
         : (average = null);
     }
     return (
       <>
+        <OrderModal
+          open={open}
+          onClose={handleClose}
+          orders={setServices}
+          developerId={devID}
+          devData={dev}
+        />
         <div className="profile__container">
           <div className="profile__left-part">
             <div className="detail__situation">
@@ -127,9 +134,9 @@ function DevDetails() {
                 </div>
               )}
               {auth.access_token == undefined ||
-              auth.user_info.user_role != 1 ? (
+                auth.user_info.user_role != 1 ? (
                 <div className="dev__contact">
-                  <Button onClick={handleAskServicesClick}>Demandez une prestation</Button>
+                  <Button onClick={handleOpen}>Demandez une prestation</Button>
                 </div>
               ) : (
                 ""
@@ -149,7 +156,7 @@ function DevDetails() {
                         prestation={prestation}
                         services={services}
                         setServices={setServices}
-                        devProfileId={dev.id}
+                        devProfileId={dev?.id}
                         displayButton={false}
                       />
                     ))}

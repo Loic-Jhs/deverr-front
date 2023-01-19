@@ -6,7 +6,7 @@ import {
   useState,
 } from "react";
 import ModalWindow from "../Modal/Modal";
-import type { DevStack } from "../../types/index";
+import type { DevStack } from "../../types";
 import Button from "../Button/Button";
 import { authContext } from "../../contexts/authContext";
 import StacksCard from "./StacksCard";
@@ -25,15 +25,13 @@ function StacksModal(props: ModalType) {
 
   //STATES
   const [stacks, setStacks] = useState<DevStack[]>([]);
-  const [selected, setSelected] = useState<number | undefined>(undefined);
   const [stackSelected, setStackSelected] = useState<DevStack | undefined>(
     undefined
   );
   const [yearsExp, setYearsExp] = useState<string>("1");
-  const [primaryStackExist, setPrimaryStackExist] = useState<boolean>(false);
 
   useEffect(() => {
-    fetch(`http://localhost/all-stacks`, {
+    fetch(`${import.meta.env.VITE_API_URL}/all-stacks`, {
       method: "GET",
       headers: {
         "access-control-allow-origin": "*",
@@ -43,39 +41,34 @@ function StacksModal(props: ModalType) {
     })
       .then((response) => response.json())
       .then((data: DevStack[]) => {
-        // On filtre les stacks par rapport à leur id
-        const filteredStacks = data.filter(
-          (stack) =>
-            // Compare les stack.id des deux tableaux,
-            // pour ne renvoyer que ceux qui ne sont pas déjà présent.
-            !props.devStacks.some((devStack) => devStack.id === stack.id)
-        );
-        setStacks(filteredStacks);
-        // On verifie si une techno à is_primary à 1
-        // On le passe dans le seter pour le fournir en props à StacksCard
-        setPrimaryStackExist(
-          props.devStacks.some((devStack) => devStack.is_primary === 1)
-        );
+        if (props.devStacks) {
+          // On filtre les stacks par rapport à leur id
+          const filteredStacks = data.filter(
+            (stack) =>
+              // Compare-les stack.id des deux tableaux,
+              // pour ne renvoyer que ceux qui ne sont pas déjà présents.
+              !props.devStacks.some((devStack) => devStack.id === stack.id)
+          );
+          setStacks(filteredStacks);
+          // On vérifie si une techno à is_primary à 1
+          // On le passe dans le setter pour le fournir en props à StacksCard
+        } else {
+          setStacks(data);
+        }
       });
   }, [props.open]);
 
-  const handleClick = (item: DevStack) => {
-    setStackSelected(item);
-  };
-
   const validateAddingStack = () => {
-    fetch("http://localhost/profile/stacks/store", {
+    fetch(`${import.meta.env.VITE_API_URL}/profile/stacks/store`, {
       method: "POST",
       headers: {
-        "access-control-allow-origin": "*",
-        "Content-type": "application/json",
         Authorization: `Bearer ` + auth.access_token,
       },
       mode: "cors",
       body: JSON.stringify({
         stack_id: stackSelected?.id,
         stack_experience: yearsExp,
-        is_primary: stackSelected?.is_primary,
+        is_primary: stackSelected?.is_primary ?? 0,
       }),
     })
       .then((_response) => {
@@ -104,7 +97,6 @@ function StacksModal(props: ModalType) {
                   stackSelected={stackSelected}
                   setStackSelected={setStackSelected}
                   setYearsExp={setYearsExp}
-                  primaryStackExist={primaryStackExist}
                 />
               );
             })}

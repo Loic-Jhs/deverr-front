@@ -11,24 +11,22 @@ function DevList() {
   const [filteredDev, setFilteredDev] = useState<Dev[]>();
 
   useEffect(() => {
-    const fetchData = async () => {
-      await fetch("http://localhost/all-developers", {
+    (async () => {
+      await fetch(`${import.meta.env.VITE_API_URL}/all-developers`, {
         method: "GET",
+        mode: "cors",
         headers: {
-          "access-control-allow-origin": "*",
           "Content-type": "application/json",
         },
-        mode: "cors",
       })
         .then((response) => response.json())
         .then((data) => {
-          setDevList(data);
-          setFilteredDev(data);
+          setDevList(data.data);
+          setFilteredDev(data.data);
           setIsLoaded(true);
         })
         .catch((e) => console.error(e));
-    };
-    fetchData();
+    })();
   }, [isLoaded]);
 
   const filterDevFunc = (devArray: Dev[] | undefined, inputLetters: string) => {

@@ -13,10 +13,9 @@ function ResetPassword() {
 
   const onSubmit: SubmitHandler<ResetPasswordType> = async (data) => {
     setLoading(true);
-    await fetch(`http://localhost/reset-password/`, {
+    await fetch(`${import.meta.env.VITE_API_URL}/reset-password/`, {
       method: "POST",
       headers: {
-        "access-control-allow-origin": "*",
         "Content-type": "application/json",
       },
       mode: 'cors',
@@ -52,7 +51,7 @@ function ResetPassword() {
           <input type="password" {...register("password")} name="password" />
           {errors?.password && <p>{errors.password.message}</p>}
 
-          <label>Conrifmation de mot de passe</label>
+          <label>Confirmation de mot de passe</label>
           <input type="password" {...register("password_confirmation")} name="password_confirmation" />
           {errors?.password_confirmation && <p>{errors.password_confirmation.message}</p>}
 

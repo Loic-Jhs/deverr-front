@@ -9,9 +9,12 @@ function CardList() {
   const [isLoaded, setIsLoaded] = useState<Boolean>(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      await fetch('http://localhost/random-developers', {
+    (async () => {
+      await fetch(`${import.meta.env.VITE_API_URL}/random-developers`, {
         method: "GET",
+        headers: {
+          "Content-type": "application/json",
+        },
         mode: 'cors'
       })
         .then((response) => response.json())
@@ -20,8 +23,8 @@ function CardList() {
           setIsLoaded(true);
         })
         .catch((error) => console.error("une erreur est survenue", error));
-    };
-    fetchData();
+    })();
+
   }, [])
   
   return (

@@ -1,5 +1,5 @@
 import type { DevInfos } from "../../types";
-import { CircularProgress, Rating } from "@mui/material";
+import { CircularProgress} from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { authContext } from "../../contexts/authContext";
 import ServicesModal from "./ServicesModal";
@@ -8,6 +8,7 @@ import StacksModal from "./StacksModal";
 import Button from "../Button/Button";
 import ConfirmModal from "../Modal/ConfirmModal";
 import ClearIcon from "@mui/icons-material/Clear";
+import defaultAvatar from "../../assets/img/avatar.svg"
 import "./style.scss";
 
 function DevProfile() {
@@ -33,16 +34,12 @@ function DevProfile() {
   const handleConfirmClose = () => setConfirmOpen(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      await fetch("http://localhost/profile/", {
+    (async () => {
+      await fetch(`${import.meta.env.VITE_API_URL}/profile/`, {
         method: "GET",
         headers: {
-          "access-control-allow-origin": "*",
           "Content-type": "application/json",
-          // To improve, find out why the context is lost
-          // when the component is refreshed
-          Authorization:
-            `Bearer ` + JSON.parse(localStorage.getItem("access_token") ?? ""),
+          Authorization: `Bearer ` + auth.access_token,
         },
         mode: "cors",
       })
@@ -52,8 +49,7 @@ function DevProfile() {
           setIsLoaded(true);
         })
         .catch((error) => console.error(error));
-    };
-    fetchData();
+    })();
   }, [isLoaded, services]);
 
   const handleEditElement = () => {
@@ -75,10 +71,9 @@ function DevProfile() {
     e.preventDefault();
     setIsEditable(!isEditable);
 
-    const response = await fetch("http://localhost/profile/update", {
+    await fetch(`${import.meta.env.VITE_API_URL}/profile/update`, {
       method: "PUT",
       headers: {
-        "access-control-allow-origin": "*",
         "Content-type": "application/json",
         Authorization: `Bearer ` + auth.access_token,
       },
@@ -90,10 +85,9 @@ function DevProfile() {
   };
 
   const deleteUser = () => {
-    fetch("http://localhost/profile/delete", {
+    fetch(`${import.meta.env.VITE_API_URL}/profile/delete`, {
       method: "DELETE",
       headers: {
-        "access-control-allow-origin": "*",
         "Content-type": "application/json",
         Authorization: `Bearer ` + auth.access_token,
       },
@@ -107,10 +101,9 @@ function DevProfile() {
   };
 
   const deleteStacks = (stackId: number) => {
-    fetch(`http://localhost/profile/stacks/delete/${stackId}`, {
+    fetch(`${import.meta.env.VITE_API_URL}/profile/stacks/delete/${stackId}`, {
       method: "DELETE",
       headers: {
-        "access-control-allow-origin": "*",
         "Content-type": "application/json",
         Authorization: `Bearer ` + auth.access_token,
       },
@@ -199,7 +192,7 @@ function DevProfile() {
                 )}
               </div>
               <div className="dev__stacks">
-                {dev.stacks.map((stack) => {
+                {dev.stacks && dev.stacks.map((stack) => {
                   return (
                     <div key={stack.id} className="stack__item">
                       <img src={stack.logo} alt={`Logo ${stack.name}`} />
@@ -224,7 +217,7 @@ function DevProfile() {
               </div>
               <div className="img__container">
                 <img
-                  src={dev.avatar}
+                  src={dev.avatar ? dev.avatar : defaultAvatar}
                   alt={`${dev.firstname} ${dev.lastname} avatar`}
                 />
               </div>
@@ -232,11 +225,11 @@ function DevProfile() {
                 <h3>
                   {dev.firstname} {dev.lastname}
                 </h3>
-                <p>Développeur depuis {dev.years_of_experience} ans</p>
+                <p>Développeur depuis {dev.years_of_experience ? dev.years_of_experience : "1"} ans</p>
               </div>
               <div className="dev__prestations-reviews">
                 <h3>
-                  {dev.prestations.length > 1
+                  {dev.prestations && dev.prestations.length > 1
                     ? "Services proposés "
                     : "Service proposé "}
                   :

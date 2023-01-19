@@ -2,7 +2,6 @@ import React, {
   Dispatch,
   SetStateAction,
   useContext,
-  useEffect,
   useState,
 } from "react";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
@@ -12,7 +11,6 @@ import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import CancelIcon from "@mui/icons-material/Cancel";
 import EditIcon from "@mui/icons-material/Edit";
 import type { RealPrestation } from "../../types";
-import { useParams } from "react-router-dom";
 
 type PROPS = {
   prestation: RealPrestation;
@@ -24,7 +22,6 @@ type PROPS = {
 
 function PrestationCard(props: PROPS) {
   //HOOKS
-  const { devID } = useParams();
   const { auth } = useContext(authContext);
 
   //STATES
@@ -35,12 +32,11 @@ function PrestationCard(props: PROPS) {
   );
 
   const updateService = (id: number, description?: string, price?: number) => {
-    fetch(`http://localhost/profile/prestations/edit/${id}`, {
+    fetch(`${import.meta.env.VITE_API_URL}/profile/prestations/edit/${id}`, {
       method: "PATCH",
       headers: {
-        Authorization: "Bearer " + auth.access_token,
-        "access-control-allow-origin": "*",
         "Content-type": "application/json",
+        Authorization: "Bearer " + auth.access_token,
       },
       body: JSON.stringify({
         prestation_type_id: id,
@@ -57,12 +53,11 @@ function PrestationCard(props: PROPS) {
   };
 
   const deleteService = (id: number) => {
-    fetch(`http://localhost/profile/prestations/delete/${id}`, {
+    fetch(`${import.meta.env.VITE_API_URL}/profile/prestations/delete/${id}`, {
       method: "DELETE",
       headers: {
-        Authorization: "Bearer " + auth.access_token,
-        "access-control-allow-origin": "*",
         "Content-type": "application/json",
+        Authorization: "Bearer " + auth.access_token,
       },
       mode: "cors",
     })

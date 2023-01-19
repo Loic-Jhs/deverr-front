@@ -27,17 +27,15 @@ function ServicesModal(props: ModalType) {
 
   //STATES
   const [selected, setSelected] = useState<number | undefined>(undefined);
-  // TODO change for the good type
-  const [serviceSelected, setServiceSelected] = useState<any>();
+  const [serviceSelected, setServiceSelected] = useState<number| undefined>();
   const [description, setDescription] = useState<string | undefined>();
   const [price, setPrice] = useState<string | undefined>();
   const [data, setData] = useState<T[]>();
 
   useEffect(() => {
-    fetch(`http://localhost/all-prestations/`, {
+    fetch(`${import.meta.env.VITE_API_URL}/all-prestations/`, {
       method: "GET",
       headers: {
-        "access-control-allow-origin": "*",
         "Content-type": "application/json",
       },
       mode: "cors",
@@ -54,12 +52,11 @@ function ServicesModal(props: ModalType) {
   };
 
   const validateAddingService = () => {
-    fetch(`http://localhost/profile/prestations/store`, {
+    fetch(`${import.meta.env.VITE_API_URL}/profile/prestations/store`, {
       method: "POST",
       headers: {
-        Authorization: "Bearer " + auth.access_token,
-        "access-control-allow-origin": "*",
         "Content-type": "application/json",
+        Authorization: "Bearer " + auth.access_token,
       },
       body: JSON.stringify({
         prestation_type_id: serviceSelected,

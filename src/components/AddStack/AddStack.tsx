@@ -3,19 +3,16 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { authContext } from '../../contexts/authContext';
 import Stacks from '../../models/stacks';
 import { DevStack } from '../../types';
-import { DevInfos } from '../../types';
 import Button from '../Button/Button';
 
 import './addStack.scss';
 
 interface modaleProps {
-  toggleStack: () => void;
   devStacks: DevStack[];
 }
 
-function AddStack({ toggleStack, devStacks }: modaleProps) {
+function AddStack({ devStacks }: modaleProps) {
   const { auth } = useContext(authContext);
-  const [dev, setDev] = useState<DevInfos>();
   const [isLoaded, setIsLoaded] = useState(false);
   const [stacks, setStacks] = useState<Stacks[]>([]);
   const [successMessage, setSuccessMessage] = useState('');
@@ -28,25 +25,21 @@ function AddStack({ toggleStack, devStacks }: modaleProps) {
 
   useEffect(() => {
     if (auth && auth.access_token != undefined) {
-      const fetchData = async () => {
-        try {
-          const response = await fetch('http://localhost/stacks/all', {
-            method: "GET",
-            headers: {
-              "access-control-allow-origin": "*",
-              "Content-type": "application/json",
-              Authorization: `Bearer ${auth.access_token}`
-            },
-            mode: 'cors'
-          });
-          const data = await response.json();
-          setStacks(data);
-          setIsLoaded(true);
-        } catch (e) {
-          console.error(e);
-        }
-      }
-      fetchData();
+      (async () => {
+        await fetch(`${import.meta.env.VITE_API_URL}/stacks/all`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${auth.access_token}`
+          },
+          mode: 'cors'
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            setStacks(data);
+            setIsLoaded(true);
+          })
+          .catch((error) => console.error("une erreur est survenue", error));
+      })();
     }
   }, [isLoaded]);
 
@@ -59,12 +52,11 @@ function AddStack({ toggleStack, devStacks }: modaleProps) {
     };
 
     try {
-      const response = await fetch(`http://localhost/profile/add-stack/${stacksDataRequired.stack_id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/profile/add-stack/${stacksDataRequired.stack_id}`, {
         method: "POST",
         headers: {
-          "access-control-allow-origin": "*",
+          Authorization: `Bearer ${auth.access_token}`,
           "Content-type": "application/json",
-          Authorization: `Bearer ` + localStorage.getItem('access_token')?.replaceAll('"', '')
         },
         body: JSON.stringify(stacksDataRequired),
         mode: 'cors'
@@ -89,7 +81,7 @@ function AddStack({ toggleStack, devStacks }: modaleProps) {
               )
             })}
           </select>
-          {errors.id && <p className="error">Selectionnez une techno !</p>}
+          {errors.id && <p className="error">Sélectionnez une techno !</p>}
           <Button type="submit">
             Ajouter
           </Button>

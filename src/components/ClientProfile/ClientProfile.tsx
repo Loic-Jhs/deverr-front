@@ -1,6 +1,5 @@
 import { CircularProgress } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
 import { authContext } from "../../contexts/authContext";
 import { UserInfos } from "../../types";
 import "./style.scss";
@@ -11,7 +10,6 @@ function ClientProfile() {
   const [client, setClient] = useState<UserInfos>();
   const [isLoaded, setIsLoaded] = useState<Boolean>(false);
   const [isCurrentClient, setIsCurrentClient] = useState<boolean>(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (auth.access_token != undefined) {
@@ -21,27 +19,23 @@ function ClientProfile() {
 
   useEffect(() => {
     if (isCurrentClient) {
-      const fetchData = async () => {
+      (async () => {
         try {
-          const response = await fetch(`http://localhost/profile/`, {
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/profile/`, {
             method: "GET",
             headers: {
-              "access-control-allow-origin": "*",
+              Authorization: `Bearer ${auth.access_token}`,
               "Content-type": "application/json",
-              Authorization:
-                `Bearer ` + localStorage.getItem("access_token")?.replaceAll('"', ""),
             },
             mode: "cors",
           });
           const data = await response.json();
-          console.error(data);
           setClient(data);
           setIsLoaded(true);
         } catch (e) {
           console.error(e);
         }
-      };
-      fetchData();
+      })();
     }
   }, [isCurrentClient, isLoaded, auth]);
 
@@ -60,7 +54,7 @@ function ClientProfile() {
         <div className="client__orders__container">
           <h2>Suivi de vos demandes : </h2>
           <div className="client__orders__list">
-            {client.orders.map((order, index) => {
+            {client.orders.map((order: UserInfos['orders'][0], index) => {
               let classToAdd = order.is_finished ? "finished__order" : "";
 
               return (
