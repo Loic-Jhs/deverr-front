@@ -5,8 +5,8 @@ import { authContext } from "../../contexts/authContext";
 import { useParams } from "react-router-dom";
 import Button from "../Button/Button";
 import PrestationCard from "../DevProfile/PrestationCard";
-import "./style.scss";
 import OrderModal from "./OrderModal";
+import "./style.scss";
 
 function DevDetails() {
   //HOOKS
@@ -19,7 +19,7 @@ function DevDetails() {
   const [services, setServices] = useState<Boolean>(false);
 
   //MODAL STATES
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -28,7 +28,6 @@ function DevDetails() {
       await fetch(`${import.meta.env.VITE_API_URL}/developer/${devID}`, {
         method: "GET",
         headers: {
-          Authorization: `Bearer ` + auth.access_token,
           "Content-type": "application/json",
         },
         mode: "cors",
@@ -133,8 +132,8 @@ function DevDetails() {
                   />
                 </div>
               )}
-              {auth.access_token == undefined ||
-                auth.user_info.user_role != 1 ? (
+              { auth.access_token != undefined &&
+                auth.user_info.user_role === "0" ? (
                 <div className="dev__contact">
                   <Button onClick={handleOpen}>Demandez une prestation</Button>
                 </div>
