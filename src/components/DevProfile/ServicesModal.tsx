@@ -13,7 +13,8 @@ import Button from "../Button/Button";
 type  ModalType = {
   open: boolean;
   onClose: () => void;
-  services: Dispatch<SetStateAction<Boolean>>;
+  setServices: Dispatch<SetStateAction<Boolean>>;
+  services: Boolean;
 }
 
 type T = {
@@ -66,7 +67,7 @@ function ServicesModal(props: ModalType) {
       mode: "cors",
     })
       .then((_response) => {
-        props.services(true);
+        props.setServices(!props.services);
         props.onClose();
       })
       .catch((error) => console.error(error));

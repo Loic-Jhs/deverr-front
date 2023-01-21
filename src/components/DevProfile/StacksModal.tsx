@@ -59,10 +59,20 @@ function StacksModal(props: ModalType) {
   }, [props.open]);
 
   const validateAddingStack = () => {
+    console.log(
+      "token :", auth.access_token,
+      {
+        stack_id: stackSelected?.id,
+        stack_experience: yearsExp,
+        is_primary: stackSelected?.is_primary ?? 0,
+      }
+    );
+    
     fetch(`${import.meta.env.VITE_API_URL}/profile/stacks/store`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ` + auth.access_token,
+        "Content-type": "application/json",
       },
       mode: "cors",
       body: JSON.stringify({
