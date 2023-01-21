@@ -74,6 +74,7 @@ function PrestationCard(props: PROPS) {
           Si le user connecté correspond à un développeur 
           on affiche les boutons
           */
+         auth.access_token &&
           auth.user_info.user_id === props.devProfileId && (
             <div className="svg">
               {!editService && props.displayButton && (

@@ -29,7 +29,7 @@ function AuthProvider({ children }: React.PropsWithChildren) {
   };
 
   useEffect(() => {
-    if (localStorage.length > 0) {
+    if (isLogged || localStorage.getItem("access_token")) {
       setAuth({
         access_token: JSON.parse(localStorage.getItem("access_token") ?? ""),
         token_type: JSON.parse(localStorage.getItem("token_type") ?? ""),
