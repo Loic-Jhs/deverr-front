@@ -34,10 +34,8 @@ function DevProfile() {
   const handleConfirmClose = () => setConfirmOpen(false);
 
   useEffect(() => {
-    console.log(services);
-    
     if (auth.access_token !== undefined) {
-      fetch(`${import.meta.env.VITE_API_URL}/profile/`, {
+      fetch(`${import.meta.env.VITE_API_URL}/profile`, {
         method: "GET",
         headers: {
           "Content-type": "application/json",

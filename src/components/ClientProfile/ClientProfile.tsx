@@ -21,11 +21,12 @@ function ClientProfile() {
     if (isCurrentClient) {
       (async () => {
         try {
-          const response = await fetch(`${import.meta.env.VITE_API_URL}/profile/`, {
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/profile`, {
             method: "GET",
             headers: {
               Authorization: `Bearer ${auth.access_token}`,
               "Content-type": "application/json",
+              "Accept": "application/json",
             },
             mode: "cors",
           });
