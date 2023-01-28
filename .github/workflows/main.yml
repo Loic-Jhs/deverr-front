@@ -15,42 +15,13 @@ jobs:
       
       - name : install sshpass
         run : sudo apt install sshpass
-    
-      - name: Install and build
-        run: |
-          npm install
-          npm run build
           
-      - name: ssh-scp-ssh-pipelines
-        # You may pin to the exact commit or the version.
-        # uses: cross-the-world/ssh-scp-ssh-pipelines@78e864b4890087a58248ff39320406971ca88b89
-        uses: cross-the-world/ssh-scp-ssh-pipelines@v1.1.4
+      
+      - name: Connect to production server and update production
+        uses: appleboy/ssh-action@master
         with:
-          # ssh remote host
           host: ${{ secrets.SSH_IP }}
-          # ssh remote user
-          user:  ${{ secrets.SSH_USER }}
-          # ssh remote password
-          pass:  ${{ secrets.SSH_PASSWORD }}
-          # execute pre-commands before scp
-          first_ssh: rm -R /var/www/html/deverr.fr
-          # scp from local to remote
-          scp: dist /var/www/html/deverr.fr
-          # execute post-commands after scp
-          last_ssh: /home/darkmoi31/.htaccess /var/www/html/deverr.fr
-          
-          
-          
-          
-#       - name: Connect to production server and update production
-#         uses: appleboy/ssh-action@master
-#         with:
-#             host: ${{ secrets.SSH_IP }}
-#             username: ${{ secrets.SSH_USER }}
-#             password: ${{ secrets.SSH_PASSWORD }}
-#             script: |
-#               scp -r dist ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }}:~/var/www/html/deverr.fr
-#                 echo "dist folder copied to remote server"
-
-
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: ./updateApi.sh > logFrontUpdate.log 2>&1
           
