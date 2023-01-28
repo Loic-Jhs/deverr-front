@@ -14,7 +14,7 @@ function Homepage() {
             vous accompagne !
           </h2>
           <p>
-            <span>DEVERR</span> est la plateforme qui met à votre disposition des <span>développeurs</span> qui donneront vie à <span>vos projets</span>.
+            <span>DEVERR</span> est la plateforme qui met à votre disposition des <span>développeurs</span> qui donneront vie à <span>vos projets allo</span>.
           </p>
           <div className="homepage__button">
             <div className="button__container">
