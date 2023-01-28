@@ -13,15 +13,11 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2.1.5
       
-      - name : install sshpass
-        run : sudo apt install sshpass
-          
-      
       - name: Connect to production server and update production
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_IP }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASSWORD }}
-          script: ./updateApi.sh > logFrontUpdate.log 2>&1
+          script: ./updateFront.sh > logFrontUpdate.log 2>&1
           
