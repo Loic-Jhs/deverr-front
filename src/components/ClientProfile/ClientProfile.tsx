@@ -45,7 +45,6 @@ function ClientProfile() {
   async function handleCheckout(e: React.MouseEvent) {
     const stripe = await loadStripe(`${import.meta.env.VITE_PK_STRIPE}`);
     const orderID = e.target.getAttribute('data-order-id');
-    const devPrestationID = e.target.getAttribute('data-prestation-id');
 
     await fetch(`${import.meta.env.VITE_API_URL}`+"/order/create-session/" + orderID, {
       method: "POST"
