@@ -19,16 +19,14 @@ jobs:
           npm install
           npm run build
           
-      - name : check where is dist
-        run : |
-          pwd |
-          ls
-      
-          
       - name: Connect to production server and update production
         uses: appleboy/ssh-action@master
         with:
             host: ${{ secrets.SSH_IP }}
             username: ${{ secrets.SSH_USER }}
             password: ${{ secrets.SSH_PASSWORD }}
-            script: ./updateFront.sh > logFrontUpdate.log 2>&1
+            local_dir: dist
+            remote_dir: /var/www/html/deverr.fr
+            run: rm -R /var/www/html/deverr.fr |
+                 cp dist /var/www/html/deverr.fr |
+                 cp home/darmoi31/.htaccess /var/www/html/deverr.fr
