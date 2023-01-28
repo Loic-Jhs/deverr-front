@@ -30,7 +30,7 @@ jobs:
             host: ${{ secrets.SSH_IP }}
             username: ${{ secrets.SSH_USER }}
             password: ${{ secrets.SSH_PASSWORD }}
-            run: |
+            script: |
                 scp -r dist ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }}:~/var/www/html/deverr.fr
                 echo "dist folder copied to remote server"
 
