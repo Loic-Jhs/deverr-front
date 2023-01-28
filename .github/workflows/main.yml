@@ -15,6 +15,9 @@ jobs:
 
       - name: Run cypress tests
         uses: cypress-io/github-action@v5
+        with: 
+         build: npm run build
+         dev: npm run dev
 
       - name: Connect to production server and update production
         uses: appleboy/ssh-action@master
