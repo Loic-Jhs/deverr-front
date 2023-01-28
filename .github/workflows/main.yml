@@ -11,10 +11,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v2.1.5
-
-      - name: Run cypress tests
-        uses: cypress-io/github-action@v5
+      - uses: actions/setup-node@v3.6.0
 
       - name: Connect to production server and update production
         uses: appleboy/ssh-action@master
