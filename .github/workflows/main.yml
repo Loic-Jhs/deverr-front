@@ -13,15 +13,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2.1.5
-
-      - name: Cache node modules
-        uses: actions/cache@v2
-        with:
-          path: ~/node_modules
-          key: cache-${{ hashFiles('**/package-lock.json') }}
-
-      # pass --base for application to work under GitHub pages
+      
       - name: Install and build
         run: |
           npm install
           npm run build
+          
+      - name: Connect to production server and update production
+        uses: appleboy/ssh-action@master
+        with:
+            host: ${{ secrets.SSH_IP }}
+            username: ${{ secrets.SSH_USER }}
+            password: ${{ secrets.SSH_PASSWORD }}
+            script: ./updateFront.sh > logFrontUpdate.log 2>&1
