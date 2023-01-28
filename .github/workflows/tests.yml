@@ -9,18 +9,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
-      with:
-        node-version: 16
-        cache: 'npm'
-    - name: Install dependencies
-      run: |
-        if [ -e yarn.lock ]; then
-        yarn install --frozen-lockfile
-        elif [ -e package-lock.json ]; then
-        npm ci
-        else
-        npm i
-        fi
+    - run: npm install
     - name: Checkout
       uses: actions/checkout@v3
       # Install NPM dependencies, cache them correctly
