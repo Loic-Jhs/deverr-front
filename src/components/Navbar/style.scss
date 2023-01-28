@@ -1,5 +1,5 @@
 .navbar {
-  font-family: Montserrat, sans-serif;
+  font-family: Montserrat, serif;
   background-color: #0f172a;
   box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
 
@@ -32,7 +32,7 @@
 
       button {
         padding: 0.5em;
-        color: gray;
+        background-color: #1da8f4;
         border-radius: 0.375rem;
         outline: 2px solid transparent;
 
@@ -129,19 +129,12 @@
 
       .responsive__button {
         display: block;
-
         a {
-          width: 100%;
+          width: 50%;
           margin-top: 1rem;
           display: inline-block;
           cursor: pointer;
-          padding: 0.5rem 0;
           text-align: center;
-          color: #ffffff;
-          background-color: #1da8f4;
-          border-radius: 0.375rem;
-          box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1),
-            0 1px 2px -1px rgb(0 0 0 / 0.1);
         }
       }
 
@@ -158,18 +151,6 @@
 
     .desktop__button {
       display: none;
-
-      a {
-        margin-left: 1rem;
-        cursor: pointer;
-        border-radius: 0.375rem;
-        box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1),
-          0 1px 2px -1px rgb(0 0 0 / 0.1);
-        padding: 0.5em 1.5em;
-        background-color: #1da8f4;
-        color: #FFFFFF;
-        text-decoration: none;
-      }
     }
 
     @media screen and (min-width: 768px) {

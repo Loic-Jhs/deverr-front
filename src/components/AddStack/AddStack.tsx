@@ -1,21 +1,21 @@
-import { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { authContext } from '../../contexts/authContext';
-import { DevStack, RealStack } from '../../types';
 import Stacks from '../../models/stacks';
-import { DevInfos } from '../../types';
+import { DevStack } from '../../types';
+import Button from '../Button/Button';
+
 import './addStack.scss';
 
 interface modaleProps {
-  toggleStack: () => void;
   devStacks: DevStack[];
 }
 
-function AddStack({ toggleStack, devStacks }: modaleProps) {
+function AddStack({ devStacks }: modaleProps) {
   const { auth } = useContext(authContext);
-  const [dev, setDev] = useState<DevInfos>();
   const [isLoaded, setIsLoaded] = useState(false);
   const [stacks, setStacks] = useState<Stacks[]>([]);
+  const [successMessage, setSuccessMessage] = useState('');
   const { register, handleSubmit, formState: { errors } } = useForm<Stacks>();
   const filteredStacks = stacks.filter((stack) => {
     return !devStacks.find((devStack) => 
@@ -23,30 +23,25 @@ function AddStack({ toggleStack, devStacks }: modaleProps) {
     )
   });
 
-
   useEffect(() => {
     if (auth && auth.access_token != undefined) {
-      const fetchData = async () => {
-        try {
-          const response = await fetch('https://api-dev.deverr.fr/stacks/all', {
-            method: "GET",
-            headers: {
-              "access-control-allow-origin": "*",
-              "Content-type": "application/json",
-              Authorization: `Bearer ${auth.access_token}`
-            },
-            mode: 'cors'
-          });
-          const data = await response.json();
-          setStacks(data);
-          setIsLoaded(true);
-        } catch (e) {
-          console.log(e);
-        }
-      }
-      fetchData()
+      (async () => {
+        await fetch(`${import.meta.env.VITE_API_URL}/stacks/all`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${auth.access_token}`
+          },
+          mode: 'cors'
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            setStacks(data);
+            setIsLoaded(true);
+          })
+          .catch((error) => console.error("une erreur est survenue", error));
+      })();
     }
-  }, [isLoaded])
+  }, [isLoaded]);
 
   const onSubmit: SubmitHandler<Stacks> = async (data) => {
     const stacksDataRequired = {
@@ -57,43 +52,43 @@ function AddStack({ toggleStack, devStacks }: modaleProps) {
     };
 
     try {
-      const response = await fetch(`https://api-dev.deverr.fr/profile/add-stack/${stacksDataRequired.stack_id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/profile/add-stack/${stacksDataRequired.stack_id}`, {
         method: "POST",
         headers: {
-          "access-control-allow-origin": "*",
+          Authorization: `Bearer ${auth.access_token}`,
           "Content-type": "application/json",
-          Authorization: `Bearer ` + localStorage.getItem('access_token')?.replaceAll('"', '')
         },
         body: JSON.stringify(stacksDataRequired),
         mode: 'cors'
       });
       const data = await response.json();
-      console.log(data);
+      setSuccessMessage(data.message + " !");
     } catch (e) {
       console.error(e);
     }
-  }
+  };
 
   return (
     <>
       <div className='dev__stacks'>
         <form id="stacksForm" className="stacks__form" onSubmit={handleSubmit(onSubmit)}>
-          <h1>Choisisser une nouvelle Techno</h1>
+          <h1>Choisissez une nouvelle Techno</h1>
           <select {...register("id", { required: true })}>
-            <option value="">Selectionner une techno</option>
+            <option value="">Sélectionnez une techno</option>
             {filteredStacks.map((stack) => {
               return (
                 <option key={stack.id} value={stack.id}>{stack.name}</option>
               )
             })}
           </select>
-          {errors.id && <p className="error">Selectionnez une techno !</p>}
-          <div className="button__container">
-            <button type="submit">
-              <span className="span">Ajouter</span>
-            </button>
-          </div>
+          {errors.id && <p className="error">Sélectionnez une techno !</p>}
+          <Button type="submit">
+            Ajouter
+          </Button>
         </form>
+      </div>
+      <div className="success">
+        <p>{successMessage}</p>
       </div>
     </>
   );

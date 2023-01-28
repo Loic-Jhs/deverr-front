@@ -1,39 +1,28 @@
-import { ReactNode, useContext } from "react";
-import { Link } from "react-router-dom";
-import { authContext } from "../../contexts/authContext";
+import { Modal} from '@mui/material';
 import './modal.scss';
 
 interface ModalType {
-  children?: ReactNode;
-  isOpen: boolean;
-  toggle: () => void;
+  open: boolean;
+  onClose: () => void;
+  children: JSX.Element;
 }
 
+function ModalWindow(props: ModalType) {
+  const { children } = props;
 
-
-function Modal(props: ModalType) {
-  const { auth } = useContext(authContext);
   return (
-    <>
-      {props.isOpen && (
-        <div className="modal-overlay" onClick={props.toggle}>
-          <div onClick={(e) => e.stopPropagation()} className="modal-box">
-            {
-              auth.access_token != undefined ?
-                props.children :
-                <div className="not__authenticated">
-                  <h1>Pour pouvoir demander une prestation, veuilez vous inscrire ou vous connecter</h1>
-                  <div className="button__container">
-                    <Link className="register__link" to="/register">S'inscrire</Link>
-                    <Link className="login__link" to="/login">Se connecter</Link>
-                  </div>
-                </div>
-            }
-          </div>
-        </div>
-      )}
-    </>
+    <Modal
+      open={props.open}
+      onClose={props.onClose}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+      className="modal-container"
+    >
+      <div className="modal-content">
+        {children}
+      </div>
+    </Modal>
   );
 }
 
-export default Modal
+export default ModalWindow

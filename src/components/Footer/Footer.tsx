@@ -6,7 +6,7 @@ function Footer() {
     <div className="footer__container">
       <div className="footer__content">
         <div className="logo__container">
-          <a className="logo__link"href="#">
+          <a className="logo__link" href="#">
           <img src={logoDeverrBlack} alt="Logo Deverr" />
           <span>DEVERR © 2022</span>
         </a>

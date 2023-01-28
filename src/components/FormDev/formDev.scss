@@ -57,7 +57,7 @@ $blueDeverr2: #1d9bf0;
         resize: none;
         border-radius: 1rem;
         border: $blueDeverr2 solid 2px;
-        height: 7em;
+        height: 5em;
         padding: 0.5rem;
       }
       .stack__container {
@@ -94,10 +94,6 @@ $blueDeverr2: #1d9bf0;
             }
           }
         }
-        .primary__input {
-          display: flex;
-          align-items: center;
-        }
       }
     }
     .button__container {
@@ -106,34 +102,6 @@ $blueDeverr2: #1d9bf0;
       align-items: center;
       margin-top: 1rem;
       width: 100%;
-      p {
-        margin-bottom: 0rem;
-      }
-      button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 50px;
-        cursor: pointer;
-        text-transform: uppercase;
-        height: 45px;
-        width: 130px;
-        opacity: 1;
-        background-color: $blueDeverr2;
-        border: 1px solid rgba(0, 0, 0, 0.6);
-      }
-      button,
-      span {
-        font-family: "Montserrat", sans-serif;
-        color: #ffffff;
-        font-size: 12px;
-        font-weight: 500;
-        letter-spacing: 0.7px;
-      }
-      
-      button:hover {
-        transform: perspective(1px) scale3d(1.044, 1.044, 1) translateZ(0);
-      }
     }
     .error {
       color: red;

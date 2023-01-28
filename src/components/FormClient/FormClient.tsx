@@ -1,59 +1,52 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import UserInput from '../../models/userInput';
 import schema from './formClientValidation';
 import { Link } from 'react-router-dom';
+import Button from "../Button/Button";
 import './formClient.scss';
 
-const FormClient = () => {
-  const [userInput, setUserInput] = useState<UserInput>({
-    lastname: "",
-    firstname: "",
-    email: "",
-    password: "",
-    confirmedPassword: "",
-    type: "user",
-  });
+const defaultValues = {
+  lastname: "",
+  firstname: "",
+  email: "",
+  password: "",
+  confirmedPassword: "",
+  type: "user",
+};
 
+const FormClient = () => {
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
-  const { confirmedPassword, ...cleanUserInput } = userInput;
-  const { register, handleSubmit, reset, formState: { errors } } = useForm<UserInput>({ resolver: yupResolver(schema) });
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<UserInput>({ defaultValues });
 
   const onSubmit: SubmitHandler<UserInput> = async (data) => {
     setLoading(true);
     try {
-      await fetch('https://api-dev.deverr.fr/register', {
+      await fetch(`${import.meta.env.VITE_API_URL}/register`, {
         method: "POST",
-        headers: {
-          "access-control-allow-origin": "*",
-          "Content-type": "application/json",
-        },
         mode: 'cors',
-        body: JSON.stringify(cleanUserInput),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
       })
-      .then(response => response.json())
-      .then(responseData => {
-        setLoading(false);
-        setSuccessMessage(responseData.message);
-        setTimeout(() => {setSuccessMessage("")}, 4000);
-        setUserInput({
-          lastname: "",
-          firstname: "",
-          email: "",
-          password: "",
-          confirmedPassword: "",
-          type: "user",
+        .then(response => response.json())
+        .then(responseData => {
+          setLoading(false);
+          setSuccessMessage(responseData.message);
+          setTimeout(() => { setSuccessMessage("") }, 4000);
+          reset();
         });
-      });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
-  }
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUserInput({ ...userInput, [event.target.name]: event.target.value });
   }
 
   return (
@@ -73,40 +66,40 @@ const FormClient = () => {
         <div className="input__container">
           <p className="error">{errors.lastname?.message}</p>
           <label>Nom</label>
-          <input type="text" {...register("lastname")} name="lastname" placeholder="Nom" value={userInput.lastname} onChange={handleChange} />
+          <input type="text" {...register("lastname")} name="lastname" placeholder="Nom" />
         </div>
 
         <div className="input__container">
           <p className="error">{errors.firstname?.message}</p>
           <label>Prénom</label>
-          <input type="text" {...register("firstname")} name="firstname" placeholder="Prénom" value={userInput.firstname} onChange={handleChange} />
+          <input type="text" {...register("firstname")} name="firstname" placeholder="Prénom" />
         </div>
 
         <div className="input__container">
           <p className="error">{errors.email?.message}</p>
           <label>Email</label>
-          <input type="email" {...register("email")} name="email" placeholder="E-mail" value={userInput.email} onChange={handleChange} />
+          <input type="email" {...register("email")} name="email" placeholder="E-mail" />
         </div>
 
         <div className="input__container">
           <p className="error">{errors.password?.message}</p>
           <label>Mot de passe</label>
-          <input type="password" {...register("password")} name="password" placeholder="Mot de passe" value={userInput.password} onChange={handleChange} />
+          <input type="password" {...register("password")} name="password" placeholder="Mot de passe" />
         </div>
 
         <div className="input__container">
           <p className="error">{errors.confirmedPassword?.message}</p>
           <label>Confirmer le mot de passe</label>
-          <input type="password" {...register("confirmedPassword")} placeholder="Confirmez votre mot de passe" value={userInput.confirmedPassword} onChange={handleChange} />
+          <input type="password" {...register("confirmedPassword")} placeholder="Confirmez votre mot de passe" />
         </div>
 
         <div className="button__container">
           <Link to="/registerdev">
             <p>Je suis un dev</p>
           </Link>
-          <button type="submit" className="btn">
-            <span className="span">Suivant</span>
-          </button>
+          <Button type="submit">
+            Envoyer
+          </Button>
         </div>
       </form>
     </section>

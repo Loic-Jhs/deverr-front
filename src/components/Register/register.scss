@@ -38,33 +38,18 @@
       }
     }
 
-    .button {
+    .buttons {
       display: flex;
       align-self: center;
       flex-direction: column;
 
       button {
-        color: black;
-        font-size: 1rem;
-        font-weight: bold;
-        padding: 0.5rem 1rem;
         margin-bottom: 1rem;
-        background-color: #1da8f4;
-        border: none;
-        border-radius: 0.375rem;
-        box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1),
-          0 1px 2px -1px rgb(0 0 0 / 0.1);
-        width: 15rem;
-        height: 2.5rem;
-      }
-
-      button:hover {
-        background: grey;
       }
     }
 
     @media screen and (min-width: 768px) {
-      .button {
+      .buttons {
         align-content: center;
 
         button {

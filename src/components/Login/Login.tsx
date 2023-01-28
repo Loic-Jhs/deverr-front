@@ -1,73 +1,85 @@
-import React, { useContext, useState } from 'react';
-import { useForm, SubmitHandler } from "react-hook-form";
-import superagent from 'superagent';
-import { yupResolver } from '@hookform/resolvers/yup';
+import Button from '../Button/Button';
 import schema from './loginValidation';
+// import logoDeverr from "../../assets/img/D.jpg";
 import LoginInput from '../../models/loginInput';
-import { useNavigate } from 'react-router-dom';
-import './login.scss';
+import React, { useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm, SubmitHandler } from "react-hook-form";
 import { authContext } from '../../contexts/authContext';
+
+import './login.scss';
 
 const Login = () => {
 
   const { setIsLogged } = useContext(authContext)
-
-  const [loginInput, setLoginInput] = useState<LoginInput>({
-    email: "",
-    password: "",
-  });
-
   const { register, handleSubmit, formState: { errors } } = useForm<LoginInput>({ resolver: yupResolver(schema) });
+
   const navigate = useNavigate();
+  const [error, setError] = useState<Boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<String>("");
 
-  const onSubmit: SubmitHandler<LoginInput> = (data) => {
-    superagent
-      .post('https://api-dev.deverr.fr/login')
-      .send(loginInput)
-      .end((err, res) => {
-        // Calling the end function will send the request
-        localStorage.setItem('access_token', JSON.stringify(res.body.access_token)),
-        localStorage.setItem('token_type', JSON.stringify(res.body.token_type)),
-        localStorage.setItem('user_info', JSON.stringify(res.body.user_info))
-        
-        setIsLogged(true)
-        // Entourer d'un if pour gérer la redirection en fonction du rôle
-        if (res.body.user_info.user_role == 1 && res.body.access_token != undefined) {
-          navigate(`/dev-profile/${res.body.user_info.developer_id}`);
-        } else if (res.body.access_token != undefined) {
-          navigate("/developers");
+  // TODO: débug l'erreur à la connexion
+
+  const onSubmit: SubmitHandler<LoginInput> = async (data) => {
+    try {
+      await fetch(`${import.meta.env.VITE_API_URL}/login`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }).then(response => {
+        if (response.ok) {
+          return response.json();
         }
-      });
+      })
+        .then(data => {
+          localStorage.setItem('access_token', JSON.stringify(data.access_token));
+          localStorage.setItem('token_type', JSON.stringify(data.token_type));
+          localStorage.setItem('user_info', JSON.stringify(data.user_info));
+          setIsLogged(true);
+          if (data.user_info.user_role == 1) {
+            navigate(`/dev-profile/`);
+          } else if (data.user_info.user_role == 0) {
+            navigate("/developers");
+          }
+        }).catch(
+          error =>  {throw new Error(error);}
+        );
+    } catch (error) {
+      setError(true);
+      setErrorMessage("Identifiant ou mot de passe incorrect");
+    }
   }
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setLoginInput({ ...loginInput, [event.target.name]: event.target.value });
-  }
-
 
   return (
     <section>
       <form className="login__form" onSubmit={handleSubmit(onSubmit)}>
         <h1>Connexion</h1>
+        {
+          error &&
+          <p className='error'>{ errorMessage }</p>
+        }
         <div className="input__container">
           <p className="error">{errors.email?.message}</p>
           <label>Email</label>
-          <input type="email" placeholder="Email" {...register("email")} value={loginInput.email} onChange={handleChange} />
+          <input type="email" placeholder="Email" {...register("email")} />
         </div>
-
         <div className="input__container">
           <p className="error">{errors.password?.message}</p>
           <label>Mot de passe</label>
-          <input type="password" {...register("password")} placeholder="Mot de passe" value={loginInput.password} onChange={handleChange} />
+          <input type="password" {...register("password")} placeholder="Mot de passe" />
         </div>
-
-        <div className="button__container">
-          <button type="submit" className="btn">
-            <span className="span">Connexion</span>
-          </button>
-        </div>
+        <Button type="submit">
+          Connexion
+        </Button>
+        <Link to={'/forgot-password'} className="forgotPasswordLink">
+          Mot de passe oublié ?
+        </Link>
       </form>
     </section>
   );
 }
 
-export default Login
+export default Login;

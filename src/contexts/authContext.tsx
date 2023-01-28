@@ -1,34 +1,48 @@
-import React, { createContext, useEffect, useMemo, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { UserAsContext } from "../types";
 
-export const authContext = createContext<any>({}); 
+export const authContext = createContext<any>({});
 
 function AuthProvider({ children }: React.PropsWithChildren) {
-    const [auth, setAuth] = useState<UserAsContext>({ access_token: undefined, token_type: undefined, user_info: undefined });
-    const [isLogged, setIsLogged] = useState(false)
+  const navigate = useNavigate();
+  const [auth, setAuth] = useState<UserAsContext>({
+    access_token: undefined,
+    token_type: undefined,
+    user_info: undefined,
+  });
+  const [isLogged, setIsLogged] = useState(false);
 
-    const resetState = () => {
-        setAuth({ access_token: undefined, token_type: undefined, user_info: undefined });
-    };
+  const resetState = () => {
+    setAuth({
+      access_token: undefined,
+      token_type: undefined,
+      user_info: undefined,
+    });
+  };
 
-    useEffect(() => {
-        if (localStorage.length > 0) {
-          setAuth({
-            access_token: JSON.parse(localStorage.getItem('access_token') ?? ''),
-            token_type: JSON.parse(localStorage.getItem('token_type') ?? ''),
-            user_info: JSON.parse(localStorage.getItem('user_info') ?? '')
-          })
-        }
-      }, [isLogged])
+  const logout = () => {
+    localStorage.clear();
+    navigate("/");
+    resetState();
+    setIsLogged(false);
+  };
 
-    return (
-        <authContext.Provider
-            value={{ auth, setAuth, setIsLogged, resetState }}
-        >
-            {children}
-        </authContext.Provider>
-    );
+  useEffect(() => {
+    if (isLogged || localStorage.getItem("access_token")) {
+      setAuth({
+        access_token: JSON.parse(localStorage.getItem("access_token") ?? ""),
+        token_type: JSON.parse(localStorage.getItem("token_type") ?? ""),
+        user_info: JSON.parse(localStorage.getItem("user_info") ?? ""),
+      });
+    }
+  }, [isLogged]);
+
+  return (
+    <authContext.Provider value={{ auth, setAuth, setIsLogged, resetState, logout }}>
+      {children}
+    </authContext.Provider>
+  );
 }
-
 
 export default AuthProvider;

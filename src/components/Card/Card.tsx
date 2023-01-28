@@ -10,7 +10,7 @@ function Card(dev: HomepageDev) {
           <div className="card__stack"> 
             <p>{dev.firstname} {dev.lastname.substring(0,1)}.</p>
               <div key={dev.stack.name} className="logo__stack">
-                <img src={`${dev.stack.logo}`} />
+                <img src={`${dev.stack.logo}`} alt={"technologie d'un développeur"}/>
               </div>
           </div>
         </div>
