@@ -21,18 +21,18 @@ jobs:
           npm install
           npm run build
           
-#       - name : connect with SSH
-#        run : sshpass -p “ENTER PASSWORD HERE” ssh testuser@192.168.10.10
+      - name : connect with SSH
+        run : sshpass -p ${{ secrets.SSH_PASSWORD}} ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }} | ls
 
-      - name: Connect to production server and update production
-        uses: appleboy/ssh-action@master
-        with:
-            host: ${{ secrets.SSH_IP }}
-            username: ${{ secrets.SSH_USER }}
-            password: ${{ secrets.SSH_PASSWORD }}
-            script: |
-                scp -r dist ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }}:~/var/www/html/deverr.fr
-                echo "dist folder copied to remote server"
+#       - name: Connect to production server and update production
+#         uses: appleboy/ssh-action@master
+#         with:
+#             host: ${{ secrets.SSH_IP }}
+#             username: ${{ secrets.SSH_USER }}
+#             password: ${{ secrets.SSH_PASSWORD }}
+#             script: |
+#               scp -r dist ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }}:~/var/www/html/deverr.fr
+#                 echo "dist folder copied to remote server"
 
 
 #       - name: Copy dist folder to remote server
