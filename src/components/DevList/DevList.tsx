@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Rating } from "@mui/material";
-import { Dev } from "../../types";
+import {Dev, RealPrestation} from "../../types";
 import "./style.scss";
 
 function DevList() {
@@ -136,13 +136,13 @@ function DevList() {
                   <h2>Mes prestations :</h2>
                   <div className="dev__prestations">
                     {prestations &&
-                      prestations.map((prestation) => {
+                      prestations.map((prestation: RealPrestation) => {
                         return (
                           <div
                             key={prestation.id}
                             className="prestation__container"
                           >
-                            <p>{prestation.name}</p>
+                            <p>{prestation.prestation_type_name}</p>
                           </div>
                         );
                       })}

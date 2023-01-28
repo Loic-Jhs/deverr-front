@@ -4,7 +4,7 @@ import React, {
   useContext,
   useState,
 } from "react";
-import { DevInfos } from "../../types";
+import {DevInfos, RealPrestation} from "../../types";
 import { authContext } from "../../contexts/authContext";
 import ModalWindow from "../Modal/Modal";
 import Button from "../Button/Button";
@@ -20,7 +20,6 @@ type  ModalType = {
 
 type T = {
   id: number;
-  name: string;
 };
 
 function OrderModal(props: ModalType) {
@@ -70,7 +69,7 @@ function OrderModal(props: ModalType) {
         <h2>Choisissez une prestation</h2>
         <ul>
           {props.devData &&
-            props.devData.prestations.map((item: T) => {
+            props.devData.prestations.map((item: RealPrestation) => {
               return (
                 <div key={item.id}>
                   <li
@@ -78,7 +77,7 @@ function OrderModal(props: ModalType) {
                     value={item.id}
                     className={selected === item.id ? "selected" : ""}
                   >
-                    {item.name}
+                    {item.prestation_type_name}
                   </li>
                   {selected === item.id && (
                     <div>
