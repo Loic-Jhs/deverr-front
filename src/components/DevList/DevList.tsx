@@ -21,8 +21,8 @@ function DevList() {
       })
         .then((response) => response.json())
         .then((data) => {
-          setDevList(data);
-          setFilteredDev(data);
+          setDevList(data.data);
+          setFilteredDev(data.data);
           setIsLoaded(true);
         })
         .catch((e) => console.error(e));
@@ -142,7 +142,7 @@ function DevList() {
                             key={prestation.id}
                             className="prestation__container"
                           >
-                            <p>{prestation.name}</p>
+                            <p>{prestation.prestation_type_name}</p>
                           </div>
                         );
                       })}

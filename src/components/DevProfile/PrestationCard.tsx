@@ -30,8 +30,13 @@ function PrestationCard(props: PROPS) {
   const [description, setDescription] = useState<string | undefined>(
     props.prestation.description
   );
+  const [name, setName] = useState<string | undefined>(
+    props.prestation.prestation_type_name
+  );
 
   const updateService = (id: number, description?: string, price?: number) => {
+    console.log(props.services);
+    
     fetch(`${import.meta.env.VITE_API_URL}/profile/prestations/edit/${id}`, {
       method: "PATCH",
       headers: {
@@ -39,7 +44,7 @@ function PrestationCard(props: PROPS) {
         Authorization: "Bearer " + auth.access_token,
       },
       body: JSON.stringify({
-        prestation_type_id: id,
+        prestation_type_id: props.prestation.prestation_type_id,
         description: description,
         price: price,
       }),
@@ -68,7 +73,7 @@ function PrestationCard(props: PROPS) {
   return (
     <div className="dev__prestation-item">
       <div className="edit">
-        <h4>{props.prestation.name}</h4>
+        <h4>{props.prestation.prestation_type_name}</h4>
         {
           /*
           Si le user connecté correspond à un développeur 

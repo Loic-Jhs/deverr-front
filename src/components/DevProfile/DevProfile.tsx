@@ -1,5 +1,5 @@
 import type { DevInfos } from "../../types";
-import { CircularProgress} from "@mui/material";
+import { CircularProgress } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { authContext } from "../../contexts/authContext";
 import ServicesModal from "./ServicesModal";
@@ -8,7 +8,7 @@ import StacksModal from "./StacksModal";
 import Button from "../Button/Button";
 import ConfirmModal from "../Modal/ConfirmModal";
 import ClearIcon from "@mui/icons-material/Clear";
-import defaultAvatar from "../../assets/img/avatar.svg"
+import defaultAvatar from "../../assets/img/avatar.svg";
 import "./style.scss";
 
 function DevProfile() {
@@ -34,8 +34,8 @@ function DevProfile() {
   const handleConfirmClose = () => setConfirmOpen(false);
 
   useEffect(() => {
-    (async () => {
-      await fetch(`${import.meta.env.VITE_API_URL}/profile`, {
+    if (auth.access_token !== undefined) {
+      fetch(`${import.meta.env.VITE_API_URL}/profile`, {
         method: "GET",
         headers: {
           "Content-type": "application/json",
@@ -47,9 +47,10 @@ function DevProfile() {
         .then((data) => {
           setDev(data);
           setIsLoaded(true);
+          // setServices(false);
         })
         .catch((error) => console.error(error));
-    })();
+    }
   }, [isLoaded, services, auth]);
 
   const handleEditElement = () => {
@@ -121,7 +122,8 @@ function DevProfile() {
         <ServicesModal
           open={open}
           onClose={handleClose}
-          services={setServices}
+          setServices={setServices}
+          services={services}
         />
         <StacksModal
           open={stacksOpen}
@@ -192,19 +194,20 @@ function DevProfile() {
                 )}
               </div>
               <div className="dev__stacks">
-                {dev.stacks && dev.stacks.map((stack) => {
-                  return (
-                    <div key={stack.id} className="stack__item">
-                      <img src={stack.logo} alt={`Logo ${stack.name}`} />
-                      {displayButton && (
-                        <ClearIcon
-                          color="error"
-                          onClick={() => deleteStacks(stack.id)}
-                        />
-                      )}
-                    </div>
-                  );
-                })}
+                {dev.stacks &&
+                  dev.stacks.map((stack) => {
+                    return (
+                      <div key={stack.id} className="stack__item">
+                        <img src={stack.logo} alt={`Logo ${stack.name}`} />
+                        {displayButton && (
+                          <ClearIcon
+                            color="error"
+                            onClick={() => deleteStacks(stack.id)}
+                          />
+                        )}
+                      </div>
+                    );
+                  })}
               </div>
             </div>
           </div>
@@ -225,7 +228,10 @@ function DevProfile() {
                 <h3>
                   {dev.firstname} {dev.lastname}
                 </h3>
-                <p>Développeur depuis {dev.years_of_experience ? dev.years_of_experience : "1"} ans</p>
+                <p>
+                  Développeur depuis{" "}
+                  {dev.years_of_experience ? dev.years_of_experience : "1"} ans
+                </p>
               </div>
               <div className="dev__prestations-reviews">
                 <h3>

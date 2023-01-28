@@ -7,22 +7,26 @@ import { Link } from 'react-router-dom';
 import Button from "../Button/Button";
 import './formClient.scss';
 
-const FormClient = () => {
-  const [userInput, setUserInput] = useState<UserInput>({
-    lastname: "",
-    firstname: "",
-    email: "",
-    password: "",
-    confirmedPassword: "",
-    type: "user",
-  });
+const defaultValues = {
+  lastname: "",
+  firstname: "",
+  email: "",
+  password: "",
+  confirmedPassword: "",
+  type: "user",
+};
 
+const FormClient = () => {
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
-  const { confirmedPassword, ...cleanUserInput } = userInput;
-  const { register, handleSubmit, reset, formState: { errors } } = useForm<UserInput>({ resolver: yupResolver(schema) });
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<UserInput>({ defaultValues });
 
-  const onSubmit: SubmitHandler<UserInput> = async () => {
+  const onSubmit: SubmitHandler<UserInput> = async (data) => {
     setLoading(true);
     try {
       await fetch(`${import.meta.env.VITE_API_URL}/register`, {
@@ -31,7 +35,7 @@ const FormClient = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(cleanUserInput),
+        body: JSON.stringify(data),
       })
         .then(response => response.json())
         .then(responseData => {

@@ -54,6 +54,7 @@ export type UserInfos = {
     is_accepted_by_developer: boolean;
     price: number;
     prestation_name: string;
+    prestation_id: number;
     created_at: string;
     updated_at: string;
   }>;
@@ -95,7 +96,7 @@ export type RealStack = {
 
 export type RealPrestation = {
   id: number;
-  name: string;
+  prestation_type_name: string;
   description: string;
   price: number;
   prestation_type_id: number;
