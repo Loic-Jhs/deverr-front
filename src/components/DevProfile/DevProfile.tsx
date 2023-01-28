@@ -35,7 +35,7 @@ function DevProfile() {
 
   useEffect(() => {
     (async () => {
-      await fetch(`${import.meta.env.VITE_API_URL}/profile/`, {
+      await fetch(`${import.meta.env.VITE_API_URL}/profile`, {
         method: "GET",
         headers: {
           "Content-type": "application/json",
@@ -50,7 +50,7 @@ function DevProfile() {
         })
         .catch((error) => console.error(error));
     })();
-  }, [isLoaded, services]);
+  }, [isLoaded, services, auth]);
 
   const handleEditElement = () => {
     setIsEditable(!isEditable);

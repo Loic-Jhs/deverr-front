@@ -2,12 +2,22 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { authContext } from '../../contexts/authContext';
 import { Order } from '../../types';
+import CancelOrder from '../CancelOrder/CancelOrder';
+import ModalWindow from '../Modal/Modal';
+import OrderDone from '../OrderDone/OrderDone';
 import './style.scss'
 
 function DevOrder() {
     const { auth } = useContext(authContext)
     const { devID } = useParams()
     const [ isLoaded, setIsLoaded ] = useState<Boolean>(false);
+    const [openCancelOrder, setOpenCancelOrder] = useState(false);
+    const handleOpenCancelOrder = () => setOpenCancelOrder(true);
+    const handleCloseCancelOrder = () => setOpenCancelOrder(false);
+    const [openOrderDone, setOpenOrderDone] = useState(false);
+    const handleOpenOrderDone = () => setOpenOrderDone(true);
+    const handleCloseOrderDone = () => setOpenOrderDone(false);
+
     const [ orders, setOrders ] = useState<Order[]>()
     const [ orderToCancel, setOrderToCancel ] = useState<Order>()
     const [ orderDone, setOrderDone ] = useState<Order>()
@@ -81,8 +91,8 @@ function DevOrder() {
 
     return (
         <div className='dev__order-container'>
-            {/* <Modal isOpen={isOpen} toggle={toggle} children={<CancelOrder setIsLoaded={setIsLoaded} order={orderToCancel} toggle={toggle} auth={auth}/>} />
-            <Modal isOpen={isOpenOderDone} toggle={toggleOrderDone} children={<OrderDone setIsLoaded={setIsLoaded} order={orderDone} toggle={toggleOrderDone} auth={auth}/>} /> */}
+            <ModalWindow open={openCancelOrder} onClose={handleCloseCancelOrder} children={<CancelOrder setIsLoaded={setIsLoaded} order={orderToCancel} toggle={handleCloseCancelOrder} auth={auth}/>} />
+            <ModalWindow open={openOrderDone} onClose={handleCloseOrderDone} children={<OrderDone setIsLoaded={setIsLoaded} order={orderDone} toggle={handleCloseOrderDone} auth={auth}/>} />
 
           <div className='developer__order'>
             <h1>Suivi de mes demandes.</h1>
@@ -107,7 +117,7 @@ function DevOrder() {
                             </button>
                             <button onClick={() => {
                               setOrderToCancel(order)
-                              // toggle()
+                              handleOpenCancelOrder()
                             }} className='cancel__order'>
                               Non
                             </button>
@@ -140,7 +150,7 @@ function DevOrder() {
                           <div className='button__container'>
                             <button  onClick={() => {
                               setOrderDone(order)
-                              // toggleOrderDone()
+                              handleOpenOrderDone()
                             }} className='order__done'>
                               Prestation terminée !
                             </button>

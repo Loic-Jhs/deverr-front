@@ -21,8 +21,8 @@ function DevList() {
       })
         .then((response) => response.json())
         .then((data) => {
-          setDevList(data.data);
-          setFilteredDev(data.data);
+          setDevList(data);
+          setFilteredDev(data);
           setIsLoaded(true);
         })
         .catch((e) => console.error(e));
