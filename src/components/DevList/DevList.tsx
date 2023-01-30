@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Rating } from "@mui/material";
-import {Dev, RealPrestation} from "../../types";
+import {Dev, RealPrestation, RealStack} from "../../types";
 import "./style.scss";
 
 function DevList() {
@@ -14,14 +14,12 @@ function DevList() {
     (async () => {
       await fetch(`${import.meta.env.VITE_API_URL}/all-developers`, {
         method: "GET",
-        mode: "cors",
         headers: {
           "Content-type": "application/json",
         },
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
           setDevList(data.data);
           setFilteredDev(data.data);
           setIsLoaded(true);
@@ -64,7 +62,7 @@ function DevList() {
       </div>
       <div className="dev-list__container">
         {filteredDev &&
-          filteredDev.map((dev) => {
+          filteredDev.map((dev: Dev) => {
             const {
               id,
               firstname,
@@ -123,7 +121,7 @@ function DevList() {
                   <h2>Mes compétences :</h2>
                   <div className="dev__stacks">
                     {stacks &&
-                      stacks.map((stack) => {
+                      stacks.map((stack: RealStack) => {
                         return (
                           <div key={stack.id} className="dev__item-stack-logo">
                             <img
