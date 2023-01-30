@@ -93,7 +93,7 @@ function ClientProfile() {
                   </p>
                   <h3>Statut de la demande :</h3>
                   <p>
-                    {order.is_accepted_by_developer
+                    {order.is_accepted_by_developer == null
                       ? "En attente du développeur"
                       : "Demande traitée"}
                   </p>
