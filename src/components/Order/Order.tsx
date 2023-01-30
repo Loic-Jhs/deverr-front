@@ -86,7 +86,7 @@ function Order({ toggle }: modaleProps) {
                       <option value="">Sélectionner une prestation</option>
                       {dev.prestations && dev.prestations.map((prestation: RealPrestation) => {
                         return (
-                          <option key={prestation.id} value={prestation.id}>{prestation.prestation_type_name}</option>
+                          <option key={prestation.id} value={prestation.id}>{prestation.name}</option>
                         )
                       })}
                       {errors.prestation_id && <p>Sélectionnez une prestation !</p>}
