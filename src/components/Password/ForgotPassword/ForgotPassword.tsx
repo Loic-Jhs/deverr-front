@@ -3,6 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import schema from './forgotPasswordValidation';
 import { ForgotPasswordType } from "../../../types";
 import { useState } from "react";
+import "./style.scss";
 
 function ForgotPassword() {
   const [message, setMessage] = useState<string>('');
@@ -33,7 +34,8 @@ function ForgotPassword() {
   // TODO: Ajouter du style
   return (
     <>
-      <div>
+      <div className="forgot-password__container">
+        <h1>Vous avez oubliez votre mot de passe?</h1>
         <div>
           {message && <p>{message}</p>}
         </div>
@@ -41,7 +43,7 @@ function ForgotPassword() {
           {loading && <p> Chargement...</p>}
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <label>Email</label>
+          <label>Votre email :</label>
           <input type="email" {...register("email")} name="email" placeholder="john@doe.com" />
           {errors?.email && <p>{errors.email.message}</p>}
 

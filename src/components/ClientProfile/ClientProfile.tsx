@@ -1,8 +1,10 @@
 import { CircularProgress } from "@mui/material";
+import Button from '../Button/Button';
 import React, { useContext, useEffect, useState } from "react";
 import { authContext } from "../../contexts/authContext";
 import { UserInfos } from "../../types";
 import "./style.scss";
+import {loadStripe} from '@stripe/stripe-js';
 
 function ClientProfile() {
   const { auth } = useContext(authContext);
@@ -38,6 +40,31 @@ function ClientProfile() {
     }
   }, [isCurrentClient, isLoaded, auth]);
 
+  async function handleCheckout(e : React.ChangeEvent) {
+    const stripe = await loadStripe(`${import.meta.env.VITE_PK_STRIPE}`);
+    const orderID = e.target.getAttribute('data-order-id');
+
+    await fetch(`${import.meta.env.VITE_API_URL}`+"/order/create-session/" + orderID, {
+      method: "POST"
+    })
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (session) {
+      return stripe?.redirectToCheckout({sessionId: session.id});
+    })
+    .then(function (result) {
+      if (result?.error) {
+          alert(result.error.message);
+      } else {
+
+      }
+    })
+    .catch(function (error) {
+        console.error("Error: " + error);
+    })
+  }
+
   if (client) {
     return (
       <div className="client__container">
@@ -55,7 +82,6 @@ function ClientProfile() {
           <div className="client__orders__list">
             {client.orders.map((order: UserInfos['orders'][0], index) => {
               let classToAdd = order.is_finished ? "finished__order" : "";
-
               return (
                 <div key={index} className={`order__item ${classToAdd}`}>
                   <h3>Prestation demandée :</h3>
@@ -65,7 +91,7 @@ function ClientProfile() {
                   </p>
                   <h3>Statut de la demande :</h3>
                   <p>
-                    {order.is_accepted_by_developer
+                    {order.is_accepted_by_developer == null
                       ? "En attente du développeur"
                       : "Demande traitée"}
                   </p>
@@ -81,6 +107,7 @@ function ClientProfile() {
                     <div>
                       <h3>Statut du projet :</h3>
                       <p>{order.is_finished ? "Terminé" : "En cours"}</p>
+                      {order.is_finished ? <Button onClick={handleCheckout} data-order-id={order.id} className="payment__button">Payer prestation</Button> : ""}
                     </div>
                   ) : (
                     ""

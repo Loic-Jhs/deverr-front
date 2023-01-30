@@ -141,7 +141,7 @@ function DevList() {
                             key={prestation.id}
                             className="prestation__container"
                           >
-                            <p>{prestation.name}</p>
+                            <p>{prestation.prestation_type_name}</p>
                           </div>
                         );
                       })}

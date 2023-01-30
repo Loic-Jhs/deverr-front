@@ -4,6 +4,9 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 1.5rem;
+  .homepage__button {
+    margin-top: 2rem;
+  }
   .goal-image__container {
     width: 85%;
     height: 50vh;
@@ -56,6 +59,12 @@
 @media screen and (max-width: 1280px) {
   .homepage__container {
     height: auto;
+    .homepage__button {
+      a {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
     .goal-image__container {
       display: flex;
       flex-direction: column;
