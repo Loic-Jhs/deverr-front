@@ -22,7 +22,6 @@ function CancelOrder({order, toggle, auth, setIsLoaded}: CancelOrderProps) {
             "Content-type": "application/json",
             Authorization: `Bearer ${auth.access_token}`
           },
-          mode: 'cors'
         });
         const data = await response.json();
         setCancelMessage(data.message)

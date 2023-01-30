@@ -13,12 +13,11 @@ function ResetPassword() {
 
   const onSubmit: SubmitHandler<ResetPasswordType> = async (data) => {
     setLoading(true);
-    await fetch(`${import.meta.env.VITE_API_URL}/reset-password/`, {
+    await fetch(`${import.meta.env.VITE_API_URL}/reset-password`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
       },
-      mode: 'cors',
       body: JSON.stringify({...data, token})
     })
       .then(response => response.json())

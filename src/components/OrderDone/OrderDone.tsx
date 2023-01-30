@@ -21,7 +21,6 @@ function OrderDone({order, toggle, auth, setIsLoaded}: OrderDoneProps) {
             "Content-type": "application/json",
             Authorization: `Bearer ${auth.access_token}`
           },
-          mode: 'cors'
         });
         const data = await response.json();
         setConfirmMessage(data.message)

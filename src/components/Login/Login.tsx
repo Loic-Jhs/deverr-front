@@ -1,6 +1,5 @@
 import Button from '../Button/Button';
 import schema from './loginValidation';
-// import logoDeverr from "../../assets/img/D.jpg";
 import LoginInput from '../../models/loginInput';
 import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -18,8 +17,6 @@ const Login = () => {
   const navigate = useNavigate();
   const [error, setError] = useState<Boolean>(false);
   const [errorMessage, setErrorMessage] = useState<String>("");
-
-  // TODO: débug l'erreur à la connexion
 
   const onSubmit: SubmitHandler<LoginInput> = async (data) => {
     try {

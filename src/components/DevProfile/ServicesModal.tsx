@@ -63,10 +63,11 @@ function ServicesModal(props: ModalType) {
         description: description,
         price: Number(price),
       }),
-      mode: "cors",
     })
       .then((_response) => {
         props.setServices(!props.services);
+        setDescription("");
+        setPrice("");
         props.onClose();
       })
       .catch((error) => console.error(error));

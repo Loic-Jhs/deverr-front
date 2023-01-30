@@ -41,7 +41,6 @@ function DevProfile() {
           "Content-type": "application/json",
           Authorization: `Bearer ` + auth.access_token,
         },
-        mode: "cors",
       })
         .then((response) => response.json())
         .then((data) => {
@@ -79,7 +78,6 @@ function DevProfile() {
         Authorization: `Bearer ` + auth.access_token,
       },
       body: JSON.stringify({ ...dev }),
-      mode: "cors",
     })
       .then((response) => response.json())
       .catch((err) => console.error(err));
@@ -92,7 +90,6 @@ function DevProfile() {
         "Content-type": "application/json",
         Authorization: `Bearer ` + auth.access_token,
       },
-      mode: "cors",
     })
       .then((_response) => {
         handleConfirmClose();
@@ -108,7 +105,6 @@ function DevProfile() {
         "Content-type": "application/json",
         Authorization: `Bearer ` + auth.access_token,
       },
-      mode: "cors",
     })
       .then((_response) => {
         setServices(!services);

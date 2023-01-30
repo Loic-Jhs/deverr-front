@@ -42,14 +42,12 @@ function OrderModal(props: ModalType) {
       headers: {
         Authorization: "Bearer " + auth.access_token,
         "Content-type": "application/json",
-
       },
       body: JSON.stringify({
         developer_id: props.developerId,
         developer_prestation_id: selected,
         instructions: instruction,
       }),
-      mode: "cors",
     })
       .then((_response) => {
         props.orders(true);
@@ -77,7 +75,7 @@ function OrderModal(props: ModalType) {
                     value={item.id}
                     className={selected === item.id ? "selected" : ""}
                   >
-                    {item.prestation_type_name}
+                    {item.name}
                   </li>
                   {selected === item.id && (
                     <div>

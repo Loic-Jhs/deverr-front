@@ -20,11 +20,10 @@ function DevOrder() {
     if (auth.access_token != undefined && auth.user_info.developer_id == devID) {
       (async () => {
         await fetch(`${import.meta.env.VITE_API_URL}/order?developer_id=${devID}`, {
-            method: "GET",
-            headers: {
-                Authorization: `Bearer ${auth.access_token}`
-            },
-            mode: 'cors'
+          method: "GET",
+          headers: {
+              Authorization: `Bearer ${auth.access_token}`
+          },
         })
         .then((response) => response.json())
         .then((data) => {
@@ -67,7 +66,6 @@ function DevOrder() {
             Authorization: `Bearer ${auth.access_token}`,
             "Content-type": "application/json"
           },
-          mode: 'cors'
         })
         .then((response) => response.json())
         .then((data) => {

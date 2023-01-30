@@ -34,10 +34,8 @@ function StacksModal(props: ModalType) {
     fetch(`${import.meta.env.VITE_API_URL}/all-stacks`, {
       method: "GET",
       headers: {
-        "access-control-allow-origin": "*",
         "Content-type": "application/json",
       },
-      mode: "cors",
     })
       .then((response) => response.json())
       .then((data: DevStack[]) => {
@@ -74,7 +72,7 @@ function StacksModal(props: ModalType) {
         Authorization: `Bearer ` + auth.access_token,
         "Content-type": "application/json",
       },
-      mode: "cors",
+
       body: JSON.stringify({
         stack_id: stackSelected?.id,
         stack_experience: yearsExp,

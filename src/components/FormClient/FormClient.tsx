@@ -31,7 +31,6 @@ const FormClient = () => {
     try {
       await fetch(`${import.meta.env.VITE_API_URL}/register`, {
         method: "POST",
-        mode: 'cors',
         headers: {
           "Content-Type": "application/json",
         },

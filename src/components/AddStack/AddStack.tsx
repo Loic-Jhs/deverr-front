@@ -31,7 +31,6 @@ function AddStack({ devStacks }: modaleProps) {
           headers: {
             Authorization: `Bearer ${auth.access_token}`
           },
-          mode: 'cors'
         })
           .then((response) => response.json())
           .then((data) => {
@@ -59,7 +58,6 @@ function AddStack({ devStacks }: modaleProps) {
           "Content-type": "application/json",
         },
         body: JSON.stringify(stacksDataRequired),
-        mode: 'cors'
       });
       const data = await response.json();
       setSuccessMessage(data.message + " !");

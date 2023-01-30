@@ -39,7 +39,6 @@ function Order({ toggle }: modaleProps) {
         headers: {
           "Content-type": "application/json"
         },
-        mode: 'cors'
       })
       .then((response) => response.json())
       .then((data) => {
@@ -60,12 +59,10 @@ function Order({ toggle }: modaleProps) {
     await fetch(`${import.meta.env.VITE_API_URL}/order/store`, {
         method: "POST",
         headers: {
-          "access-control-allow-origin": "*",
           "Content-type": "application/json",
           Authorization: `Bearer ` + auth.token,
         },
         body: JSON.stringify(orderDataRequired),
-        mode: 'cors'
       })
       .then((response) => response.json())
       .then((data) => {

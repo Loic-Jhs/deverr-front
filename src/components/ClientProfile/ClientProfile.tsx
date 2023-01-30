@@ -25,10 +25,8 @@ function ClientProfile() {
             method: "GET",
             headers: {
               Authorization: `Bearer ${auth.access_token}`,
-              "Content-type": "application/json",
-              "Accept": "application/json",
+              "Content-type": "application/json"
             },
-            mode: "cors",
           });
           const data = await response.json();
           setClient(data);

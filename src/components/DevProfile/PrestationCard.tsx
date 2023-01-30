@@ -30,9 +30,7 @@ function PrestationCard(props: PROPS) {
   const [description, setDescription] = useState<string | undefined>(
     props.prestation.description
   );
-  const [name, setName] = useState<string | undefined>(
-    props.prestation.prestation_type_name
-  );
+
 
   const updateService = (id: number, description?: string, price?: number) => {
     console.log(props.services);
@@ -48,7 +46,6 @@ function PrestationCard(props: PROPS) {
         description: description,
         price: price,
       }),
-      mode: "cors",
     })
       .then((_response) => {
         props.setServices(!props.services);
@@ -64,7 +61,6 @@ function PrestationCard(props: PROPS) {
         "Content-type": "application/json",
         Authorization: "Bearer " + auth.access_token,
       },
-      mode: "cors",
     })
       .then((_response) => props.setServices(!props.services))
       .catch((error) => console.error(error));
@@ -73,7 +69,7 @@ function PrestationCard(props: PROPS) {
   return (
     <div className="dev__prestation-item">
       <div className="edit">
-        <h4>{props.prestation.prestation_type_name}</h4>
+        <h4>{props.prestation.name}</h4>
         {
           /*
           Si le user connecté correspond à un développeur 

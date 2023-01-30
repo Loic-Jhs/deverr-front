@@ -15,7 +15,6 @@ function CardList() {
         headers: {
           "Content-type": "application/json",
         },
-        mode: 'cors'
       })
         .then((response) => response.json())
         .then((data) => {
