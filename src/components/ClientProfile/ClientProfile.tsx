@@ -42,7 +42,7 @@ function ClientProfile() {
     }
   }, [isCurrentClient, isLoaded, auth]);
 
-  async function handleCheckout(e: React.MouseEvent) {
+  async function handleCheckout(e : React.ChangeEvent) {
     const stripe = await loadStripe(`${import.meta.env.VITE_PK_STRIPE}`);
     const orderID = e.target.getAttribute('data-order-id');
 
