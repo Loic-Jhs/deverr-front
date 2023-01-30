@@ -98,7 +98,7 @@ function DevOrder() {
                             <h3>Voici les détails de la demande : </h3>
                             <p>{order.instructions}</p>
                           </div>
-                          <p>Cette demande vous intéresse t'elle?</p>
+                          <p>Cette demande vous intéresse-t-elle?</p>
                           <div className='button__container'>
                             <button onClick={() => confirmOrder(order.id)} className='confirm__order'>
                               Oui
@@ -172,7 +172,7 @@ function DevOrder() {
                     })
                     :
                     <div className='no__order-element'>
-                      <h2>Vous n'avez réaliser aucune demande pour le moment</h2>
+                      <h2>Vous n'avez réalisé aucune demande pour le moment</h2>
                     </div>
                     }
                 </div>
