@@ -34,12 +34,11 @@ function ServicesModal(props: ModalType) {
   const [data, setData] = useState<T[]>();
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/all-prestations/`, {
+    fetch(`${import.meta.env.VITE_API_URL}/all-prestations`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
       },
-      mode: "cors",
     })
       .then((response) => response.json())
       .then((data) => {
