@@ -95,7 +95,7 @@ export type RealStack = {
 
 export type RealPrestation = {
   id: number;
-  prestation_type_name: string;
+  name: string;
   description: string;
   price: number;
   prestation_type_id: number;
