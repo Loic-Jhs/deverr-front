@@ -1,6 +1,6 @@
-import Card from "../Card/Card";
+import Card from "./Card/Card";
 import { useEffect, useState } from "react";
-import { HomepageDev } from "../../types";
+import { HomepageDev } from "../../../types";
 import './style.scss'
 
 function CardList() {

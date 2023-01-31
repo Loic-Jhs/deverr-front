@@ -78,7 +78,7 @@ function DevOrder() {
           },
         })
         .then((response) => response.json())
-        .then((data) => {
+        .then(() => {
             setIsLoaded(false)
         })
         .catch((error) => {
@@ -102,7 +102,7 @@ function DevOrder() {
                       return (
                         <div key={order.id} className='order__item'>
                           <p>
-                            Le {order.created_at}, vous avez reçu une demande concernant la prestation {order.prestation_name} de le part de {order.user_fullname}
+                            Le  {order.created_at}, vous avez reçu une demande concernant la prestation {order.prestation_name} de le part de {order.user_fullname}
                           </p>
                           <div className='order__detail'>
                             <h3>Voici les détails de la demande : </h3>

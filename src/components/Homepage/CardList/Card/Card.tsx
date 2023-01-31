@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { HomepageDev } from "../../types";
+import { HomepageDev } from "../../../../types";
 import './style.scss';
 
 function Card(dev: HomepageDev) {

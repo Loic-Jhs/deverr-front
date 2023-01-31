@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import Button from "../Button/Button";
 import { Link } from 'react-router-dom';
-import CardList from "../CardList/CardList"
+import CardList from "./CardList/CardList"
 import { authContext } from "../../contexts/authContext";
 import developerSkills from "../../assets/lotties/developerSkills.json"
 import LottieIllustration from '../LottieIllustration/LottieIllustration';
