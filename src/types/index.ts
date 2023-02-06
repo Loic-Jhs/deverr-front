@@ -6,8 +6,8 @@ export type Dev = {
   average_rating: number | null;
   reviews_number: number | null;
   description: string;
-  stacks: Array<RealStack>;
-  prestations: Array<RealPrestation>;
+  stacks: Array<Stack>;
+  prestations: Array<Prestation>;
   register_date: string;
 };
 
@@ -33,7 +33,7 @@ export type DevInfos = {
   orders_count: number | null;
   firstname: string;
   lastname: string;
-  prestations: Array<RealPrestation>;
+  prestations: Array<Prestation>;
   stacks: Array<DevStack>;
   reviews: Array<Review>;
   years_of_experience: number;
@@ -88,13 +88,13 @@ export type DevPrestation = {
   description: string;
 };
 
-export type RealStack = {
+export type Stack = {
   id: number;
   logo: string;
   name: string;
 };
 
-export type RealPrestation = {
+export type Prestation = {
   id: number;
   name: string;
   description: string;
@@ -119,18 +119,6 @@ export type DevStack = {
   experience: number;
   is_primary: number;
   logo: string;
-};
-export type Stack = {
-  id: number;
-  label: string;
-  logo: string;
-  experience: number;
-  isPreference: boolean;
-};
-
-export type Prestation = {
-  id: number;
-  name: string;
 };
 
 export type Rate = {

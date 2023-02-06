@@ -10,10 +10,10 @@ import { Input, TextareaAutosize } from "@mui/material";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import CancelIcon from "@mui/icons-material/Cancel";
 import EditIcon from "@mui/icons-material/Edit";
-import type { RealPrestation } from "../../types";
+import type { Prestation } from "../../types";
 
 type PROPS = {
-  prestation: RealPrestation;
+  prestation: Prestation;
   services: Boolean;
   setServices: Dispatch<SetStateAction<Boolean>>;
   devProfileId?: Number;

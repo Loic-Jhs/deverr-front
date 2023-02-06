@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Rating } from "@mui/material";
-import {Dev, RealPrestation, RealStack} from "../../types";
+import {Dev, Prestation, Stack} from "../../types";
 import "./style.scss";
 
 function DevList() {
@@ -15,6 +15,7 @@ function DevList() {
       await fetch(`${import.meta.env.VITE_API_URL}/all-developers`, {
         method: "GET",
         headers: {
+          "mode": "no-cors",
           "Content-type": "application/json",
         },
       })
@@ -121,7 +122,7 @@ function DevList() {
                   <h2>Mes compétences :</h2>
                   <div className="dev__stacks">
                     {stacks &&
-                      stacks.map((stack: RealStack) => {
+                      stacks.map((stack: Stack) => {
                         return (
                           <div key={stack.id} className="dev__item-stack-logo">
                             <img
@@ -135,7 +136,7 @@ function DevList() {
                   <h2>Mes prestations :</h2>
                   <div className="dev__prestations">
                     {prestations &&
-                      prestations.map((prestation: RealPrestation) => {
+                      prestations.map((prestation: Prestation) => {
                         return (
                           <div
                             key={prestation.id}

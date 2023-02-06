@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { authContext } from "../../contexts/authContext";
 import { CircularProgress } from "@mui/material";
 import { useParams } from "react-router-dom";
-import {DevInfos, RealPrestation} from "../../types";
+import {DevInfos, Prestation} from "../../types";
 import './order.scss';
 
 interface modaleProps {
@@ -84,7 +84,7 @@ function Order({ toggle }: modaleProps) {
                     <p>Choisir une prestation</p>
                     <select {...register("prestation_id", { required: true })} name="prestation_id">
                       <option value="">Sélectionner une prestation</option>
-                      {dev.prestations && dev.prestations.map((prestation: RealPrestation) => {
+                      {dev.prestations && dev.prestations.map((prestation: Prestation) => {
                         return (
                           <option key={prestation.id} value={prestation.id}>{prestation.name}</option>
                         )
