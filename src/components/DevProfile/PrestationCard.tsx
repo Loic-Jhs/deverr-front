@@ -33,8 +33,6 @@ function PrestationCard(props: PROPS) {
 
 
   const updateService = (id: number, description?: string, price?: number) => {
-    console.log(props.services);
-    
     fetch(`${import.meta.env.VITE_API_URL}/profile/prestations/edit/${id}`, {
       method: "PATCH",
       headers: {

@@ -53,7 +53,7 @@ const FormClient = () => {
       <h1>Inscription d'un client</h1>
 
       <div className="success">
-        <p>{successMessage}</p>
+        <p id="success">{successMessage}</p>
       </div>
 
       <div className="load">
