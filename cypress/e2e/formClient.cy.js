@@ -25,6 +25,6 @@ describe("The register client form", () => {
       "contain",
       "Votre compte a bien été créé, merci de le vérifier grâce au lien envoyé dans votre boîte mail."
     );
-    cy.request( "DELETE", deleteUrl);
+    cy.request( "DELETE", deleteUrl).its("status").should("eq", 200)
   });
 });
