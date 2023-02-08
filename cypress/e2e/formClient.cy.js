@@ -13,7 +13,7 @@ let randomName = generateString(5);
 const deleteUrl = `${Cypress.env("API_URL")}/delete-user-by-email/${randomName}@email.com`;
 
 describe("The register client form", () => {
-  it("should submit the client form successfuly and delete the generated user", () => {
+  it("should submit the client form successfully and delete the generated user", () => {
     cy.visit("/registerclient");
     cy.get("input[name=lastname]").type(randomName);
     cy.get("input[name=firstname]").type(randomName);
