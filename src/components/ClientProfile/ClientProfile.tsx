@@ -5,22 +5,33 @@ import { authContext } from "../../contexts/authContext";
 import { UserInfos } from "../../types";
 import "./style.scss";
 import {loadStripe} from '@stripe/stripe-js';
+import { useNavigate } from "react-router-dom";
 
 function ClientProfile() {
+
   const { auth } = useContext(authContext);
-  //   const { userID } = useParams();
   const [client, setClient] = useState<UserInfos>();
   const [isLoaded, setIsLoaded] = useState<Boolean>(false);
   const [isCurrentClient, setIsCurrentClient] = useState<boolean>(false);
+  const navigate = useNavigate()
 
   useEffect(() => {
-    if (auth.access_token != undefined) {
+    if (!auth.access_token) {
+      navigate('/');
+    }
+  }, [auth, navigate]);
+
+
+  useEffect(() => {
+    if (auth.access_token != undefined && auth.user_info.developer_id == null) {
       setIsCurrentClient(true);
+    } else if (auth.access_token != undefined && auth.user_info.developer_id != null) {
+      navigate('/dev-profile/');
     }
   }, [auth]);
 
   useEffect(() => {
-    if (isCurrentClient) {
+    if (isCurrentClient == true) {
       (async () => {
         try {
           const response = await fetch(`${import.meta.env.VITE_API_URL}/profile`, {
@@ -37,7 +48,7 @@ function ClientProfile() {
           console.error(e);
         }
       })();
-    }
+    } 
   }, [isCurrentClient, isLoaded, auth]);
 
   async function handleCheckout(e : React.ChangeEvent) {
@@ -56,8 +67,6 @@ function ClientProfile() {
     .then(function (result) {
       if (result?.error) {
           alert(result.error.message);
-      } else {
-
       }
     })
     .catch(function (error) {
@@ -107,7 +116,11 @@ function ClientProfile() {
                     <div>
                       <h3>Statut du projet :</h3>
                       <p>{order.is_finished ? "Terminé" : "En cours"}</p>
-                      {order.is_finished ? <Button onClick={handleCheckout} data-order-id={order.id} className="payment__button">Payer prestation</Button> : ""}
+                      {order.is_finished && order.is_payed == false ? 
+                        <Button onClick={handleCheckout} data-order-id={order.id} className="payment__button">Payer prestation</Button> 
+                        : 
+                        ""
+                      }
                     </div>
                   ) : (
                     ""

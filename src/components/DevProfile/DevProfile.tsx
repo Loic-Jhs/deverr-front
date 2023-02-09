@@ -10,10 +10,12 @@ import ConfirmModal from "../Modal/ConfirmModal";
 import ClearIcon from "@mui/icons-material/Clear";
 import defaultAvatar from "../../assets/img/avatar.svg";
 import "./style.scss";
+import { useNavigate } from "react-router-dom";
 
 function DevProfile() {
   //HOOKS
   const { auth, logout } = useContext(authContext);
+  const navigate = useNavigate();
 
   //STATES
   const [dev, setDev] = useState<DevInfos>();
@@ -34,7 +36,7 @@ function DevProfile() {
   const handleConfirmClose = () => setConfirmOpen(false);
 
   useEffect(() => {
-    if (auth.access_token !== undefined) {
+    if (auth.access_token !== undefined && auth.user_info.developer_id != null) {
       fetch(`${import.meta.env.VITE_API_URL}/profile`, {
         method: "GET",
         headers: {
@@ -50,6 +52,12 @@ function DevProfile() {
         .catch((error) => console.error(error));
     }
   }, [isLoaded, services, auth]);
+
+  useEffect(() => {
+    if (auth.access_token === undefined ) {
+      navigate('/');
+    } 
+  }, [auth, navigate]);
 
   const handleEditElement = () => {
     setIsEditable(!isEditable);

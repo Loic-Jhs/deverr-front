@@ -37,7 +37,7 @@ function CancelOrder({order, toggle, auth, setIsLoaded}: CancelOrderProps) {
       {
         !cancelMessage ?
           <div className='modal__cancel-order'>
-            <h2>Refuser la commande de {order?.instructions}</h2>
+            <h2>Refuser la commande de {order?.user_fullname}</h2>
             <p>Vous êtes sur le point de refuser la commande concernant la prestation {order?.prestation_name}</p>
             <p>Veuillez confirmer cette action</p>
             <div className='button___container-modal'>
