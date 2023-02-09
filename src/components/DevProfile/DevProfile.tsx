@@ -46,7 +46,6 @@ function DevProfile() {
         .then((data) => {
           setDev(data);
           setIsLoaded(true);
-          // setServices(false);
         })
         .catch((error) => console.error(error));
     }
