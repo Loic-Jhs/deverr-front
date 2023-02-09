@@ -35,7 +35,7 @@ function Homepage() {
           <LottieIllustration animationData={developerSkills} illustration={developerSkills} />
         </div>
       </div>
-      <div>
+      <div data-cy="cardList">
         <CardList />
       </div>
     </div>

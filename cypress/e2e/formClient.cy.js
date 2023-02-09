@@ -13,7 +13,7 @@ let randomName = generateString(5);
 const deleteUrl = `${Cypress.env("API_URL")}/delete-user-by-email/${randomName}@email.com`;
 
 describe("The register client form", () => {
-  it("should submit the client form successfuly and delete the generated user", () => {
+  it("should submit the client form successfully and delete the generated user", () => {
     cy.visit("/registerclient");
     cy.get("input[name=lastname]").type(randomName);
     cy.get("input[name=firstname]").type(randomName);
@@ -25,6 +25,6 @@ describe("The register client form", () => {
       "contain",
       "Votre compte a bien été créé, merci de le vérifier grâce au lien envoyé dans votre boîte mail."
     );
-    cy.request( "DELETE", deleteUrl);
+    cy.request( "DELETE", deleteUrl).its("status").should("eq", 200)
   });
 });
