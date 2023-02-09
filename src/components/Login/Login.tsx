@@ -1,7 +1,7 @@
 import Button from '../Button/Button';
 import schema from './loginValidation';
 import LoginInput from '../../models/loginInput';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -11,12 +11,18 @@ import './login.scss';
 
 const Login = () => {
 
-  const { setIsLogged } = useContext(authContext)
+  const { setIsLogged, auth } = useContext(authContext)
   const { register, handleSubmit, formState: { errors } } = useForm<LoginInput>({ resolver: yupResolver(schema) });
 
   const navigate = useNavigate();
   const [error, setError] = useState<Boolean>(false);
   const [errorMessage, setErrorMessage] = useState<String>("");
+
+  useEffect(() => {
+    if (auth.access_token) {
+      navigate('/my-profile');
+    }
+  }, [auth, navigate]);
 
   const onSubmit: SubmitHandler<LoginInput> = async (data) => {
     try {

@@ -1,11 +1,23 @@
 import Button from "../Button/Button";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import peopleComputer from "../../assets/lotties/peopleComputer.json"
 import LottieIllustration from '../LottieIllustration/LottieIllustration';
 
 import "./register.scss";
+import { useContext, useEffect } from "react";
+import { authContext } from "../../contexts/authContext";
 
 function Register() {
+
+  const { auth } = useContext(authContext)
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (auth.access_token) {
+      navigate('/my-profile');
+    }
+  }, [auth, navigate]);
+
   return (
     <div className="register__container">
       <p className="register__info"><span>DEVERR</span> est une plateforme pour mettre en relation des <span>développeurs</span> avec de <span>nouveaux clients</span>.</p>

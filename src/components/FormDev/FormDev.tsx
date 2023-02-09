@@ -1,9 +1,10 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import DevInput from "../../models/devInput";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 import "./formDev.scss";
+import { authContext } from "../../contexts/authContext";
 
 // TODO use clear method after sending in form
 const defaultValues = {
@@ -19,6 +20,15 @@ const defaultValues = {
 };
 
 const FormDev = () => {
+  const { auth } = useContext(authContext)
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (auth.access_token) {
+      navigate('/my-profile');
+    }
+  }, [auth, navigate]);
+
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const {

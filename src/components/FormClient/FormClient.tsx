@@ -1,11 +1,12 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import UserInput from '../../models/userInput';
 import schema from './formClientValidation';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from "../Button/Button";
 import './formClient.scss';
+import { authContext } from "../../contexts/authContext";
 
 const defaultValues = {
   lastname: "",
@@ -17,6 +18,15 @@ const defaultValues = {
 };
 
 const FormClient = () => {
+  const { auth } = useContext(authContext)
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (auth.access_token) {
+      navigate('/my-profile');
+    }
+  }, [auth, navigate]);
+  
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const {
