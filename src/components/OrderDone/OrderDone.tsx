@@ -35,7 +35,7 @@ function OrderDone({order, toggle, auth, setIsLoaded}: OrderDoneProps) {
     <>
       {
         !confirmMessage ?
-          <div className='modal__cancel-order'>
+          <div className='modal__order-done'>
             <h2>Fin de prestation</h2>
             <p>Vous êtes sur le point de clôturer la commande demandée par {order?.user_fullname} concernant la prestation {order?.prestation_name}</p>
             <p>Confirmez vous avoir terminé cette prestation?</p>

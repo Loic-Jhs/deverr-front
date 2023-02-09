@@ -138,7 +138,7 @@ function DevOrder() {
                       return (
                         <div key={order.id} className='order__item'>
                           <p>
-                            La demande de {order.user_fullname} concernant la prestation {order.instructions} est toujours en cours de réalisation.
+                            La demande de {order.user_fullname} concernant la prestation {order.prestation_name} est toujours en cours de réalisation.
                           </p>
                           <div className='order__detail'>
                             <h3>Voici les détails de la demande : </h3>

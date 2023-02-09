@@ -50,7 +50,7 @@ export type UserInfos = {
     developer: string;
     instructions: string;
     is_finished: boolean;
-    is_payed: boolean;
+    is_paid: boolean;
     is_accepted_by_developer: boolean;
     price: number;
     prestation_name: string;

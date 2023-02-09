@@ -15,20 +15,21 @@ function ClientProfile() {
   const [isCurrentClient, setIsCurrentClient] = useState<boolean>(false);
   const navigate = useNavigate()
 
+
+  useEffect(() => {
+    if (auth.access_token != undefined && auth.user_info.developer_id == null) {
+      setIsCurrentClient(true);
+    } else if (auth.access_token != undefined && auth.user_info.developer_id != null) {
+      navigate('/dev-profile');
+    }
+  }, [auth]);
+
   useEffect(() => {
     if (!auth.access_token) {
       navigate('/');
     }
   }, [auth, navigate]);
 
-
-  useEffect(() => {
-    if (auth.access_token != undefined && auth.user_info.developer_id == null) {
-      setIsCurrentClient(true);
-    } else if (auth.access_token != undefined && auth.user_info.developer_id != null) {
-      navigate('/dev-profile/');
-    }
-  }, [auth]);
 
   useEffect(() => {
     if (isCurrentClient == true) {
@@ -73,7 +74,6 @@ function ClientProfile() {
         console.error("Error: " + error);
     })
   }
-
   if (client) {
     return (
       <div className="client__container">
@@ -102,7 +102,7 @@ function ClientProfile() {
                   <p>
                     {order.is_accepted_by_developer == null
                       ? "En attente du développeur"
-                      : "Demande traitée"}
+                      : order.is_accepted_by_developer != null && order.is_accepted_by_developer == true ? "Demande acceptée" : "Demande refusée"}
                   </p>
                   <h3>Mis à jour le :</h3>
                   <p>
@@ -116,8 +116,8 @@ function ClientProfile() {
                     <div>
                       <h3>Statut du projet :</h3>
                       <p>{order.is_finished ? "Terminé" : "En cours"}</p>
-                      {order.is_finished && order.is_payed == false ? 
-                        <Button onClick={handleCheckout} data-order-id={order.id} className="payment__button">Payer prestation</Button> 
+                      {order.is_finished == true && order.is_paid == false ? 
+                        <Button onClick={handleCheckout} data-order-id={order.id} className="payment__button">Payer la prestation</Button> 
                         : 
                         ""
                       }
