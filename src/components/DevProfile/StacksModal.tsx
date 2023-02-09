@@ -70,7 +70,9 @@ function StacksModal(props: ModalType) {
         is_primary: stackSelected?.is_primary ?? 0,
       }),
     })
-      .then((_response) => {
+      .then(() => {
+        //On inverse l'état afin de re fetch, ce qui rebuild le composant 
+        //et actualise l'affichage des nouvelles données
         props.setServices(!props.services);
         props.onClose();
       })
