@@ -75,11 +75,11 @@ export type UserInfo = {
 export type Review = {
   id: number;
   client_id: number;
-  client_firstname: string;
-  client_lastname: string;
+  user_who_reviewed: string;
   comment: string;
   rating: number;
   prestation_name: string;
+  created_at: string;
 };
 
 export type DevPrestation = {
