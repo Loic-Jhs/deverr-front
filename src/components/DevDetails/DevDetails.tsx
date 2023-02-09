@@ -170,7 +170,7 @@ function DevDetails() {
                     dev.reviews.map((review) => {
                       return (
                         <div key={review.id} className="dev__review-item">
-                          <p className="author__review">Alain Durand</p>
+                          <p className="author__review">{review.user_who_reviewed}</p>
                           <div className="rating__and__service">
                             <Rating
                               className="rating__star"
@@ -182,7 +182,7 @@ function DevDetails() {
                             <p className="service__review">ERP</p>
                           </div>
                           <p className="comment__review">{review.comment}</p>
-                          <p className="date__review">Posté le 10/04/22</p>
+                          <p className="date__review">Posté le {review.created_at}</p>
                         </div>
                       );
                     })}
