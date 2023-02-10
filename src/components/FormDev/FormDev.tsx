@@ -1,10 +1,12 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useContext, useEffect, useState } from "react";
+import { yupResolver } from '@hookform/resolvers/yup';
 import DevInput from "../../models/devInput";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 import "./formDev.scss";
 import { authContext } from "../../contexts/authContext";
+import schema from "../FormDev/formDevValidation";
 
 // TODO use clear method after sending in form
 const defaultValues = {
@@ -36,7 +38,7 @@ const FormDev = () => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<DevInput>({ defaultValues });
+  } = useForm<DevInput>({ resolver: yupResolver(schema) });
 
   const onSubmit: SubmitHandler<DevInput> = async (data) => {
     setLoading(true);
