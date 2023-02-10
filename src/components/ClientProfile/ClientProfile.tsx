@@ -74,7 +74,7 @@ function ClientProfile() {
         console.error("Error: " + error);
     })
   }
-  console.log(client)
+
   if (client) {
     return (
       <div className="client__container">
