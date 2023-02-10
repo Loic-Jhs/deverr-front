@@ -74,6 +74,7 @@ function ClientProfile() {
         console.error("Error: " + error);
     })
   }
+  console.log(client)
   if (client) {
     return (
       <div className="client__container">
@@ -88,6 +89,7 @@ function ClientProfile() {
         </div>
         <div className="client__orders__container">
           <h2>Suivi de vos demandes : </h2>
+          { client.orders.length > 0 ?
           <div className="client__orders__list">
             {client.orders.map((order: UserInfos['orders'][0], index) => {
               let classToAdd = order.is_finished ? "finished__order" : "";
@@ -129,6 +131,9 @@ function ClientProfile() {
               );
             })}
           </div>
+          :
+          <p>Aucune demande pour le moment</p>
+        }
         </div>
       </div>
     );
