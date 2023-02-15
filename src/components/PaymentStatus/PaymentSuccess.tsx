@@ -1,14 +1,16 @@
-import {useContext, useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
-import { authContext } from "../../contexts/authContext";
+import type {OrderInfoType} from "../../types";
+import React, {useContext, useEffect, useState} from "react";
+import {useNavigate, useParams, Link} from "react-router-dom";
+import {authContext} from "../../contexts/authContext";
 import "./style.scss";
+import DoneAllIcon from '@mui/icons-material/DoneAll';
 
 function PaymentSuccess() {
     //const navigate = useNavigate()
     //const { auth } = useContext(authContext);
 
-    const { OrderId} = useParams();
-    const [ orderPayed, setOrderPayed ] = useState();
+    const {OrderId} = useParams();
+    const [orderPayed, setOrderPayed] = useState<OrderInfoType>();
 
     /*useEffect(() => {
         if (!auth.access_token) {
@@ -22,12 +24,32 @@ function PaymentSuccess() {
         }
       }, [auth]);*/
 
-    return (
-        <div className="payment-info__container">
-            <h1>Merci pour votre paiement ! {OrderId}</h1>
-            <p>Nous allons informer developpeurName developpeurLastname que la prestation XX a été payée.</p>
-            <p>N'hésitez pas à visiter son profil afin de laisser un avis ! </p>
-        </div>
-    )
-  }
-  export default PaymentSuccess;
+    useEffect(() => {
+        (async () => {
+            await fetch(`${import.meta.env.VITE_API_URL}/order-payed/${OrderId}`, {
+                method: "GET",
+                headers: {
+                    "Content-type": "application/json",
+                },
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    setOrderPayed(data[0]);
+                })
+                .catch((error) => console.error(error));
+        })();
+    }, [orderPayed]);
+
+    if (orderPayed) {
+        return (
+            <div className="payment-info__container">
+                <DoneAllIcon className="icon icon-success"/>
+                <h1>Merci pour votre paiement !</h1>
+                <p>Nous allons informer {orderPayed.fullname} que la prestation "{orderPayed.prestation}" a été payée.</p>
+                <p>N'hésitez pas à visiter <Link to={`/dev-profile/${orderPayed.developer_id}`} className="">son profil</Link> afin de laisser un avis ! </p>
+            </div>
+        )
+    }
+}
+
+export default PaymentSuccess;
