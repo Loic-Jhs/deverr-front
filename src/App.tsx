@@ -14,6 +14,9 @@ import ForgotPassword from './components/Password/ForgotPassword/ForgotPassword'
 import ResetPassword from './components/Password/ResetPassword/ResetPassword';
 import ClientProfile from './components/ClientProfile/ClientProfile';
 import './App.css'
+import PaymentSuccess from './components/PaymentStatus/PaymentSuccess';
+import PaymentFail from './components/PaymentStatus/PaymentFail';
+import NotFoundPage from './components/NotFoundPage/NotFoundPage';
 
 
 function App() {
@@ -24,6 +27,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/payment-success" element={<PaymentSuccess />} />
+        <Route path="/payment-fail" element={<PaymentFail />} />
         <Route path="/dev-profile/:devID" element={<DevDetails />} />
         <Route path="/dev-profile" element={<DevProfile />} />
         <Route path="/my-profile" element={<ClientProfile />} />
@@ -34,6 +39,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path='/forgot-password' element={<ForgotPassword />} />
         <Route path='/reset-password/:token' element={<ResetPassword />} />
+        <Route path='/*' element={<NotFoundPage />} />
       </Routes>
       <Footer />
     </div>

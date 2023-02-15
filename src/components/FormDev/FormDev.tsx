@@ -8,18 +8,6 @@ import "./formDev.scss";
 import { authContext } from "../../contexts/authContext";
 import schema from "../FormDev/formDevValidation";
 
-// TODO use clear method after sending in form
-const defaultValues = {
-  firstname: "",
-  lastname: "",
-  email: "",
-  role: 1,
-  years_of_experience: 1,
-  description: "",
-  password: "",
-  confirmedPassword: "",
-  type: "developer",
-};
 
 const FormDev = () => {
   const { auth } = useContext(authContext)
