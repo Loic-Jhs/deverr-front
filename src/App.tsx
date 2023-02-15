@@ -27,8 +27,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/payment-success" element={<PaymentSuccess />} />
-        <Route path="/payment-fail" element={<PaymentFail />} />
+        <Route path="/payment-success/:stripeSessionId/:OrderId" element={<PaymentSuccess />} />
+        <Route path="/payment-fail/:stripeSessionId/:OrderId" element={<PaymentFail />} />
         <Route path="/dev-profile/:devID" element={<DevDetails />} />
         <Route path="/dev-profile" element={<DevProfile />} />
         <Route path="/my-profile" element={<ClientProfile />} />
@@ -46,4 +46,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
