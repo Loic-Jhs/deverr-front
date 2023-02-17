@@ -1,6 +1,6 @@
 import type {OrderInfoType} from "../../types";
 import React, {useContext, useEffect, useState} from "react";
-import {useNavigate, useParams, Link} from "react-router-dom";
+import {useNavigate, useParams, Link, Navigate} from "react-router-dom";
 import {authContext} from "../../contexts/authContext";
 import "./style.scss";
 import DoneAllIcon from '@mui/icons-material/DoneAll';
@@ -49,6 +49,8 @@ function PaymentSuccess() {
                 <p>N'hésitez pas à visiter <Link to={`/dev-profile/${orderPayed.developer_id}`}>son profil</Link> afin de laisser un avis ! </p>
             </div>
         )
+    } else {
+        return <Navigate to={'/'}/>
     }
 }
 
