@@ -1,6 +1,6 @@
 import "./style.scss";
 import React, {useEffect, useState} from "react";
-import {Link, useParams} from "react-router-dom";
+import {Link, Navigate, useParams} from "react-router-dom";
 import {OrderInfoType} from "../../types";
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 
@@ -35,6 +35,8 @@ function PaymentFail() {
                 <p>Pour ce faire veuillez retourner sur <Link to={`/my-profile`}>votre profil</Link></p>
             </div>
         )
+    } else {
+        return <Navigate to={'/'}/>
     }
 }
 
