@@ -4,6 +4,7 @@ import {useNavigate, useParams, Link, Navigate} from "react-router-dom";
 import {authContext} from "../../contexts/authContext";
 import "./style.scss";
 import DoneAllIcon from '@mui/icons-material/DoneAll';
+import {CircularProgress} from "@mui/material";
 
 function PaymentSuccess() {
     //const navigate = useNavigate()
@@ -50,7 +51,7 @@ function PaymentSuccess() {
             </div>
         )
     } else {
-        return <Navigate to={'/'}/>
+         return <CircularProgress />;
     }
 }
 

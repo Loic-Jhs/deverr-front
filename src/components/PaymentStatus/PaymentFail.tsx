@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 import {Link, Navigate, useParams} from "react-router-dom";
 import {OrderInfoType} from "../../types";
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
+import {CircularProgress} from "@mui/material";
 
 function PaymentFail() {
     const {OrderId} = useParams();
@@ -36,7 +37,7 @@ function PaymentFail() {
             </div>
         )
     } else {
-        return <Navigate to={'/'}/>
+        return <CircularProgress />;
     }
 }
 
