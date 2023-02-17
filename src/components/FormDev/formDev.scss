@@ -10,7 +10,7 @@ $blueDeverr2: #1d9bf0;
   padding: 0 20px 20px 20px;
   h1 {
     font-size: 1.3rem;
-    font-weight: 300;
+    font-weight: bold;
   }
   a {
     font-size: 20px;
@@ -34,7 +34,11 @@ $blueDeverr2: #1d9bf0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    padding: 1rem;
+    width: 90%;
+    margin-top: 0.75rem;
+    border: 1px solid black;
+    border-radius: 0.75rem;
     .input__container {
       display: flex;
       flex-direction: column;
@@ -51,6 +55,7 @@ $blueDeverr2: #1d9bf0;
         border-color: $blueDeverr2;
         font-size: inherit;
         padding: 0.5rem;
+        margin-bottom: 0.5rem;
       }
       .description {
         font-family: "Montserrat", sans-serif;
@@ -100,8 +105,9 @@ $blueDeverr2: #1d9bf0;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 1rem;
-      width: 100%;
+      margin-top: 1.5rem;
+      padding-bottom: 0.5rem;
+      width: 80%;
     }
     .error {
       color: red;
@@ -116,8 +122,14 @@ $blueDeverr2: #1d9bf0;
       font-weight: 300;
     }
     .dev__form {
+      width: 50%;
+      border-radius: 1.75rem;
+      border: 0 transparent;
+      box-shadow: rgba(50, 50, 93, 0.25) 0 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;    border-radius: 0.75rem;
       .input__container {
         font-size: 1.5rem;
+        width: 80%;
         .stack__container {
           .stack__input {
             input {
