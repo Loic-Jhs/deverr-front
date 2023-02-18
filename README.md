@@ -1,12 +1,15 @@
 # DEVERR Frontend Documentation
 
-## 1 - Install all the dependencies:
+## Au clonage du projet :
+
+ - Installer toutes les dépendances:
 
 ```cmd
 npm i
 ```
+- Copier le .env.example en .env 
 
-## 2 - Run the project:
+- Lancer le projet:
 
 ```cmd
 npm run dev
