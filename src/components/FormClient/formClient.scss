@@ -21,9 +21,7 @@ $blueDeverr2: #1d9bf0;
   }
   .success {
     text-align: center;
-    p {
-      color: rgb(38, 184, 38);
-    }
+    color: rgb(38, 184, 38);
   }
   .load {
     text-align: center;
@@ -59,6 +57,9 @@ $blueDeverr2: #1d9bf0;
         font-size: inherit;
         padding: 0.5rem;
       }
+      .error {
+        color: red;
+      }
     }
     .button__container {
       display: flex;
@@ -67,9 +68,6 @@ $blueDeverr2: #1d9bf0;
       margin-top: 1.5rem;
       padding-bottom: 0.5rem;
       width: 80%;
-    }
-    .error {
-      color: red;
     }
   }
 }
