@@ -37,6 +37,7 @@ const FormClient = () => {
   } = useForm<UserInput>({ defaultValues });
 
   const onSubmit: SubmitHandler<UserInput> = async (data) => {
+    Object.assign(data, {type: 'user'});
     setLoading(true);
     try {
       await fetch(`${import.meta.env.VITE_API_URL}/register`, {

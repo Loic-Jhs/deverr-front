@@ -29,6 +29,7 @@ const FormDev = () => {
   } = useForm<DevInput>({ resolver: yupResolver(schema) });
 
   const onSubmit: SubmitHandler<DevInput> = async (data) => {
+    Object.assign(data, {type: 'developer'});
     setLoading(true);
     try {
       await fetch(`${import.meta.env.VITE_API_URL}/register`, {
